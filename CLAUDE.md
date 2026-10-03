@@ -68,29 +68,48 @@ adulti interessati ai corsi serali.
 - **Nessun testo dentro le immagini.**
 - Tutto usabile da tastiera, con l'elemento attivo ben visibile.
 - Carattere **Arial** (`Arial, Helvetica, sans-serif`), testo di base
-  almeno 16 px.
+  almeno 16 px. Titoli in **Arial Black** maiuscolo: sui telefoni dove
+  manca compare il carattere più nero disponibile.
 
 ## 6. Grafica
 
-- Stesso sistema del Liceo Digitale: testata con logo, schede, tema chiaro
-  e scuro.
+- **Grafica a fasce**, la stessa della home e di "Annotazioni sul
+  registro" del Liceo Digitale e della sua presentazione:
+  - testata e piede blu notte `#00193C`, con il logo su un riquadro bianco;
+  - fasce piene da bordo a bordo, verde e teal alternate, senza
+    sfumature;
+  - sulle fasce i titoli sono **gialli** `#FFF33F` in **Arial Black
+    maiuscolo**, il resto del testo è **bianco**;
+  - dentro le fasce, schede bianche con angoli tondi, ombra leggera e
+    retino (la trama di pallini);
+  - sulle schede: un quadratino colorato con il simbolo, un'etichetta
+    piccola in maiuscolo, il testo in Arial;
+  - pulsanti a pillola; le informazioni da mettere in evidenza in un
+    riquadro giallo con testo blu notte.
 - I colori si usano sempre con i nomi definiti in `stile.css`
   (`var(--verde)` e simili), mai con i codici scritti nelle pagine.
-- Verde dell'istituto `#026C37` per testi e pulsanti. `#8DC73C` solo
-  decorativo.
-- Un accento per indirizzo:
-  - Meccanica: blu `#1F5FA8`
-  - Grafica: arancio `#C2410C`
-  - Liceo: giallo `#F5C400` con testo blu notte `#00193C`
-  - Serali: ardesia `#3A4756`
+- **Il colore della scuola è il verde** `#026C37`: fasce, pulsanti, link.
+  `#8DC73C` solo decorativo.
+- Un colore per indirizzo, usato **solo come fondo del quadratino** con
+  il simbolo, mai come colore del testo:
+  - Meccanica: arancio `#C2410C`, simbolo bianco
+  - Grafica: rosa `#F472B6`, simbolo blu notte
+  - Liceo: blu `#1F5FA8`, simbolo bianco. Per i tre percorsi, sulla
+    pagina del liceo: azzurro `#7CB4F2` (simbolo blu notte), blu
+    `#1F5FA8`, blu scuro `#162F6E`. Quale blu va a quale percorso è da
+    decidere.
+  - Serali: ardesia `#3A4756`, simbolo bianco
+- I colori degli indirizzi sono stati provati con la simulazione del
+  daltonismo più comune: viola, magenta, rosso e rosa scuro sono stati
+  scartati perché si confondevano con il blu, il verde o il teal.
 - Il giallo non si usa mai come colore del testo su fondo chiaro.
-- Nel tema scuro gli accenti hanno una variante più chiara, controllata
-  al contrasto.
-- Simboli disegnati a mano in SVG: rotella (Meccanica), occhio (Grafica),
-  lampadina (Liceo), luna (Serali).
+- Simboli disegnati a mano in SVG, in `immagini/simboli.svg`: rotella
+  (Meccanica), occhio (Grafica), lampadina (Liceo), luna (Serali), più
+  luogo, telefono, busta, globo e calendario.
 - L'interruttore del tema non usa la luna, che è dei serali: è un
   cerchio metà pieno e metà vuoto.
-- Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
+- Il logo è `immagini/logo-natta.png`, con sfondo trasparente (nella
+  testata sta comunque su un riquadro bianco). È piccolo
   (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
   risoluzione, si sostituisce.
 

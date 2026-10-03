@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TESTO MODIFICABILE: titolo della scheda del browser e descrizione
+       che compare su Google e nelle anteprime quando si condivide il
+       link. Stanno qui e non in contenuti/ perché devono esserci prima
+       che la pagina legga i file di testo. -->
+  <title>Orientamento | IIS Giulio Natta, Rivoli</title>
+  <meta name="description" content="Indirizzi, open day e contatti dell'IIS Giulio Natta di Rivoli: istituto tecnico tecnologico, liceo scientifico e corsi serali per adulti.">
+
+  <!--
+    Il numero dopo ?v= serve a far riscaricare il file quando cambia.
+    Senza, il browser continua a usare per qualche minuto la copia
+    vecchia e le modifiche non si vedono.
+    QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO DI UNO
+    in tutte le pagine che lo caricano.
+  -->
+  <!-- Il tema chiaro o scuro: va letto prima del foglio di stile -->
+  <script src="js/tema.js?v=1"></script>
+  <link rel="stylesheet" href="stile.css?v=1">
+  <link rel="icon" href="immagini/logo-natta.png">
+</head>
+<body>
+
+  <a class="salta" href="#contenuto">Salta al contenuto</a>
+
+  <!-- La testata: logo e nome della scuola, interruttore del tema -->
+  <header class="fascia fascia-testata">
+    <div class="fascia-interno testata-interno">
+      <p class="marchio">
+        <!-- alt vuoto: il nome della scuola è scritto subito accanto -->
+        <span class="logo-scuola">
+          <img src="immagini/logo-natta.png" alt="" width="46" height="31">
+        </span>
+        <span id="nome-scuola"></span>
+      </p>
+      <div id="interruttore-tema"></div>
+    </div>
+  </header>
+
+  <!-- Tutti i testi qui sotto arrivano da contenuti/home.txt e
+       contenuti/comuni.txt. Il contenuto resta nascosto finché i testi
+       non sono stati letti, così non si vedono titoli vuoti. -->
+  <main id="contenuto" tabindex="-1" hidden>
+
+    <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
+      <div class="fascia-interno">
+        <p class="occhiello" id="occhiello"></p>
+        <h1 class="titolo-sito" id="titolo"></h1>
+        <p class="claim" id="claim"></p>
+        <div class="presentazione" id="presentazione"></div>
+      </div>
+    </section>
+
+    <section class="fascia fascia-teal" aria-labelledby="titolo-indirizzi">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-indirizzi"></h2>
+        <div class="schede" id="schede"></div>
+      </div>
+    </section>
+
+    <section class="fascia fascia-verde" aria-labelledby="titolo-open-day">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-open-day"></h2>
+        <ul class="date" id="elenco-open-day"></ul>
+        <p class="evidenza" id="prenotazione"></p>
+      </div>
+    </section>
+
+    <section class="fascia fascia-teal" aria-labelledby="titolo-contatti">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-contatti"></h2>
+        <ul class="contatti" id="elenco-contatti"></ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
+       possono leggere. -->
+  <section class="fascia fascia-verde" id="avviso" hidden>
+    <div class="fascia-interno">
+      <h1 class="titolo-fascia">Orientamento al Natta di Rivoli</h1>
+      <p>Non riesco a caricare i testi di questa pagina.</p>
+      <p>Se hai aperto il file dal computer con un doppio clic, usa invece
+         <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
+         visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+    </div>
+  </section>
+
+  <!-- Se JavaScript è spento, la pagina non può leggere i testi -->
+  <noscript>
+    <section class="fascia fascia-verde">
+      <div class="fascia-interno">
+        <p>Per vedere questa pagina serve JavaScript attivo nel browser.
+           In alternativa visita il
+           <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+      </div>
+    </section>
+  </noscript>
+
+  <footer class="fascia fascia-piede">
+    <div class="fascia-interno" id="piede"></div>
+  </footer>
+
+  <script src="js/contenuti.js?v=1"></script>
+  <script src="js/home.js?v=1"></script>
+  <script>Tema.interruttore('interruttore-tema');</script>
+</body>
+</html>

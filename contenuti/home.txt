@@ -12,6 +12,16 @@ claim: Tre percorsi, un unico traguardo: il futuro.
 testo: Al Natta ci sono due istituti tecnici tecnologici e un liceo scientifico. Per gli adulti ci sono i corsi serali.
 testo: Qui trovi che cosa si studia in ogni indirizzo, le date degli open day e i contatti.
 
+== SEZIONI ==
+# I titoli delle parti della pagina e le scritte fisse delle schede.
+# Accanto al titolo degli open day il sito aggiunge l'anno scritto in
+# comuni.txt.
+indirizzi: Indirizzi e corsi
+open-day: Open day
+contatti: Contatti
+in-preparazione: Pagina in preparazione
+vai-alla-pagina: Vai alla pagina
+
 == INDIRIZZI ==
 # Una riga per scheda, sette colonne in quest'ordine:
 #
@@ -40,3 +50,18 @@ Corsi serali | Per adulti, anno 2026/27 | [DA COMPLETARE: claim] | Meccanica e m
 #   in un posto solo.
 liceo | Il sito del Liceo Digitale | sito-liceo-digitale
 serali | Iscrizioni ai serali 2026/27 | pagina-serali
+
+== CONTATTI ==
+# Quali contatti mostrare, in quest'ordine. Due colonne:
+#
+#   etichetta | nome del campo in comuni.txt
+#
+# Il sito capisce da solo che cosa fare: il telefono si può chiamare
+# con un tocco, le email si aprono nel programma di posta, gli
+# indirizzi web diventano link.
+Indirizzo | indirizzo
+Telefono | telefono
+Email della scuola | email
+Orientamento | email-orientamento
+Liceo Digitale | email-liceo-digitale
+Sito della scuola | sito
