@@ -1,0 +1,29 @@
+# DATI COMUNI A TUTTE LE PAGINE
+# ------------------------------------------------------------------
+# Contatti e open day servono a tutte le pagine del sito, e in futuro
+# a volantini e cartoline. Stanno solo qui: se un dato cambia, si
+# cambia solo qui.
+#
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+# ------------------------------------------------------------------
+
+== SCUOLA ==
+nome: IIS "Giulio Natta"
+indirizzo: Via XX Settembre 14A, 10098 Rivoli (TO)
+telefono: 011 956 32 13
+email: tois059003@istruzione.it
+email-orientamento: orientamento@itisgiulionatta.it
+email-liceo-digitale: liceodigitale@itisgiulionatta.it
+sito: https://www.itisgiulionatta.it
+sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale/
+
+== OPEN DAY ==
+anno: [DA COMPLETARE: anno scolastico da confermare]
+prenotazione: [DA COMPLETARE: link di prenotazione]
+# Una riga per open day: giorno | data | orario
+sabato | 21 novembre | 10-12
+venerdì | 27 novembre | 17.30-19.30
+sabato | 12 dicembre | 10-12
+mercoledì | 16 dicembre | 17.30-19.30
+venerdì | 15 gennaio | 17.30-19.30

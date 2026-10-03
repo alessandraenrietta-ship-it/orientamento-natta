@@ -1,0 +1,30 @@
+# TESTI DELLA PAGINA INIZIALE (index.html)
+# ------------------------------------------------------------------
+# Contatti e open day non stanno qui: sono in comuni.txt.
+#
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+# ------------------------------------------------------------------
+
+== APERTURA ==
+titolo: Orientamento al Natta di Rivoli
+claim: Tre percorsi, un unico traguardo: il futuro.
+testo: Al Natta ci sono due istituti tecnici tecnologici e un liceo scientifico. Per gli adulti ci sono i corsi serali.
+testo: Qui trovi che cosa si studia in ogni indirizzo, le date degli open day e i contatti.
+
+== INDIRIZZI ==
+# Una riga per scheda, sette colonne in quest'ordine:
+#
+#   nome | tipo | claim | in breve | pagina | stato | colore
+#
+#   stato    pronta oppure in preparazione.
+#            Con "in preparazione" la scheda compare senza link.
+#            Si scrive "pronta" solo quando la pagina esiste davvero.
+#   colore   meccanica, grafica, liceo oppure serali: non va cambiato.
+#
+# Una colonna vuota si lascia vuota fra due barre, come il claim dei
+# serali.
+Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Costruisci, muovi, trasforma. | Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia. | meccanica.html | in preparazione | meccanica
+Grafica e comunicazione | Istituto tecnico tecnologico | Dai colore alle parole, dai voce alle immagini. | [DA COMPLETARE: una frase concreta su che cosa si studia] | grafica.html | in preparazione | grafica
+Scienze applicate | Liceo scientifico, opzione | Dove la curiosità si trasforma in conoscenza. | Tre percorsi sulla stessa base: Scienze applicate, Liceo Matematico, Liceo Digitale. | liceo.html | in preparazione | liceo
+Corsi serali | Per adulti, anno 2026/27 | | Meccanica e meccatronica; Grafica e comunicazione. [DA COMPLETARE: orari e requisiti per iscriversi] | serali.html | in preparazione | serali
