@@ -1,0 +1,27 @@
+# ------------------------------------------------------------
+#  Cose che NON devono finire online.
+#
+#  Git ignora tutto quello che è scritto qui dentro: anche se
+#  un file di questi si trova nella cartella, non viene mai
+#  pubblicato per sbaglio.
+#
+#  Per proteggere un altro file basta scriverne il nome su una
+#  riga nuova.
+# ------------------------------------------------------------
+
+# Materiali di lavoro: brochure vecchie, bozze, foto da selezionare.
+materiali-grezzi/
+
+# Qualunque file marcato NON-PUBBLICARE nel nome, ovunque si trovi.
+*NON-PUBBLICARE*
+*non-pubblicare*
+
+# La cartella dove l'app di Claude salva i file che mi manda.
+Claude outputs/
+
+# La cartella degli strumenti di Claude: non fa parte del sito.
+.claude/
+
+# File temporanei di Windows.
+Thumbs.db
+desktop.ini
