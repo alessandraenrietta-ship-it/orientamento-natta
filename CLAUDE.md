@@ -87,7 +87,12 @@ adulti interessati ai corsi serali.
 - Nel tema scuro gli accenti hanno una variante più chiara, controllata
   al contrasto.
 - Simboli disegnati a mano in SVG: rotella (Meccanica), occhio (Grafica),
-  lampadina (Liceo).
+  lampadina (Liceo), luna (Serali).
+- L'interruttore del tema non usa la luna, che è dei serali: è un
+  cerchio metà pieno e metà vuoto.
+- Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
+  (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
+  risoluzione, si sostituisce.
 
 ## 7. Come si scrive
 
@@ -109,6 +114,8 @@ adulti interessati ai corsi serali.
   3. **Liceo scientifico opzione Scienze applicate**, con tre percorsi
      sulla stessa base: Scienze applicate, Liceo Matematico, Liceo
      Digitale (curvatura, rimanda al suo sito).
+     Curvatura: stesso diploma, con più ore (quali e quante: da definire).
+     Liceo Matematico: descrizione da definire.
   4. **Corsi serali per adulti 2026/27**: Meccanica e meccatronica;
      Grafica e comunicazione.
 - Materie plastiche: **non si presenta** (decisione in corso).

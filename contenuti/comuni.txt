@@ -17,10 +17,14 @@ email-orientamento: orientamento@itisgiulionatta.it
 email-liceo-digitale: liceodigitale@itisgiulionatta.it
 sito: https://www.itisgiulionatta.it
 sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale/
+# L'indirizzo della pagina dei serali contiene l'anno: va aggiornato
+# ogni anno.
+pagina-serali: https://www.itisgiulionatta.it/pagine/corso-serale-per-adulti-as-2026-2027---online-il-modulo-per-le-preiscrizioni
 
 == OPEN DAY ==
-anno: [DA COMPLETARE: anno scolastico da confermare]
-prenotazione: [DA COMPLETARE: link di prenotazione]
+anno: 2026/27
+prenotazione: https://www.itisgiulionatta.it
+come-prenotare: Si prenota dal banner nella home page del sito della scuola.
 # Una riga per open day: giorno | data | orario
 sabato | 21 novembre | 10-12
 venerdì | 27 novembre | 17.30-19.30

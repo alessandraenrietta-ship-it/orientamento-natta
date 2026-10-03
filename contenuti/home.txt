@@ -22,9 +22,21 @@ testo: Qui trovi che cosa si studia in ogni indirizzo, le date degli open day e 
 #            Si scrive "pronta" solo quando la pagina esiste davvero.
 #   colore   meccanica, grafica, liceo oppure serali: non va cambiato.
 #
-# Una colonna vuota si lascia vuota fra due barre, come il claim dei
-# serali.
+# Una colonna vuota si lascia vuota fra due barre.
 Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Costruisci, muovi, trasforma. | Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia. | meccanica.html | in preparazione | meccanica
 Grafica e comunicazione | Istituto tecnico tecnologico | Dai colore alle parole, dai voce alle immagini. | [DA COMPLETARE: una frase concreta su che cosa si studia] | grafica.html | in preparazione | grafica
-Scienze applicate | Liceo scientifico, opzione | Dove la curiosità si trasforma in conoscenza. | Tre percorsi sulla stessa base: Scienze applicate, Liceo Matematico, Liceo Digitale. | liceo.html | in preparazione | liceo
-Corsi serali | Per adulti, anno 2026/27 | | Meccanica e meccatronica; Grafica e comunicazione. [DA COMPLETARE: orari e requisiti per iscriversi] | serali.html | in preparazione | serali
+Scienze applicate | Liceo scientifico, opzione | Dove la curiosità si trasforma in conoscenza. | Tre percorsi sulla stessa base: Scienze applicate, Liceo Matematico, Liceo Digitale. Il Liceo Digitale è una curvatura: stesso diploma, con più ore [DA COMPLETARE: di quali materie e quante]. | liceo.html | in preparazione | liceo
+Corsi serali | Per adulti, anno 2026/27 | [DA COMPLETARE: claim] | Meccanica e meccatronica; Grafica e comunicazione. Modulo e modalità di iscrizione sul sito della scuola. [DA COMPLETARE: orari, frequenza, requisiti] | serali.html | in preparazione | serali
+
+== LINK UTILI ==
+# Link in più dentro una scheda, anche quando la scheda è "in preparazione".
+# Tre colonne:
+#
+#   scheda | testo del link | nome del campo in comuni.txt
+#
+#   scheda   meccanica, grafica, liceo oppure serali
+#   l'ultima colonna NON è l'indirizzo: è il nome del campo di
+#   comuni.txt dove l'indirizzo è scritto. Così ogni indirizzo sta
+#   in un posto solo.
+liceo | Il sito del Liceo Digitale | sito-liceo-digitale
+serali | Iscrizioni ai serali 2026/27 | pagina-serali
