@@ -38,6 +38,11 @@ adulti interessati ai corsi serali.
 - Nomi di file e cartelle **minuscoli**, con **trattini**, senza spazi né
   accenti.
 
+- **Il sito è in bozza.** Ogni pagina ha nella testa
+  `<meta name="robots" content="noindex, nofollow">`, così i motori di
+  ricerca non la mostrano. Si mette anche nelle pagine nuove, e si
+  toglie da tutte solo quando Alessandra dice che il sito è approvato.
+
 ## 3. Contenuti separati dal codice
 
 - Testi, date e contatti stanno nella cartella `contenuti/`, in file `.txt`,
