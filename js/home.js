@@ -15,7 +15,7 @@
 
   /* I disegni stanno in immagini/simboli.svg: se si cambia un disegno,
      si aumenta il numero ?v= qui sotto. */
-  var FILE_SIMBOLI = "immagini/simboli.svg?v=1";
+  var FILE_SIMBOLI = "immagini/simboli.svg?v=2";
 
   /* Il simbolo di ogni indirizzo, scelto dalla colonna "colore" */
   var SIMBOLI = {
@@ -234,7 +234,13 @@
   }
 
   function openDay(comuni) {
-    C.scrivi(document.getElementById("open-day-per-chi"), comuni.campo("OPEN DAY", "per-chi"));
+    /* La riga sotto il titolo compare solo se nel file c'è */
+    var perChi = document.getElementById("open-day-per-chi");
+    if (comuni.campo("OPEN DAY", "per-chi")) {
+      C.scrivi(perChi, comuni.campo("OPEN DAY", "per-chi"));
+    } else {
+      perChi.hidden = true;
+    }
 
     var elenco = document.getElementById("elenco-open-day");
     comuni.righe("OPEN DAY").forEach(function (riga, i) {

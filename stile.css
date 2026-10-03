@@ -380,6 +380,14 @@ p:last-child { margin-bottom: 0; }
 
 .icona svg { width: 1.9rem; height: 1.9rem; }
 
+/* Nelle schede degli indirizzi il quadratino si allunga fino a
+   diventare una barra larga quanto la scheda, con il simbolo al
+   centro: il colore di ogni indirizzo si vede di più. La striscia
+   dei serali tiene il quadratino, perché lì il simbolo sta a fianco
+   dei testi. */
+.scheda:not(.scheda-orizzontale) > .icona { width: 100%; }
+.scheda:not(.scheda-orizzontale) > .icona svg { width: 2.3rem; height: 2.3rem; }
+
 .icona-meccanica { background: var(--meccanica); color: var(--blu-notte); }
 .icona-grafica   { background: var(--grafica);   color: var(--blu-notte); }
 .icona-liceo     { background: var(--liceo); }

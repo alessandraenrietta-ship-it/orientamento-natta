@@ -4,8 +4,9 @@ Tutti i testi stanno nella cartella `contenuti/`. Si aprono con il Blocco
 note. Non serve toccare nessun altro file.
 
 - `comuni.txt`: contatti e open day, validi per tutte le pagine. Nella
-  sezione degli open day, il campo `per-chi` è la riga che compare
-  sotto il titolo.
+  sezione degli open day, il campo `per-chi`, se c'è, è la riga che
+  compare sotto il titolo; gli orari si scrivono sempre con ore e
+  minuti, come `10.00-12.00`.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
