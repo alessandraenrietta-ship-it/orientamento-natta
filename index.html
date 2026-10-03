@@ -18,59 +18,83 @@
     QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO DI UNO
     in tutte le pagine che lo caricano.
   -->
-  <!-- Il tema chiaro o scuro: va letto prima del foglio di stile -->
-  <script src="js/tema.js?v=1"></script>
-  <link rel="stylesheet" href="stile.css?v=1">
+  <link rel="stylesheet" href="stile.css?v=9">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
 
   <a class="salta" href="#contenuto">Salta al contenuto</a>
 
-  <!-- La testata: logo e nome della scuola, interruttore del tema -->
+  <!-- La testata: logo e nome della scuola -->
   <header class="fascia fascia-testata">
     <div class="fascia-interno testata-interno">
       <p class="marchio">
-        <!-- alt vuoto: il nome della scuola è scritto subito accanto -->
-        <span class="logo-scuola">
-          <img src="immagini/logo-natta.png" alt="" width="46" height="31">
-        </span>
+        <!-- Il logo con lo sfondo trasparente, direttamente sul verde
+             scuro. alt vuoto: il nome della scuola è scritto subito
+             accanto. -->
+        <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
         <span id="nome-scuola"></span>
       </p>
-      <div id="interruttore-tema"></div>
     </div>
   </header>
 
-  <!-- Tutti i testi qui sotto arrivano da contenuti/home.txt e
-       contenuti/comuni.txt. Il contenuto resta nascosto finché i testi
-       non sono stati letti, così non si vedono titoli vuoti. -->
+  <!-- Tutti i testi qui sotto arrivano dai file della cartella
+       contenuti/: home.txt, comuni.txt e serali.txt. Il contenuto resta
+       nascosto finché i testi non sono stati letti, così non si vedono
+       titoli vuoti.
+       Le fasce si alternano: verde, chiara, verde, chiara, verde. -->
   <main id="contenuto" tabindex="-1" hidden>
 
+    <!-- Apertura: l'unica fascia con il testo centrato -->
     <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
       <div class="fascia-interno">
         <p class="occhiello" id="occhiello"></p>
         <h1 class="titolo-sito" id="titolo"></h1>
         <p class="claim" id="claim"></p>
         <div class="presentazione" id="presentazione"></div>
+        <!-- La riga per gli adulti (compare solo se c'è nel file) e i due
+             pulsanti che portano alle fasce degli indirizzi e dei
+             serali, più in basso in questa stessa pagina -->
+        <p class="per-adulti" id="testo-adulti"></p>
+        <p class="pulsanti">
+          <a class="pulsante" id="pulsante-diurno" href="#titolo-indirizzi"></a>
+          <a class="pulsante" id="pulsante-adulti" href="#titolo-serali"></a>
+        </p>
       </div>
     </section>
 
-    <section class="fascia fascia-teal" aria-labelledby="titolo-indirizzi">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-indirizzi"></h2>
-        <div class="schede" id="schede"></div>
-      </div>
-    </section>
-
-    <section class="fascia fascia-verde" aria-labelledby="titolo-open-day">
+    <!-- Gli open day subito dopo l'apertura: le date scadono, devono
+         vedersi presto -->
+    <section class="fascia fascia-chiara" aria-labelledby="titolo-open-day">
       <div class="fascia-interno">
         <h2 class="titolo-fascia" id="titolo-open-day"></h2>
+        <p class="sottotitolo" id="open-day-per-chi"></p>
         <ul class="date" id="elenco-open-day"></ul>
         <p class="evidenza" id="prenotazione"></p>
       </div>
     </section>
 
-    <section class="fascia fascia-teal" aria-labelledby="titolo-contatti">
+    <section class="fascia fascia-verde" aria-labelledby="titolo-indirizzi">
+      <div class="fascia-interno">
+        <!-- tabindex="-1": il titolo può ricevere il focus, ci arriva il
+             pulsante "Dopo la terza media" dell'apertura -->
+        <h2 class="titolo-fascia" id="titolo-indirizzi" tabindex="-1"></h2>
+        <div class="schede" id="schede"></div>
+      </div>
+    </section>
+
+    <!-- I corsi serali: una fascia tutta loro, separata dagli indirizzi
+         del diurno, con una sola scheda costruita come quelle degli
+         indirizzi. Il titolo può ricevere il focus (tabindex="-1"): ci
+         arriva il pulsante dell'apertura. -->
+    <section class="fascia fascia-chiara" aria-labelledby="titolo-serali">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-serali" tabindex="-1"></h2>
+        <div id="scheda-serali"></div>
+      </div>
+    </section>
+
+    <section class="fascia fascia-verde" aria-labelledby="titolo-contatti">
       <div class="fascia-interno">
         <h2 class="titolo-fascia" id="titolo-contatti"></h2>
         <ul class="contatti" id="elenco-contatti"></ul>
@@ -83,7 +107,7 @@
        possono leggere. -->
   <section class="fascia fascia-verde" id="avviso" hidden>
     <div class="fascia-interno">
-      <h1 class="titolo-fascia">Orientamento al Natta di Rivoli</h1>
+      <h1 class="titolo-fascia">Orientamento I.I.S. G. Natta</h1>
       <p>Non riesco a caricare i testi di questa pagina.</p>
       <p>Se hai aperto il file dal computer con un doppio clic, usa invece
          <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
@@ -106,8 +130,7 @@
     <div class="fascia-interno" id="piede"></div>
   </footer>
 
-  <script src="js/contenuti.js?v=1"></script>
-  <script src="js/home.js?v=1"></script>
-  <script>Tema.interruttore('interruttore-tema');</script>
+  <script src="js/contenuti.js?v=2"></script>
+  <script src="js/home.js?v=7"></script>
 </body>
 </html>

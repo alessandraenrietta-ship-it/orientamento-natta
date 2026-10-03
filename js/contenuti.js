@@ -14,6 +14,8 @@
          file.campo("APERTURA", "titolo")   -> il primo testo del campo
          file.campi("APERTURA", "testo")    -> tutti i testi del campo
          file.righe("INDIRIZZI")            -> le righe della tabella
+         file.voci("SERALI")                -> tutti i campi in ordine,
+                                               come coppie [nome, testo]
        });
 
    Le righe che il lettore non capisce non fermano la pagina: vengono
@@ -63,12 +65,16 @@ window.Contenuti = (function () {
       }
 
       /* Conta solo il primo ":", così un orario o un indirizzo web
-         nel testo non creano problemi. */
-      var campo = pulita.match(/^([A-Za-z0-9-]+)\s*:\s*(.*)$/);
+         nel testo non creano problemi. Il nome del campo può avere
+         spazi e lettere accentate ("studi già fatti"). */
+      var campo = pulita.match(/^([A-Za-z0-9À-ÿ' -]+?)\s*:\s*(.*)$/);
       if (campo) {
         var nome = campo[1].toLowerCase();
         if (!corrente.campi[nome]) { corrente.campi[nome] = []; }
         corrente.campi[nome].push(campo[2]);
+        /* Si ricorda anche l'ordine delle righe, con il nome scritto
+           com'è nel file: serve quando i nomi compaiono sulla pagina. */
+        corrente.voci.push([campo[1], campo[2]]);
         return;
       }
 
@@ -87,12 +93,18 @@ window.Contenuti = (function () {
       righe: function (sezione) {
         var s = sezioni[sezione];
         return s ? s.righe.slice() : [];
+      },
+      /* Tutti i campi della sezione, nell'ordine del file, come coppie
+         [nome, testo]. */
+      voci: function (sezione) {
+        var s = sezioni[sezione];
+        return s ? s.voci.slice() : [];
       }
     };
   }
 
   function nuovaSezione(sezioni, nome) {
-    if (!sezioni[nome]) { sezioni[nome] = { campi: {}, righe: [] }; }
+    if (!sezioni[nome]) { sezioni[nome] = { campi: {}, righe: [], voci: [] }; }
     return sezioni[nome];
   }
 

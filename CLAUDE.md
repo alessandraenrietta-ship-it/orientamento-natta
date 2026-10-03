@@ -63,7 +63,7 @@ adulti interessati ai corsi serali.
 ## 5. Prima lo smartphone, accessibilità sempre
 
 - Si progetta per lo smartphone, poi per computer e LIM.
-- Contrasto almeno **4,5:1** per il testo, nel tema chiaro e nel tema scuro.
+- Contrasto almeno **4,5:1** per il testo.
 - Testo alternativo per le immagini, `alt=""` per quelle solo decorative.
 - **Nessun testo dentro le immagini.**
 - Tutto usabile da tastiera, con l'elemento attivo ben visibile.
@@ -73,43 +73,56 @@ adulti interessati ai corsi serali.
 
 ## 6. Grafica
 
-- **Grafica a fasce**, la stessa della home e di "Annotazioni sul
-  registro" del Liceo Digitale e della sua presentazione:
-  - testata e piede blu notte `#00193C`, con il logo su un riquadro bianco;
-  - fasce piene da bordo a bordo, verde e teal alternate, senza
-    sfumature;
-  - sulle fasce i titoli sono **gialli** `#FFF33F` in **Arial Black
-    maiuscolo**, il resto del testo è **bianco**;
-  - dentro le fasce, schede bianche con angoli tondi, ombra leggera e
-    retino (la trama di pallini);
+- **Un solo tema, chiaro.** Il tema scuro è stato eliminato: niente
+  interruttore, niente regole CSS o codice JavaScript per il tema scuro.
+- **Grafica a fasce**: fasce piene da bordo a bordo, alternate verdi e
+  chiare, senza sfumature.
+  - testata e piede: verde scuro `#014A26`, testo bianco; nella testata
+    il logo con lo sfondo trasparente, senza riquadro;
+  - **fascia verde** `#026C37`: titoli gialli `#FFF33F` in Arial Black
+    maiuscolo, testo bianco, pulsante a pillola bianco con testo verde;
+  - **fascia chiara** `#F3F7EC`: titoli verdi `#026C37` in Arial Black
+    maiuscolo, testo blu notte `#00193C`, pulsante a pillola verde con
+    testo bianco;
+  - riquadro in evidenza: giallo `#FFF33F`, testo blu notte `#00193C`;
+  - schede bianche con angoli tondi e retino (la trama di pallini); sulle
+    fasce chiare anche un bordo tenue e un'ombra, perché il bianco su
+    `#F3F7EC` ha contrasto 1,1;
   - sulle schede: un quadratino colorato con il simbolo, un'etichetta
-    piccola in maiuscolo, il testo in Arial;
-  - pulsanti a pillola; le informazioni da mettere in evidenza in un
-    riquadro giallo con testo blu notte.
-- I colori si usano sempre con i nomi definiti in `stile.css`
-  (`var(--verde)` e simili), mai con i codici scritti nelle pagine.
-- **Il colore della scuola è il verde** `#026C37`: fasce, pulsanti, link.
-  `#8DC73C` solo decorativo.
+    piccola in maiuscolo, il testo in Arial.
+- Nella home le fasce sono: testata; apertura verde (l'unica con il
+  testo centrato, con i pulsanti "Dopo la terza media" e "Corsi serali
+  per adulti"); open day chiara (subito dopo l'apertura, perché le date
+  scadono); indirizzi verde (tre schede di pari importanza, tutte e tre
+  su una riga al computer, mai due più una); serali chiara (separata dagli
+  indirizzi del diurno: una sola scheda con gli stessi pezzi di quelle
+  degli indirizzi, disposta come una striscia orizzontale lunga e
+  bassa, simbolo a sinistra, testi al centro e "Pagina in preparazione"
+  o il pulsante a destra; sul telefono simbolo accanto ai testi; porta
+  alla pagina dei serali); contatti verde; piede.
+- Il riquadro giallo della prenotazione ha il contenuto centrato.
+- I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
+  loro testi stanno in `contenuti/serali.txt`.
+- **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,
+  link. Il verde lime `#8DC73C` è solo decorativo, mai per il testo.
+- Il teal `#00596B` non si usa più.
 - Un colore per indirizzo, usato **solo come fondo del quadratino** con
-  il simbolo, mai come colore del testo:
-  - Meccanica: arancio `#C2410C`, simbolo bianco
-  - Grafica: rosa `#F472B6`, simbolo blu notte
-  - Liceo: blu `#1F5FA8`, simbolo bianco. Per i tre percorsi, sulla
-    pagina del liceo: azzurro `#7CB4F2` (simbolo blu notte), blu
-    `#1F5FA8`, blu scuro `#162F6E`. Quale blu va a quale percorso è da
-    decidere.
-  - Serali: ardesia `#3A4756`, simbolo bianco
-- I colori degli indirizzi sono stati provati con la simulazione del
-  daltonismo più comune: viola, magenta, rosso e rosa scuro sono stati
-  scartati perché si confondevano con il blu, il verde o il teal.
+  il simbolo, **sempre con un bordo sottile blu notte** `#00193C`:
+  - Meccanica: ambra `#F59E0B`, simbolo blu notte, rotella
+  - Grafica: rosa `#F472B6`, simbolo blu notte, occhio
+  - Liceo: blu `#1F5FA8`, simbolo bianco, lampadina
+  - Serali: ardesia `#3A4756`, simbolo bianco, luna
+- Percorsi del liceo, per le pagine future: tutti blu `#1F5FA8` con
+  simbolo bianco. Simboli: beuta (Scienze applicate), π disegnato come
+  forma (Liceo Matematico), `</>` (Liceo Digitale).
+- I colori sono stati verificati per contrasto (testo almeno 4,5:1) e per
+  deuteranopia e protanopia. **Non si cambiano senza dirlo ad
+  Alessandra.**
 - Il giallo non si usa mai come colore del testo su fondo chiaro.
 - Simboli disegnati a mano in SVG, in `immagini/simboli.svg`: rotella
   (Meccanica), occhio (Grafica), lampadina (Liceo), luna (Serali), più
   luogo, telefono, busta, globo e calendario.
-- L'interruttore del tema non usa la luna, che è dei serali: è un
-  cerchio metà pieno e metà vuoto.
-- Il logo è `immagini/logo-natta.png`, con sfondo trasparente (nella
-  testata sta comunque su un riquadro bianco). È piccolo
+- Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
   (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
   risoluzione, si sostituisce.
 

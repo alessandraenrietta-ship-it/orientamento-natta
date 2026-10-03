@@ -1,21 +1,29 @@
 # TESTI DELLA PAGINA INIZIALE (index.html)
 # ------------------------------------------------------------------
 # Contatti e open day non stanno qui: sono in comuni.txt.
+# I corsi serali hanno un file tutto loro: serali.txt.
 #
 # Le righe che iniziano con # sono commenti: il sito le ignora.
 # Il formato è spiegato in LEGGIMI.md.
 # ------------------------------------------------------------------
 
 == APERTURA ==
-titolo: Orientamento al Natta di Rivoli
-claim: Tre percorsi, un unico traguardo: il futuro.
-testo: Al Natta ci sono due istituti tecnici tecnologici e un liceo scientifico. Per gli adulti ci sono i corsi serali.
-testo: Qui trovi che cosa si studia in ogni indirizzo, le date degli open day e i contatti.
+titolo: Orientamento I.I.S. G. Natta
+# claim provvisorio, da rivedere insieme agli altri
+claim: Percorsi diversi, un unico traguardo: il futuro.
+# Si possono aggiungere, sotto il claim, righe "testo" (ognuna è un
+# paragrafo) e una riga "testo-adulti" sopra il pulsante. Per ora non
+# ci sono: l'apertura deve restare breve.
+# Le scritte dei due pulsanti dell'apertura: il primo porta alla fascia
+# degli indirizzi, il secondo alla fascia dei serali, più in basso
+# nella stessa pagina.
+pulsante-diurno: Dopo la terza media
+pulsante-adulti: Corsi serali per adulti
 
 == SEZIONI ==
 # I titoli delle parti della pagina e le scritte fisse delle schede.
 # Accanto al titolo degli open day il sito aggiunge l'anno scritto in
-# comuni.txt.
+# comuni.txt. Il titolo dei serali sta in serali.txt.
 indirizzi: Indirizzi e corsi
 open-day: Open day
 contatti: Contatti
@@ -30,26 +38,14 @@ vai-alla-pagina: Vai alla pagina
 #   stato    pronta oppure in preparazione.
 #            Con "in preparazione" la scheda compare senza link.
 #            Si scrive "pronta" solo quando la pagina esiste davvero.
-#   colore   meccanica, grafica, liceo oppure serali: non va cambiato.
+#   colore   meccanica, grafica oppure liceo: non va cambiato.
 #
 # Una colonna vuota si lascia vuota fra due barre.
+# Le tre schede hanno tutte la stessa struttura: niente link in più
+# dentro una scheda sola.
 Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Costruisci, muovi, trasforma. | Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia. | meccanica.html | in preparazione | meccanica
 Grafica e comunicazione | Istituto tecnico tecnologico | Dai colore alle parole, dai voce alle immagini. | [DA COMPLETARE: una frase concreta su che cosa si studia] | grafica.html | in preparazione | grafica
-Scienze applicate | Liceo scientifico, opzione | Dove la curiosità si trasforma in conoscenza. | Tre percorsi sulla stessa base: Scienze applicate, Liceo Matematico, Liceo Digitale. Il Liceo Digitale è una curvatura: stesso diploma, con più ore [DA COMPLETARE: di quali materie e quante]. | liceo.html | in preparazione | liceo
-Corsi serali | Per adulti, anno 2026/27 | [DA COMPLETARE: claim] | Meccanica e meccatronica; Grafica e comunicazione. Modulo e modalità di iscrizione sul sito della scuola. [DA COMPLETARE: orari, frequenza, requisiti] | serali.html | in preparazione | serali
-
-== LINK UTILI ==
-# Link in più dentro una scheda, anche quando la scheda è "in preparazione".
-# Tre colonne:
-#
-#   scheda | testo del link | nome del campo in comuni.txt
-#
-#   scheda   meccanica, grafica, liceo oppure serali
-#   l'ultima colonna NON è l'indirizzo: è il nome del campo di
-#   comuni.txt dove l'indirizzo è scritto. Così ogni indirizzo sta
-#   in un posto solo.
-liceo | Il sito del Liceo Digitale | sito-liceo-digitale
-serali | Iscrizioni ai serali 2026/27 | pagina-serali
+Scienze applicate | Liceo scientifico, opzione | Dove la curiosità si trasforma in conoscenza. | Tre percorsi sulla stessa base scientifica: Scienze applicate; Liceo Matematico, con più ore di matematica; Liceo Digitale, con ore in più di intelligenza artificiale, coding, diritto e pensiero critico. | liceo.html | in preparazione | liceo
 
 == CONTATTI ==
 # Quali contatti mostrare, in quest'ordine. Due colonne:
@@ -59,6 +55,9 @@ serali | Iscrizioni ai serali 2026/27 | pagina-serali
 # Il sito capisce da solo che cosa fare: il telefono si può chiamare
 # con un tocco, le email si aprono nel programma di posta, gli
 # indirizzi web diventano link.
+# Le schede sono disposte per sei contatti (3 per riga al computer,
+# 2 sul tablet): se se ne aggiungono o tolgono, va rivista la
+# disposizione in stile.css.
 Indirizzo | indirizzo
 Telefono | telefono
 Email della scuola | email

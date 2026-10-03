@@ -5,13 +5,15 @@
    Tutte le pagine del sito si collegano a questo file.
 
    LA GRAFICA "A FASCE"
-   È la stessa del sito Liceo Digitale e della sua presentazione: la
-   pagina è fatta di fasce larghe quanto lo schermo, di colori pieni.
-     - testata e piede blu notte
-     - fasce verdi e teal che si alternano, con i titoli in giallo in
-       Arial Black maiuscolo e il testo in bianco
-     - dentro le fasce, schede bianche con gli angoli tondi, un'ombra
-       leggera e il "retino", la trama di pallini fitti
+   La pagina è fatta di fasce larghe quanto lo schermo, di colori
+   pieni, senza sfumature:
+     - testata e piede verde scuro, con il testo bianco
+     - fasce VERDI e fasce CHIARE che si alternano
+       . sul verde: titoli gialli, testo bianco, pulsante bianco
+       . sul chiaro: titoli verdi, testo blu notte, pulsante verde
+     - dentro le fasce, schede bianche con gli angoli tondi e il
+       "retino", la trama di pallini fitti
+   Il sito ha un solo tema, chiaro: il tema scuro è stato tolto.
 
    Si scrive PRIMA PER LO SMARTPHONE: le regole qui sotto valgono per
    lo schermo piccolo, e quelle per computer e LIM stanno in fondo,
@@ -26,54 +28,47 @@
    COLORI
    I nomi qui sotto vanno usati nelle pagine al posto dei codici.
    Esempio: color: var(--giallo);
+
+   Sono stati verificati per il contrasto (testo almeno 4,5:1) e per
+   la deuteranopia e la protanopia, i due tipi più comuni di
+   daltonismo. Non si cambiano senza dirlo ad Alessandra.
    ----------------------------------------------------------------- */
 
 :root {
 
   /* Colori dell'istituto. Il colore della scuola è il verde. */
-  --verde:         #026C37;  /* verde del logo: fasce, pulsanti, link */
-  --verde-chiaro:  #8DC73C;  /* verde lime del logo: SOLO decorativo */
-  --teal:          #00596B;  /* le fasce che si alternano al verde */
-  --blu-notte:     #00193C;  /* testata, piede, testo sulle schede */
-  --giallo:        #FFF33F;  /* titoli e link sulle fasce */
+  --verde:         #026C37;  /* fasce verdi, pulsanti, link */
+  --verde-scuro:   #014A26;  /* testata e piede, con il testo bianco */
+  --chiaro:        #F3F7EC;  /* fasce chiare */
+  --verde-chiaro:  #8DC73C;  /* verde lime del logo: SOLO decorativo, mai per il testo */
+  --blu-notte:     #00193C;  /* testo sulle fasce chiare e sulle schede */
+  --giallo:        #FFF33F;  /* titoli sulle fasce verdi, riquadro in evidenza */
   --bianco:        #FFFFFF;
 
-  /* Un colore per indirizzo. Si usano SOLO come fondo del quadratino
-     con il simbolo, mai come colore del testo. Sopra ognuno il simbolo
-     è bianco, tranne sul rosa e sull'azzurro, dove è blu notte.
-     Contrasti misurati del simbolo:
-       arancio 5,2 - rosa 6,6 - blu 6,4 - ardesia 9,5
-       azzurro 8,0 - blu scuro 12,6
-     Sono stati provati anche con la simulazione del daltonismo più
-     comune: restano distinguibili fra loro e dal verde della scuola. */
-  --meccanica:     #C2410C;  /* arancio */
+  /* Contrasti misurati del testo:
+       giallo su verde 5,7 - bianco su verde 6,6 - bianco su verde scuro 10,5
+       verde su chiaro 6,0 - blu notte su chiaro 16,1 - verde su bianco 6,6
+       blu notte su giallo 15,1                                          */
+
+  /* Un colore per indirizzo. Si usa SOLO come fondo del quadratino con
+     il simbolo, sempre con un bordo sottile blu notte: l'ambra e il
+     rosa da soli si staccherebbero poco dal bianco della scheda.
+     Contrasto del simbolo: ambra 8,1 - rosa 6,6 - blu 6,4 - ardesia 9,5 */
+  --meccanica:     #F59E0B;  /* ambra: simbolo blu notte */
   --grafica:       #F472B6;  /* rosa: simbolo blu notte */
-  --liceo:         #1F5FA8;  /* blu */
-  --liceo-chiaro:  #7CB4F2;  /* azzurro, per un percorso del liceo: simbolo blu notte */
-  --liceo-scuro:   #162F6E;  /* blu scuro, per un percorso del liceo */
-  --serali:        #3A4756;  /* ardesia */
+  --liceo:         #1F5FA8;  /* blu: simbolo bianco */
+  --serali:        #3A4756;  /* ardesia: simbolo bianco */
 
-  /* Ruoli: le fasce */
-  --fascia-verde:  var(--verde);
-  --fascia-teal:   var(--teal);
-  --fascia-notte:  var(--blu-notte);
-  --titolo-fascia: var(--giallo);   /* contrasto 5,7 sul verde, 6,9 sul teal */
-  --testo-fascia:  var(--bianco);
-
-  /* Ruoli: le schede */
+  /* Ruoli delle schede */
   --carta:         var(--bianco);
-  --testo-carta:   var(--blu-notte);
-  --etichetta:     var(--verde);    /* etichette, titoletti e link sulle schede */
   --retino:        rgba(2, 108, 55, 0.13);
   --retino-passo:  8px;
   --ombra:         0 6px 18px rgba(0, 0, 0, 0.18);
-
-  /* Ruoli: pulsanti e contorno della tastiera */
-  --pulsante-fondo: var(--verde);
-  --pulsante-testo: var(--bianco);
-  --pulsante-sopra: var(--blu-notte);  /* quando ci passi sopra il mouse */
-  --fuoco-carta:    var(--blu-notte);  /* sulle schede chiare */
-  --fuoco-fascia:   var(--giallo);     /* sulle fasce scure */
+  /* Sulle fasce chiare il bianco della scheda si stacca appena dal
+     fondo (contrasto 1,1): si aggiungono un bordo verde tenue e
+     un'ombra più marcata. */
+  --bordo-scheda:  #A9C9B4;
+  --ombra-chiaro:  0 4px 14px rgba(0, 25, 60, 0.16);
 
   /* Caratteri. Arial Black per i titoli: c'è su Windows e Mac, mentre
      sui telefoni Android di solito manca e al suo posto compare il
@@ -85,28 +80,6 @@
   --raggio:        24px;   /* angoli delle schede */
   --spazio:        1.25rem;
   --massimo:       72rem;  /* larghezza massima del contenuto */
-}
-
-
-/* -----------------------------------------------------------------
-   TEMA SCURO
-   Si accende con l'interruttore in alto a destra (vedi js/tema.js).
-   Le fasce diventano più cupe, come nel Liceo Digitale, e le schede
-   scure. I colori degli indirizzi non cambiano.
-   ----------------------------------------------------------------- */
-
-html[data-tema="scuro"] {
-  --fascia-verde:   #0A2B1D;
-  --fascia-teal:    #072A33;
-  --fascia-notte:   #01060F;
-  --carta:          #10222C;
-  --testo-carta:    #F1F7F3;
-  --etichetta:      #9BD246;   /* sul fondo scuro il verde del logo non si legge */
-  --retino:         rgba(155, 210, 70, 0.10);
-  --pulsante-fondo: #9BD246;
-  --pulsante-testo: #06231A;
-  --pulsante-sopra: #B7E065;
-  --fuoco-carta:    var(--giallo);
 }
 
 
@@ -123,8 +96,8 @@ body {
   font-family: var(--carattere);
   font-size: 1.0625rem;   /* 17 pixel */
   line-height: 1.6;
-  color: var(--testo-fascia);
-  background: var(--fascia-notte);
+  color: var(--blu-notte);
+  background: var(--chiaro);
 }
 
 h1, h2, h3 { margin: 0 0 0.6em; line-height: 1.15; }
@@ -148,6 +121,9 @@ p:last-child { margin-bottom: 0; }
    LE FASCE
    Ogni fascia va da un bordo all'altro dello schermo. Dentro c'è un
    .fascia-interno che tiene il contenuto incolonnato.
+   Il colore lo decide la classe: fascia-verde oppure fascia-chiara.
+   Ognuna imposta i colori di titoli, testo, link e pulsanti che le
+   stanno sopra.
    ----------------------------------------------------------------- */
 
 .fascia { padding: 1.8rem var(--spazio); }
@@ -157,13 +133,31 @@ p:last-child { margin-bottom: 0; }
   margin: 0 auto;
 }
 
-.fascia-verde { background: var(--fascia-verde); }
-.fascia-teal  { background: var(--fascia-teal); }
+.fascia-verde {
+  --titolo:          var(--giallo);
+  --testo:           var(--bianco);
+  --link:            var(--bianco);
+  --pulsante-fondo:  var(--bianco);
+  --pulsante-testo:  var(--verde);
+  --fuoco:           var(--giallo);
+  color: var(--testo);
+  background: var(--verde);
+}
 
-/* Sulle fasce i link sono gialli, come i titoli */
-.fascia a { color: var(--titolo-fascia); }
+.fascia-chiara {
+  --titolo:          var(--verde);
+  --testo:           var(--blu-notte);
+  --link:            var(--verde);
+  --pulsante-fondo:  var(--verde);
+  --pulsante-testo:  var(--bianco);
+  --fuoco:           var(--blu-notte);
+  color: var(--testo);
+  background: var(--chiaro);
+}
 
-/* Il titolo di una fascia: grande, giallo, maiuscolo */
+.fascia a { color: var(--link); }
+
+/* Il titolo di una fascia: grande, maiuscolo */
 .titolo-fascia {
   margin: 0 0 1.2rem;
   font-family: var(--titolo-grande);
@@ -171,7 +165,10 @@ p:last-child { margin-bottom: 0; }
   font-size: clamp(1.6rem, 6vw, 2.6rem);
   line-height: 1.05;
   text-transform: uppercase;
-  color: var(--titolo-fascia);
+  color: var(--titolo);
+  /* Quando ci si arriva con un salto nella pagina, il titolo non resta
+     incollato al bordo dello schermo e il contorno si vede tutto. */
+  scroll-margin-top: 1rem;
 }
 
 /* La riga piccola sopra al titolo, per esempio il nome della scuola */
@@ -181,25 +178,27 @@ p:last-child { margin-bottom: 0; }
   font-weight: bold;
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  color: var(--titolo-fascia);
+  color: var(--titolo);
 }
 
 
 /* -----------------------------------------------------------------
-   TESTATA
-   Logo e nome della scuola a sinistra, interruttore del tema a destra.
+   TESTATA E PIEDE
+   Verde scuro, con il testo bianco.
    ----------------------------------------------------------------- */
 
-.fascia-testata {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
-  background: var(--fascia-notte);
+.fascia-testata,
+.fascia-piede {
+  --fuoco: var(--giallo);
+  color: var(--bianco);
+  background: var(--verde-scuro);
 }
+
+.fascia-testata { padding-top: 0.8rem; padding-bottom: 0.8rem; }
 
 .testata-interno {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -213,51 +212,70 @@ p:last-child { margin-bottom: 0; }
   font-size: 1rem;
   line-height: 1.2;
   text-transform: uppercase;
-  color: var(--bianco);
 }
 
-/* Il logo sta su un riquadro bianco, come nel Liceo Digitale. Il bianco
-   resta bianco anche nel tema scuro. */
+/* Il logo con lo sfondo trasparente, direttamente sul verde scuro.
+   È piccolo (231 per 155 pixel): non va ingrandito oltre. */
 .logo-scuola {
-  display: flex;
+  display: block;
   flex: none;
-  align-items: center;
-  justify-content: center;
-  padding: 0.35rem 0.55rem;
-  border-radius: 12px;
-  background: #FFFFFF;
+  width: 56px;
+  height: auto;
 }
 
-.logo-scuola img { display: block; width: 46px; height: auto; }
-
-.interruttore-tema {
-  display: inline-flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  padding: 0;
-  color: var(--bianco);
-  background: transparent;
-  border: 2px solid var(--giallo);
-  border-radius: 50%;
-  cursor: pointer;
+.fascia-piede {
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  font-size: 0.9rem;
 }
-
-.interruttore-tema:hover {
-  color: var(--blu-notte);
-  background: var(--giallo);
-}
-
-.interruttore-tema svg { width: 24px; height: 24px; }
 
 
 /* -----------------------------------------------------------------
    APERTURA DELLA PAGINA
    ----------------------------------------------------------------- */
 
-.fascia-apertura { padding-top: 2.2rem; padding-bottom: 2.4rem; }
+/* L'apertura è l'unica fascia con tutto centrato: titolo, claim, frasi,
+   riga per gli adulti e pulsante. Le altre restano a sinistra. */
+.fascia-apertura {
+  padding-top: 2.2rem;
+  padding-bottom: 2.4rem;
+  text-align: center;
+}
+
+.fascia-apertura .claim,
+.fascia-apertura .presentazione,
+.fascia-apertura .per-adulti {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.per-adulti {
+  max-width: 40rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0.8rem;
+  font-weight: bold;
+}
+
+/* I due pulsanti dell'apertura: affiancati se c'è posto, uno sotto
+   l'altro sul telefono stretto. Stessa forma e stesso peso: nessuno
+   dei due è più importante dell'altro. */
+.pulsanti {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem;
+}
+
+.pulsanti .pulsante {
+  min-width: 15rem;   /* stessa larghezza per tutti e due */
+  text-align: center;
+}
+
+/* La riga sotto il titolo di una fascia */
+.sottotitolo {
+  max-width: 46rem;
+  margin: -0.4rem 0 1.2rem;
+}
 
 .titolo-sito {
   margin: 0 0 1rem;
@@ -266,11 +284,15 @@ p:last-child { margin-bottom: 0; }
   font-size: clamp(2.1rem, 9vw, 4.2rem);
   line-height: 0.98;
   text-transform: uppercase;
-  color: var(--titolo-fascia);
+  color: var(--titolo);
+  /* Le righe del titolo si dividono in parti simili: niente parola
+     rimasta sola sulla seconda riga. I browser vecchi lo ignorano. */
+  text-wrap: balance;
 }
 
 .claim {
   max-width: 40rem;
+  margin-bottom: 1.6rem;
   font-size: 1.3rem;
   font-weight: bold;
   line-height: 1.35;
@@ -280,12 +302,41 @@ p:last-child { margin-bottom: 0; }
 
 
 /* -----------------------------------------------------------------
+   PULSANTI
+   Una pillola. I colori li decide la fascia: bianca con il testo
+   verde sul verde, verde con il testo bianco sul chiaro e sulle
+   schede.
+   ----------------------------------------------------------------- */
+
+.pulsante {
+  display: inline-block;
+  min-height: 44px;   /* la misura minima perché un dito non sbagli */
+  padding: 0.6em 1.8em;
+  font-weight: bold;
+  text-decoration: none;
+  color: var(--pulsante-testo);
+  background: var(--pulsante-fondo);
+  border-radius: 999px;
+}
+
+.fascia a.pulsante,
+.carta a.pulsante { color: var(--pulsante-testo); }
+
+.pulsante:hover { text-decoration: underline; }
+
+
+/* -----------------------------------------------------------------
    SCHEDE
-   Bianche, tonde, con il retino e un'ombra leggera.
+   Bianche, tonde, con il retino. Dentro una scheda i colori sono
+   sempre quelli del fondo chiaro, qualunque sia la fascia intorno.
    ----------------------------------------------------------------- */
 
 .carta {
-  color: var(--testo-carta);
+  --link:            var(--verde);
+  --pulsante-fondo:  var(--verde);
+  --pulsante-testo:  var(--bianco);
+  --fuoco:           var(--blu-notte);
+  color: var(--blu-notte);
   background-color: var(--carta);
   background-image: radial-gradient(var(--retino) 1.2px, transparent 1.3px);
   background-size: var(--retino-passo) var(--retino-passo);
@@ -293,19 +344,26 @@ p:last-child { margin-bottom: 0; }
   box-shadow: var(--ombra);
 }
 
-.carta a { color: var(--etichetta); font-weight: bold; }
+.carta a { color: var(--link); font-weight: bold; }
 
-/* L'etichetta piccola in maiuscolo, come nella presentazione */
+/* Sulle fasce chiare: bordo tenue e ombra più marcata */
+.fascia-chiara .carta {
+  border: 1px solid var(--bordo-scheda);
+  box-shadow: var(--ombra-chiaro);
+}
+
+/* L'etichetta piccola in maiuscolo */
 .etichetta {
   margin: 0 0 0.3rem;
   font-size: 0.8rem;
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--etichetta);
+  color: var(--verde);
 }
 
-/* Il quadratino colorato con il simbolo */
+/* Il quadratino colorato con il simbolo, sempre con il bordo sottile
+   blu notte */
 .icona {
   display: flex;
   flex: none;
@@ -314,6 +372,7 @@ p:last-child { margin-bottom: 0; }
   width: 3.2rem;
   height: 3.2rem;
   margin-bottom: 0.9rem;
+  border: 1.5px solid var(--blu-notte);
   border-radius: 14px;
   color: var(--bianco);
   background: var(--verde);
@@ -321,8 +380,8 @@ p:last-child { margin-bottom: 0; }
 
 .icona svg { width: 1.9rem; height: 1.9rem; }
 
-.icona-meccanica { background: var(--meccanica); }
-.icona-grafica   { background: var(--grafica); color: var(--blu-notte); }
+.icona-meccanica { background: var(--meccanica); color: var(--blu-notte); }
+.icona-grafica   { background: var(--grafica);   color: var(--blu-notte); }
 .icona-liceo     { background: var(--liceo); }
 .icona-serali    { background: var(--serali); }
 
@@ -331,10 +390,15 @@ p:last-child { margin-bottom: 0; }
    SCHEDE DEGLI INDIRIZZI
    ----------------------------------------------------------------- */
 
+/* Le tre schede hanno pari importanza: stessa larghezza, stessa
+   altezza. Una per riga finché lo schermo non è abbastanza largo da
+   tenerle tutte e tre leggibili (vedi SCHERMI PIÙ LARGHI): mai due più
+   una. Da sole, non si allargano oltre una misura comoda da leggere. */
 .schede {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--spazio);
+  max-width: 46rem;
 }
 
 .scheda {
@@ -348,7 +412,7 @@ p:last-child { margin-bottom: 0; }
   font-size: 1.3rem;
 }
 
-.scheda-claim { font-weight: bold; color: var(--etichetta); }
+.scheda-claim { font-weight: bold; color: var(--verde); }
 
 /* "Pagina in preparazione" e il pulsante stanno sempre in fondo alla
    scheda, così nelle schede affiancate sono alla stessa altezza. */
@@ -356,28 +420,31 @@ p:last-child { margin-bottom: 0; }
 
 .scheda-stato { font-style: italic; }
 
-.scheda-link {
-  margin: 0.8rem 0 0;
-  padding: 0;
-  list-style: none;
+/* La scheda dei serali: gli stessi pezzi delle schede degli indirizzi,
+   disposti in orizzontale, così la scheda è lunga e bassa. Il simbolo
+   sta a sinistra e i testi alla sua destra; dal tablet in su anche
+   "Pagina in preparazione" (o il pulsante) va a destra, sulla stessa
+   riga. */
+.scheda-orizzontale {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 1rem;
+  align-items: start;
+  padding: 1rem 1.2rem;
 }
 
-.scheda-link li + li { margin-top: 0.4em; }
+.scheda-orizzontale > * { grid-column: 2; margin: 0 0 0.25rem; }
 
-/* Il pulsante verso la pagina dell'indirizzo: una pillola verde */
-.pulsante {
-  display: inline-block;
-  min-height: 44px;   /* la misura minima perché un dito non sbagli */
-  padding: 0.6em 1.8em;
-  font-weight: bold;
-  text-decoration: none;
-  color: var(--pulsante-testo);
-  background: var(--pulsante-fondo);
-  border-radius: 999px;
+.scheda-orizzontale > .icona {
+  grid-column: 1;
+  grid-row: 1 / span 5;
+  align-self: center;
+  margin: 0;
 }
 
-.carta a.pulsante { color: var(--pulsante-testo); }
-.pulsante:hover { background: var(--pulsante-sopra); }
+.scheda-orizzontale h3 { font-size: 1.15rem; }
+
+.scheda-orizzontale > .scheda-fondo { margin: 0.3rem 0 0; padding: 0; }
 
 
 /* -----------------------------------------------------------------
@@ -385,9 +452,11 @@ p:last-child { margin-bottom: 0; }
    Una scheda per data, con la data in grande.
    ----------------------------------------------------------------- */
 
+/* auto-fit: le date si dividono tutta la riga, senza lasciare posti
+   vuoti in fondo */
 .date {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 11rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
   gap: 0.9rem;
   margin: 0 0 1.4rem;
   padding: 0;
@@ -409,11 +478,14 @@ p:last-child { margin-bottom: 0; }
 
 .data-ora { display: block; margin-top: 0.3rem; }
 
-/* La prenotazione: un riquadro giallo, come le schede in evidenza
-   della presentazione. Il giallo resta giallo anche nel tema scuro. */
+/* Il riquadro in evidenza: giallo con il testo blu notte, contenuto
+   centrato */
 .evidenza {
+  --link:   var(--blu-notte);
+  --fuoco:  var(--blu-notte);
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.9rem;
   margin: 0;
   padding: 1rem 1.2rem;
@@ -423,22 +495,26 @@ p:last-child { margin-bottom: 0; }
   border-radius: 18px;
 }
 
+.fascia .evidenza a { color: var(--link); }
+
 .evidenza .icona {
   margin: 0;
   color: var(--giallo);
   background: var(--blu-notte);
 }
 
-.fascia .evidenza a { color: var(--blu-notte); }
-
 
 /* -----------------------------------------------------------------
    CONTATTI
    ----------------------------------------------------------------- */
 
+/* I contatti sono sei: uno per riga sul telefono, due sul tablet, tre
+   al computer (vedi SCHERMI PIÙ LARGHI). Così ogni riga è piena e non
+   resta spazio vuoto in fondo. Se un giorno i contatti non saranno più
+   sei, va rivisto il numero di colonne. */
 .contatti {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.9rem;
   margin: 0;
   padding: 0;
@@ -473,18 +549,6 @@ p:last-child { margin-bottom: 0; }
 
 
 /* -----------------------------------------------------------------
-   PIEDE
-   ----------------------------------------------------------------- */
-
-.fascia-piede {
-  padding-top: 1.2rem;
-  padding-bottom: 1.2rem;
-  font-size: 0.9rem;
-  background: var(--fascia-notte);
-}
-
-
-/* -----------------------------------------------------------------
    SALTA AL CONTENUTO
    Un link che non si vede finché non si usa la tastiera: premendo
    Tab appena aperta la pagina compare in alto, e porta dritti al
@@ -509,18 +573,14 @@ p:last-child { margin-bottom: 0; }
 /* -----------------------------------------------------------------
    ACCESSIBILITÀ
    Il contorno di messa a fuoco serve a chi naviga con la tastiera:
-   non va tolto. Sulle fasce è giallo, sulle schede chiare blu notte.
+   non va tolto. Il colore lo decide il fondo: giallo sul verde, blu
+   notte sul chiaro, sulle schede e sul giallo.
    ----------------------------------------------------------------- */
 
 :focus-visible {
-  outline: 3px solid var(--fuoco-fascia);
+  outline: 3px solid var(--fuoco, var(--blu-notte));
   outline-offset: 3px;
 }
-
-.carta :focus-visible,
-.evidenza :focus-visible { outline-color: var(--fuoco-carta); }
-
-.evidenza :focus-visible { outline-color: var(--blu-notte); }
 
 .salta:focus-visible { outline-color: var(--blu-notte); }
 
@@ -538,14 +598,40 @@ p:last-child { margin-bottom: 0; }
    SCHERMI PIÙ LARGHI
    ----------------------------------------------------------------- */
 
-/* Tablet e computer: due schede per riga, fasce più ariose */
+/* Tablet e computer: fasce più ariose */
 @media (min-width: 48rem) {
   .fascia { padding-top: 2.6rem; padding-bottom: 2.6rem; }
   .fascia-apertura { padding-top: 3.2rem; padding-bottom: 3.4rem; }
   .fascia-testata, .fascia-piede { padding-top: 0.9rem; padding-bottom: 0.9rem; }
-  .schede { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .scheda { padding: 1.8rem; }
   .marchio { font-size: 1.1rem; }
+  .contatti { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* La scheda orizzontale dei serali: tre colonne, simbolo, testi e,
+     a destra, "Pagina in preparazione" o il pulsante */
+  .scheda-orizzontale {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 1.6rem;
+    padding: 1.1rem 1.8rem;
+  }
+  .scheda-orizzontale > .scheda-fondo {
+    grid-column: 3;
+    grid-row: 1 / span 5;
+    align-self: center;
+    margin: 0;
+  }
+}
+
+/* Computer e LIM: le tre schede degli indirizzi sulla stessa riga.
+   Sotto questa larghezza sarebbero troppo strette da leggere.
+   La scheda dei serali usa la stessa griglia: è larga quanto una
+   scheda degli indirizzi. */
+@media (min-width: 64rem) {
+  .schede {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: none;
+  }
+  .contatti { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* LIM e schermi grandi: tutto un po' più grande, per chi guarda da

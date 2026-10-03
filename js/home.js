@@ -25,9 +25,14 @@
     serali: "luna"
   };
 
-  Promise.all([C.leggi("contenuti/home.txt"), C.leggi("contenuti/comuni.txt")])
+  Promise.all([
+    C.leggi("contenuti/home.txt"),
+    C.leggi("contenuti/comuni.txt"),
+    C.leggi("contenuti/serali.txt")
+  ])
     .then(function (file) {
       riempi(file[0], file[1]);
+      serali(file[2], file[0]);
       document.getElementById("contenuto").hidden = false;
     })
     .catch(function (errore) {
@@ -55,6 +60,29 @@
     home.campi("APERTURA", "testo").forEach(function (testo) {
       presentazione.appendChild(C.scrivi(document.createElement("p"), testo));
     });
+    /* La riga per gli adulti compare solo se nel file c'è */
+    var testoAdulti = document.getElementById("testo-adulti");
+    if (home.campo("APERTURA", "testo-adulti")) {
+      C.scrivi(testoAdulti, home.campo("APERTURA", "testo-adulti"));
+    } else {
+      testoAdulti.hidden = true;
+    }
+    /* I due pulsanti dell'apertura portano alle fasce degli indirizzi
+       e dei serali, più in basso. Dopo il salto il focus va sul titolo
+       della fascia: chi usa la tastiera riparte da lì, e il lettore di
+       schermo legge il titolo. Un pulsante senza scritta nel file non
+       compare. */
+    [["pulsante-diurno", "titolo-indirizzi"], ["pulsante-adulti", "titolo-serali"]]
+      .forEach(function (coppia) {
+        var pulsante = document.getElementById(coppia[0]);
+        var scritta = home.campo("APERTURA", coppia[0]);
+        if (!scritta) { pulsante.hidden = true; return; }
+        C.scrivi(pulsante, scritta);
+        pulsante.addEventListener("click", function () {
+          var titolo = document.getElementById(coppia[1]);
+          setTimeout(function () { titolo.focus(); }, 0);
+        });
+      });
 
     /* Titoli delle fasce */
     C.scrivi(document.getElementById("titolo-indirizzi"), home.campo("SEZIONI", "indirizzi"));
@@ -62,7 +90,7 @@
       home.campo("SEZIONI", "open-day") + " " + comuni.campo("OPEN DAY", "anno"));
     C.scrivi(document.getElementById("titolo-contatti"), home.campo("SEZIONI", "contatti"));
 
-    schede(home, comuni);
+    schede(home);
     openDay(comuni);
     contatti(home, comuni);
 
@@ -115,24 +143,11 @@
      LE SCHEDE DEGLI INDIRIZZI
      --------------------------------------------------------------- */
 
-  function schede(home, comuni) {
+  /* Le tre schede hanno tutte la stessa struttura: simbolo, tipo di
+     scuola, nome, claim, testo breve e, in fondo, il pulsante o
+     "Pagina in preparazione". */
+  function schede(home) {
     var contenitore = document.getElementById("schede");
-
-    /* I link utili, raccolti per scheda */
-    var linkUtili = {};
-    home.righe("LINK UTILI").forEach(function (riga, i) {
-      if (riga.length !== 3) {
-        console.warn("home.txt, LINK UTILI, riga " + (i + 1) + ": servono 3 colonne, ne ho trovate " + riga.length);
-        return;
-      }
-      var indirizzo = comuni.campo("SCUOLA", riga[2]);
-      if (!indirizzo) {
-        console.warn("home.txt, LINK UTILI: in comuni.txt non trovo il campo " + riga[2]);
-        return;
-      }
-      if (!linkUtili[riga[0]]) { linkUtili[riga[0]] = []; }
-      linkUtili[riga[0]].push({ testo: riga[1], indirizzo: indirizzo });
-    });
 
     home.righe("INDIRIZZI").forEach(function (riga, i) {
       if (riga.length !== 7) {
@@ -143,11 +158,11 @@
         nome: riga[0], tipo: riga[1], claim: riga[2], breve: riga[3],
         pagina: riga[4], stato: riga[5].toLowerCase(), colore: riga[6].toLowerCase()
       };
-      contenitore.appendChild(scheda(dati, linkUtili[dati.colore] || [], home));
+      contenitore.appendChild(scheda(dati, home));
     });
   }
 
-  function scheda(dati, link, home) {
+  function scheda(dati, home) {
     var articolo = document.createElement("article");
     articolo.className = "carta scheda";
 
@@ -169,17 +184,6 @@
       fondo.appendChild(pulsantePagina(dati, home, fondo));
     } else {
       fondo.appendChild(inPreparazione(home));
-    }
-
-    if (link.length) {
-      var elenco = document.createElement("ul");
-      elenco.className = "scheda-link";
-      link.forEach(function (l) {
-        var voce = document.createElement("li");
-        voce.appendChild(collegamento(l.testo, l.indirizzo));
-        elenco.appendChild(voce);
-      });
-      fondo.appendChild(elenco);
     }
 
     articolo.appendChild(fondo);
@@ -230,6 +234,8 @@
   }
 
   function openDay(comuni) {
+    C.scrivi(document.getElementById("open-day-per-chi"), comuni.campo("OPEN DAY", "per-chi"));
+
     var elenco = document.getElementById("elenco-open-day");
     comuni.righe("OPEN DAY").forEach(function (riga, i) {
       if (riga.length !== 3) {
@@ -250,6 +256,33 @@
       comuni.campo("OPEN DAY", "come-prenotare"),
       comuni.campo("OPEN DAY", "prenotazione")
     ));
+  }
+
+
+  /* ---------------------------------------------------------------
+     CORSI SERALI
+     Legge la sezione HOME di contenuti/serali.txt e costruisce una
+     scheda uguale a quelle degli indirizzi, con la stessa funzione.
+     Le informazioni dettagliate (sezione PAGINA) servono alla futura
+     pagina dei serali e qui non si usano.
+     --------------------------------------------------------------- */
+
+  function serali(file, home) {
+    C.scrivi(document.getElementById("titolo-serali"), file.campo("HOME", "titolo"));
+    var dati = {
+      nome:   file.campo("HOME", "nome"),
+      tipo:   file.campo("HOME", "tipo"),
+      claim:  file.campo("HOME", "claim"),
+      breve:  file.campo("HOME", "in breve"),
+      pagina: file.campo("HOME", "pagina"),
+      stato:  file.campo("HOME", "stato").toLowerCase(),
+      colore: "serali"
+    };
+    /* Stessa scheda degli indirizzi, ma disposta in orizzontale: lunga
+       e bassa */
+    var articolo = scheda(dati, home);
+    articolo.className += " scheda-orizzontale";
+    document.getElementById("scheda-serali").appendChild(articolo);
   }
 
 
