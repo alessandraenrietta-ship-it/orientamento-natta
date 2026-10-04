@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="stile.css?v=21">
+  <link rel="stylesheet" href="stile.css?v=22">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <!-- Le tre pagine dei percorsi sono uguali: cambiano solo il titolo qui
@@ -29,9 +29,13 @@
   <!-- La testata: logo e nome della scuola, come nella home -->
   <header class="fascia fascia-testata">
     <div class="fascia-interno testata-interno">
+      <!-- Logo e nome sono un collegamento alla home. Il lettore di
+           schermo sente anche "pagina iniziale" (TESTO MODIFICABILE). -->
       <p class="marchio">
-        <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
-        <span id="nome-scuola"></span>
+        <a class="marchio-link" href="index.html">
+          <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
+          <span class="marchio-nome" id="nome-scuola"></span><span class="solo-lettori">, pagina iniziale</span>
+        </a>
       </p>
     </div>
   </header>
@@ -48,7 +52,7 @@
       </div>
     </section>
 
-    <section class="fascia fascia-chiara" aria-labelledby="titolo-quadro">
+    <section class="fascia fascia-quadro" aria-labelledby="titolo-quadro">
       <div class="fascia-interno">
         <h2 class="titolo-fascia" id="titolo-quadro"></h2>
         <div class="carta quadro">
@@ -104,6 +108,6 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=1"></script>
-  <script src="js/liceo.js?v=5"></script>
+  <script src="js/liceo.js?v=6"></script>
 </body>
 </html>

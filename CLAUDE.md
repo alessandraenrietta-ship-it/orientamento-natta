@@ -83,7 +83,8 @@ adulti interessati ai corsi serali.
 - **Grafica a fasce**: fasce piene da bordo a bordo, alternate verdi e
   chiare, senza sfumature.
   - testata e piede: verde scuro `#014A26`, testo bianco; nella testata
-    il logo con lo sfondo trasparente, senza riquadro;
+    il logo con lo sfondo trasparente, senza riquadro; nelle pagine
+    interne logo e nome sono un collegamento alla home (nella home no);
   - **fascia verde** `#026C37`: titoli gialli `#FFF33F` in Arial Black
     maiuscolo, testo bianco, pulsante a pillola bianco con testo verde;
   - **fascia chiara** `#F3F7EC`: titoli verdi `#026C37` in Arial Black
@@ -159,20 +160,26 @@ adulti interessati ai corsi serali.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
-  `<body>`. Fasce: apertura verde, quadro orario chiara, laboratori e
+  `<body>`. Fasce: apertura verde, quadro orario blu (tono del percorso), laboratori e
   progetti verde, dopo il diploma chiara. Le ultime due compaiono solo
   se c'è il loro campo in `liceo.txt`: per ora sono nascoste (righe
   commentate con `#`), su richiesta di Alessandra. Nella pagina del Liceo
   Digitale nessun collegamento al sito del Liceo Digitale.
 - Quadro orario: una vera tabella in una scheda bianca senza retino,
   che sul telefono sta in 375 pixel senza scorrere di lato.
-  - Intestazioni su due righe: i gruppi "Primo biennio", "Secondo
-    biennio", "Quinto anno" (grassetto blu notte, 11 pixel sul telefono,
-    13 al computer) e sotto "Materia" e gli anni (grassetto verde).
-    Due linee verticali blu notte di 2 pixel dividono i gruppi.
-  - Cinque colonne degli anni larghe uguali (2,6rem sul telefono, il
-    minimo perché "Quinto" ci entri; 4,5rem al computer). Righe bianche,
-    numeri in grassetto blu notte, trattini grigi `#5B6B80`.
+  - La fascia del quadro orario (`fascia-quadro`) ha il fondo pieno nel
+    tono del percorso, con il titolo "QUADRO ORARIO" giallo e la
+    tabella sulla sua scheda bianca.
+  - Intestazione: una fascia piena nel tono del percorso, scritte in
+    bianco grassetto, su due righe: i gruppi "Primo biennio", "Secondo
+    biennio", "Quinto anno" (11 pixel sul telefono, 13 al computer,
+    sempre su due righe: "Primo / biennio") e sotto "Materia" e gli
+    anni. Due linee verticali di 2 pixel dividono i gruppi: bianche
+    nell'intestazione, blu notte nel resto della tabella.
+  - Colonne degli anni: le prime quattro larghe uguali (2,6rem sul
+    telefono, il minimo perché "Quinto" ci entri; 4,5rem al computer),
+    il quinto anno più largo (3,2rem; 5,5rem al computer). Righe
+    bianche, numeri in grassetto blu notte, trattini grigi `#5B6B80`.
   - Ore in più (Matematico e Digitale): dopo il quadro base, sotto una
     riga-titolo "In più nel ..." nel tono del percorso, testo bianco
     maiuscolo. Niente giallo, niente legenda.

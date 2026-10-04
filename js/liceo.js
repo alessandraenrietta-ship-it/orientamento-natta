@@ -271,15 +271,16 @@
     var tabella = document.getElementById("orario");
     tabella.appendChild(elemento("caption", "solo-lettori", TESTI.didascalia + nome));
 
-    /* Le colonne: la materia, poi i cinque anni, tutti larghi uguali
-       (le larghezze stanno in stile.css) */
+    /* Le colonne: la materia, poi i cinque anni. I primi quattro sono
+       larghi uguali; il quinto è un po' più largo, perché sopra c'è
+       "Quinto anno" da solo (le larghezze stanno in stile.css). */
     var colonne = document.createElement("colgroup");
     var colMateria = document.createElement("col");
     colMateria.className = "orario-col-materia";
     colonne.appendChild(colMateria);
     for (var k = 0; k < 5; k++) {
       var col = document.createElement("col");
-      col.className = "orario-col-anno";
+      col.className = "orario-col-anno" + (k === 4 ? " orario-col-quinto" : "");
       colonne.appendChild(col);
     }
     tabella.appendChild(colonne);
@@ -294,8 +295,21 @@
     thMateria.scope = "col";
     thMateria.rowSpan = 2;
     rigaGruppi.appendChild(thMateria);
+    /* Ogni gruppo sempre su due righe, a capo dopo la prima parola
+       ("Primo / biennio", "Quinto / anno"), così sono tutti uguali:
+       "Quinto anno" su una riga sola non entra nella sua colonna. */
     TESTI.gruppi.forEach(function (gruppo) {
-      var th = elemento("th", "", gruppo[0]);
+      var th = document.createElement("th");
+      var spazio = gruppo[0].indexOf(" ");
+      if (spazio === -1) {
+        C.scrivi(th, gruppo[0]);
+      } else {
+        /* lo spazio prima dell'a capo non si vede, ma tiene separate le
+           due parole per chi legge il testo ("Primo biennio") */
+        C.scrivi(th, gruppo[0].slice(0, spazio + 1));
+        th.appendChild(document.createElement("br"));
+        C.scrivi(th, gruppo[0].slice(spazio + 1));
+      }
       th.scope = "colgroup";
       th.colSpan = gruppo[1];
       rigaGruppi.appendChild(th);

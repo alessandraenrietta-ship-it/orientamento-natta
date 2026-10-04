@@ -242,6 +242,20 @@ p:last-child { margin-bottom: 0; }
   text-transform: uppercase;
 }
 
+/* Nelle pagine interne logo e nome sono un collegamento alla home:
+   bianco, senza sottolineatura a riposo; al passaggio del mouse il
+   nome si sottolinea. Il contorno da tastiera è giallo, come nel resto
+   della testata. */
+.marchio-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--bianco);
+  text-decoration: none;
+}
+.fascia-testata a.marchio-link { color: var(--bianco); }
+.marchio-link:hover .marchio-nome { text-decoration: underline; }
+
 /* Il logo con lo sfondo trasparente, direttamente sul verde scuro.
    È piccolo (231 per 155 pixel): non va ingrandito oltre. */
 .logo-scuola {
@@ -905,19 +919,46 @@ p:last-child { margin-bottom: 0; }
    Una tabella vera dentro una scheda bianca, senza retino dietro i
    numeri. Righe bianche separate da una linea sottile chiara.
    Colonne: la materia, che prende lo spazio che resta, e i cinque
-   anni, tutti larghi uguali. Due linee verticali blu notte dividono i
-   gruppi: primo biennio (1° e 2°), secondo biennio (3° e 4°), quinto
-   anno.
-   Nel Liceo Matematico e nel Liceo Digitale le ore in più stanno sotto
-   una riga-titolo "In più nel ..." nel tono del percorso.
+   anni: i primi quattro larghi uguali, il quinto un po' più largo.
+   Due linee verticali dividono i gruppi: primo biennio (1° e 2°),
+   secondo biennio (3° e 4°), quinto anno.
+   L'intestazione è una fascia nel tono del percorso con le scritte in
+   bianco. Nel Liceo Matematico e nel Liceo Digitale le ore in più
+   stanno sotto una riga-titolo "In più nel ..." nello stesso tono.
    Sul telefono la tabella sta in 375 pixel senza scorrere di lato: i
    nomi delle materie vanno a capo; le intestazioni dei gruppi sono più
-   piccole e vanno a capo anche loro. Le colonne degli anni sono larghe
-   2,6rem (circa 42 pixel), il minimo perché "Quinto" ci entri.
+   piccole e sempre su due righe. Le colonne degli anni sono larghe
+   2,6rem (circa 42 pixel, il minimo perché "Quinto" ci entri), il
+   quinto 3,2rem.
    ----------------------------------------------------------------- */
 
+/* A destra un po' più di margine: la colonna del quinto anno non
+   arriva al bordo della scheda. A sinistra basta meno, perché i nomi
+   delle materie hanno già il loro spazio interno. */
+/* Nelle pagine dei percorsi i titoli delle fasce chiare ("QUADRO
+   ORARIO") sono nel tono del percorso invece che verdi. Sono grandi e
+   in Arial Black: sul chiaro l'azzurro ha contrasto 4,3, il blu 5,9,
+   il blu scuro 11,5 (per il testo grande basta 3). */
+body[data-percorso] .fascia-chiara .titolo-fascia { color: var(--tono, var(--liceo)); }
+
+/* La fascia del quadro orario: fondo pieno nel tono del percorso, con
+   la tabella sulla sua scheda bianca. Il titolo è giallo, come sulle
+   fasce verdi: giallo sull'azzurro 4,0, sul blu 5,6, sul blu scuro
+   10,8 (è grande, basta 3). */
+.fascia-quadro {
+  --titolo: var(--giallo);
+  --testo:  var(--bianco);
+  --fuoco:  var(--giallo);
+  color: var(--testo);
+  background: var(--tono, var(--liceo));
+}
+
+/* Titolo e tabella al centro della fascia */
+.fascia-quadro .titolo-fascia { text-align: center; }
+.fascia-quadro .carta.quadro { margin-left: auto; margin-right: auto; }
+
 .carta.quadro {
-  padding: 0.8rem 0.4rem 0.6rem;
+  padding: 0.8rem 0.9rem 0.6rem 0.4rem;
   background-image: none;   /* niente pallini dietro i numeri */
 }
 
@@ -937,6 +978,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .orario-col-anno { width: 2.6rem; }
+.orario-col-quinto { width: 3.2rem; }   /* il quinto anno un po' più largo */
 
 /* La colonna delle materie: testo normale, a capo dove serve */
 .orario th[scope="row"],
@@ -960,28 +1002,31 @@ p:last-child { margin-bottom: 0; }
   color: var(--grigio);
 }
 
-/* Intestazioni: "Materia" e gli anni in grassetto verde, circa 15
-   pixel, con la linea blu notte di 2 pixel sotto */
+/* La fascia d'intestazione: le due righe di intestazione su fondo
+   pieno nel tono del percorso, con le scritte in bianco grassetto
+   (4,7 sull'azzurro, 6,4 sul blu, 12,5 sul blu scuro) e la linea blu
+   notte di 2 pixel sotto. "Materia" e gli anni circa 15 pixel. */
 .orario thead th {
   font-size: 0.9375rem;
-  color: var(--verde);
+  color: var(--bianco);
+  background: var(--tono, var(--liceo));
   border-bottom: 2px solid var(--blu-notte);
   vertical-align: bottom;
 }
 
 /* Sopra gli anni i gruppi (Primo biennio, Secondo biennio, Quinto
-   anno): grassetto blu notte, 11 pixel sul telefono e 13 al computer,
-   a capo se serve */
+   anno): 11 pixel sul telefono e 13 al computer, sempre su due righe,
+   separati dagli anni da una linea bianca semitrasparente */
 .orario .orario-gruppi th:not(.orario-materia) {
   padding: 0.25rem 0.1rem 0.3rem;
   font-size: 0.6875rem;
   line-height: 1.15;
-  color: var(--blu-notte);
-  border-bottom: 1px solid var(--bordo-scheda);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.45);
 }
 
 /* Le due linee verticali fra i gruppi, dalle intestazioni al totale:
-   prima del 3° e prima del 5° */
+   prima del 3° e prima del 5°. Nella fascia d'intestazione sono
+   bianche, perché il blu notte sul blu non si vedrebbe. */
 .orario .orario-gruppi th:nth-child(3),
 .orario .orario-gruppi th:nth-child(4),
 .orario .orario-anni th:nth-child(3),
@@ -990,6 +1035,10 @@ p:last-child { margin-bottom: 0; }
 .orario tbody td:nth-child(6),
 .orario tfoot td:nth-child(4),
 .orario tfoot td:nth-child(6) { border-left: 2px solid var(--blu-notte); }
+.orario .orario-gruppi th:nth-child(3),
+.orario .orario-gruppi th:nth-child(4),
+.orario .orario-anni th:nth-child(3),
+.orario .orario-anni th:nth-child(5) { border-left-color: var(--bianco); }
 
 /* La riga-titolo "In più nel ...": a tutta larghezza, fondo pieno nel
    tono del percorso, testo bianco in grassetto maiuscolo, circa 13
@@ -1156,12 +1205,14 @@ p:last-child { margin-bottom: 0; }
   }
 
   /* Il quadro orario: più spazio, colonne degli anni più larghe e
-     sempre uguali fra loro; la scheda al massimo 46rem */
+     (i primi quattro uguali, il quinto più largo); la scheda al
+     massimo 46rem */
   .carta.quadro { padding: 1.4rem 1.8rem 1.6rem; max-width: 46rem; }
   .orario { font-size: 1.05rem; }
   .orario th, .orario td { padding: 0.55rem 0.6rem; }
   .orario th[scope="row"], .orario .orario-materia { padding-left: 0.8rem; }
   .orario-col-anno { width: 4.5rem; }
+  .orario-col-quinto { width: 5.5rem; }
   .orario .orario-gruppi th:not(.orario-materia) { font-size: 0.8125rem; }
   .orario .orario-titolo-in-piu { padding-left: 0.8rem; }
 }
