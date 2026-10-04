@@ -23,7 +23,7 @@
     QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO DI UNO
     in tutte le pagine che lo caricano.
   -->
-  <link rel="stylesheet" href="stile.css?v=11">
+  <link rel="stylesheet" href="stile.css?v=14">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -73,9 +73,13 @@
     <section class="fascia fascia-chiara" aria-labelledby="titolo-open-day">
       <div class="fascia-interno">
         <h2 class="titolo-fascia" id="titolo-open-day"></h2>
-        <p class="sottotitolo" id="open-day-per-chi"></p>
-        <ul class="date" id="elenco-open-day"></ul>
-        <p class="evidenza" id="prenotazione"></p>
+        <p class="sottotitolo" id="open-day-nota"></p>
+        <!-- Un'unica scheda: le date come foglietti da calendario e, in
+             fondo, il pulsante per prenotare -->
+        <div class="carta calendario">
+          <ul class="date" id="elenco-open-day"></ul>
+          <p class="calendario-fondo" id="prenotazione"></p>
+        </div>
       </div>
     </section>
 
@@ -112,7 +116,7 @@
        possono leggere. -->
   <section class="fascia fascia-verde" id="avviso" hidden>
     <div class="fascia-interno">
-      <h1 class="titolo-fascia">Orientamento I.I.S. G. Natta</h1>
+      <h1 class="titolo-fascia">Orientamento I.I.S. Giulio Natta</h1>
       <p>Non riesco a caricare i testi di questa pagina.</p>
       <p>Se hai aperto il file dal computer con un doppio clic, usa invece
          <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
@@ -136,6 +140,6 @@
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
-  <script src="js/home.js?v=10"></script>
+  <script src="js/home.js?v=12"></script>
 </body>
 </html>

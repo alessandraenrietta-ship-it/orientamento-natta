@@ -95,6 +95,11 @@ adulti interessati ai corsi serali.
     `#F3F7EC` ha contrasto 1,1;
   - sulle schede: un quadratino colorato con il simbolo, un'etichetta
     piccola in maiuscolo, il testo in Arial.
+- Il titolo grande dell'apertura ("ORIENTAMENTO I.I.S. Giulio Natta")
+  non viene trasformato in maiuscolo: compare come è scritto in
+  `home.txt`, così il nome della scuola resta in minuscolo con le
+  iniziali maiuscole. Gli altri titoli delle fasce restano in maiuscolo
+  automatico.
 - Nella home le fasce sono: testata; apertura verde (l'unica con il
   testo centrato, con i pulsanti "Dopo la terza media" e "Corsi serali
   per adulti"); open day chiara (subito dopo l'apertura, perché le date
@@ -105,7 +110,15 @@ adulti interessati ai corsi serali.
   bassa, simbolo a sinistra, testi al centro e "Pagina in preparazione"
   o il pulsante a destra; sul telefono simbolo accanto ai testi; porta
   alla pagina dei serali); contatti verde; piede.
-- Il riquadro giallo della prenotazione ha il contenuto centrato.
+- Open day: un'unica scheda bianca con le date come foglietti da
+  calendario (striscia verde con il mese, numero del giorno in Arial
+  Black blu notte, bordo sottile blu notte, niente ombra: non si
+  cliccano e non devono sembrarlo) e, in fondo, il pulsante a pillola
+  verde per prenotare. Ogni turno ha una spunta verde se è libero, una
+  croce rossa con la scritta "Sold out" se è esaurito (nel file:
+  "sold out" dopo l'orario). Il rosso `#B91C1C` (contrasto 6,5 sul
+  bianco) si usa solo qui e sempre insieme a forma e scritta, mai da
+  solo: per chi è daltonico rosso e verde si confondono.
 - I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
   loro testi stanno in `contenuti/serali.txt`.
 - **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,
@@ -124,9 +137,21 @@ adulti interessati ai corsi serali.
   deuteranopia e protanopia. **Non si cambiano senza dirlo ad
   Alessandra.**
 - Il giallo non si usa mai come colore del testo su fondo chiaro.
-- Simboli disegnati a mano in SVG, in `immagini/simboli.svg`: rotella
-  (Meccanica), occhio (Grafica), lampadina (Liceo), luna (Serali), più
-  luogo, telefono, busta, globo e calendario.
+- **Icone a linea per le funzioni, simboli pieni a adesivo per
+  l'identità di indirizzi, serali e percorsi del liceo.** Tutti
+  disegnati a mano in SVG, in `immagini/simboli.svg`.
+  - Simboli a adesivo: figure piene con interno bianco e contorno blu
+    notte spesso, forme semplici e generose, nello spirito di un
+    fumetto, leggibili anche a 24 pixel. Ingranaggio grande con un
+    secondo più piccolo che ingrana (Meccanica), occhio con l'iride
+    piena (Grafica), lampadina con filamento e attacco a righe (Liceo),
+    falce di luna con una stella (Serali). Su ogni fondo almeno uno fra
+    contorno e interno supera 3:1.
+  - Icone a linea, un solo colore: luogo, telefono, busta, globo,
+    calendario.
+- Nelle schede di indirizzi e serali il quadratino è di circa 56 pixel,
+  angoli poco arrotondati, bordo sottile blu notte, niente ombra, in
+  alto a sinistra con accanto tipo di scuola e nome.
 - Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
   (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
   risoluzione, si sostituisce.

@@ -22,16 +22,16 @@ sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale
 
 == OPEN DAY ==
 anno: 2026/27
-# Si può aggiungere una riga "per-chi:" con una frase da mostrare sotto
-# il titolo della fascia degli open day. Per ora non c'è.
-# PROVVISORIO: il link porta alla home page del sito della scuola. Va
-# sostituito con l'indirizzo del modulo di prenotazione.
 prenotazione: https://www.itisgiulionatta.it
 come-prenotare: Prenota
-# Una riga per open day: giorno | data | orario
-# L'orario si scrive sempre con ore e minuti, inizio-fine: 10.00-12.00
-sabato | 21 novembre | 10.00-12.00
-venerdì | 27 novembre | 17.30-19.30
-sabato | 12 dicembre | 10.00-12.00
-mercoledì | 16 dicembre | 17.30-19.30
-venerdì | 15 gennaio | 17.30-19.30
+nota-turni: Ogni open day ha due turni di un'ora. Al momento della prenotazione si sceglie il turno.
+# giorno | data | primo turno | secondo turno
+# Quando un turno è al completo, si scrive "sold out" dopo l'orario,
+# per esempio: 10.00-11.00 sold out
+# Sulla pagina il turno avrà una croce rossa e la scritta "Sold out";
+# i turni liberi hanno una spunta verde.
+sabato | 21 novembre | 10.00-11.00 | 11.00-12.00
+venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30
+sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00
+mercoledì | 16 dicembre | 17.30-18.30 | 18.30-19.30
+venerdì | 15 gennaio | 17.30-18.30 | 18.30-19.30

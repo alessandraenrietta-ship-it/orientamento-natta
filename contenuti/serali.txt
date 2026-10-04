@@ -20,7 +20,7 @@ titolo: Corsi serali per adulti
 tipo: Anno scolastico 2026/27
 nome: Meccanica e meccatronica; Grafica e comunicazione
 claim:
-in breve: A chi lavora o vuole riprendere gli studi.
+in breve: Per chi lavora o vuole riprendere gli studi.
 pagina: serali.html
 stato: in preparazione
 

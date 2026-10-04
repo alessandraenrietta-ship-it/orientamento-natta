@@ -15,7 +15,7 @@
 
   /* I disegni stanno in immagini/simboli.svg: se si cambia un disegno,
      si aumenta il numero ?v= qui sotto. */
-  var FILE_SIMBOLI = "immagini/simboli.svg?v=2";
+  var FILE_SIMBOLI = "immagini/simboli.svg?v=4";
 
   /* Il simbolo di ogni indirizzo, scelto dalla colonna "colore" */
   var SIMBOLI = {
@@ -118,6 +118,19 @@
     return riquadro;
   }
 
+  /* Un simbolo da solo, senza quadratino, che prende il colore del
+     testo intorno. Solo decorativo. */
+  function segno(simbolo, classe) {
+    var svg = document.createElementNS(SVG, "svg");
+    svg.setAttribute("class", classe);
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    var uso = document.createElementNS(SVG, "use");
+    uso.setAttribute("href", FILE_SIMBOLI + "#" + simbolo);
+    svg.appendChild(uso);
+    return svg;
+  }
+
   /* Un elemento con dentro un testo, che può contenere [DA COMPLETARE] */
   function elemento(tag, classe, testo) {
     var e = document.createElement(tag);
@@ -166,14 +179,22 @@
     var articolo = document.createElement("article");
     articolo.className = "carta scheda";
 
+    /* La testa della scheda: il quadratino con il simbolo a sinistra e,
+       accanto, il tipo di scuola e il nome. Il resto segue sotto, a
+       tutta larghezza. */
+    var testa = document.createElement("div");
+    testa.className = "scheda-testa";
     if (SIMBOLI[dati.colore]) {
-      articolo.appendChild(icona(SIMBOLI[dati.colore], "icona-" + dati.colore));
+      testa.appendChild(icona(SIMBOLI[dati.colore], "icona-" + dati.colore));
     } else {
       console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
     }
-
-    articolo.appendChild(elemento("p", "etichetta", dati.tipo));
-    articolo.appendChild(elemento("h3", "", dati.nome));
+    var titoli = document.createElement("div");
+    titoli.className = "scheda-titoli";
+    titoli.appendChild(elemento("p", "etichetta", dati.tipo));
+    titoli.appendChild(elemento("h3", "", dati.nome));
+    testa.appendChild(titoli);
+    articolo.appendChild(testa);
     if (dati.claim) { articolo.appendChild(elemento("p", "scheda-claim", dati.claim)); }
     /* La frase concreta, subito sotto il claim, in testo normale. Come
        gli altri campi, se è vuota non compare. */
@@ -229,42 +250,100 @@
      OPEN DAY
      --------------------------------------------------------------- */
 
-  /* "17.30-19.30" diventa "dalle 17.30 alle 19.30": si legge meglio.
-       è uno spazio che non va a capo: "alle" resta con l'ora. */
-  function orario(testo) {
-    var parti = testo.match(/^\s*(\S+)\s*-\s*(\S+)\s*$/);
-    return parti ? "dalle " + parti[1] + " alle " + parti[2] : testo;
+  /* Il mese abbreviato del foglietto, ricavato dalla data scritta nel
+     file: "21 novembre" diventa NOV. */
+  var MESI = {
+    gennaio: "GEN", febbraio: "FEB", marzo: "MAR", aprile: "APR",
+    maggio: "MAG", giugno: "GIU", luglio: "LUG", agosto: "AGO",
+    settembre: "SET", ottobre: "OTT", novembre: "NOV", dicembre: "DIC"
+  };
+
+  /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
+     "sold out": "10.00-11.00 sold out".
+     - turno libero: spunta verde
+     - turno esaurito: croce rossa e la scritta "Sold out"
+     La differenza non sta solo nel colore (rosso e verde si confondono
+     per chi è daltonico) ma anche nella forma e nella scritta. Chi usa
+     un lettore di schermo sente "posti liberi" oppure "sold out". */
+  var SOLD_OUT = /\s*sold\s*out\s*$/i;
+
+  function turnoConStato(testo) {
+    var esaurito = SOLD_OUT.test(testo);
+    var orario = testo.replace(SOLD_OUT, "");
+    var voce = document.createElement("li");
+    voce.className = "turno " + (esaurito ? "turno-esaurito" : "turno-libero");
+    voce.appendChild(segno(esaurito ? "croce" : "spunta", "turno-segno"));
+    C.scrivi(voce, orario);
+    if (esaurito) {
+      voce.appendChild(elemento("span", "sold-out", " Sold out"));
+    } else {
+      voce.appendChild(elemento("span", "solo-lettori", ", posti liberi"));
+    }
+    return voce;
   }
 
   function openDay(comuni) {
-    /* La riga sotto il titolo compare solo se nel file c'è */
-    var perChi = document.getElementById("open-day-per-chi");
-    if (comuni.campo("OPEN DAY", "per-chi")) {
-      C.scrivi(perChi, comuni.campo("OPEN DAY", "per-chi"));
+    /* La nota sui turni, sotto il titolo: compare solo se c'è */
+    var nota = document.getElementById("open-day-nota");
+    if (comuni.campo("OPEN DAY", "nota-turni")) {
+      C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
     } else {
-      perChi.hidden = true;
+      nota.hidden = true;
     }
 
+    /* Ogni data: un foglietto da calendario (mese e giorno) e, accanto
+       o sotto, il giorno della settimana e i due turni. Il foglietto è
+       solo un disegno: chi usa un lettore di schermo sente la data per
+       intero, scritta accanto al giorno della settimana. */
     var elenco = document.getElementById("elenco-open-day");
     comuni.righe("OPEN DAY").forEach(function (riga, i) {
-      if (riga.length !== 3) {
-        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 3 colonne, ne ho trovate " + riga.length);
+      if (riga.length !== 4) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
         return;
       }
+      var parti = riga[1].split(/\s+/);
+      var numero = parti[0];
+      var mese = MESI[(parti[1] || "").toLowerCase()] || (parti[1] || "").slice(0, 3).toUpperCase();
+
       var voce = document.createElement("li");
-      voce.className = "carta data";
-      voce.appendChild(elemento("span", "etichetta", riga[0]));
-      voce.appendChild(elemento("span", "data-giorno", riga[1]));
-      voce.appendChild(elemento("span", "data-ora", orario(riga[2])));
+      voce.className = "data";
+
+      var foglietto = document.createElement("div");
+      foglietto.className = "foglietto";
+      foglietto.setAttribute("aria-hidden", "true");
+      foglietto.appendChild(elemento("span", "foglietto-mese", mese));
+      foglietto.appendChild(elemento("span", "foglietto-giorno", numero));
+      voce.appendChild(foglietto);
+
+      var testi = document.createElement("div");
+      testi.className = "data-testi";
+      var quando = elemento("p", "data-settimana", riga[0]);
+      quando.appendChild(elemento("span", "solo-lettori", " " + riga[1]));
+      testi.appendChild(quando);
+      /* I due turni, uno sotto l'altro */
+      var turni = document.createElement("ul");
+      turni.className = "data-turni";
+      [riga[2], riga[3]].forEach(function (orario) {
+        turni.appendChild(turnoConStato(orario));
+      });
+      testi.appendChild(turni);
+      voce.appendChild(testi);
+
       elenco.appendChild(voce);
     });
 
+    /* In fondo alla scheda, il pulsante per prenotare. Se il link manca,
+       resta solo il testo. */
     var prenota = document.getElementById("prenotazione");
-    prenota.appendChild(icona("calendario"));
-    prenota.appendChild(collegamento(
-      comuni.campo("OPEN DAY", "come-prenotare"),
-      comuni.campo("OPEN DAY", "prenotazione")
-    ));
+    var testo = comuni.campo("OPEN DAY", "come-prenotare");
+    var link = comuni.campo("OPEN DAY", "prenotazione");
+    if (link && !C.daCompletare(link)) {
+      var a = elemento("a", "pulsante", testo);
+      a.href = link;
+      prenota.appendChild(a);
+    } else {
+      C.scrivi(prenota, testo + " " + (link || ""));
+    }
   }
 
 

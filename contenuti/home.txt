@@ -8,7 +8,9 @@
 # ------------------------------------------------------------------
 
 == APERTURA ==
-titolo: Orientamento I.I.S. G. Natta
+# Il titolo compare esattamente come è scritto qui, maiuscole comprese:
+# la pagina non lo trasforma in maiuscolo.
+titolo: ORIENTAMENTO I.I.S. Giulio Natta
 # claim provvisorio, da rivedere insieme agli altri
 claim: Percorsi diversi, un unico traguardo: il futuro.
 # Si possono aggiungere, sotto il claim, righe "testo" (ognuna è un
@@ -44,9 +46,13 @@ vai-alla-pagina: Vai alla pagina
 # Una colonna vuota si lascia vuota fra due barre.
 # Le tre schede hanno tutte la stessa struttura: niente link in più
 # dentro una scheda sola.
-Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Un'auto? Non la guarderai più come prima. | In questo indirizzo imparerai a capire un motore e a progettarne i componenti. | Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia. | meccanica.html | in preparazione | meccanica
+#
+# Testi per le future pagine degli indirizzi (non compaiono in home)
+# meccanica.html: Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia.
+# liceo.html: Tre percorsi sulla stessa base scientifica: Scienze applicate; Liceo Matematico, con più ore di matematica; Liceo Digitale, con ore in più di intelligenza artificiale, coding, diritto e pensiero critico.
+Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Un'auto? Non la guarderai più come prima. | In questo indirizzo imparerai a capire un motore e a progettarne i componenti. | | meccanica.html | in preparazione | meccanica
 Grafica e comunicazione | Istituto tecnico tecnologico | Una pubblicità? Non la guarderai più come prima. | In questo indirizzo imparerai a progettare una campagna e a capire perché funziona. | | grafica.html | in preparazione | grafica
-Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | Tre percorsi sulla stessa base scientifica: Scienze applicate; Liceo Matematico, con più ore di matematica; Liceo Digitale, con ore in più di intelligenza artificiale, coding, diritto e pensiero critico. | liceo.html | in preparazione | liceo
+Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | in preparazione | liceo
 
 == CONTATTI ==
 # Quali contatti mostrare, in quest'ordine. Due colonne:

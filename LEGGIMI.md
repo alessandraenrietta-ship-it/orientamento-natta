@@ -4,9 +4,17 @@ Tutti i testi stanno nella cartella `contenuti/`. Si aprono con il Blocco
 note. Non serve toccare nessun altro file.
 
 - `comuni.txt`: contatti e open day, validi per tutte le pagine. Nella
-  sezione degli open day, il campo `per-chi`, se c'è, è la riga che
-  compare sotto il titolo; gli orari si scrivono sempre con ore e
-  minuti, come `10.00-12.00`.
+  sezione degli open day:
+  - `nota-turni` è la frase che compare sotto il titolo della fascia;
+  - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
+    a cui porta;
+  - la tabella ha **quattro colonne**: `giorno | data | primo turno |
+    secondo turno`. La data si scrive come `21 novembre`: dal mese il
+    sito ricava la sigla del foglietto da calendario (NOV). Gli orari si
+    scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
+  - quando un turno è al completo si scrive `sold out` dopo l'orario,
+    come `10.00-11.00 sold out`: sulla pagina compare una croce rossa
+    con la scritta "Sold out". I turni liberi hanno una spunta verde.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
@@ -55,6 +63,13 @@ sulla pagina diventa "**A chi si rivolge** A chi lavora o vuole
 riprendere gli studi." Per aggiungere un'informazione si scrive una
 riga nuova nel punto in cui deve comparire; per toglierla si cancella
 la riga.
+
+## Le maiuscole del titolo
+
+Il titolo grande della pagina iniziale (campo `titolo` della sezione
+`APERTURA` di `home.txt`) compare **esattamente come è scritto**: le
+parole in maiuscolo vanno scritte in maiuscolo nel file. Gli altri
+titoli delle fasce, invece, la pagina li mette in maiuscolo da sola.
 
 ## Dati che mancano
 

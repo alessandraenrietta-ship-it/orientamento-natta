@@ -53,11 +53,27 @@
   /* Un colore per indirizzo. Si usa SOLO come fondo del quadratino con
      il simbolo, sempre con un bordo sottile blu notte: l'ambra e il
      rosa da soli si staccherebbero poco dal bianco della scheda.
-     Contrasto del simbolo: ambra 8,1 - rosa 6,6 - blu 6,4 - ardesia 9,5 */
+     Il simbolo "adesivo" ha interno bianco e contorno blu notte: su ogni
+     fondo almeno uno dei due supera 3:1.
+       ambra:   contorno 8,1 (interno 2,2)
+       rosa:    contorno 6,6 (interno 2,7)
+       blu:     interno 6,4 (contorno 2,7)
+       ardesia: interno 9,5 (contorno 1,8)                              */
   --meccanica:     #F59E0B;  /* ambra: simbolo blu notte */
   --grafica:       #F472B6;  /* rosa: simbolo blu notte */
   --liceo:         #1F5FA8;  /* blu: simbolo bianco */
   --serali:        #3A4756;  /* ardesia: simbolo bianco */
+
+  /* Rosso SOLO per i turni esauriti degli open day (croce e scritta
+     "Sold out"): contrasto 6,5 sul bianco della scheda. Va sempre
+     insieme a una forma o a una scritta, mai da solo, perché per chi è
+     daltonico rosso e verde si confondono. */
+  --rosso:         #B91C1C;
+
+  /* I simboli "adesivo" di indirizzi e serali (immagini/simboli.svg):
+     interno bianco e contorno blu notte, su qualunque fondo. */
+  --simbolo-interno:  var(--bianco);
+  --simbolo-contorno: var(--blu-notte);
 
   /* Ruoli delle schede */
   --carta:         var(--bianco);
@@ -283,7 +299,8 @@ p:last-child { margin-bottom: 0; }
   font-weight: 900;
   font-size: clamp(2.1rem, 9vw, 4.2rem);
   line-height: 0.98;
-  text-transform: uppercase;
+  /* Niente maiuscolo automatico: il titolo compare come è scritto in
+     home.txt, così il nome della scuola può restare in minuscolo. */
   color: var(--titolo);
   /* Le righe del titolo si dividono in parti simili: niente parola
      rimasta sola sulla seconda riga. I browser vecchi lo ignorano. */
@@ -380,16 +397,19 @@ p:last-child { margin-bottom: 0; }
 
 .icona svg { width: 1.9rem; height: 1.9rem; }
 
-/* Nelle schede degli indirizzi il quadratino si allunga fino a
-   diventare una barra larga quanto la scheda, con il simbolo al
-   centro: il colore di ogni indirizzo si vede di più. La striscia
-   dei serali tiene il quadratino, perché lì il simbolo sta a fianco
-   dei testi. */
-.scheda:not(.scheda-orizzontale) > .icona { width: 100%; }
-.scheda:not(.scheda-orizzontale) > .icona svg { width: 2.3rem; height: 2.3rem; }
+/* Nelle schede degli indirizzi e dei serali il quadratino è di circa
+   56 pixel, con gli angoli poco arrotondati, bordo sottile blu notte e
+   niente ombra. */
+.scheda .icona {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0;
+  border-radius: 6px;
+}
+.scheda .icona svg { width: 2.6rem; height: 2.6rem; }
 
-.icona-meccanica { background: var(--meccanica); color: var(--blu-notte); }
-.icona-grafica   { background: var(--grafica);   color: var(--blu-notte); }
+.icona-meccanica { background: var(--meccanica); }
+.icona-grafica   { background: var(--grafica); }
 .icona-liceo     { background: var(--liceo); }
 .icona-serali    { background: var(--serali); }
 
@@ -415,8 +435,19 @@ p:last-child { margin-bottom: 0; }
   padding: 1.4rem;
 }
 
+/* La testa della scheda: quadratino a sinistra, accanto tipo di
+   scuola e nome. Claim, frase e il resto seguono sotto. */
+.scheda-testa {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 0.9rem;
+}
+
+.scheda-titoli .etichetta { margin: 0 0 0.2rem; }
+
 .scheda h3 {
-  margin-bottom: 0.4em;
+  margin: 0;
   font-size: 1.3rem;
 }
 
@@ -441,9 +472,15 @@ p:last-child { margin-bottom: 0; }
   padding: 1rem 1.2rem;
 }
 
-.scheda-orizzontale > * { grid-column: 2; margin: 0 0 0.25rem; }
+/* Qui la testa della scheda non fa da contenitore: quadratino, tipo e
+   nome entrano direttamente nella griglia insieme agli altri pezzi. */
+.scheda-orizzontale .scheda-testa,
+.scheda-orizzontale .scheda-titoli { display: contents; }
 
-.scheda-orizzontale > .icona {
+.scheda-orizzontale > *,
+.scheda-orizzontale .scheda-titoli > * { grid-column: 2; margin: 0 0 0.25rem; }
+
+.scheda-orizzontale .icona {
   grid-column: 1;
   grid-row: 1 / span 5;
   align-self: center;
@@ -457,58 +494,104 @@ p:last-child { margin-bottom: 0; }
 
 /* -----------------------------------------------------------------
    OPEN DAY
-   Una scheda per data, con la data in grande.
+   Un'unica scheda bianca. Ogni data è un foglietto da calendario:
+   striscia verde con il mese, sotto il numero del giorno. Accanto (al
+   telefono) o sotto (al computer) il giorno della settimana e i due
+   turni. In fondo il pulsante per prenotare.
+   I foglietti non si cliccano e non devono sembrarlo: niente ombra,
+   niente effetti al passaggio del mouse.
    ----------------------------------------------------------------- */
 
-/* auto-fit: le date si dividono tutta la riga, senza lasciare posti
-   vuoti in fondo */
+.calendario { padding: 0.6rem 1.2rem 1.4rem; }
+
 .date {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
-  gap: 0.9rem;
-  margin: 0 0 1.4rem;
+  margin: 0 0 1.2rem;
   padding: 0;
   list-style: none;
 }
 
-.data { padding: 1.1rem 1.2rem; }
+/* Telefono: una data per riga, separate da una linea sottile */
+.data {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--bordo-scheda);
+}
 
-.data .etichetta { margin-bottom: 0.15rem; }
+.data-testi p { margin: 0; }
 
-.data-giorno {
-  display: block;
-  font-family: var(--titolo-grande);
-  font-weight: 900;
-  font-size: 1.35rem;
-  line-height: 1.15;
+.data-settimana {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+/* I due turni: uno sotto l'altro, ciascuno con il suo segno: spunta
+   verde se ci sono posti, croce rossa e "Sold out" se è esaurito. Il
+   segno cambia anche di forma, non solo di colore. Un turno non va mai
+   a capo a metà. */
+.data-turni {
+  margin: 0.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.turno {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.turno-segno { flex: none; width: 1.05em; height: 1.05em; }
+
+.turno-libero .turno-segno { color: var(--verde); }
+.turno-esaurito .turno-segno,
+.sold-out { color: var(--rosso); }
+
+.sold-out {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.data-ora { display: block; margin-top: 0.3rem; }
-
-/* Il riquadro in evidenza: giallo con il testo blu notte, contenuto
-   centrato */
-.evidenza {
-  --link:   var(--blu-notte);
-  --fuoco:  var(--blu-notte);
+.foglietto {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.9rem;
-  margin: 0;
-  padding: 1rem 1.2rem;
-  font-weight: bold;
-  color: var(--blu-notte);
-  background: var(--giallo);
-  border-radius: 18px;
+  flex: none;
+  flex-direction: column;
+  width: 3.6rem;
+  overflow: hidden;
+  text-align: center;
+  background: var(--bianco);
+  border: 1.5px solid var(--blu-notte);
+  border-radius: 6px;
+  cursor: default;
 }
 
-.fascia .evidenza a { color: var(--link); }
+/* Bianco su verde: contrasto 6,6 */
+.foglietto-mese {
+  padding: 0.15rem 0;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  color: var(--bianco);
+  background: var(--verde);
+}
 
-.evidenza .icona {
+.foglietto-giorno {
+  padding: 0.2rem 0 0.25rem;
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  color: var(--blu-notte);
+}
+
+.calendario-fondo {
   margin: 0;
-  color: var(--giallo);
-  background: var(--blu-notte);
+  text-align: center;
 }
 
 
@@ -631,15 +714,32 @@ p:last-child { margin-bottom: 0; }
 }
 
 /* Computer e LIM: le tre schede degli indirizzi sulla stessa riga.
-   Sotto questa larghezza sarebbero troppo strette da leggere.
-   La scheda dei serali usa la stessa griglia: è larga quanto una
-   scheda degli indirizzi. */
+   Sotto questa larghezza sarebbero troppo strette da leggere. */
 @media (min-width: 64rem) {
   .schede {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: none;
   }
   .contatti { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+  /* Open day: i foglietti affiancati come una striscia di calendario,
+     con giorno della settimana e turni sotto ciascuno */
+  .calendario { padding: 1.6rem 1.8rem 1.8rem; }
+  .date {
+    display: grid;
+    grid-auto-flow: column;            /* una colonna per ogni data */
+    grid-auto-columns: minmax(0, 1fr); /* tutte larghe uguali */
+    gap: 1rem;
+    margin-bottom: 1.6rem;
+  }
+  .data {
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 0;
+    border-bottom: none;
+    text-align: center;
+  }
+  .turno { justify-content: center; }
 }
 
 /* LIM e schermi grandi: tutto un po' più grande, per chi guarda da
