@@ -54,7 +54,7 @@ vai-alla-pagina: Vai alla pagina
 # liceo.html: Tre percorsi sulla stessa base scientifica: Scienze applicate; Liceo Matematico, con più ore di matematica; Liceo Digitale, con ore in più di intelligenza artificiale, coding, diritto e pensiero critico.
 Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Un'auto? Non la guarderai più come prima. | In questo indirizzo imparerai a capire un motore e a progettarne i componenti. | | meccanica.html | in preparazione | meccanica
 Grafica e comunicazione | Istituto tecnico tecnologico | Una pubblicità? Non la guarderai più come prima. | In questo indirizzo imparerai a progettare una campagna e a capire perché funziona. | | grafica.html | in preparazione | grafica
-Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | in preparazione | liceo
+Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | pronta | liceo
 
 == CONTATTI ==
 # I pulsanti d'azione della fascia dei contatti, in quest'ordine.
