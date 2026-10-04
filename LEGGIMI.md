@@ -11,7 +11,9 @@ note. Non serve toccare nessun altro file.
   ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
   pulsanti che portano alla fascia degli indirizzi e a quella dei
-  serali. Righe e pulsanti senza testo non compaiono.
+  serali. Righe e pulsanti senza testo non compaiono. Nella tabella
+  `INDIRIZZI`, la colonna `frase` è la frase concreta che compare subito
+  sotto il claim; se è vuota non compare.
 - `serali.txt`: i testi dei corsi serali per adulti.
 
 ## Le quattro regole

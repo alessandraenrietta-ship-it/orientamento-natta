@@ -150,13 +150,13 @@
     var contenitore = document.getElementById("schede");
 
     home.righe("INDIRIZZI").forEach(function (riga, i) {
-      if (riga.length !== 7) {
-        console.warn("home.txt, INDIRIZZI, riga " + (i + 1) + ": servono 7 colonne, ne ho trovate " + riga.length);
+      if (riga.length !== 8) {
+        console.warn("home.txt, INDIRIZZI, riga " + (i + 1) + ": servono 8 colonne, ne ho trovate " + riga.length);
         return;
       }
       var dati = {
-        nome: riga[0], tipo: riga[1], claim: riga[2], breve: riga[3],
-        pagina: riga[4], stato: riga[5].toLowerCase(), colore: riga[6].toLowerCase()
+        nome: riga[0], tipo: riga[1], claim: riga[2], frase: riga[3], breve: riga[4],
+        pagina: riga[5], stato: riga[6].toLowerCase(), colore: riga[7].toLowerCase()
       };
       contenitore.appendChild(scheda(dati, home));
     });
@@ -175,6 +175,9 @@
     articolo.appendChild(elemento("p", "etichetta", dati.tipo));
     articolo.appendChild(elemento("h3", "", dati.nome));
     if (dati.claim) { articolo.appendChild(elemento("p", "scheda-claim", dati.claim)); }
+    /* La frase concreta, subito sotto il claim, in testo normale. Come
+       gli altri campi, se è vuota non compare. */
+    if (dati.frase) { articolo.appendChild(elemento("p", "scheda-frase", dati.frase)); }
     if (dati.breve) { articolo.appendChild(elemento("p", "", dati.breve)); }
 
     var fondo = document.createElement("div");
