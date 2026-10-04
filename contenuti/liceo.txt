@@ -41,13 +41,16 @@ Religione cattolica o attività alternative | 1 | 1 | 1 | 1 | 1
 
 == ORE AGGIUNTIVE MATEMATICO ==
 # Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
-# Ogni riga diventa una riga gialla in fondo al quadro, anche se la
+# Nel quadro orario queste righe compaiono dopo le materie del quadro
+# base, sotto la riga-titolo "In più nel Liceo Matematico", anche se la
 # materia c'è già nel quadro base: così Matematica compare due volte,
 # con le ore di base e, più sotto, con le sole ore in più.
 Matematica | 2 | 2 | 1 | 1 | 1
 
 == ORE AGGIUNTIVE DIGITALE ==
 # Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
+# Nel quadro orario queste righe compaiono dopo le materie del quadro
+# base, sotto la riga-titolo "In più nel Liceo Digitale".
 Laboratorio del pensiero critico | 1 | 1 | - | - | -
 Diritto | 1 | 1 | - | - | -
 Intelligenza artificiale e coding | 1 | 1 | 1 | 1 | 1

@@ -164,10 +164,20 @@ adulti interessati ai corsi serali.
   se c'è il loro campo in `liceo.txt`: per ora sono nascoste (righe
   commentate con `#`), su richiesta di Alessandra. Nella pagina del Liceo
   Digitale nessun collegamento al sito del Liceo Digitale.
-- Quadro orario: una vera tabella, che sul telefono sta in 375 pixel
-  senza scorrere di lato. Le ore in più dei percorsi sono in giallo con
-  testo blu notte, in grassetto e dette a voce al lettore di schermo
-  ("ore in più"), con una legenda; i totali li calcola il sito.
+- Quadro orario: una vera tabella in una scheda bianca senza retino,
+  che sul telefono sta in 375 pixel senza scorrere di lato.
+  - Intestazioni su due righe: i gruppi "Primo biennio", "Secondo
+    biennio", "Quinto anno" (grassetto blu notte, 11 pixel sul telefono,
+    13 al computer) e sotto "Materia" e gli anni (grassetto verde).
+    Due linee verticali blu notte di 2 pixel dividono i gruppi.
+  - Cinque colonne degli anni larghe uguali (2,6rem sul telefono, il
+    minimo perché "Quinto" ci entri; 4,5rem al computer). Righe bianche,
+    numeri in grassetto blu notte, trattini grigi `#5B6B80`.
+  - Ore in più (Matematico e Digitale): dopo il quadro base, sotto una
+    riga-titolo "In più nel ..." nel tono del percorso, testo bianco
+    maiuscolo. Niente giallo, niente legenda.
+  - Ultima riga "Totale", con i totali calcolati dal sito in Arial
+    Black.
 - I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
   loro testi stanno in `contenuti/serali.txt`.
 - **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,

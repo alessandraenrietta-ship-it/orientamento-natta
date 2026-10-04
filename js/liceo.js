@@ -31,16 +31,14 @@
     laboratori: "Laboratori e progetti",
     dopo: "Dopo il diploma",
     materia: "Materia",
-    biennio: "Biennio",
-    triennio: "Triennio",
-    totale: "Totale ore settimanali",
+    /* i gruppi di anni sopra le colonne: scritta e numero di colonne */
+    gruppi: [["Primo biennio", 2], ["Secondo biennio", 2], ["Quinto anno", 1]],
+    inPiuNel: "In più nel",
+    totale: "Totale",
     anni: ["1°", "2°", "3°", "4°", "5°"],
     anniPerLettori: ["primo anno", "secondo anno", "terzo anno", "quarto anno", "quinto anno"],
-    legenda: "In giallo le ore in più rispetto a Scienze applicate.",
     didascalia: "Ore settimanali, ",
-    nessunaOra: "nessuna ora",
-    oraInPiu: "ora in più",
-    oreInPiu: "ore in più"
+    nessunaOra: "nessuna ora"
   };
 
   var percorso = document.body.getAttribute("data-percorso");
@@ -177,6 +175,11 @@
     }
     var nome = riga[0];
 
+    /* Il tono del percorso (per la riga-titolo "In più nel ..." del
+       quadro orario), dal nome del file della pagina, come nelle schede
+       di liceo.html */
+    if (riga[2]) { document.body.classList.add("tono-" + riga[2].replace(/\.html$/, "")); }
+
     tornaIndietro(liceo.campo("LICEO", "torna-liceo"));
     C.scrivi(document.getElementById("etichetta"), titoloCompleto(liceo));
     C.scrivi(document.getElementById("titolo"), nome);
@@ -206,14 +209,14 @@
 
   /* ---------------------------------------------------------------
      IL QUADRO ORARIO
-     Il quadro base di Scienze applicate più, se ci sono, le ore
-     aggiuntive del percorso: ogni riga delle ore aggiuntive diventa
-     una riga nuova in fondo al quadro, prima del totale, anche se la
-     materia c'è già nel quadro base (nel Liceo Matematico c'è così una
-     seconda riga "Matematica" con le sole ore in più).
-     Le ore in più sono in giallo, in grassetto e, per chi usa un
-     lettore di schermo, dette a voce ("2 ore in più"). I totali li
-     calcola il sito.
+     Le materie di Scienze applicate (QUADRO BASE) subito sotto le
+     intestazioni. Nel Liceo Matematico e nel Liceo Digitale seguono le
+     ore aggiuntive del percorso, in una seconda parte della tabella che
+     si apre con la riga-titolo "In più nel ..." nel tono del percorso
+     (nel Matematico c'è così una seconda riga "Matematica" con le sole
+     ore in più). In fondo il totale, calcolato dal sito.
+     Le colonne degli anni sono raggruppate: primo biennio (1° e 2°),
+     secondo biennio (3° e 4°), quinto anno.
      --------------------------------------------------------------- */
 
   /* Le ore di una cella: il trattino (o una cella vuota) vale zero */
@@ -227,61 +230,63 @@
     return numero;
   }
 
-  /* Una cella con un testo da vedere e uno, diverso, da ascoltare */
-  function cella(classe, visibile, perLettori) {
-    var td = document.createElement("td");
-    if (classe) { td.className = classe; }
-    var vedi = document.createElement("span");
-    vedi.setAttribute("aria-hidden", "true");
-    vedi.textContent = visibile;
-    td.appendChild(vedi);
-    td.appendChild(elemento("span", "solo-lettori", perLettori));
-    return td;
+  /* Le righe di una tabella di liceo.txt, controllate: sei colonne */
+  function righeOre(liceo, sezione) {
+    return liceo.righe(sezione).filter(function (r, i) {
+      if (r.length !== 6) {
+        console.warn("liceo.txt, " + sezione + ", riga " + (i + 1) + ": servono 6 colonne, ne ho trovate " + r.length);
+        return false;
+      }
+      return true;
+    });
   }
 
-  function inPiu(n) {
-    return n + " " + (n === 1 ? TESTI.oraInPiu : TESTI.oreInPiu);
+  /* Una riga della tabella: la materia e le ore dei cinque anni, che
+     si aggiungono ai totali. Il trattino si vede grigio; il lettore di
+     schermo sente "nessuna ora". */
+  function rigaMateria(r, totali) {
+    var tr = document.createElement("tr");
+    var th = elemento("th", "", r[0]);
+    th.scope = "row";
+    tr.appendChild(th);
+    for (var j = 0; j < 5; j++) {
+      var n = ore(r[j + 1], r[0]);
+      totali[j] += n;
+      var td = document.createElement("td");
+      if (n > 0) {
+        td.textContent = n;
+      } else {
+        td.className = "orario-nessuna";
+        var vedi = elemento("span", "", "–");
+        vedi.setAttribute("aria-hidden", "true");
+        td.appendChild(vedi);
+        td.appendChild(elemento("span", "solo-lettori", TESTI.nessunaOra));
+      }
+      tr.appendChild(td);
+    }
+    return tr;
   }
 
   function quadroOrario(liceo, sezioneOre, nome) {
-    /* Le materie del quadro base */
-    var materie = [];
-    liceo.righe("QUADRO BASE").forEach(function (r, i) {
-      if (r.length !== 6) {
-        console.warn("liceo.txt, QUADRO BASE, riga " + (i + 1) + ": servono 6 colonne, ne ho trovate " + r.length);
-        return;
-      }
-      materie.push({ nome: r[0], base: r.slice(1), extra: null, nuova: false });
-    });
-
-    /* Le ore aggiuntive del percorso */
-    var aggiunte = sezioneOre ? liceo.righe(sezioneOre) : [];
-    aggiunte.forEach(function (r, i) {
-      if (r.length !== 6) {
-        console.warn("liceo.txt, " + sezioneOre + ", riga " + (i + 1) + ": servono 6 colonne, ne ho trovate " + r.length);
-        return;
-      }
-      materie.push({ nome: r[0], base: null, extra: r.slice(1), nuova: true });
-    });
-
     var tabella = document.getElementById("orario");
     tabella.appendChild(elemento("caption", "solo-lettori", TESTI.didascalia + nome));
 
-    /* Le colonne, raggruppate: la materia, il biennio (primo e secondo
-       anno), il triennio (dal terzo al quinto). Le larghezze stanno in
-       stile.css. */
-    [["orario-col-materia", 1], ["orario-col-biennio", 2], ["orario-col-triennio", 3]]
-      .forEach(function (gruppo) {
-        var colgroup = document.createElement("colgroup");
-        colgroup.className = gruppo[0];
-        for (var k = 0; k < gruppo[1]; k++) {
-          colgroup.appendChild(document.createElement("col"));
-        }
-        tabella.appendChild(colgroup);
-      });
+    /* Le colonne: la materia, poi i cinque anni, tutti larghi uguali
+       (le larghezze stanno in stile.css) */
+    var colonne = document.createElement("colgroup");
+    var colMateria = document.createElement("col");
+    colMateria.className = "orario-col-materia";
+    colonne.appendChild(colMateria);
+    for (var k = 0; k < 5; k++) {
+      var col = document.createElement("col");
+      col.className = "orario-col-anno";
+      colonne.appendChild(col);
+    }
+    tabella.appendChild(colonne);
 
-    /* Le intestazioni, su due righe: sopra "Biennio" e "Triennio",
-       sotto i cinque anni. "Materia" occupa tutte e due le righe. */
+    /* Le intestazioni, su due righe: sopra i gruppi (Primo biennio,
+       Secondo biennio, Quinto anno), sotto i cinque anni. "Materia"
+       occupa tutte e due le righe. */
     var testa = document.createElement("thead");
     var rigaGruppi = document.createElement("tr");
     rigaGruppi.className = "orario-gruppi";
@@ -289,7 +294,7 @@
     thMateria.scope = "col";
     thMateria.rowSpan = 2;
     rigaGruppi.appendChild(thMateria);
-    [[TESTI.biennio, 2], [TESTI.triennio, 3]].forEach(function (gruppo) {
+    TESTI.gruppi.forEach(function (gruppo) {
       var th = elemento("th", "", gruppo[0]);
       th.scope = "colgroup";
       th.colSpan = gruppo[1];
@@ -311,34 +316,33 @@
     testa.appendChild(rigaAnni);
     tabella.appendChild(testa);
 
-    /* Una riga per materia */
+    /* Le materie del quadro base */
     var totali = [0, 0, 0, 0, 0];
-    var corpo = document.createElement("tbody");
-    materie.forEach(function (m) {
-      var tr = document.createElement("tr");
-      if (m.nuova) { tr.className = "riga-in-piu"; }
-      var th = elemento("th", "", m.nome);
-      th.scope = "row";
-      tr.appendChild(th);
-
-      for (var j = 0; j < 5; j++) {
-        var base = m.base ? ore(m.base[j], m.nome) : 0;
-        var extra = m.extra ? ore(m.extra[j], m.nome) : 0;
-        totali[j] += base + extra;
-
-        if (extra > 0) {
-          tr.appendChild(cella("in-piu", String(extra), inPiu(extra)));
-        } else if (base > 0) {
-          var td = document.createElement("td");
-          td.textContent = base;
-          tr.appendChild(td);
-        } else {
-          tr.appendChild(cella(m.nuova ? "in-piu" : "", "–", TESTI.nessunaOra));
-        }
-      }
-      corpo.appendChild(tr);
+    var base = document.createElement("tbody");
+    righeOre(liceo, "QUADRO BASE").forEach(function (r) {
+      base.appendChild(rigaMateria(r, totali));
     });
-    tabella.appendChild(corpo);
+    tabella.appendChild(base);
+
+    /* Le ore in più del percorso, se ci sono: una seconda parte della
+       tabella che si apre con la riga-titolo "In più nel ...". Per il
+       lettore di schermo la riga-titolo è l'intestazione delle righe
+       che la seguono. */
+    var aggiunte = sezioneOre ? righeOre(liceo, sezioneOre) : [];
+    if (aggiunte.length) {
+      var inPiu = document.createElement("tbody");
+      inPiu.className = "orario-in-piu";
+      var rigaTitolo = document.createElement("tr");
+      var thTitolo = elemento("th", "orario-titolo-in-piu", TESTI.inPiuNel + " " + nome);
+      thTitolo.scope = "rowgroup";
+      thTitolo.colSpan = 6;
+      rigaTitolo.appendChild(thTitolo);
+      inPiu.appendChild(rigaTitolo);
+      aggiunte.forEach(function (r) {
+        inPiu.appendChild(rigaMateria(r, totali));
+      });
+      tabella.appendChild(inPiu);
+    }
 
     /* In fondo, i totali calcolati */
     var piede = document.createElement("tfoot");
@@ -353,16 +357,5 @@
     });
     piede.appendChild(rigaTotale);
     tabella.appendChild(piede);
-
-    /* La legenda compare solo se ci sono ore in più */
-    var legenda = document.getElementById("legenda");
-    if (aggiunte.length) {
-      var campione = elemento("span", "legenda-campione", "");
-      campione.setAttribute("aria-hidden", "true");
-      legenda.appendChild(campione);
-      C.scrivi(legenda, TESTI.legenda);
-    } else {
-      legenda.hidden = true;
-    }
   }
 }());

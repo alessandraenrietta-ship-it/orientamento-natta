@@ -114,11 +114,12 @@ Le sezioni `== ORE AGGIUNTIVE MATEMATICO ==` e `== ORE AGGIUNTIVE
 DIGITALE ==` hanno le stesse sei colonne del quadro base, ma contengono
 **solo le ore in più** rispetto a Scienze applicate, non le ore totali.
 
-Ogni riga delle ore aggiuntive diventa **una riga nuova in fondo al
-quadro**, prima del totale, in giallo e in grassetto, con una legenda
-sotto il quadro. Vale anche se la materia c'è già nel quadro base: nel
-Liceo Matematico la riga "Matematica" compare due volte, prima con le
-ore di Scienze applicate e in fondo, in giallo, con le sole ore in più.
+Nel quadro orario le righe delle ore aggiuntive compaiono **dopo le
+materie del quadro base**, sotto una riga-titolo colorata "In più nel
+Liceo Matematico" oppure "In più nel Liceo Digitale", prima del totale.
+Vale anche se la materia c'è già nel quadro base: nel Liceo Matematico
+la riga "Matematica" compare due volte, prima con le ore di Scienze
+applicate e più sotto, dopo la riga-titolo, con le sole ore in più.
 
 **I totali li calcola il sito**: non si scrivono da nessuna parte. Per
 cambiare un orario basta correggere un numero; per aggiungere una
