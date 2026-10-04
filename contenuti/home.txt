@@ -12,7 +12,7 @@
 # la pagina non lo trasforma in maiuscolo.
 titolo: ORIENTAMENTO I.I.S. Giulio Natta
 # claim provvisorio, da rivedere insieme agli altri
-claim: Percorsi diversi, un unico traguardo: il futuro.
+claim: Un'unica scuola, tanti modi di imparare.
 # Si possono aggiungere, sotto il claim, righe "testo" (ognuna è un
 # paragrafo) e una riga "testo-adulti" sopra il pulsante. Per ora non
 # ci sono: l'apertura deve restare breve.
