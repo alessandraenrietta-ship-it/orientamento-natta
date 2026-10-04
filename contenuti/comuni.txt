@@ -24,7 +24,8 @@ sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale
 anno: 2026/27
 prenotazione: https://www.itisgiulionatta.it
 come-prenotare: Prenota
-nota-turni: Ogni open day ha due turni di un'ora. Al momento della prenotazione si sceglie il turno.
+# Si può aggiungere una riga "nota-turni:" con una frase da mostrare
+# sotto il titolo della fascia degli open day. Per ora non c'è.
 # giorno | data | primo turno | secondo turno
 # Quando un turno è al completo, si scrive "sold out" dopo l'orario,
 # per esempio: 10.00-11.00 sold out

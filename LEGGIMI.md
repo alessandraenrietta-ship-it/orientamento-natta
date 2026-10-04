@@ -5,7 +5,8 @@ note. Non serve toccare nessun altro file.
 
 - `comuni.txt`: contatti e open day, validi per tutte le pagine. Nella
   sezione degli open day:
-  - `nota-turni` è la frase che compare sotto il titolo della fascia;
+  - `nota-turni`, se c'è, è la frase che compare sotto il titolo della
+    fascia; se manca, sotto il titolo non resta spazio vuoto;
   - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
     a cui porta;
   - la tabella ha **quattro colonne**: `giorno | data | primo turno |
