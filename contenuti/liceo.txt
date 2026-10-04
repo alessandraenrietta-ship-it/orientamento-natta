@@ -9,8 +9,11 @@ titolo: Liceo scientifico
 titolo-riga-2: opzione Scienze applicate
 sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere. (da definire)
 pulsante-percorso: Scopri il percorso
-torna-home: Torna alla home
-torna-liceo: Torna al liceo
+# I collegamenti "‹ Torna alla home" e "‹ Torna al liceo", in alto a
+# sinistra nell'apertura, per ora sono nascosti: per farli comparire si
+# toglie il # (e lo spazio dopo) all'inizio della riga.
+# torna-home: Torna alla home
+# torna-liceo: Torna al liceo
 
 == PERCORSI ==
 # Una riga per percorso, tre colonne:

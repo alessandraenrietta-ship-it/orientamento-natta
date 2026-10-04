@@ -134,12 +134,20 @@ adulti interessati ai corsi serali.
   bianco) si usa solo qui e sempre insieme a forma e scritta, mai da
   solo: per chi è daltonico rosso e verde si confondono.
 - Pagina del liceo (`liceo.html`): testata e piede della home; apertura
-  verde centrata con "‹ Torna alla home" in alto a sinistra, il
-  quadratino blu con la lampadina, il claim del liceo (preso da
+  verde centrata (i collegamenti "‹ Torna alla home" e, nei percorsi,
+  "‹ Torna al liceo" sono nascosti su richiesta di Alessandra: righe
+  commentate in `liceo.txt`), il quadratino blu con la lampadina, il claim del liceo (preso da
   `home.txt`) piccolo sopra il titolo; il titolo è un solo h1 su due
-  righe, "titolo" e, al 60% della grandezza, "titolo-riga-2". Sotto,
+  righe, "titolo" e, al 60% della grandezza, "titolo-riga-2".
+  Disposizione mista, solo con il CSS: sul telefono lampadina (quadratino
+  di 80 pixel), claim, titolo e sottotitolo uno sotto l'altro; dai 600
+  pixel in su claim in alto, poi lampadina e titolo affiancati (quadratino
+  alto quanto le due righe del titolo, gruppo centrato), poi il
+  sottotitolo. Fra 600 e circa 770 pixel il titolo rimpicciolisce per
+  restare su due righe. Sotto,
   su fascia chiara, le tre schede dei percorsi, ognuna un unico link
-  cliccabile per intero, nessun simbolo:
+  cliccabile per intero, nessun simbolo, con un bordo di 2 pixel nel
+  tono del percorso:
   - parte alta piena nel tono del percorso (vedi più sotto), con il
     nome in Arial Black maiuscolo bianco centrato (24 pixel a 375 di
     schermo, 26 più largo, mai sotto 22: non deve andare a capo) e un

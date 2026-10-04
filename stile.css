@@ -718,13 +718,22 @@ p:last-child { margin-bottom: 0; }
   text-decoration: underline;
 }
 
+/* La grandezza del titolo delle pagine interne. Sta in una variabile
+   perché serve anche al quadratino della lampadina, che dai 600 pixel
+   in su è alto quanto le due righe del titolo. */
+.fascia-apertura { --dim-titolo-pagina: clamp(1.8rem, 7vw, 3.2rem); }
+
+/* Il quadratino della lampadina nell'apertura del liceo: sul telefono
+   circa 80 pixel, centrato sopra il claim. La lampadina ne riempie
+   circa tre quarti. */
 .apertura-simbolo .icona {
-  width: 3.5rem;
-  height: 3.5rem;
-  margin: 0 auto 1rem;
-  border-radius: 6px;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.1rem;
+  border-width: 2px;
+  border-radius: 16px;
 }
-.apertura-simbolo .icona svg { width: 2.6rem; height: 2.6rem; }
+.apertura-simbolo .icona svg { width: 3.9rem; height: 3.9rem; }
 
 /* Il claim piccolo sopra il titolo: giallo, in grassetto, non in
    maiuscolo perché è una frase intera. Giallo su verde: 5,7. */
@@ -744,7 +753,7 @@ p:last-child { margin-bottom: 0; }
   max-width: 50rem;
   font-family: var(--titolo-grande);
   font-weight: 900;
-  font-size: clamp(1.8rem, 7vw, 3.2rem);
+  font-size: var(--dim-titolo-pagina, clamp(1.8rem, 7vw, 3.2rem));
   line-height: 1.05;
   text-transform: uppercase;
   color: var(--titolo);
@@ -802,13 +811,17 @@ p:last-child { margin-bottom: 0; }
 .tono-liceo-matematico        { --tono: var(--percorso-matematico); }
 .tono-liceo-digitale          { --tono: var(--percorso-digitale); }
 
+/* Il bordo della scheda: 2 pixel nel tono del percorso, al posto del
+   bordo verde tenue delle altre schede */
+.fascia-chiara .carta.percorso { border: 2px solid var(--tono, var(--liceo)); }
+
 /* La parte alta: fondo pieno, angoli in alto tondi come la scheda
-   (un pixel in meno, per stare dentro il bordo) */
+   (2 pixel in meno, per stare dentro il bordo) */
 .percorso-testa {
   padding: 1.5rem 1rem 1.3rem;
   text-align: center;
   background: var(--tono, var(--liceo));
-  border-radius: calc(var(--raggio) - 1px) calc(var(--raggio) - 1px) 0 0;
+  border-radius: calc(var(--raggio) - 2px) calc(var(--raggio) - 2px) 0 0;
 }
 
 /* Il nome: Arial Black, maiuscolo, bianco. 24 pixel a 375 pixel di
@@ -1064,6 +1077,48 @@ p:last-child { margin-bottom: 0; }
 /* -----------------------------------------------------------------
    SCHERMI PIÙ LARGHI
    ----------------------------------------------------------------- */
+
+/* Dai 600 pixel in su: l'apertura del liceo cambia disposizione.
+   In alto il claim; sotto, lampadina e titolo affiancati (il gruppo è
+   centrato nella pagina, il titolo allineato a sinistra); sotto ancora
+   il sottotitolo. Lo fa una griglia: le colonne esterne (1fr) tengono
+   al centro le due di mezzo, che sono larghe quanto lampadina e
+   titolo. Nella pagina lampadina e titolo restano scritti una volta
+   sola.
+   Il quadratino è alto quanto le due righe del titolo: la prima è alta
+   1,05 volte la grandezza del titolo, la seconda (al 60%) 0,63 volte,
+   più lo spazio fra le due (0,12): in tutto circa 1,8 volte.
+   Fra 600 e circa 770 pixel il titolo rimpicciolisce con lo schermo,
+   così "LICEO SCIENTIFICO" resta su una riga accanto al quadratino:
+   la riga è larga circa 11 volte la grandezza del titolo, il
+   quadratino 1,8 volte, più lo spazio fra i due e i margini. */
+@media (min-width: 37.5rem) {
+  .apertura-liceo {
+    --dim-titolo-pagina: clamp(1.8rem, (100vw - 3.6rem) / 13.5, 3.2rem);
+    display: grid;
+    grid-template-columns: 1fr auto auto 1fr;
+    grid-template-areas:
+      "claim   claim   claim  claim"
+      ".       simbolo titolo ."
+      "testo   testo   testo  testo";
+    align-items: center;
+  }
+  .apertura-liceo .occhiello-frase { grid-area: claim; margin-bottom: 1.1rem; }
+  .apertura-liceo .apertura-simbolo { grid-area: simbolo; }
+  .apertura-liceo .titolo-pagina {
+    grid-area: titolo;
+    margin: 0;
+    text-align: left;
+  }
+  .apertura-liceo .apertura-testo { grid-area: testo; margin-top: 1.3rem; }
+
+  .apertura-liceo .apertura-simbolo .icona {
+    width: calc(var(--dim-titolo-pagina) * 1.8);
+    height: calc(var(--dim-titolo-pagina) * 1.8);
+    margin: 0 1.1rem 0 0;   /* lo spazio fra quadratino e titolo */
+  }
+  .apertura-liceo .apertura-simbolo .icona svg { width: 75%; height: 75%; }
+}
 
 /* Tablet e computer: fasce più ariose */
 @media (min-width: 48rem) {

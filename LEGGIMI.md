@@ -89,7 +89,10 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
 - `== LICEO ==`: titolo (`titolo` e, sulla seconda riga più piccola,
   `titolo-riga-2`; nelle pagine dei percorsi compaiono uniti da una
   virgola), sottotitolo della pagina del liceo e le
-  scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`). Il
+  scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`).
+  `torna-home` e `torna-liceo` sono i collegamenti in alto a sinistra;
+  oggi hanno un `#` davanti e non compaiono: per farli comparire si
+  toglie il `#`. Il
   claim piccolo sopra il titolo non sta qui: è quello della scheda del
   liceo nella tabella `INDIRIZZI` di `home.txt`.
 - `== PERCORSI ==`: una riga per percorso, tre colonne, `nome |

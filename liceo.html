@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="stile.css?v=19">
+  <link rel="stylesheet" href="stile.css?v=20">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -42,10 +42,15 @@
     <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
       <div class="fascia-interno">
         <p class="torna"><a href="index.html"><span aria-hidden="true">‹ </span><span id="torna"></span></a></p>
-        <div class="apertura-simbolo" id="simbolo"></div>
-        <p class="occhiello-frase" id="claim"></p>
-        <h1 class="titolo-pagina" id="titolo"></h1>
-        <p class="apertura-testo" id="sottotitolo"></p>
+        <!-- Telefono: lampadina, claim, titolo e sottotitolo uno sotto
+             l'altro. Dai 600 pixel in su: claim in alto, poi lampadina e
+             titolo affiancati, poi il sottotitolo (vedi stile.css). -->
+        <div class="apertura-liceo">
+          <div class="apertura-simbolo" id="simbolo"></div>
+          <p class="occhiello-frase" id="claim"></p>
+          <h1 class="titolo-pagina" id="titolo"></h1>
+          <p class="apertura-testo" id="sottotitolo"></p>
+        </div>
       </div>
     </section>
 
@@ -89,6 +94,6 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=1"></script>
-  <script src="js/liceo.js?v=3"></script>
+  <script src="js/liceo.js?v=4"></script>
 </body>
 </html>

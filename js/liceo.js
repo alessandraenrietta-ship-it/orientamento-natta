@@ -70,7 +70,7 @@
      --------------------------------------------------------------- */
 
   function paginaLiceo(liceo, home) {
-    C.scrivi(document.getElementById("torna"), liceo.campo("LICEO", "torna-home"));
+    tornaIndietro(liceo.campo("LICEO", "torna-home"));
 
     /* Il quadratino blu con la lampadina, come nella scheda della home */
     document.getElementById("simbolo").appendChild(P.icona("lampadina", "icona-liceo"));
@@ -149,6 +149,19 @@
     return liceo.campo("LICEO", "titolo") + (riga2 ? ", " + riga2 : "");
   }
 
+  /* Il collegamento in alto a sinistra ("‹ Torna alla home", "‹ Torna
+     al liceo") compare solo se in liceo.txt c'è la sua scritta. Per
+     nasconderlo si mette un # davanti alla riga; per farlo ricomparire
+     lo si toglie. */
+  function tornaIndietro(testo) {
+    var scritta = document.getElementById("torna");
+    if (!testo) {
+      scritta.closest(".torna").hidden = true;
+      return;
+    }
+    C.scrivi(scritta, testo);
+  }
+
 
   /* ---------------------------------------------------------------
      LE PAGINE DEI PERCORSI
@@ -164,7 +177,7 @@
     }
     var nome = riga[0];
 
-    C.scrivi(document.getElementById("torna"), liceo.campo("LICEO", "torna-liceo"));
+    tornaIndietro(liceo.campo("LICEO", "torna-liceo"));
     C.scrivi(document.getElementById("etichetta"), titoloCompleto(liceo));
     C.scrivi(document.getElementById("titolo"), nome);
     C.scrivi(document.getElementById("spiegazione"), liceo.campo(sezione, "spiegazione"));
