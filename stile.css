@@ -953,8 +953,9 @@ body[data-percorso] .fascia-chiara .titolo-fascia { color: var(--tono, var(--lic
   background: var(--tono, var(--liceo));
 }
 
-/* Titolo e tabella al centro della fascia */
-.fascia-quadro .titolo-fascia { text-align: center; }
+/* Titolo e tabella al centro della fascia. Il titolo compare come è
+   scritto ("Quadro orario"), non in maiuscolo. */
+.fascia-quadro .titolo-fascia { text-align: center; text-transform: none; }
 .fascia-quadro .carta.quadro { margin-left: auto; margin-right: auto; }
 
 .carta.quadro {
