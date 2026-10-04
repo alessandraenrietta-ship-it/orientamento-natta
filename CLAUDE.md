@@ -94,8 +94,9 @@ adulti interessati ai corsi serali.
   - schede bianche con angoli tondi e retino (la trama di pallini); sulle
     fasce chiare anche un bordo tenue e un'ombra, perché il bianco su
     `#F3F7EC` ha contrasto 1,1;
-  - sulle schede: un quadratino colorato con il simbolo, un'etichetta
-    piccola in maiuscolo, il testo in Arial.
+  - sulle schede: il simbolo (sulla parte alta colorata, o in un
+    quadratino colorato per i serali), un'etichetta piccola in
+    maiuscolo, il testo in Arial.
 - Il titolo grande dell'apertura ("ORIENTAMENTO I.I.S. Giulio Natta")
   non viene trasformato in maiuscolo: compare come è scritto in
   `home.txt`, così il nome della scuola resta in minuscolo con le
@@ -190,12 +191,14 @@ adulti interessati ai corsi serali.
 - **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,
   link. Il verde lime `#8DC73C` è solo decorativo, mai per il testo.
 - Il teal `#00596B` non si usa più.
-- Un colore per indirizzo, usato **solo come fondo del quadratino** con
-  il simbolo, **sempre con un bordo sottile blu notte** `#00193C`:
-  - Meccanica: ambra `#F59E0B`, simbolo blu notte, rotella
-  - Grafica: rosa `#F472B6`, simbolo blu notte, occhio
-  - Liceo: blu `#1F5FA8`, simbolo bianco, lampadina
-  - Serali: ardesia `#3A4756`, simbolo bianco, luna
+- Un colore per indirizzo. Nella home è il fondo della parte alta della
+  scheda dell'indirizzo, con il testo bianco, e il bordo di 3 pixel
+  della scheda; per i serali è il fondo del quadratino con il simbolo,
+  con un bordo sottile blu notte `#00193C`:
+  - Meccanica: arancione bruciato `#C2410C` (bianco 5,2), rotella
+  - Grafica: rosa scuro `#B8326F` (bianco 5,6), occhio
+  - Liceo: blu `#1F5FA8` (bianco 6,4), lampadina
+  - Serali: ardesia `#3A4756`, luna (colore da rivedere)
 - Percorsi del liceo: tre toni di blu, legati al percorso e non alla
   posizione, usati come fondo della parte alta delle schede e della
   pillola "Scopri il percorso", sempre con testo bianco grande o in
@@ -222,9 +225,18 @@ adulti interessati ai corsi serali.
   - Icone a linea, un solo colore: luogo, telefono, busta, globo,
     spunta e croce dei turni,
     calendario.
-- Nelle schede di indirizzi e serali il quadratino è di circa 56 pixel,
-  angoli poco arrotondati, bordo sottile blu notte, niente ombra, in
-  alto a sinistra con accanto tipo di scuola e nome.
+- Schede degli indirizzi nella home, in due parti:
+  - in alto, su fondo pieno nel colore dell'indirizzo e centrati: il
+    simbolo di circa 3.4rem senza quadratino, il tipo di scuola bianco
+    piccolo maiuscolo spaziato, il nome in Arial Black maiuscolo bianco
+    (circa 1.25rem), un filetto giallo di 56×5 pixel;
+  - sotto, la parte bianca con il retino: claim verde, frase e in fondo
+    "Pagina in preparazione" o il pulsante "Scopri di più" centrato.
+  Bordo di 3 pixel nel colore dell'indirizzo. Al computer, con le
+  schede affiancate, le tre parti alte sono alte uguali (subgrid).
+- Nella scheda dei serali il quadratino è di circa 56 pixel, angoli poco
+  arrotondati, bordo sottile blu notte, niente ombra, a sinistra
+  accanto a tipo di scuola e nome.
 - Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
   (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
   risoluzione, si sostituisce.

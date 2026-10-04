@@ -101,9 +101,13 @@
      LE SCHEDE DEGLI INDIRIZZI
      --------------------------------------------------------------- */
 
-  /* Le tre schede hanno tutte la stessa struttura: simbolo, tipo di
-     scuola, nome, claim, testo breve e, in fondo, il pulsante o
-     "Pagina in preparazione". */
+  /* Le tre schede hanno tutte la stessa struttura, in due parti:
+     - in alto, su fondo pieno nel colore dell'indirizzo: il simbolo,
+       il tipo di scuola, il nome e un filetto giallo;
+     - sotto, la parte bianca: claim, frase, testo breve e, in fondo,
+       il pulsante "Scopri di più" o "Pagina in preparazione".
+     La scheda dei serali è costruita in un altro modo (vedi più sotto,
+     funzione scheda). */
   function schede(home) {
     var contenitore = document.getElementById("schede");
 
@@ -116,10 +120,51 @@
         nome: riga[0], tipo: riga[1], claim: riga[2], frase: riga[3], breve: riga[4],
         pagina: riga[5], stato: riga[6].toLowerCase(), colore: riga[7].toLowerCase()
       };
-      contenitore.appendChild(scheda(dati, home));
+      contenitore.appendChild(schedaIndirizzo(dati, home));
     });
   }
 
+  function schedaIndirizzo(dati, home) {
+    var articolo = document.createElement("article");
+    articolo.className = "carta scheda-indirizzo tono-indirizzo-" + dati.colore;
+
+    /* La parte alta. Il simbolo è solo un disegno: il lettore di
+       schermo sente il tipo di scuola e il nome. */
+    var testa = document.createElement("div");
+    testa.className = "indirizzo-testa";
+    if (SIMBOLI[dati.colore]) {
+      testa.appendChild(segno(SIMBOLI[dati.colore], "indirizzo-simbolo"));
+    } else {
+      console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
+    }
+    testa.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
+    testa.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
+    var filetto = elemento("span", "indirizzo-filetto", "");
+    filetto.setAttribute("aria-hidden", "true");
+    testa.appendChild(filetto);
+    articolo.appendChild(testa);
+
+    /* La parte bianca */
+    var corpo = document.createElement("div");
+    corpo.className = "indirizzo-corpo";
+    if (dati.claim) { corpo.appendChild(elemento("p", "scheda-claim", dati.claim)); }
+    if (dati.frase) { corpo.appendChild(elemento("p", "scheda-frase", dati.frase)); }
+    if (dati.breve) { corpo.appendChild(elemento("p", "", dati.breve)); }
+    var fondo = document.createElement("div");
+    fondo.className = "scheda-fondo";
+    if (dati.stato === "pronta") {
+      fondo.appendChild(pulsantePagina(dati, home, fondo));
+    } else {
+      fondo.appendChild(inPreparazione(home));
+    }
+    corpo.appendChild(fondo);
+    articolo.appendChild(corpo);
+    return articolo;
+  }
+
+  /* La scheda dei serali: il quadratino con il simbolo, tipo, nome,
+     claim, testo breve e, in fondo, il pulsante o "Pagina in
+     preparazione" (disposta in orizzontale da stile.css). */
   function scheda(dati, home) {
     var articolo = document.createElement("article");
     articolo.className = "carta scheda";

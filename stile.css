@@ -50,18 +50,19 @@
        verde su chiaro 6,0 - blu notte su chiaro 16,1 - verde su bianco 6,6
        blu notte su giallo 15,1                                          */
 
-  /* Un colore per indirizzo. Si usa SOLO come fondo del quadratino con
-     il simbolo, sempre con un bordo sottile blu notte: l'ambra e il
-     rosa da soli si staccherebbero poco dal bianco della scheda.
+  /* Un colore per indirizzo. Nella home è il fondo della parte alta
+     della scheda dell'indirizzo, con il testo bianco, e il suo bordo;
+     per i serali è il fondo del quadratino con il simbolo.
+     Contrasto del bianco: arancione 5,2, rosa scuro 5,6, blu 6,4.
      Il simbolo "adesivo" ha interno bianco e contorno blu notte: su ogni
      fondo almeno uno dei due supera 3:1.
-       ambra:   contorno 8,1 (interno 2,2)
-       rosa:    contorno 6,6 (interno 2,7)
-       blu:     interno 6,4 (contorno 2,7)
-       ardesia: interno 9,5 (contorno 1,8)                              */
-  --meccanica:     #F59E0B;  /* ambra: simbolo blu notte */
-  --grafica:       #F472B6;  /* rosa: simbolo blu notte */
-  --liceo:         #1F5FA8;  /* blu: simbolo bianco */
+       arancione:  interno 5,2, contorno 3,4
+       rosa scuro: interno 5,6, contorno 3,1
+       blu:        interno 6,4 (contorno 2,7)
+       ardesia:    interno 9,5 (contorno 1,8)                           */
+  --meccanica:     #C2410C;  /* arancione bruciato: testo bianco 5,2 */
+  --grafica:       #B8326F;  /* rosa scuro: testo bianco 5,6 */
+  --liceo:         #1F5FA8;  /* blu: testo bianco 6,4 */
   --serali:        #3A4756;  /* ardesia: simbolo bianco */
 
   /* I tre percorsi del liceo: tre toni di blu, usati come fondo della
@@ -487,10 +488,83 @@ p:last-child { margin-bottom: 0; }
 
 /* Nelle tre schede degli indirizzi il pulsante "Scopri di più" sta al
    centro. Nella scheda orizzontale dei serali resta al suo posto. */
-.scheda:not(.scheda-orizzontale) .scheda-fondo .pulsante {
+.scheda-indirizzo .scheda-fondo .pulsante {
   display: block;
   width: fit-content;
   margin: 0 auto;
+}
+
+/* Le schede degli indirizzi, in due parti:
+   - in alto una fascia piena nel colore dell'indirizzo, centrata, con
+     il simbolo, il tipo di scuola, il nome e un filetto giallo;
+   - sotto la parte bianca con il retino: claim, frase e, in fondo,
+     "Pagina in preparazione" o il pulsante.
+   Intorno un bordo di 3 pixel nel colore dell'indirizzo. */
+.tono-indirizzo-meccanica { --tono: var(--meccanica); }
+.tono-indirizzo-grafica   { --tono: var(--grafica); }
+.tono-indirizzo-liceo     { --tono: var(--liceo); }
+
+.carta.scheda-indirizzo {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--tono, var(--verde));
+}
+
+/* La parte alta: gli angoli in alto seguono quelli tondi della scheda
+   (3 pixel in meno, per stare dentro il bordo) */
+.indirizzo-testa {
+  padding: 1.4rem 1rem 1.2rem;
+  text-align: center;
+  color: var(--bianco);
+  background: var(--tono, var(--verde));
+  border-radius: calc(var(--raggio) - 3px) calc(var(--raggio) - 3px) 0 0;
+}
+
+/* Il simbolo "adesivo" direttamente sul colore, senza quadratino */
+.indirizzo-simbolo {
+  display: block;
+  width: 3.4rem;
+  height: 3.4rem;
+  margin: 0 auto 0.6rem;
+}
+
+/* Il tipo di scuola: piccolo, maiuscolo, spaziato. Bianco in grassetto
+   su arancione 5,2, rosa scuro 5,6, blu 6,4. */
+.indirizzo-tipo {
+  margin: 0 0 0.3rem;
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Il nome: Arial Black, maiuscolo, bianco */
+.indirizzo-nome {
+  margin: 0;
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+/* Il filetto giallo sotto il nome: solo decorativo */
+.indirizzo-filetto {
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin: 0.8rem auto 0;
+  background: var(--giallo);
+  border-radius: 3px;
+}
+
+/* La parte bianca, con il retino della scheda */
+.indirizzo-corpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.2rem 1.4rem 1.4rem;
 }
 
 /* La scheda dei serali: gli stessi pezzi delle schede degli indirizzi,
@@ -1225,6 +1299,19 @@ body[data-percorso] .fascia-chiara .titolo-fascia { color: var(--tono, var(--lic
   .percorsi {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: none;
+  }
+
+  /* Schede degli indirizzi affiancate: le tre parti alte hanno la
+     stessa altezza, anche se un nome va su due righe. Ogni scheda
+     occupa due righe della griglia (parte alta e parte bianca) e le
+     condivide con le altre (subgrid). Sui browser che non conoscono
+     subgrid le schede si vedono lo stesso, con parti alte diverse. */
+  .schede { grid-template-rows: auto auto; }
+  .carta.scheda-indirizzo {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
   }
 
   /* Open day: i foglietti affiancati come una striscia di calendario,
