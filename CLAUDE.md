@@ -149,10 +149,12 @@ adulti interessati ai corsi serali.
      Articolazioni dalla terza: Meccanica e meccatronica, Energia.
   2. Istituto tecnico tecnologico **Grafica e comunicazione**.
   3. **Liceo scientifico opzione Scienze applicate**, con tre percorsi
-     sulla stessa base: Scienze applicate, Liceo Matematico, Liceo
-     Digitale (curvatura, rimanda al suo sito).
-     Curvatura: stesso diploma, con più ore (quali e quante: da definire).
-     Liceo Matematico: descrizione da definire.
+     sulla stessa base scientifica: Scienze applicate; Liceo Matematico,
+     con più ore di matematica; Liceo Digitale, curvatura con ore in più
+     di intelligenza artificiale, coding, diritto e pensiero critico.
+     Curvatura: stesso diploma, con più ore (quante: da definire).
+     Il sito del Liceo Digitale non compare nella home: il suo indirizzo
+     resta in `comuni.txt` per la futura pagina del liceo.
   4. **Corsi serali per adulti 2026/27**: Meccanica e meccatronica;
      Grafica e comunicazione.
 - Materie plastiche: **non si presenta** (decisione in corso).
