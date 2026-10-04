@@ -86,7 +86,9 @@ la riga.
 percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
 `liceo-digitale.html`).
 
-- `== LICEO ==`: titolo e sottotitolo della pagina del liceo e le
+- `== LICEO ==`: titolo (`titolo` e, sulla seconda riga più piccola,
+  `titolo-riga-2`; nelle pagine dei percorsi compaiono uniti da una
+  virgola), sottotitolo della pagina del liceo e le
   scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`). Il
   claim piccolo sopra il titolo non sta qui: è quello della scheda del
   liceo nella tabella `INDIRIZZI` di `home.txt`.

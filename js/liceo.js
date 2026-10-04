@@ -87,12 +87,27 @@
       claim.hidden = true;
     }
 
-    C.scrivi(document.getElementById("titolo"), liceo.campo("LICEO", "titolo"));
+    /* Il titolo su due righe, in un solo h1: "titolo" sopra e, più
+       piccola, "titolo-riga-2". Fra le due una virgola che si sente ma
+       non si vede: il lettore di schermo legge "Liceo scientifico,
+       opzione Scienze applicate". */
+    var h1 = document.getElementById("titolo");
+    C.scrivi(h1, liceo.campo("LICEO", "titolo"));
+    if (liceo.campo("LICEO", "titolo-riga-2")) {
+      h1.appendChild(elemento("span", "solo-lettori", ", "));
+      h1.appendChild(elemento("span", "titolo-riga-2", liceo.campo("LICEO", "titolo-riga-2")));
+    }
     C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
 
-    /* Le tre schede dei percorsi, nell'ordine del file. Ogni scheda è
-       cliccabile per intero: il link sta sul nome e copre tutta la
-       scheda (vedi stile.css). */
+    /* Le tre schede dei percorsi, nell'ordine del file. Ognuna ha una
+       parte alta colorata con il nome e, sotto, la parte bianca con la
+       spiegazione e la pillola "Scopri il percorso".
+       - Il colore della parte alta segue il percorso, non la posizione:
+         la classe viene dal nome del file della pagina
+         (liceo-matematico.html dà "tono-liceo-matematico").
+       - La scheda è cliccabile per intero con un solo link, sul nome,
+         che copre tutta la scheda (vedi stile.css). La pillola è solo
+         un disegno: il lettore di schermo sente solo il nome. */
     var elenco = document.getElementById("percorsi");
     liceo.righe("PERCORSI").forEach(function (riga, i) {
       if (riga.length !== 3) {
@@ -100,26 +115,38 @@
         return;
       }
       var voce = document.createElement("li");
-      voce.className = "carta percorso";
+      voce.className = "carta percorso tono-" + riga[2].replace(/\.html$/, "");
 
+      var testa = document.createElement("div");
+      testa.className = "percorso-testa";
       var titolo = document.createElement("h2");
       titolo.className = "percorso-nome";
       var link = elemento("a", "percorso-link", riga[0]);
       link.href = riga[2];
       titolo.appendChild(link);
-      voce.appendChild(titolo);
+      testa.appendChild(titolo);
+      var filetto = elemento("span", "percorso-filetto", "");
+      filetto.setAttribute("aria-hidden", "true");
+      testa.appendChild(filetto);
+      voce.appendChild(testa);
 
-      voce.appendChild(elemento("p", "percorso-testo", riga[1]));
-
-      /* "Scopri il percorso" con la freccina, che non viene letta */
-      var vai = elemento("p", "percorso-vai", liceo.campo("LICEO", "pulsante-percorso"));
-      var freccia = elemento("span", "", " ›");
-      freccia.setAttribute("aria-hidden", "true");
-      vai.appendChild(freccia);
-      voce.appendChild(vai);
+      var corpo = document.createElement("div");
+      corpo.className = "percorso-corpo";
+      corpo.appendChild(elemento("p", "percorso-testo", riga[1]));
+      var vai = elemento("p", "percorso-vai", liceo.campo("LICEO", "pulsante-percorso") + " ›");
+      vai.setAttribute("aria-hidden", "true");
+      corpo.appendChild(vai);
+      voce.appendChild(corpo);
 
       elenco.appendChild(voce);
     });
+  }
+
+  /* Il nome completo del liceo, su una riga: "Liceo scientifico,
+     opzione Scienze applicate" */
+  function titoloCompleto(liceo) {
+    var riga2 = liceo.campo("LICEO", "titolo-riga-2");
+    return liceo.campo("LICEO", "titolo") + (riga2 ? ", " + riga2 : "");
   }
 
 
@@ -138,7 +165,7 @@
     var nome = riga[0];
 
     C.scrivi(document.getElementById("torna"), liceo.campo("LICEO", "torna-liceo"));
-    C.scrivi(document.getElementById("etichetta"), liceo.campo("LICEO", "titolo"));
+    C.scrivi(document.getElementById("etichetta"), titoloCompleto(liceo));
     C.scrivi(document.getElementById("titolo"), nome);
     C.scrivi(document.getElementById("spiegazione"), liceo.campo(sezione, "spiegazione"));
 

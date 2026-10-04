@@ -5,7 +5,8 @@
 # Il claim del liceo non sta qui: si prende da home.txt.
 
 == LICEO ==
-titolo: Liceo scientifico, opzione Scienze applicate
+titolo: Liceo scientifico
+titolo-riga-2: opzione Scienze applicate
 sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere. (da definire)
 pulsante-percorso: Scopri il percorso
 torna-home: Torna alla home

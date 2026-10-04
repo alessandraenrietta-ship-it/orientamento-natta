@@ -64,6 +64,14 @@
   --liceo:         #1F5FA8;  /* blu: simbolo bianco */
   --serali:        #3A4756;  /* ardesia: simbolo bianco */
 
+  /* I tre percorsi del liceo: tre toni di blu, usati come fondo della
+     parte alta delle schede in liceo.html e della pillola "Scopri il
+     percorso", con il testo bianco grande o in grassetto. Su questi
+     fondi mai testo piccolo e sottile. */
+  --percorso-scienze:    #2A7AB0;  /* Scienze applicate, azzurro: bianco 4,7 */
+  --percorso-matematico: #1F5FA8;  /* Liceo Matematico, blu: bianco 6,4 */
+  --percorso-digitale:   #0F3460;  /* Liceo Digitale, blu scuro: bianco 12,5 */
+
   /* Rosso SOLO per i turni esauriti degli open day (croce e scritta
      "Esaurito"): contrasto 6,5 sul bianco della scheda. Va sempre
      insieme a una forma o a una scritta, mai da solo, perché per chi è
@@ -743,6 +751,13 @@ p:last-child { margin-bottom: 0; }
   text-wrap: balance;
 }
 
+/* La seconda riga del titolo: stesso stile, al 60% della grandezza */
+.titolo-riga-2 {
+  display: block;
+  margin-top: 0.2em;
+  font-size: 0.6em;
+}
+
 .apertura-testo {
   max-width: 40rem;
   margin: 0 auto;
@@ -755,12 +770,15 @@ p:last-child { margin-bottom: 0; }
 
 /* -----------------------------------------------------------------
    LE SCHEDE DEI PERCORSI DEL LICEO
-   Bianche, con un filo blu (il colore del liceo) sul lato sinistro.
+   Due parti: in alto una fascia piena nel tono del percorso, con il
+   nome in bianco e un filetto giallo; sotto la parte bianca con la
+   spiegazione e la pillola verde "Scopri il percorso".
    Ogni scheda è cliccabile per intero: il link sta sul nome e un suo
    "strato" invisibile copre tutta la scheda. Così chi usa un lettore
-   di schermo sente solo il nome del percorso.
+   di schermo sente solo il nome del percorso. La pillola è solo un
+   disegno, non un secondo link.
    Telefono: una sotto l'altra. Computer: tre affiancate, alte uguali,
-   con "Scopri il percorso" sempre in fondo.
+   con le pillole allineate in fondo.
    ----------------------------------------------------------------- */
 
 .percorsi {
@@ -777,22 +795,56 @@ p:last-child { margin-bottom: 0; }
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 1.3rem 1.4rem 1.3rem 1.3rem;
 }
 
-.fascia-chiara .carta.percorso { border-left: 6px solid var(--liceo); }
+/* Il tono di ogni percorso: la classe viene dal nome della pagina */
+.tono-liceo-scienze-applicate { --tono: var(--percorso-scienze); }
+.tono-liceo-matematico        { --tono: var(--percorso-matematico); }
+.tono-liceo-digitale          { --tono: var(--percorso-digitale); }
 
+/* La parte alta: fondo pieno, angoli in alto tondi come la scheda
+   (un pixel in meno, per stare dentro il bordo) */
+.percorso-testa {
+  padding: 1.5rem 1rem 1.3rem;
+  text-align: center;
+  background: var(--tono, var(--liceo));
+  border-radius: calc(var(--raggio) - 1px) calc(var(--raggio) - 1px) 0 0;
+}
+
+/* Il nome: Arial Black, maiuscolo, bianco. 24 pixel a 375 pixel di
+   schermo, 26 sugli schermi più larghi, mai sotto 22: così
+   "SCIENZE APPLICATE" (297 pixel a 26) non va a capo nei telefoni
+   comuni. */
 .percorso-nome {
-  margin: 0 0 0.5rem;
+  margin: 0;
   font-family: var(--titolo-grande);
   font-weight: 900;
-  font-size: 1.3rem;
-  line-height: 1.15;
+  font-size: clamp(1.375rem, 6.4vw, 1.625rem);
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
 .carta .percorso-link {
-  color: var(--blu-notte);
+  color: var(--bianco);
   text-decoration: none;
+}
+
+/* Il filetto giallo sotto il nome: solo decorativo */
+.percorso-filetto {
+  display: block;
+  width: 56px;
+  height: 5px;
+  margin: 0.8rem auto 0;
+  background: var(--giallo);
+  border-radius: 3px;
+}
+
+/* La parte bianca: trama di pallini, testo blu notte */
+.percorso-corpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.2rem 1.3rem 1.4rem;
 }
 
 /* Lo strato invisibile che rende cliccabile tutta la scheda */
@@ -810,15 +862,23 @@ p:last-child { margin-bottom: 0; }
   outline-offset: 4px;
 }
 
-.percorso-testo { margin-bottom: 1rem; }
+.percorso-testo { margin-bottom: 1.2rem; }
 
-/* Verde su bianco: 6,6; sul chiaro del passaggio del mouse: 6,0 */
+/* La pillola, larga quanto la scheda, sempre in fondo, nello stesso
+   tono della parte alta. Bianco in grassetto: 4,7 sull'azzurro, 6,4
+   sul blu, 12,5 sul blu scuro (tutti sopra 4,5). */
 .percorso-vai {
   margin: auto 0 0;
+  padding: 0.65em 1em;
   font-weight: bold;
-  color: var(--verde);
+  text-align: center;
+  color: var(--bianco);
+  background: var(--tono, var(--liceo));
+  border-radius: 999px;
 }
 
+/* Al passaggio del mouse la parte bianca diventa chiara e la scritta
+   della pillola si sottolinea */
 .carta.percorso:hover { background-color: var(--chiaro); }
 .percorso:hover .percorso-vai { text-decoration: underline; }
 

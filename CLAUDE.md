@@ -136,10 +136,18 @@ adulti interessati ai corsi serali.
 - Pagina del liceo (`liceo.html`): testata e piede della home; apertura
   verde centrata con "‹ Torna alla home" in alto a sinistra, il
   quadratino blu con la lampadina, il claim del liceo (preso da
-  `home.txt`) piccolo sopra il titolo; sotto, su fascia chiara, le tre
-  schede dei percorsi: bianche con un filo blu `#1F5FA8` a sinistra,
-  nessun simbolo, nome in Arial Black blu notte, "Scopri il percorso ›"
-  verde in fondo, ognuna un unico link cliccabile per intero.
+  `home.txt`) piccolo sopra il titolo; il titolo è un solo h1 su due
+  righe, "titolo" e, al 60% della grandezza, "titolo-riga-2". Sotto,
+  su fascia chiara, le tre schede dei percorsi, ognuna un unico link
+  cliccabile per intero, nessun simbolo:
+  - parte alta piena nel tono del percorso (vedi più sotto), con il
+    nome in Arial Black maiuscolo bianco centrato (24 pixel a 375 di
+    schermo, 26 più largo, mai sotto 22: non deve andare a capo) e un
+    filetto giallo decorativo di 56×5 pixel;
+  - parte bianca con la spiegazione breve e la pillola "Scopri il
+    percorso ›", nello stesso tono della parte alta, testo bianco in
+    grassetto, larga quanto la scheda, in fondo. La pillola è solo
+    grafica (nascosta al lettore di schermo), non un secondo link.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
@@ -163,9 +171,15 @@ adulti interessati ai corsi serali.
   - Grafica: rosa `#F472B6`, simbolo blu notte, occhio
   - Liceo: blu `#1F5FA8`, simbolo bianco, lampadina
   - Serali: ardesia `#3A4756`, simbolo bianco, luna
-- Percorsi del liceo, per le pagine future: tutti blu `#1F5FA8` con
-  simbolo bianco. Simboli: beuta (Scienze applicate), π disegnato come
-  forma (Liceo Matematico), `</>` (Liceo Digitale).
+- Percorsi del liceo: tre toni di blu, legati al percorso e non alla
+  posizione, usati come fondo della parte alta delle schede e della
+  pillola "Scopri il percorso", sempre con testo bianco grande o in
+  grassetto (mai testo piccolo e sottile su questi fondi):
+  - Scienze applicate: azzurro `#2A7AB0` (bianco 4,7)
+  - Liceo Matematico: blu `#1F5FA8` (bianco 6,4)
+  - Liceo Digitale: blu scuro `#0F3460` (bianco 12,5)
+  Simboli previsti ma non ancora usati: beuta (Scienze applicate), π
+  disegnato come forma (Liceo Matematico), `</>` (Liceo Digitale).
 - I colori sono stati verificati per contrasto (testo almeno 4,5:1) e per
   deuteranopia e protanopia. **Non si cambiano senza dirlo ad
   Alessandra.**
