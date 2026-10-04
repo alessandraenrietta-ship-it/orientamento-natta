@@ -1,0 +1,64 @@
+# TESTI DELLA PAGINA DEL LICEO E DEI TRE PERCORSI
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+# I testi con "(da definire)" sono provvisori.
+# Il claim del liceo non sta qui: si prende da home.txt.
+
+== LICEO ==
+titolo: Liceo scientifico, opzione Scienze applicate
+sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere. (da definire)
+pulsante-percorso: Scopri il percorso
+torna-home: Torna alla home
+torna-liceo: Torna al liceo
+
+== PERCORSI ==
+# Una riga per percorso, tre colonne:
+#   nome | spiegazione breve | pagina
+Scienze applicate | Le materie del liceo scientifico, con più scienze naturali e l'informatica al posto del latino. (da definire) | liceo-scienze-applicate.html
+Liceo Matematico | Le stesse materie di Scienze applicate, con più ore di matematica in tutti e cinque gli anni. (da definire) | liceo-matematico.html
+Liceo Digitale | Le stesse materie di Scienze applicate, con intelligenza artificiale e coding per cinque anni, diritto e pensiero critico nei primi due. (da definire) | liceo-digitale.html
+
+== QUADRO BASE ==
+# Ore settimanali di Scienze applicate, comuni ai tre percorsi.
+# Sei colonne: materia | 1° anno | 2° | 3° | 4° | 5°
+# Il trattino - vuol dire che la materia in quell'anno non c'è.
+Lingua e letteratura italiana | 4 | 4 | 4 | 4 | 4
+Lingua e cultura straniera (inglese) | 3 | 3 | 3 | 3 | 3
+Storia e geografia | 3 | 3 | - | - | -
+Storia | - | - | 2 | 2 | 2
+Filosofia | - | - | 2 | 2 | 2
+Matematica | 5 | 4 | 4 | 4 | 4
+Informatica | 2 | 2 | 2 | 2 | 2
+Fisica | 2 | 2 | 3 | 3 | 3
+Scienze naturali | 3 | 4 | 5 | 5 | 5
+Disegno e storia dell'arte | 2 | 2 | 2 | 2 | 2
+Scienze motorie e sportive | 2 | 2 | 2 | 2 | 2
+Religione cattolica o attività alternative | 1 | 1 | 1 | 1 | 1
+
+== ORE AGGIUNTIVE MATEMATICO ==
+# Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
+# Ogni riga diventa una riga gialla in fondo al quadro, anche se la
+# materia c'è già nel quadro base: così Matematica compare due volte,
+# con le ore di base e, più sotto, con le sole ore in più.
+Matematica | 2 | 2 | 1 | 1 | 1
+
+== ORE AGGIUNTIVE DIGITALE ==
+# Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
+Laboratorio del pensiero critico | 1 | 1 | - | - | -
+Diritto | 1 | 1 | - | - | -
+Intelligenza artificiale e coding | 1 | 1 | 1 | 1 | 1
+
+== SCIENZE APPLICATE ==
+spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
+laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+
+== LICEO MATEMATICO ==
+spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
+laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+
+== LICEO DIGITALE ==
+spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
+laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TESTO MODIFICABILE: titolo della scheda del browser e descrizione
+       che compare su Google e nelle anteprime quando si condivide il
+       link. -->
+  <title>Liceo Matematico | IIS Giulio Natta, Rivoli</title>
+  <meta name="description" content="Il Liceo Matematico dell'IIS Giulio Natta di Rivoli: liceo scientifico opzione Scienze applicate con più ore di matematica. Quadro orario, laboratori e dopo il diploma.">
+
+  <!-- BOZZA: chiede ai motori di ricerca di non mostrare questa pagina.
+       Va TOLTA quando il sito è approvato. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
+       DI UNO in tutte le pagine che lo caricano. -->
+  <link rel="stylesheet" href="stile.css?v=17">
+  <link rel="icon" href="immagini/logo-natta.png">
+</head>
+<!-- Le tre pagine dei percorsi sono uguali: cambiano solo il titolo qui
+     sopra e i due attributi qui sotto, che dicono quali sezioni di
+     contenuti/liceo.txt leggere. -->
+<body data-percorso="LICEO MATEMATICO" data-ore="ORE AGGIUNTIVE MATEMATICO">
+
+  <a class="salta" href="#contenuto">Salta al contenuto</a>
+
+  <!-- La testata: logo e nome della scuola, come nella home -->
+  <header class="fascia fascia-testata">
+    <div class="fascia-interno testata-interno">
+      <p class="marchio">
+        <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
+        <span id="nome-scuola"></span>
+      </p>
+    </div>
+  </header>
+
+  <!-- Tutti i testi qui sotto arrivano da contenuti/liceo.txt -->
+  <main id="contenuto" tabindex="-1" hidden>
+
+    <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
+      <div class="fascia-interno">
+        <p class="torna"><a href="liceo.html"><span aria-hidden="true">‹ </span><span id="torna"></span></a></p>
+        <p class="occhiello" id="etichetta"></p>
+        <h1 class="titolo-pagina" id="titolo"></h1>
+        <p class="apertura-testo" id="spiegazione"></p>
+      </div>
+    </section>
+
+    <section class="fascia fascia-chiara" aria-labelledby="titolo-quadro">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-quadro"></h2>
+        <div class="carta quadro">
+          <table class="orario" id="orario"></table>
+          <p class="legenda" id="legenda"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="fascia fascia-verde" aria-labelledby="titolo-laboratori">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-laboratori"></h2>
+        <p class="testo-fascia" id="laboratori"></p>
+      </div>
+    </section>
+
+    <section class="fascia fascia-chiara" aria-labelledby="titolo-dopo">
+      <div class="fascia-interno">
+        <h2 class="titolo-fascia" id="titolo-dopo"></h2>
+        <p class="testo-fascia" id="dopo-il-diploma"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
+       possono leggere. -->
+  <section class="fascia fascia-verde" id="avviso" hidden>
+    <div class="fascia-interno">
+      <h1 class="titolo-fascia">Liceo Matematico</h1>
+      <p>Non riesco a caricare i testi di questa pagina.</p>
+      <p>Se hai aperto il file dal computer con un doppio clic, usa invece
+         <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
+         visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+    </div>
+  </section>
+
+  <noscript>
+    <section class="fascia fascia-verde">
+      <div class="fascia-interno">
+        <p>Per vedere questa pagina serve JavaScript attivo nel browser.
+           In alternativa visita il
+           <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+      </div>
+    </section>
+  </noscript>
+
+  <!-- Il piede: i dati istituzionali della scuola, come nella home -->
+  <footer class="fascia fascia-piede">
+    <div class="fascia-interno">
+      <ul class="piede-voci" id="piede"></ul>
+    </div>
+  </footer>
+
+  <script src="js/contenuti.js?v=2"></script>
+  <script src="js/comuni.js?v=1"></script>
+  <script src="js/liceo.js?v=1"></script>
+</body>
+</html>

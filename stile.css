@@ -683,6 +683,257 @@ p:last-child { margin-bottom: 0; }
 
 
 /* -----------------------------------------------------------------
+   PAGINE INTERNE: LICEO E PERCORSI
+   L'apertura è come quella della home (fascia verde, testo
+   centrato), con in alto a sinistra il collegamento per tornare
+   indietro.
+   ----------------------------------------------------------------- */
+
+/* "‹ Torna alla home", "‹ Torna al liceo" */
+.torna {
+  margin: -1rem 0 1.4rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.torna a {
+  display: inline-block;
+  padding: 0.6rem 0;    /* più facile da toccare con un dito */
+  text-decoration: underline;
+}
+
+.apertura-simbolo .icona {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto 1rem;
+  border-radius: 6px;
+}
+.apertura-simbolo .icona svg { width: 2.6rem; height: 2.6rem; }
+
+/* Il claim piccolo sopra il titolo: giallo, in grassetto, non in
+   maiuscolo perché è una frase intera. Giallo su verde: 5,7. */
+.occhiello-frase {
+  margin: 0 auto 0.7rem;
+  max-width: 40rem;
+  font-size: 1.05rem;
+  font-weight: bold;
+  color: var(--titolo);
+  text-wrap: balance;
+}
+
+/* Il titolo delle pagine interne: più piccolo di quello della home,
+   in maiuscolo come gli altri titoli */
+.titolo-pagina {
+  margin: 0 auto 1rem;
+  max-width: 50rem;
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: clamp(1.8rem, 7vw, 3.2rem);
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--titolo);
+  text-wrap: balance;
+}
+
+.apertura-testo {
+  max-width: 40rem;
+  margin: 0 auto;
+  font-size: 1.15rem;
+}
+
+/* Il testo semplice di una fascia, senza scheda */
+.testo-fascia { max-width: 46rem; }
+
+
+/* -----------------------------------------------------------------
+   LE SCHEDE DEI PERCORSI DEL LICEO
+   Bianche, con un filo blu (il colore del liceo) sul lato sinistro.
+   Ogni scheda è cliccabile per intero: il link sta sul nome e un suo
+   "strato" invisibile copre tutta la scheda. Così chi usa un lettore
+   di schermo sente solo il nome del percorso.
+   Telefono: una sotto l'altra. Computer: tre affiancate, alte uguali,
+   con "Scopri il percorso" sempre in fondo.
+   ----------------------------------------------------------------- */
+
+.percorsi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spazio);
+  max-width: 46rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.carta.percorso {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1.3rem 1.4rem 1.3rem 1.3rem;
+}
+
+.fascia-chiara .carta.percorso { border-left: 6px solid var(--liceo); }
+
+.percorso-nome {
+  margin: 0 0 0.5rem;
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 1.3rem;
+  line-height: 1.15;
+}
+
+.carta .percorso-link {
+  color: var(--blu-notte);
+  text-decoration: none;
+}
+
+/* Lo strato invisibile che rende cliccabile tutta la scheda */
+.percorso-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--raggio);
+}
+
+/* Il contorno da tastiera gira intorno a tutta la scheda */
+.percorso-link:focus-visible { outline: none; }
+.percorso-link:focus-visible::after {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 4px;
+}
+
+.percorso-testo { margin-bottom: 1rem; }
+
+/* Verde su bianco: 6,6; sul chiaro del passaggio del mouse: 6,0 */
+.percorso-vai {
+  margin: auto 0 0;
+  font-weight: bold;
+  color: var(--verde);
+}
+
+.carta.percorso:hover { background-color: var(--chiaro); }
+.percorso:hover .percorso-vai { text-decoration: underline; }
+
+
+/* -----------------------------------------------------------------
+   IL QUADRO ORARIO
+   Una tabella vera dentro una scheda bianca. Sul telefono deve stare
+   in 375 pixel senza scorrere di lato: i nomi delle materie vanno a
+   capo, le colonne degli anni sono strette e i numeri centrati.
+   Le ore in più dei percorsi sono in giallo e in grassetto
+   (blu notte su giallo: 15,1).
+   Per la leggibilità: niente retino dietro la tabella, righe
+   alternate bianche e chiare (si segue la riga con l'occhio fino al
+   numero), cifre tutte larghe uguali, così restano incolonnate.
+   ----------------------------------------------------------------- */
+
+.carta.quadro {
+  padding: 0.8rem 0.6rem 1rem;
+  background-image: none;   /* niente pallini dietro i numeri */
+}
+
+.orario {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 1rem;
+  line-height: 1.25;
+  font-variant-numeric: tabular-nums;
+}
+
+.orario th,
+.orario td {
+  padding: 0.55rem 0.2rem;
+  border-bottom: 1px solid var(--bordo-scheda);
+}
+
+/* La colonna delle materie prende lo spazio che resta */
+.orario th[scope="row"],
+.orario .orario-materia {
+  text-align: left;
+  padding-left: 0.5rem;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.orario th[scope="row"] { font-weight: normal; }
+
+/* Le cinque colonne degli anni: strette, numeri al centro */
+.orario-col-biennio col,
+.orario-col-triennio col { width: 2.3rem; }
+.orario td { text-align: center; }
+
+/* Le intestazioni: verde in grassetto, staccate da una linea spessa.
+   Gli anni un po' più grandi: si leggono a colpo d'occhio. */
+.orario thead th {
+  padding-top: 0.3rem;
+  font-size: 1.05rem;
+  color: var(--verde);
+  border-bottom: 2px solid var(--blu-notte);
+}
+.orario thead .orario-materia {
+  font-size: 0.9rem;
+  vertical-align: bottom;
+}
+
+/* Sopra gli anni, "Biennio" e "Triennio": piccoli, in maiuscolo */
+.orario .orario-gruppi th:not(.orario-materia) {
+  padding: 0.2rem 0.1rem 0.3rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--blu-notte);
+  border-bottom: 1px solid var(--bordo-scheda);
+}
+.orario .orario-anni th { padding-top: 0.35rem; }
+
+/* La linea che divide il biennio dal triennio, dall'intestazione al
+   totale */
+.orario .orario-gruppi th:nth-child(3),
+.orario .orario-anni th:nth-child(3),
+.orario tbody td:nth-child(4),
+.orario tfoot td:nth-child(4) { border-left: 2px solid var(--blu-notte); }
+
+/* Righe alternate: una bianca, una chiara (blu notte sul chiaro: 16,1) */
+.orario tbody tr:nth-child(even) > * { background: var(--chiaro); }
+
+/* La riga del totale: in grassetto, staccata da una linea più spessa */
+.orario tfoot th,
+.orario tfoot td {
+  font-weight: bold;
+  border-top: 2px solid var(--blu-notte);
+  border-bottom: none;
+}
+.orario tfoot td { font-size: 1.1rem; }
+
+/* Le ore in più: fondo giallo, testo blu notte in grassetto. Vale
+   anche sulle righe alternate chiare. */
+.orario tbody tr > .in-piu,
+.orario tbody tr.riga-in-piu > * {
+  font-weight: bold;
+  color: var(--blu-notte);
+  background: var(--giallo);
+}
+
+.legenda {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0.9rem 0 0 0.4rem;
+  font-size: 0.95rem;
+}
+
+.legenda-campione {
+  flex: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  background: var(--giallo);
+  border: 1.5px solid var(--blu-notte);
+  border-radius: 3px;
+}
+
+
+/* -----------------------------------------------------------------
    DATI DA COMPLETARE
    Le scritte [DA COMPLETARE: ...] dei file di testo compaiono in un
    riquadro tratteggiato, così non sfuggono.
@@ -775,12 +1026,22 @@ p:last-child { margin-bottom: 0; }
     align-self: center;
     margin: 0;
   }
+
+  /* Il quadro orario: più spazio, colonne degli anni più larghe */
+  .carta.quadro { padding: 1.4rem 1.8rem 1.6rem; max-width: 46rem; }
+  .orario { font-size: 1.05rem; }
+  .orario th, .orario td { padding: 0.55rem 0.6rem; }
+  .orario th[scope="row"], .orario .orario-materia { padding-left: 0.8rem; }
+  .orario-col-biennio col,
+  .orario-col-triennio col { width: 4.5rem; }
+  .orario .orario-gruppi th:not(.orario-materia) { font-size: 0.85rem; }
 }
 
 /* Computer e LIM: le tre schede degli indirizzi sulla stessa riga.
    Sotto questa larghezza sarebbero troppo strette da leggere. */
 @media (min-width: 64rem) {
-  .schede {
+  .schede,
+  .percorsi {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     max-width: none;
   }

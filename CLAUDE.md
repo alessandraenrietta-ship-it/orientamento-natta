@@ -133,6 +133,23 @@ adulti interessati ai corsi serali.
   "esaurito" dopo l'orario; la scritta sta nel campo `esaurito`). Il rosso `#B91C1C` (contrasto 6,5 sul
   bianco) si usa solo qui e sempre insieme a forma e scritta, mai da
   solo: per chi è daltonico rosso e verde si confondono.
+- Pagina del liceo (`liceo.html`): testata e piede della home; apertura
+  verde centrata con "‹ Torna alla home" in alto a sinistra, il
+  quadratino blu con la lampadina, il claim del liceo (preso da
+  `home.txt`) piccolo sopra il titolo; sotto, su fascia chiara, le tre
+  schede dei percorsi: bianche con un filo blu `#1F5FA8` a sinistra,
+  nessun simbolo, nome in Arial Black blu notte, "Scopri il percorso ›"
+  verde in fondo, ognuna un unico link cliccabile per intero.
+- Pagine dei percorsi (`liceo-scienze-applicate.html`,
+  `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
+  cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
+  `<body>`. Fasce: apertura verde, quadro orario chiara, laboratori e
+  progetti verde, dopo il diploma chiara. Nella pagina del Liceo
+  Digitale nessun collegamento al sito del Liceo Digitale.
+- Quadro orario: una vera tabella, che sul telefono sta in 375 pixel
+  senza scorrere di lato. Le ore in più dei percorsi sono in giallo con
+  testo blu notte, in grassetto e dette a voce al lettore di schermo
+  ("ore in più"), con una legenda; i totali li calcola il sito.
 - I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
   loro testi stanno in `contenuti/serali.txt`.
 - **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,
@@ -192,9 +209,13 @@ adulti interessati ai corsi serali.
      sulla stessa base scientifica: Scienze applicate; Liceo Matematico,
      con più ore di matematica; Liceo Digitale, curvatura con ore in più
      di intelligenza artificiale, coding, diritto e pensiero critico.
-     Curvatura: stesso diploma, con più ore (quante: da definire).
-     Il sito del Liceo Digitale non compare nella home: il suo indirizzo
-     resta in `comuni.txt` per la futura pagina del liceo.
+     Curvatura: stesso diploma, con più ore. Le ore stanno in
+     `contenuti/liceo.txt`: quadro base di Scienze applicate e ore
+     aggiuntive di Matematico e Digitale.
+     Il sito del Liceo Digitale non compare né nella home né nelle
+     pagine del liceo; il suo indirizzo resta in `comuni.txt`.
+     La scheda del liceo nella home resta "in preparazione" finché
+     Alessandra non dà il via libera.
   4. **Corsi serali per adulti 2026/27**: Meccanica e meccatronica;
      Grafica e comunicazione.
 - Materie plastiche: **non si presenta** (decisione in corso).

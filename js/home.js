@@ -4,18 +4,19 @@
    Legge contenuti/home.txt e contenuti/comuni.txt e riempie la pagina.
    I testi non stanno qui: si cambiano nei file di testo.
 
-   Ha bisogno di js/contenuti.js, che va caricato prima di questo.
+   Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
+   prima di questo.
    ================================================================== */
 
 (function () {
   "use strict";
 
   var C = window.Contenuti;
-  var SVG = "http://www.w3.org/2000/svg";
 
-  /* I disegni stanno in immagini/simboli.svg: se si cambia un disegno,
-     si aumenta il numero ?v= qui sotto. */
-  var FILE_SIMBOLI = "immagini/simboli.svg?v=4";
+  /* I pezzi comuni a tutte le pagine stanno in js/comuni.js */
+  var P = window.Pezzi;
+  var icona = P.icona, segno = P.segno, elemento = P.elemento;
+  var linkTelefono = P.linkTelefono, scriviDato = P.scriviDato;
 
   /* Il simbolo di ogni indirizzo, scelto dalla colonna "colore" */
   var SIMBOLI = {
@@ -41,10 +42,8 @@
     });
 
   function riempi(home, comuni) {
-    var nome = comuni.campo("SCUOLA", "nome");
-
     /* Testata */
-    C.scrivi(document.getElementById("nome-scuola"), nome);
+    P.testata(comuni);
 
     /* Apertura. La riga piccola sopra al titolo compare solo se nel
        file c'è il campo "occhiello". */
@@ -94,60 +93,7 @@
     openDay(comuni);
     contatti(home, comuni);
 
-    piede(comuni);
-  }
-
-
-  /* ---------------------------------------------------------------
-     I PEZZI CHE SI RIPETONO
-     --------------------------------------------------------------- */
-
-  /* Il quadratino colorato con un simbolo dentro. Il simbolo è solo
-     decorativo: il nome è sempre scritto accanto. */
-  function icona(simbolo, classe) {
-    var riquadro = document.createElement("span");
-    riquadro.className = "icona" + (classe ? " " + classe : "");
-    var svg = document.createElementNS(SVG, "svg");
-    svg.setAttribute("aria-hidden", "true");
-    svg.setAttribute("focusable", "false");
-    var uso = document.createElementNS(SVG, "use");
-    uso.setAttribute("href", FILE_SIMBOLI + "#" + simbolo);
-    svg.appendChild(uso);
-    riquadro.appendChild(svg);
-    return riquadro;
-  }
-
-  /* Un simbolo da solo, senza quadratino, che prende il colore del
-     testo intorno. Solo decorativo. */
-  function segno(simbolo, classe) {
-    var svg = document.createElementNS(SVG, "svg");
-    svg.setAttribute("class", classe);
-    svg.setAttribute("aria-hidden", "true");
-    svg.setAttribute("focusable", "false");
-    var uso = document.createElementNS(SVG, "use");
-    uso.setAttribute("href", FILE_SIMBOLI + "#" + simbolo);
-    svg.appendChild(uso);
-    return svg;
-  }
-
-  /* Un elemento con dentro un testo, che può contenere [DA COMPLETARE] */
-  function elemento(tag, classe, testo) {
-    var e = document.createElement(tag);
-    if (classe) { e.className = classe; }
-    return C.scrivi(e, testo);
-  }
-
-  /* Un link, oppure solo il testo se l'indirizzo manca */
-  function collegamento(testo, indirizzo) {
-    if (!indirizzo || C.daCompletare(indirizzo)) {
-      var solo = C.scrivi(document.createElement("span"), testo);
-      if (indirizzo) { C.scrivi(solo, " " + indirizzo); }
-      return solo;
-    }
-    var a = document.createElement("a");
-    a.href = indirizzo;
-    C.scrivi(a, testo);
-    return a;
+    P.piede(comuni);
   }
 
 
@@ -379,32 +325,6 @@
      CONTATTI
      --------------------------------------------------------------- */
 
-  /* Il telefono per la chiamata: solo cifre, con il prefisso
-     dell'Italia davanti */
-  function linkTelefono(numero) {
-    return "tel:+39" + numero.replace(/\D/g, "");
-  }
-
-  /* Un indirizzo web si mostra senza "https://", che non serve leggere */
-  function sitoDaMostrare(indirizzo) {
-    return indirizzo.replace(/^https?:\/\//, "").replace(/\/$/, "");
-  }
-
-  /* Scrive un dato. Negli indirizzi email il punto in cui si può andare
-     a capo è subito dopo la chiocciola: sul telefono "orientamento@" /
-     "itisgiulionatta.it", mai a metà parola. Il dato resta scritto per
-     intero e si può selezionare e copiare. */
-  function scriviDato(el, valore) {
-    var chiocciola = valore.indexOf("@");
-    if (chiocciola === -1 || C.daCompletare(valore)) {
-      return C.scrivi(el, valore);
-    }
-    el.appendChild(document.createTextNode(valore.slice(0, chiocciola + 1)));
-    el.appendChild(document.createElement("wbr"));
-    el.appendChild(document.createTextNode(valore.slice(chiocciola + 1)));
-    return el;
-  }
-
   /* I pulsanti d'azione della fascia dei contatti. Ogni riga di
      home.txt: azione | campo del dato | campo del link (facoltativo).
      Ogni pulsante è un unico link, cliccabile per intero. */
@@ -470,28 +390,5 @@
       voce.appendChild(a);
       elenco.appendChild(voce);
     });
-  }
-
-  /* Il piede: nome della scuola, indirizzo, telefono, email della
-     segreteria e sito, presi da comuni.txt. Telefono, email e sito sono
-     link. */
-  function piede(comuni) {
-    var elenco = document.getElementById("piede");
-    function voce(contenuto) {
-      var li = document.createElement("li");
-      li.appendChild(contenuto);
-      elenco.appendChild(li);
-    }
-    var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
-
-    if (campo("nome")) { voce(C.scrivi(document.createElement("span"), campo("nome"))); }
-    if (campo("indirizzo")) { voce(C.scrivi(document.createElement("span"), campo("indirizzo"))); }
-    if (campo("telefono")) { voce(collegamento(campo("telefono"), linkTelefono(campo("telefono")))); }
-    if (campo("email")) {
-      var email = collegamento("", "mailto:" + campo("email"));
-      scriviDato(email, campo("email"));
-      voce(email);
-    }
-    if (campo("sito")) { voce(collegamento(sitoDaMostrare(campo("sito")), campo("sito"))); }
   }
 }());

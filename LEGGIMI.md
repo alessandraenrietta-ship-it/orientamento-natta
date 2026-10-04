@@ -37,6 +37,8 @@ note. Non serve toccare nessun altro file.
   link in una nuova scheda. Se nella sezione `SEZIONI` si aggiunge il
   campo `apri-mappa`, la sua scritta compare sotto il dato; oggi non c'è.
 - `serali.txt`: i testi dei corsi serali per adulti.
+- `liceo.txt`: i testi della pagina del liceo (`liceo.html`) e delle
+  pagine dei tre percorsi. Vedi più sotto.
 
 ## Le quattro regole
 
@@ -77,6 +79,42 @@ sulla pagina diventa "**A chi si rivolge** A chi lavora o vuole
 riprendere gli studi." Per aggiungere un'informazione si scrive una
 riga nuova nel punto in cui deve comparire; per toglierla si cancella
 la riga.
+
+## Il file del liceo
+
+`liceo.txt` serve a quattro pagine: `liceo.html` e le tre pagine dei
+percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
+`liceo-digitale.html`).
+
+- `== LICEO ==`: titolo e sottotitolo della pagina del liceo e le
+  scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`). Il
+  claim piccolo sopra il titolo non sta qui: è quello della scheda del
+  liceo nella tabella `INDIRIZZI` di `home.txt`.
+- `== PERCORSI ==`: una riga per percorso, tre colonne, `nome |
+  spiegazione breve | pagina`. Diventano le tre schede della pagina del
+  liceo, nello stesso ordine.
+- `== QUADRO BASE ==`: le ore settimanali di Scienze applicate, comuni
+  ai tre percorsi. Sei colonne: la materia e le ore dal primo al quinto
+  anno. Il trattino `-` vuol dire che in quell'anno la materia non c'è.
+- `== SCIENZE APPLICATE ==`, `== LICEO MATEMATICO ==`, `== LICEO
+  DIGITALE ==`: i testi di ciascuna pagina di percorso (`spiegazione`
+  sotto il titolo, `laboratori`, `dopo-il-diploma`).
+
+### Le ore aggiuntive
+
+Le sezioni `== ORE AGGIUNTIVE MATEMATICO ==` e `== ORE AGGIUNTIVE
+DIGITALE ==` hanno le stesse sei colonne del quadro base, ma contengono
+**solo le ore in più** rispetto a Scienze applicate, non le ore totali.
+
+Ogni riga delle ore aggiuntive diventa **una riga nuova in fondo al
+quadro**, prima del totale, in giallo e in grassetto, con una legenda
+sotto il quadro. Vale anche se la materia c'è già nel quadro base: nel
+Liceo Matematico la riga "Matematica" compare due volte, prima con le
+ore di Scienze applicate e in fondo, in giallo, con le sole ore in più.
+
+**I totali li calcola il sito**: non si scrivono da nessuna parte. Per
+cambiare un orario basta correggere un numero; per aggiungere una
+materia in più si aggiunge una riga.
 
 ## Le maiuscole del titolo
 
