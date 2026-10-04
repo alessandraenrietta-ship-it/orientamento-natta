@@ -459,6 +459,14 @@ p:last-child { margin-bottom: 0; }
 
 .scheda-stato { font-style: italic; }
 
+/* Nelle tre schede degli indirizzi il pulsante "Scopri di più" sta al
+   centro. Nella scheda orizzontale dei serali resta al suo posto. */
+.scheda:not(.scheda-orizzontale) .scheda-fondo .pulsante {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 /* La scheda dei serali: gli stessi pezzi delle schede degli indirizzi,
    disposti in orizzontale, così la scheda è lunga e bassa. Il simbolo
    sta a sinistra e i testi alla sua destra; dal tablet in su anche

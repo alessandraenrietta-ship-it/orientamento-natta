@@ -165,7 +165,7 @@
 
   /* Il pulsante verso la pagina dell'indirizzo. Per chi usa un lettore
      di schermo si aggiunge il nome dell'indirizzo, altrimenti sentirebbe
-     quattro volte "Vai alla pagina" senza sapere quale.
+     più volte "Scopri di più" senza sapere quale.
      Per sicurezza si controlla anche che la pagina esista davvero: se
      manca, al posto del pulsante torna "Pagina in preparazione". */
   function pulsantePagina(dati, home, fondo) {

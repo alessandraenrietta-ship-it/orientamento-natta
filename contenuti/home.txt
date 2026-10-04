@@ -30,7 +30,7 @@ indirizzi: Indirizzi e corsi
 open-day: Open day
 contatti: Contatti
 in-preparazione: Pagina in preparazione
-vai-alla-pagina: Vai alla pagina
+vai-alla-pagina: Scopri di più
 # Si può aggiungere una riga "apri-mappa:" con una scritta da mostrare
 # sotto l'indirizzo nel pulsante della mappa. Per ora non c'è.
 
