@@ -94,8 +94,7 @@
     openDay(comuni);
     contatti(home, comuni);
 
-    /* Piede */
-    C.scrivi(document.getElementById("piede"), nome + " · " + comuni.campo("SCUOLA", "indirizzo"));
+    piede(comuni);
   }
 
 
@@ -259,23 +258,25 @@
   };
 
   /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
-     "sold out": "10.00-11.00 sold out".
+     "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
+     "sold out").
      - turno libero: spunta verde
-     - turno esaurito: croce rossa e la scritta "Sold out"
+     - turno esaurito: croce rossa e la scritta del campo "esaurito" di
+       comuni.txt
      La differenza non sta solo nel colore (rosso e verde si confondono
      per chi è daltonico) ma anche nella forma e nella scritta. Chi usa
-     un lettore di schermo sente "posti liberi" oppure "sold out". */
-  var SOLD_OUT = /\s*sold\s*out\s*$/i;
+     un lettore di schermo sente "posti liberi" oppure la scritta. */
+  var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
-  function turnoConStato(testo) {
-    var esaurito = SOLD_OUT.test(testo);
-    var orario = testo.replace(SOLD_OUT, "");
+  function turnoConStato(testo, scrittaEsaurito) {
+    var esaurito = TURNO_PIENO.test(testo);
+    var orario = testo.replace(TURNO_PIENO, "");
     var voce = document.createElement("li");
     voce.className = "turno " + (esaurito ? "turno-esaurito" : "turno-libero");
     voce.appendChild(segno(esaurito ? "croce" : "spunta", "turno-segno"));
     C.scrivi(voce, orario);
     if (esaurito) {
-      voce.appendChild(elemento("span", "sold-out", " Sold out"));
+      voce.appendChild(elemento("span", "turno-scritta", " " + scrittaEsaurito));
     } else {
       voce.appendChild(elemento("span", "solo-lettori", ", posti liberi"));
     }
@@ -324,7 +325,7 @@
       var turni = document.createElement("ul");
       turni.className = "data-turni";
       [riga[2], riga[3]].forEach(function (orario) {
-        turni.appendChild(turnoConStato(orario));
+        turni.appendChild(turnoConStato(orario, comuni.campo("OPEN DAY", "esaurito") || "Esaurito"));
       });
       testi.appendChild(turni);
       voce.appendChild(testi);
@@ -378,50 +379,119 @@
      CONTATTI
      --------------------------------------------------------------- */
 
+  /* Il telefono per la chiamata: solo cifre, con il prefisso
+     dell'Italia davanti */
+  function linkTelefono(numero) {
+    return "tel:+39" + numero.replace(/\D/g, "");
+  }
+
+  /* Un indirizzo web si mostra senza "https://", che non serve leggere */
+  function sitoDaMostrare(indirizzo) {
+    return indirizzo.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  }
+
+  /* Scrive un dato. Negli indirizzi email il punto in cui si può andare
+     a capo è subito dopo la chiocciola: sul telefono "orientamento@" /
+     "itisgiulionatta.it", mai a metà parola. Il dato resta scritto per
+     intero e si può selezionare e copiare. */
+  function scriviDato(el, valore) {
+    var chiocciola = valore.indexOf("@");
+    if (chiocciola === -1 || C.daCompletare(valore)) {
+      return C.scrivi(el, valore);
+    }
+    el.appendChild(document.createTextNode(valore.slice(0, chiocciola + 1)));
+    el.appendChild(document.createElement("wbr"));
+    el.appendChild(document.createTextNode(valore.slice(chiocciola + 1)));
+    return el;
+  }
+
+  /* I pulsanti d'azione della fascia dei contatti. Ogni riga di
+     home.txt: azione | campo del dato | campo del link (facoltativo).
+     Ogni pulsante è un unico link, cliccabile per intero. */
   function contatti(home, comuni) {
     var elenco = document.getElementById("elenco-contatti");
     home.righe("CONTATTI").forEach(function (riga, i) {
-      if (riga.length !== 2) {
-        console.warn("home.txt, CONTATTI, riga " + (i + 1) + ": servono 2 colonne, ne ho trovate " + riga.length);
+      if (riga.length !== 3) {
+        console.warn("home.txt, CONTATTI, riga " + (i + 1) + ": servono 3 colonne, ne ho trovate " + riga.length);
         return;
       }
-      var campo = riga[1];
-      var valore = comuni.campo("SCUOLA", campo);
+      var valore = comuni.campo("SCUOLA", riga[1]);
       if (!valore) {
-        console.warn("home.txt, CONTATTI: in comuni.txt non trovo il campo " + campo);
+        console.warn("home.txt, CONTATTI: in comuni.txt non trovo il campo " + riga[1]);
         return;
       }
 
-      /* Il sito capisce da solo di che contatto si tratta */
-      var simbolo, link = null, mostra = valore;
-      if (campo === "telefono") {
+      /* Il link: quello della terza colonna se c'è, altrimenti il sito
+         lo capisce dal dato (il telefono chiama, l'email apre la posta) */
+      var simbolo, link = null, esterno = false;
+      if (riga[2]) {
+        link = comuni.campo("SCUOLA", riga[2]);
+        if (!link) { console.warn("home.txt, CONTATTI: in comuni.txt non trovo il campo " + riga[2]); }
+        esterno = true;
+        simbolo = /^https?:\/\//.test(valore) ? "globo" : "luogo";
+      } else if (riga[1] === "telefono") {
+        link = linkTelefono(valore);
         simbolo = "telefono";
-        /* Il numero per la chiamata: solo cifre, con il prefisso
-           dell'Italia davanti. */
-        link = "tel:+39" + valore.replace(/\D/g, "");
       } else if (valore.indexOf("@") !== -1) {
-        simbolo = "busta";
         link = "mailto:" + valore;
-      } else if (/^https?:\/\//.test(valore)) {
-        simbolo = "globo";
-        link = valore;
-        /* Si mostra l'indirizzo senza "https://", che non serve leggere */
-        mostra = valore.replace(/^https?:\/\//, "").replace(/\/$/, "");
+        simbolo = "busta";
       } else {
         simbolo = "luogo";
       }
-      if (C.daCompletare(valore)) { link = null; }
+      if (!link || C.daCompletare(link) || C.daCompletare(valore)) { return; }
+
+      var a = document.createElement("a");
+      a.className = "carta azione";
+      a.href = link;
+      if (esterno) {
+        a.target = "_blank";
+        a.rel = "noopener";
+      }
+      a.appendChild(icona(simbolo));
+
+      var testi = document.createElement("span");
+      testi.className = "azione-testi";
+      testi.appendChild(elemento("span", "azione-nome", riga[0]));
+      testi.appendChild(scriviDato(elemento("span", "azione-dato", ""), valore));
+      if (esterno) {
+        /* Chi usa un lettore di schermo sente dove si apre il link.
+           Se in home.txt c'è il campo apri-mappa, la sua scritta compare
+           anche sotto il dato, in una riga piccola; oggi non c'è. */
+        /* TESTO MODIFICABILE */
+        var dove = /google\.[^/]+\/maps/.test(link) ? "Google Maps" : "un altro sito";
+        testi.appendChild(elemento("span", "solo-lettori", " (si apre " + dove + " in una nuova scheda)"));
+        if (home.campo("SEZIONI", "apri-mappa")) {
+          testi.appendChild(elemento("span", "azione-apri", home.campo("SEZIONI", "apri-mappa")));
+        }
+      }
+      a.appendChild(testi);
 
       var voce = document.createElement("li");
-      voce.className = "carta contatto";
-      voce.appendChild(icona(simbolo));
-      var testo = document.createElement("div");
-      testo.appendChild(elemento("p", "etichetta", riga[0]));
-      var riga2 = document.createElement("p");
-      riga2.appendChild(link ? collegamento(mostra, link) : C.scrivi(document.createElement("span"), mostra));
-      testo.appendChild(riga2);
-      voce.appendChild(testo);
+      voce.appendChild(a);
       elenco.appendChild(voce);
     });
+  }
+
+  /* Il piede: nome della scuola, indirizzo, telefono, email della
+     segreteria e sito, presi da comuni.txt. Telefono, email e sito sono
+     link. */
+  function piede(comuni) {
+    var elenco = document.getElementById("piede");
+    function voce(contenuto) {
+      var li = document.createElement("li");
+      li.appendChild(contenuto);
+      elenco.appendChild(li);
+    }
+    var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
+
+    if (campo("nome")) { voce(C.scrivi(document.createElement("span"), campo("nome"))); }
+    if (campo("indirizzo")) { voce(C.scrivi(document.createElement("span"), campo("indirizzo"))); }
+    if (campo("telefono")) { voce(collegamento(campo("telefono"), linkTelefono(campo("telefono")))); }
+    if (campo("email")) {
+      var email = collegamento("", "mailto:" + campo("email"));
+      scriviDato(email, campo("email"));
+      voce(email);
+    }
+    if (campo("sito")) { voce(collegamento(sitoDaMostrare(campo("sito")), campo("sito"))); }
   }
 }());

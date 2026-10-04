@@ -31,6 +31,8 @@ open-day: Open day
 contatti: Contatti
 in-preparazione: Pagina in preparazione
 vai-alla-pagina: Vai alla pagina
+# Si può aggiungere una riga "apri-mappa:" con una scritta da mostrare
+# sotto l'indirizzo nel pulsante della mappa. Per ora non c'è.
 
 == INDIRIZZI ==
 # Una riga per scheda, otto colonne in quest'ordine:
@@ -55,19 +57,16 @@ Grafica e comunicazione | Istituto tecnico tecnologico | Una pubblicità? Non la
 Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | in preparazione | liceo
 
 == CONTATTI ==
-# Quali contatti mostrare, in quest'ordine. Due colonne:
+# I pulsanti d'azione della fascia dei contatti, in quest'ordine.
+# Tre colonne:
 #
-#   etichetta | nome del campo in comuni.txt
+#   azione | campo del dato in comuni.txt | campo del link (facoltativo)
 #
-# Il sito capisce da solo che cosa fare: il telefono si può chiamare
-# con un tocco, le email si aprono nel programma di posta, gli
-# indirizzi web diventano link.
-# Le schede sono disposte per sei contatti (3 per riga al computer,
-# 2 sul tablet): se se ne aggiungono o tolgono, va rivista la
-# disposizione in stile.css.
-Indirizzo | indirizzo
-Telefono | telefono
-Email della scuola | email
-Orientamento | email-orientamento
-Liceo Digitale | email-liceo-digitale
-Sito della scuola | sito
+# L'azione è la scritta in grassetto; sotto compare il dato.
+# Se la terza colonna è vuota, il sito capisce da solo il link:
+# il telefono chiama, l'email apre la posta.
+# L'email della segreteria, il sito della scuola e l'email del
+# Liceo Digitale non stanno qui: sono nel piede o nelle pagine.
+Scrivi all'orientamento | email-orientamento |
+Chiamaci | telefono |
+Dove siamo | indirizzo | mappa

@@ -3,8 +3,13 @@
 Tutti i testi stanno nella cartella `contenuti/`. Si aprono con il Blocco
 note. Non serve toccare nessun altro file.
 
-- `comuni.txt`: contatti e open day, validi per tutte le pagine. Nella
-  sezione degli open day:
+- `comuni.txt`: contatti e open day, validi per tutte le pagine.
+  - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
+    usato dal pulsante "Dove siamo".
+  - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
+    `indirizzo`, `telefono`, `email` (la segreteria) e `sito`.
+
+  Nella sezione degli open day:
   - `nota-turni`, se c'è, è la frase che compare sotto il titolo della
     fascia; se manca, sotto il titolo non resta spazio vuoto;
   - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
@@ -13,16 +18,24 @@ note. Non serve toccare nessun altro file.
     secondo turno`. La data si scrive come `21 novembre`: dal mese il
     sito ricava la sigla del foglietto da calendario (NOV). Gli orari si
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
-  - quando un turno è al completo si scrive `sold out` dopo l'orario,
-    come `10.00-11.00 sold out`: sulla pagina compare una croce rossa
-    con la scritta "Sold out". I turni liberi hanno una spunta verde.
+  - quando un turno è al completo si scrive `esaurito` dopo l'orario,
+    come `10.00-11.00 esaurito`: sulla pagina compare una croce rossa
+    con la scritta del campo `esaurito` (oggi "Esaurito"). I turni liberi
+    hanno una spunta verde.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
   pulsanti che portano alla fascia degli indirizzi e a quella dei
   serali. Righe e pulsanti senza testo non compaiono. Nella tabella
   `INDIRIZZI`, la colonna `frase` è la frase concreta che compare subito
-  sotto il claim; se è vuota non compare.
+  sotto il claim; se è vuota non compare. La tabella `CONTATTI` elenca
+  i pulsanti d'azione della fascia dei contatti, con **tre colonne**:
+  `azione | campo del dato in comuni.txt | campo del link`. L'azione è
+  la scritta in grassetto, sotto compare il dato. La terza colonna si
+  può lasciare vuota: il sito capisce da solo che il telefono chiama e
+  l'email apre la posta. Se c'è (come `mappa`), il pulsante apre quel
+  link in una nuova scheda. Se nella sezione `SEZIONI` si aggiunge il
+  campo `apri-mappa`, la sua scritta compare sotto il dato; oggi non c'è.
 - `serali.txt`: i testi dei corsi serali per adulti.
 
 ## Le quattro regole

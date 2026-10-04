@@ -11,6 +11,7 @@
 == SCUOLA ==
 nome: IIS "Giulio Natta"
 indirizzo: Via XX Settembre 14A, 10098 Rivoli (TO)
+mappa: https://www.google.com/maps/search/?api=1&query=Via+XX+Settembre+14A%2C+10098+Rivoli+TO
 telefono: 011 956 32 13
 email: tois059003@istruzione.it
 email-orientamento: orientamento@itisgiulionatta.it
@@ -24,13 +25,15 @@ sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale
 anno: 2026/27
 prenotazione: https://www.itisgiulionatta.it
 come-prenotare: Prenota
+# La scritta accanto ai turni al completo
+esaurito: Esaurito
 # Si può aggiungere una riga "nota-turni:" con una frase da mostrare
 # sotto il titolo della fascia degli open day. Per ora non c'è.
 # giorno | data | primo turno | secondo turno
-# Quando un turno è al completo, si scrive "sold out" dopo l'orario,
-# per esempio: 10.00-11.00 sold out
-# Sulla pagina il turno avrà una croce rossa e la scritta "Sold out";
-# i turni liberi hanno una spunta verde.
+# Quando un turno è al completo, si scrive "esaurito" dopo l'orario,
+# per esempio: 10.00-11.00 esaurito
+# Sulla pagina il turno avrà una croce rossa e la scritta del campo
+# "esaurito"; i turni liberi hanno una spunta verde.
 sabato | 21 novembre | 10.00-11.00 | 11.00-12.00
 venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30
 sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00

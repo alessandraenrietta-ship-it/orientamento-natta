@@ -110,13 +110,27 @@ adulti interessati ai corsi serali.
   bassa, simbolo a sinistra, testi al centro e "Pagina in preparazione"
   o il pulsante a destra; sul telefono simbolo accanto ai testi; porta
   alla pagina dei serali); contatti verde; piede.
+- Contatti: tre pulsanti d'azione (Scrivi all'orientamento, Chiamaci,
+  Dove siamo), ognuno un unico link cliccabile per intero: scheda
+  bianca alta almeno 64 pixel, quadratino verde con icona a linea,
+  azione in grassetto verde e dato sotto in blu notte, niente
+  sottolineature a riposo; al passaggio del mouse l'azione si
+  sottolinea e il fondo diventa chiaro; focus da tastiera giallo.
+  "Dove siamo" apre Google Maps in una nuova scheda, con un testo
+  nascosto per il lettore di schermo; niente freccina né riga "Apri la
+  mappa" (tolte su richiesta di Alessandra); nessuna mappa
+  incorporata. Negli indirizzi email si va a capo solo dopo la
+  chiocciola.
+- Piede: nome, indirizzo, telefono, email della segreteria e sito, con
+  telefono, email e sito come link bianchi sottolineati. Al telefono
+  una voce per riga, al computer separate da un punto medio.
 - Open day: un'unica scheda bianca con le date come foglietti da
   calendario (striscia verde con il mese, numero del giorno in Arial
   Black blu notte, bordo sottile blu notte, niente ombra: non si
   cliccano e non devono sembrarlo) e, in fondo, il pulsante a pillola
   verde per prenotare. Ogni turno ha una spunta verde se è libero, una
-  croce rossa con la scritta "Sold out" se è esaurito (nel file:
-  "sold out" dopo l'orario). Il rosso `#B91C1C` (contrasto 6,5 sul
+  croce rossa con la scritta "Esaurito" se è pieno (nel file:
+  "esaurito" dopo l'orario; la scritta sta nel campo `esaurito`). Il rosso `#B91C1C` (contrasto 6,5 sul
   bianco) si usa solo qui e sempre insieme a forma e scritta, mai da
   solo: per chi è daltonico rosso e verde si confondono.
 - I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
@@ -148,6 +162,7 @@ adulti interessati ai corsi serali.
     falce di luna con una stella (Serali). Su ogni fondo almeno uno fra
     contorno e interno supera 3:1.
   - Icone a linea, un solo colore: luogo, telefono, busta, globo,
+    spunta e croce dei turni,
     calendario.
 - Nelle schede di indirizzi e serali il quadratino è di circa 56 pixel,
   angoli poco arrotondati, bordo sottile blu notte, niente ombra, in

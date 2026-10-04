@@ -23,7 +23,7 @@
     QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO DI UNO
     in tutte le pagine che lo caricano.
   -->
-  <link rel="stylesheet" href="stile.css?v=14">
+  <link rel="stylesheet" href="stile.css?v=16">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -106,7 +106,8 @@
     <section class="fascia fascia-verde" aria-labelledby="titolo-contatti">
       <div class="fascia-interno">
         <h2 class="titolo-fascia" id="titolo-contatti"></h2>
-        <ul class="contatti" id="elenco-contatti"></ul>
+        <!-- Tre pulsanti d'azione: chiamare, scrivere, arrivare -->
+        <ul class="azioni" id="elenco-contatti"></ul>
       </div>
     </section>
 
@@ -135,11 +136,14 @@
     </section>
   </noscript>
 
+  <!-- Il piede: i dati istituzionali della scuola -->
   <footer class="fascia fascia-piede">
-    <div class="fascia-interno" id="piede"></div>
+    <div class="fascia-interno">
+      <ul class="piede-voci" id="piede"></ul>
+    </div>
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
-  <script src="js/home.js?v=12"></script>
+  <script src="js/home.js?v=15"></script>
 </body>
 </html>
