@@ -144,7 +144,9 @@ adulti interessati ai corsi serali.
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
   `<body>`. Fasce: apertura verde, quadro orario chiara, laboratori e
-  progetti verde, dopo il diploma chiara. Nella pagina del Liceo
+  progetti verde, dopo il diploma chiara. Le ultime due compaiono solo
+  se c'è il loro campo in `liceo.txt`: per ora sono nascoste (righe
+  commentate con `#`), su richiesta di Alessandra. Nella pagina del Liceo
   Digitale nessun collegamento al sito del Liceo Digitale.
 - Quadro orario: una vera tabella, che sul telefono sta in 375 pixel
   senza scorrere di lato. Le ore in più dei percorsi sono in giallo con

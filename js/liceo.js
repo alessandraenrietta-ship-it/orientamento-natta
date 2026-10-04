@@ -145,11 +145,22 @@
     C.scrivi(document.getElementById("titolo-quadro"), TESTI.quadro);
     quadroOrario(liceo, sezioneOre, nome);
 
-    C.scrivi(document.getElementById("titolo-laboratori"), TESTI.laboratori);
-    C.scrivi(document.getElementById("laboratori"), liceo.campo(sezione, "laboratori"));
+    fasciaFacoltativa("laboratori", TESTI.laboratori, liceo.campo(sezione, "laboratori"));
+    fasciaFacoltativa("dopo-il-diploma", TESTI.dopo, liceo.campo(sezione, "dopo-il-diploma"));
+  }
 
-    C.scrivi(document.getElementById("titolo-dopo"), TESTI.dopo);
-    C.scrivi(document.getElementById("dopo-il-diploma"), liceo.campo(sezione, "dopo-il-diploma"));
+  /* Le fasce "Laboratori e progetti" e "Dopo il diploma" compaiono solo
+     se in liceo.txt c'è il loro campo. Per nasconderle si mette un #
+     davanti alla riga; per farle ricomparire lo si toglie. */
+  function fasciaFacoltativa(id, titolo, testo) {
+    var paragrafo = document.getElementById(id);
+    var fascia = paragrafo.closest("section");
+    if (!testo) {
+      fascia.hidden = true;
+      return;
+    }
+    C.scrivi(fascia.querySelector("h2"), titolo);
+    C.scrivi(paragrafo, testo);
   }
 
 

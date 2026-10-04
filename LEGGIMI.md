@@ -98,7 +98,10 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   anno. Il trattino `-` vuol dire che in quell'anno la materia non c'è.
 - `== SCIENZE APPLICATE ==`, `== LICEO MATEMATICO ==`, `== LICEO
   DIGITALE ==`: i testi di ciascuna pagina di percorso (`spiegazione`
-  sotto il titolo, `laboratori`, `dopo-il-diploma`).
+  sotto il titolo, `laboratori`, `dopo-il-diploma`). Le fasce
+  "Laboratori e progetti" e "Dopo il diploma" compaiono solo se c'è il
+  loro campo: oggi le righe hanno un `#` davanti e sono nascoste. Per
+  farle comparire si toglie il `#`.
 
 ### Le ore aggiuntive
 

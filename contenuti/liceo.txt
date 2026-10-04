@@ -48,17 +48,22 @@ Laboratorio del pensiero critico | 1 | 1 | - | - | -
 Diritto | 1 | 1 | - | - | -
 Intelligenza artificiale e coding | 1 | 1 | 1 | 1 | 1
 
+# Per ora le righe "laboratori" e "dopo-il-diploma" hanno un # davanti:
+# le fasce "Laboratori e progetti" e "Dopo il diploma" sono nascoste.
+# Per farle comparire si toglie il # (e lo spazio dopo) all'inizio
+# della riga.
+
 == SCIENZE APPLICATE ==
 spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
-dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+# dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO MATEMATICO ==
 spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
-dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+# dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO DIGITALE ==
 spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
-dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+# dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
