@@ -1099,9 +1099,12 @@ body[data-percorso] .fascia-chiara .titolo-fascia { color: var(--tono, var(--lic
   background: var(--tono, var(--liceo));
 }
 
-/* Titolo e tabella al centro della fascia. Il titolo compare come è
-   scritto ("Quadro orario"), non in maiuscolo. */
-.fascia-quadro .titolo-fascia { text-align: center; text-transform: none; }
+/* Titolo e tabella al centro della fascia */
+.fascia-quadro .titolo-fascia { text-align: center; }
+
+/* Nelle pagine dei percorsi i titoli delle fasce ("Quadro orario",
+   "Dopo il diploma") compaiono come sono scritti, non in maiuscolo */
+body[data-percorso] .titolo-fascia { text-transform: none; }
 .fascia-quadro .carta.quadro { margin-left: auto; margin-right: auto; }
 
 .carta.quadro {

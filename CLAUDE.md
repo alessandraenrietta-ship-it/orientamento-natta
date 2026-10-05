@@ -172,6 +172,9 @@ adulti interessati ai corsi serali.
      pixel affiancate e alte uguali;
   3. quadro orario su fascia blu (tono del percorso);
   4. "Dopo il diploma", fascia chiara.
+  Nelle pagine dei percorsi i titoli delle fasce ("Quadro orario", "Dopo
+  il diploma") sono scritti in minuscolo, non in maiuscolo come nel resto
+  del sito.
   Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
   nessuna delle tre schede sparisce la loro fascia. La fascia
   "Laboratori e progetti" non esiste più. Tutti i testi (spiegazione,
@@ -185,7 +188,7 @@ adulti interessati ai corsi serali.
 - Quadro orario: una vera tabella in una scheda bianca senza retino,
   che sul telefono sta in 375 pixel senza scorrere di lato.
   - La fascia del quadro orario (`fascia-quadro`) ha il fondo pieno nel
-    tono del percorso, con il titolo "Quadro orario" giallo, centrato, scritto in minuscolo (non in maiuscolo come gli altri titoli), e la
+    tono del percorso, con il titolo "Quadro orario" giallo, centrato, scritto in minuscolo, e la
     tabella sulla sua scheda bianca.
   - Intestazione: una fascia piena nel tono del percorso, scritte in
     bianco grassetto, su due righe: i gruppi "Primo biennio", "Secondo
