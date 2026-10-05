@@ -2,14 +2,12 @@
   <!--
     I SIMBOLI DEL SITO, disegnati a mano. Sono di due tipi.
 
-    1. SIMBOLI "ADESIVO" per l'identità di indirizzi, serali e percorsi
-       del liceo: figure piene con l'interno bianco e un contorno blu
-       notte spesso, forme semplici e generose, come in un fumetto.
-       Sono disegnati su un quadrato di 48 per 48. I due colori non sono
+    1. SIMBOLI DI IDENTITÀ per indirizzi, serali e percorsi del liceo:
+       figure piene, forme semplici e generose, in bianco e blu notte.
+       Sono disegnati su un quadrato di 48 per 48. I colori non sono
        scritti qui: li prendono dalla pagina (le variabili
-       simbolo-interno e simbolo-contorno di stile.css), con il bianco e
-       il blu notte come riserva. Così il bianco e il contorno scuro ci
-       sono sempre, su qualunque fondo colorato.
+       simbolo-interno, simbolo-contorno e simbolo-iride di stile.css),
+       con il bianco, il blu notte e il blu come riserva.
        ATTENZIONE: nei commenti di questo file non si scrivono mai due
        trattini di seguito, altrimenti il browser scarta tutto il file.
 
@@ -17,41 +15,58 @@
        colore, quello della pagina (currentColor), su un quadrato di 24.
 
     Nelle pagine si richiamano così:
-        <svg><use href="immagini/simboli.svg?v=3#rotella"></use></svg>
-    Se si cambia un disegno, si aumenta il numero ?v= in js/home.js.
+        <svg><use href="immagini/simboli.svg?v=5#rotella"></use></svg>
+    Se si cambia un disegno, si aumenta il numero ?v= in js/comuni.js.
   -->
 
-  <!-- Meccanica: un ingranaggio con pochi denti larghi e il mozzo ben
-       visibile, e uno più piccolo che ingrana -->
+  <!-- Meccanica: un ingranaggio blu notte con otto denti; al centro un
+       anello bianco con un fulmine bianco, per l'energia -->
   <symbol id="rotella" viewBox="0 0 48 48">
-    <g style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-contorno, #00193C)" stroke-width="3.5" stroke-linejoin="round">
-      <path d="M36.74 6.12L38.43 3.99L42.69 7.08L41.19 9.35A6.5 6.5 0 0 1 41.95 11.71L44.5 12.66L42.87 17.66L40.25 16.93A6.5 6.5 0 0 1 38.25 18.39L38.13 21.11L32.87 21.11L32.75 18.39A6.5 6.5 0 0 1 30.75 16.93L28.13 17.66L26.5 12.66L29.05 11.71A6.5 6.5 0 0 1 29.81 9.35L28.31 7.08L32.57 3.99L34.26 6.12A6.5 6.5 0 0 1 36.74 6.12Z"/>
-      <path d="M14.52 16.83L14.73 12.56L23.27 12.56L23.48 16.83A12.5 12.5 0 0 1 26.87 18.79L30.67 16.83L34.94 24.23L31.35 26.54A12.5 12.5 0 0 1 31.35 30.46L34.94 32.77L30.67 40.17L26.87 38.21A12.5 12.5 0 0 1 23.48 40.17L23.27 44.44L14.73 44.44L14.52 40.17A12.5 12.5 0 0 1 11.13 38.21L7.33 40.17L3.06 32.77L6.65 30.46A12.5 12.5 0 0 1 6.65 26.54L3.06 24.23L7.33 16.83L11.13 18.79A12.5 12.5 0 0 1 14.52 16.83Z"/>
+    <g style="fill: var(--simbolo-contorno, #00193C)">
+      <circle cx="24" cy="24" r="16.5"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(45 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(90 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(135 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(180 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(225 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(270 24 24)"/>
+      <rect x="20.25" y="2.5" width="7.5" height="9" rx="1.6" transform="rotate(315 24 24)"/>
     </g>
-    <!-- I mozzi: pieni, blu notte -->
-    <circle cx="19" cy="28.5" r="4.2" style="fill: var(--simbolo-contorno, #00193C)"/>
-    <circle cx="35.5" cy="12.5" r="2.4" style="fill: var(--simbolo-contorno, #00193C)"/>
+    <circle cx="24" cy="24" r="10" stroke-width="2.6" style="fill: none; stroke: var(--simbolo-interno, #FFFFFF)"/>
+    <path d="M26.2 15.6L19.6 25.2H23.6L21.8 32.4L28.4 22.8H24.4Z" stroke-width="0.8" stroke-linejoin="round" style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-interno, #FFFFFF)"/>
   </symbol>
 
-  <!-- Grafica: un occhio con l'iride piena e un riflesso -->
+  <!-- Grafica: un occhio con l'iride blu, dentro il mirino di una
+       macchina fotografica (quattro angoli bianchi) -->
   <symbol id="occhio" viewBox="0 0 48 48">
-    <path d="M3.5 24C10.5 11.5 37.5 11.5 44.5 24C37.5 36.5 10.5 36.5 3.5 24Z" stroke-width="3.5" stroke-linejoin="round" style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-contorno, #00193C)"/>
-    <circle cx="24" cy="24" r="8" style="fill: var(--simbolo-contorno, #00193C)"/>
-    <circle cx="27" cy="21" r="2.6" style="fill: var(--simbolo-interno, #FFFFFF)"/>
+    <g style="fill: none; stroke: var(--simbolo-interno, #FFFFFF)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 14V4H14"/>
+      <path d="M34 4H44V14"/>
+      <path d="M4 34V44H14"/>
+      <path d="M34 44H44V34"/>
+    </g>
+    <path d="M8 24C14 13 34 13 40 24C34 35 14 35 8 24Z" stroke-width="2.8" stroke-linejoin="round" style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-contorno, #00193C)"/>
+    <circle cx="24" cy="24" r="7" stroke-width="2" style="fill: var(--simbolo-iride, #1F5FA8); stroke: var(--simbolo-contorno, #00193C)"/>
+    <circle cx="24" cy="24" r="3.4" style="fill: var(--simbolo-contorno, #00193C)"/>
+    <circle cx="26.4" cy="21.6" r="1.6" style="fill: var(--simbolo-interno, #FFFFFF)"/>
   </symbol>
 
-  <!-- Liceo: una lampadina con il filamento e l'attacco a righe -->
+  <!-- Liceo: una lampadina accesa, bianca con il contorno blu notte, il
+       filamento a Y, l'attacco blu notte e cinque raggi bianchi -->
   <symbol id="lampadina" viewBox="0 0 48 48">
-    <g style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-contorno, #00193C)" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M17 30C17 26.5 11.5 24 11.5 17.5A12.5 12.5 0 0 1 36.5 17.5C36.5 24 31 26.5 31 30Z"/>
-      <rect x="16.5" y="30" width="15" height="10" rx="2"/>
+    <g style="fill: none; stroke: var(--simbolo-interno, #FFFFFF)" stroke-width="2.6" stroke-linecap="round">
+      <path d="M24 1.5V5"/>
+      <path d="M11 6L13.6 8.6"/>
+      <path d="M37 6L34.4 8.6"/>
+      <path d="M3.5 21H7.5"/>
+      <path d="M40.5 21H44.5"/>
     </g>
-    <g style="fill: none; stroke: var(--simbolo-contorno, #00193C)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20 30V25.5L22 21.5L24 25.5L26 21.5L28 25.5V30"/>
-      <path d="M16.5 33.4H31.5"/>
-      <path d="M16.5 36.7H31.5"/>
-    </g>
-    <path d="M20.5 40H27.5L26 44.5H22Z" stroke-width="2" stroke-linejoin="round" style="fill: var(--simbolo-contorno, #00193C); stroke: var(--simbolo-contorno, #00193C)"/>
+    <path d="M17.5 33C17.5 29 12 27 12 21A12 12 0 0 1 36 21C36 27 30.5 29 30.5 33Z" stroke-width="3" stroke-linejoin="round" style="fill: var(--simbolo-interno, #FFFFFF); stroke: var(--simbolo-contorno, #00193C)"/>
+    <path d="M24 32.5V26.5M24 26.5L20 22M24 26.5L28 22" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="fill: none; stroke: var(--simbolo-contorno, #00193C)"/>
+    <rect x="17" y="33" width="14" height="6.5" rx="1.8" style="fill: var(--simbolo-contorno, #00193C)"/>
+    <path d="M19 36.2H29" stroke-width="1.4" stroke-linecap="round" style="fill: none; stroke: var(--simbolo-interno, #FFFFFF)"/>
+    <path d="M20.5 39.5H27.5L26.2 43.5H21.8Z" style="fill: var(--simbolo-contorno, #00193C)"/>
   </symbol>
 
   <!-- Serali: una falce di luna con una piccola stella -->

@@ -16,7 +16,7 @@ window.Pezzi = (function () {
 
   /* I disegni stanno in immagini/simboli.svg: se si cambia un disegno,
      si aumenta il numero ?v= qui sotto. */
-  var FILE_SIMBOLI = "immagini/simboli.svg?v=4";
+  var FILE_SIMBOLI = "immagini/simboli.svg?v=5";
 
   /* Il quadratino colorato con un simbolo dentro. Il simbolo è solo
      decorativo: il nome è sempre scritto accanto. */

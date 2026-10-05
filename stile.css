@@ -83,10 +83,11 @@
      contrasto 5,5 sul bianco */
   --grigio:        #5B6B80;
 
-  /* I simboli "adesivo" di indirizzi e serali (immagini/simboli.svg):
-     interno bianco e contorno blu notte, su qualunque fondo. */
+  /* I simboli di indirizzi e serali (immagini/simboli.svg): bianco e
+     blu notte, su qualunque fondo; l'iride dell'occhio è blu. */
   --simbolo-interno:  var(--bianco);
   --simbolo-contorno: var(--blu-notte);
+  --simbolo-iride:    var(--liceo);
 
   /* Ruoli delle schede */
   --carta:         var(--bianco);
@@ -571,7 +572,8 @@ p:last-child { margin-bottom: 0; }
    disposti in orizzontale, così la scheda è lunga e bassa. Il simbolo
    sta a sinistra e i testi alla sua destra; dal tablet in su anche
    "Pagina in preparazione" (o il pulsante) va a destra, sulla stessa
-   riga. */
+   riga. Come le schede degli indirizzi, ha un bordo di 3 pixel nel suo
+   colore (ardesia). */
 .scheda-orizzontale {
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
@@ -579,6 +581,7 @@ p:last-child { margin-bottom: 0; }
   align-items: start;
   padding: 1rem 1.2rem;
 }
+.fascia .carta.scheda-orizzontale { border: 3px solid var(--serali); }
 
 /* Qui la testa della scheda non fa da contenitore: quadratino, tipo e
    nome entrano direttamente nella griglia insieme agli altri pezzi. */

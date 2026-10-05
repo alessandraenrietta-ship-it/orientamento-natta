@@ -215,13 +215,18 @@ adulti interessati ai corsi serali.
 - **Icone a linea per le funzioni, simboli pieni a adesivo per
   l'identità di indirizzi, serali e percorsi del liceo.** Tutti
   disegnati a mano in SVG, in `immagini/simboli.svg`.
-  - Simboli a adesivo: figure piene con interno bianco e contorno blu
-    notte spesso, forme semplici e generose, nello spirito di un
-    fumetto, leggibili anche a 24 pixel. Ingranaggio grande con un
-    secondo più piccolo che ingrana (Meccanica), occhio con l'iride
-    piena (Grafica), lampadina con filamento e attacco a righe (Liceo),
-    falce di luna con una stella (Serali). Su ogni fondo almeno uno fra
-    contorno e interno supera 3:1.
+  - Simboli di identità: figure piene in bianco e blu notte, forme
+    semplici e generose, leggibili anche a 24 pixel. Disegnati sul
+    modello scelto da Alessandra:
+    - Meccanica: ingranaggio blu notte a otto denti con, al centro, un
+      anello e un fulmine bianchi;
+    - Grafica: occhio bianco con contorno blu notte e iride blu, dentro
+      i quattro angoli bianchi di un mirino;
+    - Liceo: lampadina bianca con contorno blu notte, filamento a Y,
+      attacco blu notte e cinque raggi bianchi;
+    - Serali: falce di luna con una stella (ancora nello stile vecchio
+      ad adesivo).
+    Su ogni fondo almeno uno fra bianco e blu notte supera 3:1.
   - Icone a linea, un solo colore: luogo, telefono, busta, globo,
     spunta e croce dei turni,
     calendario.
@@ -236,7 +241,8 @@ adulti interessati ai corsi serali.
   schede affiancate, le tre parti alte sono alte uguali (subgrid).
 - Nella scheda dei serali il quadratino è di circa 56 pixel, angoli poco
   arrotondati, bordo sottile blu notte, niente ombra, a sinistra
-  accanto a tipo di scuola e nome.
+  accanto a tipo di scuola e nome. La scheda ha un bordo di 3 pixel
+  ardesia, come le schede degli indirizzi nel loro colore.
 - Il logo è `immagini/logo-natta.png`, con sfondo trasparente. È piccolo
   (231×155 pixel): non va ingrandito molto. Se arriva l'originale in alta
   risoluzione, si sostituisce.
