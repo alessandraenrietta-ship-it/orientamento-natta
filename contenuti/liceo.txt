@@ -102,7 +102,7 @@ spiegazione: Il Liceo Digitale è una curvatura del Liceo scientifico, opzione S
 impara: A osservare e comprendere i fenomeni scientifici attraverso esperimenti in laboratorio.
 impara: A programmare e a conoscere le potenzialità e i limiti dell'intelligenza artificiale.
 impara: A utilizzare gli strumenti digitali in modo critico e responsabile.
-come-si-studia: Alle lezioni si affiancano attività pratiche e laboratoriali in cui si osserva, si crea, si costruisce e si collabora.
+come-si-studia: Alle lezioni frontali si affiancano attività pratiche e laboratoriali in cui si osserva, si crea, si costruisce e si collabora.
 a-chi: A chi si interessa di scienze e tecnologia, ma non vuole rinunciare a solide basi umanistiche.
 a-chi: A chi è curioso, ama sperimentare e vuole mettersi alla prova con nuovi modi di imparare.
 a-chi: A chi vuole capire come funzionano il mondo digitale e l'intelligenza artificiale.
