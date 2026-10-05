@@ -161,11 +161,27 @@ adulti interessati ai corsi serali.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
-  `<body>`. Fasce: apertura verde, quadro orario blu (tono del percorso), laboratori e
-  progetti verde, dopo il diploma chiara. Le ultime due compaiono solo
-  se c'è il loro campo in `liceo.txt`: per ora sono nascoste (righe
-  commentate con `#`), su richiesta di Alessandra. Nella pagina del Liceo
-  Digitale nessun collegamento al sito del Liceo Digitale.
+  `<body>`. Fasce, in quest'ordine:
+  1. apertura verde: etichetta e titolo centrati, sotto la spiegazione
+     larga quanto la fascia interna;
+  2. fascia chiara con tre schede: "Che cosa si impara" (elenco),
+     "Come si studia" (paragrafo), "A chi si rivolge" (elenco). Stile
+     delle schede dei percorsi di `liceo.html`: parte alta nel tono del
+     percorso con il titolo (h2) bianco in Arial Black maiuscolo circa
+     1.05rem, parte bianca con il retino, bordo di 2 pixel. Dagli 800
+     pixel affiancate e alte uguali;
+  3. quadro orario su fascia blu (tono del percorso);
+  4. "Dopo il diploma", fascia chiara.
+  Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
+  nessuna delle tre schede sparisce la loro fascia. La fascia
+  "Laboratori e progetti" non esiste più. Tutti i testi (spiegazione,
+  schede, Dopo il diploma) sono giustificati, anche sul telefono, con
+  la sillabazione automatica. Nella
+  pagina del Liceo Digitale nessun collegamento al sito del Liceo
+  Digitale.
+- Grafia: sempre "Liceo scientifico, opzione Scienze applicate", con la
+  virgola, nei testi, nei titoli delle schede del browser e nelle
+  descrizioni delle pagine.
 - Quadro orario: una vera tabella in una scheda bianca senza retino,
   che sul telefono sta in 375 pixel senza scorrere di lato.
   - La fascia del quadro orario (`fascia-quadro`) ha il fondo pieno nel

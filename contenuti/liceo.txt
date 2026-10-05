@@ -3,12 +3,25 @@
 # Il formato è spiegato in LEGGIMI.md.
 # I testi con "(da definire)" sono provvisori.
 # Il claim del liceo non sta qui: si prende da home.txt.
+#
+# Nelle sezioni dei tre percorsi (in fondo al file):
+# - "impara" e "a-chi" sono elenchi: si scrive una riga per voce,
+#   ripetendo ogni volta il nome del campo;
+# - un blocco senza testo non compare sulla pagina (per esempio una
+#   riga con il # davanti); se mancano tutti e tre i blocchi "Che cosa
+#   si impara", "Come si studia" e "A chi si rivolge", non compare
+#   nemmeno la loro fascia.
 
 == LICEO ==
 titolo: Liceo scientifico
 titolo-riga-2: opzione Scienze applicate
 sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere. (da definire)
 pulsante-percorso: Scopri il percorso
+# I titoli dei blocchi delle pagine dei percorsi, uguali per tutte e tre
+titolo-impara: Che cosa si impara
+titolo-studio: Come si studia
+titolo-a-chi: A chi si rivolge
+titolo-dopo: Dopo il diploma
 # I collegamenti "‹ Torna alla home" e "‹ Torna al liceo", in alto a
 # sinistra nell'apertura, per ora sono nascosti: per farli comparire si
 # toglie il # (e lo spazio dopo) all'inizio della riga.
@@ -55,22 +68,42 @@ Laboratorio del pensiero critico | 1 | 1 | - | - | -
 Diritto | 1 | 1 | - | - | -
 Intelligenza artificiale e coding | 1 | 1 | 1 | 1 | 1
 
-# Per ora le righe "laboratori" e "dopo-il-diploma" hanno un # davanti:
-# le fasce "Laboratori e progetti" e "Dopo il diploma" sono nascoste.
-# Per farle comparire si toglie il # (e lo spazio dopo) all'inizio
-# della riga.
+# I TESTI DEI TRE PERCORSI
+# Campi di ogni sezione:
+#   spiegazione       il testo sotto il titolo della pagina
+#   impara            "Che cosa si impara": una riga per voce
+#   come-si-studia    "Come si studia": un paragrafo
+#   a-chi             "A chi si rivolge": una riga per voce
+#   dopo-il-diploma   "Dopo il diploma": un paragrafo
+# Le righe con il # davanti non compaiono: per far comparire un blocco
+# si toglie il # (e lo spazio dopo) e si scrive il testo al posto del
+# [DA COMPLETARE].
 
 == SCIENZE APPLICATE ==
 spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+# impara: [DA COMPLETARE: una cosa che si impara]
+# impara: [DA COMPLETARE: un'altra cosa che si impara]
+# come-si-studia: [DA COMPLETARE: come si studia]
+# a-chi: [DA COMPLETARE: a chi si rivolge]
+# a-chi: [DA COMPLETARE: a chi altro si rivolge]
 # dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO MATEMATICO ==
 spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
+# impara: [DA COMPLETARE: una cosa che si impara]
+# impara: [DA COMPLETARE: un'altra cosa che si impara]
+# come-si-studia: [DA COMPLETARE: come si studia]
+# a-chi: [DA COMPLETARE: a chi si rivolge]
+# a-chi: [DA COMPLETARE: a chi altro si rivolge]
 # dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO DIGITALE ==
-spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
-# laboratori: [DA COMPLETARE: laboratori e progetti del percorso]
-# dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+spiegazione: Il Liceo Digitale è una curvatura del Liceo scientifico, opzione Scienze applicate. Mantiene tutte le discipline di base e le integra con ore dedicate al diritto, al pensiero critico, all'intelligenza artificiale e al coding. Il percorso mette in dialogo discipline scientifiche, tecniche e umanistiche per aiutare studentesse e studenti a comprendere il presente, sviluppare nuove competenze e affrontare con consapevolezza le sfide del futuro.
+impara: A osservare e comprendere i fenomeni scientifici attraverso esperimenti in laboratorio.
+impara: A programmare e a conoscere le potenzialità e i limiti dell'intelligenza artificiale.
+impara: A utilizzare gli strumenti digitali in modo critico e responsabile.
+come-si-studia: Alle lezioni si affiancano attività pratiche e laboratoriali in cui si osserva, si crea, si costruisce e si collabora.
+a-chi: A chi si interessa di scienze e tecnologia, ma non vuole rinunciare a solide basi umanistiche.
+a-chi: A chi è curioso, ama sperimentare e vuole mettersi alla prova con nuovi modi di imparare.
+a-chi: A chi vuole capire come funzionano il mondo digitale e l'intelligenza artificiale.
+dopo-il-diploma: Il diploma consente di accedere a qualsiasi corso di laurea. Il percorso offre una preparazione particolarmente adatta agli studi scientifici, tecnologici e informatici, senza precludere la scelta di corsi universitari in ambito umanistico e sociale. In alternativa, è possibile proseguire la formazione attraverso un ITS Academy, un corso post-diploma che forma tecnici superiori, oppure entrare nel mondo del lavoro.

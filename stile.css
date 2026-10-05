@@ -868,8 +868,77 @@ p:last-child { margin-bottom: 0; }
   font-size: 1.15rem;
 }
 
+/* Nelle pagine dei percorsi la spiegazione sotto il titolo è un testo
+   lungo: è larga quanto la fila delle schede sotto. Tutti i testi
+   delle pagine dei percorsi (spiegazione, schede, "Dopo il diploma")
+   sono giustificati, anche sul telefono, con la sillabazione
+   automatica (la pagina è in italiano: lang="it"). */
+body[data-percorso] .apertura-testo { max-width: none; }
+
+body[data-percorso] .apertura-testo,
+body[data-percorso] .blocco-corpo,
+body[data-percorso] .testo-fascia {
+  text-align: justify;
+  hyphens: auto;
+}
+
 /* Il testo semplice di una fascia, senza scheda */
 .testo-fascia { max-width: 46rem; }
+
+
+/* -----------------------------------------------------------------
+   I BLOCCHI DELLE PAGINE DEI PERCORSI
+   "Che cosa si impara", "Come si studia", "A chi si rivolge": tre
+   schede nello stile di quelle dei percorsi in liceo.html. In alto
+   una fascia piena nel tono del percorso con il titolo in bianco
+   (bianco in Arial Black: 4,7 sull'azzurro, 6,4 sul blu, 12,5 sul blu
+   scuro); sotto la parte bianca con il retino. Bordo di 2 pixel nel
+   tono del percorso.
+   Telefono: una sotto l'altra. Dagli 800 pixel in su: affiancate, alte
+   uguali, con le parti alte alte uguali (vedi SCHERMI PIÙ LARGHI).
+   ----------------------------------------------------------------- */
+
+.blocchi {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--spazio);
+}
+
+.carta.blocco {
+  display: flex;
+  flex-direction: column;
+}
+.fascia-chiara .carta.blocco { border: 2px solid var(--tono, var(--liceo)); }
+
+.blocco-testa {
+  padding: 1rem 1rem 0.9rem;
+  text-align: center;
+  background: var(--tono, var(--liceo));
+  border-radius: calc(var(--raggio) - 2px) calc(var(--raggio) - 2px) 0 0;
+}
+
+.blocco-titolo {
+  margin: 0;
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 1.05rem;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--bianco);
+}
+
+.blocco-corpo {
+  flex: 1;
+  padding: 1.1rem 1.3rem 1.3rem;
+  color: var(--blu-notte);
+}
+
+.blocco-elenco {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+.blocco-elenco li + li { margin-top: 0.5rem; }
+.blocco-elenco li::marker { color: var(--tono, var(--liceo)); }
 
 
 /* -----------------------------------------------------------------
@@ -1250,6 +1319,23 @@ body[data-percorso] .fascia-chiara .titolo-fascia { color: var(--tono, var(--lic
     margin: 0 1.1rem 0 0;   /* lo spazio fra quadratino e titolo */
   }
   .apertura-liceo .apertura-simbolo .icona svg { width: 75%; height: 75%; }
+}
+
+/* Dagli 800 pixel in su, nelle pagine dei percorsi, i tre blocchi
+   stanno affiancati, alti uguali. Le parti alte hanno la stessa altezza anche
+   se un titolo va su due righe (subgrid, come per le schede degli
+   indirizzi in home). */
+@media (min-width: 50rem) {
+  .blocchi {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-rows: auto auto;
+  }
+  .carta.blocco {
+    display: grid;
+    grid-row: span 2;
+    grid-template-rows: subgrid;
+    row-gap: 0;
+  }
 }
 
 /* Tablet e computer: fasce più ariose */

@@ -28,8 +28,6 @@
   /* TESTO MODIFICABILE: le scritte fisse delle pagine dei percorsi */
   var TESTI = {
     quadro: "Quadro orario",
-    laboratori: "Laboratori e progetti",
-    dopo: "Dopo il diploma",
     materia: "Materia",
     /* i gruppi di anni sopra le colonne: scritta e numero di colonne */
     gruppi: [["Primo biennio", 2], ["Secondo biennio", 2], ["Quinto anno", 1]],
@@ -188,13 +186,58 @@
     C.scrivi(document.getElementById("titolo-quadro"), TESTI.quadro);
     quadroOrario(liceo, sezioneOre, nome);
 
-    fasciaFacoltativa("laboratori", TESTI.laboratori, liceo.campo(sezione, "laboratori"));
-    fasciaFacoltativa("dopo-il-diploma", TESTI.dopo, liceo.campo(sezione, "dopo-il-diploma"));
+    blocchi(liceo, sezione);
+
+    fasciaFacoltativa("dopo-il-diploma", liceo.campo("LICEO", "titolo-dopo"), liceo.campo(sezione, "dopo-il-diploma"));
   }
 
-  /* Le fasce "Laboratori e progetti" e "Dopo il diploma" compaiono solo
-     se in liceo.txt c'è il loro campo. Per nasconderle si mette un #
-     davanti alla riga; per farle ricomparire lo si toglie. */
+  /* Le tre schede sotto l'apertura: "Che cosa si impara" e "A chi si
+     rivolge" sono elenchi puntati (una riga del file per voce), "Come si
+     studia" è un paragrafo. I titoli stanno nella sezione LICEO di
+     liceo.txt. Una scheda senza testo non compare; se non ne compare
+     nessuna, sparisce tutta la fascia. */
+  function blocchi(liceo, sezione) {
+    var contenitore = document.getElementById("blocchi");
+    var schede = [
+      { titolo: "titolo-impara", campo: "impara", elenco: true },
+      { titolo: "titolo-studio", campo: "come-si-studia", elenco: false },
+      { titolo: "titolo-a-chi", campo: "a-chi", elenco: true }
+    ];
+    var quante = 0;
+
+    schede.forEach(function (s) {
+      var testi = liceo.campi(sezione, s.campo).filter(function (t) { return t.trim() !== ""; });
+      if (!testi.length) { return; }
+      quante++;
+
+      var scheda = document.createElement("div");
+      scheda.className = "carta blocco";
+
+      var testa = document.createElement("div");
+      testa.className = "blocco-testa";
+      testa.appendChild(elemento("h2", "blocco-titolo", liceo.campo("LICEO", s.titolo)));
+      scheda.appendChild(testa);
+
+      var corpo = document.createElement("div");
+      corpo.className = "blocco-corpo";
+      if (s.elenco) {
+        var ul = document.createElement("ul");
+        ul.className = "blocco-elenco";
+        testi.forEach(function (t) { ul.appendChild(elemento("li", "", t)); });
+        corpo.appendChild(ul);
+      } else {
+        testi.forEach(function (t) { corpo.appendChild(elemento("p", "", t)); });
+      }
+      scheda.appendChild(corpo);
+      contenitore.appendChild(scheda);
+    });
+
+    if (!quante) { contenitore.closest("section").hidden = true; }
+  }
+
+  /* La fascia "Dopo il diploma" compare solo se in liceo.txt c'è il suo
+     campo. Per nasconderla si mette un # davanti alla riga; per farla
+     ricomparire lo si toglie. */
   function fasciaFacoltativa(id, titolo, testo) {
     var paragrafo = document.getElementById(id);
     var fascia = paragrafo.closest("section");

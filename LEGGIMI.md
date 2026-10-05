@@ -102,11 +102,25 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   ai tre percorsi. Sei colonne: la materia e le ore dal primo al quinto
   anno. Il trattino `-` vuol dire che in quell'anno la materia non c'è.
 - `== SCIENZE APPLICATE ==`, `== LICEO MATEMATICO ==`, `== LICEO
-  DIGITALE ==`: i testi di ciascuna pagina di percorso (`spiegazione`
-  sotto il titolo, `laboratori`, `dopo-il-diploma`). Le fasce
-  "Laboratori e progetti" e "Dopo il diploma" compaiono solo se c'è il
-  loro campo: oggi le righe hanno un `#` davanti e sono nascoste. Per
-  farle comparire si toglie il `#`.
+  DIGITALE ==`: i testi di ciascuna pagina di percorso:
+  - `spiegazione`: il testo sotto il titolo;
+  - `impara`: "Che cosa si impara", un elenco: **una riga per voce**,
+    ripetendo ogni volta `impara:`;
+  - `come-si-studia`: "Come si studia", un paragrafo;
+  - `a-chi`: "A chi si rivolge", un elenco: **una riga per voce**,
+    ripetendo ogni volta `a-chi:`;
+  - `dopo-il-diploma`: la fascia "Dopo il diploma", un paragrafo.
+
+  I titoli dei blocchi (`titolo-impara`, `titolo-studio`,
+  `titolo-a-chi`, `titolo-dopo`) stanno nella sezione `LICEO` e valgono
+  per tutte e tre le pagine.
+
+  **Un blocco senza testo non compare.** Per nasconderlo basta mettere
+  un `#` davanti alle sue righe; se mancano tutti e tre i blocchi "Che
+  cosa si impara", "Come si studia" e "A chi si rivolge", sparisce anche
+  la loro fascia. Oggi Scienze applicate e Liceo Matematico hanno le
+  righe pronte con il `#` davanti e `[DA COMPLETARE]`: per riempirle si
+  toglie il `#` e si scrive il testo.
 
 ### Le ore aggiuntive
 
