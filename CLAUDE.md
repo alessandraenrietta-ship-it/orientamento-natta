@@ -54,8 +54,9 @@ adulti interessati ai corsi serali.
   - le righe che iniziano con `#` sono commenti
 - I dati comuni a più pagine (contatti, open day) stanno **solo** in
   `contenuti/comuni.txt`. Non si ricopiano altrove.
-- Gli stessi file serviranno per volantini e cartoline, dopo
-  l'approvazione del sito. Non ora.
+- Gli stessi file servono anche per volantini e cartoline: oggi per la
+  cartolina di presentazione (vedi il punto 12). Altri volantini e
+  cartoline si fanno solo quando li decide Alessandra.
 
 ## 4. Pagine non ancora pronte
 
@@ -337,3 +338,62 @@ hanno `NON-PUBBLICARE` nel nome: `.gitignore` li tiene fuori dal sito.
   corretti, spiegati la prima volta che compaiono.
 - Mettere alla prova le sue idee, segnalare incertezze e dati da
   verificare, niente complimenti di maniera.
+
+## 12. La cartolina di presentazione
+
+Decisa con Alessandra il 16 ottobre 2026. File: `cartolina.html`,
+`cartolina.css`, `js/cartolina.js`, `js/qr.js` (copiato dal Liceo
+Digitale) e `contenuti/cartolina.txt`.
+
+- Cartolina fronte e retro, 10 × 15 cm verticale, da salvare in PDF con
+  la funzione Stampa di Edge o Chrome. Nessuna pagina del sito la
+  collega; ha il `noindex` come le altre.
+- I testi si leggono dai file di contenuto, mai scritti nel codice:
+  claim generale e schede da `home.txt`; nome, `città`, contatti e
+  `sito-orientamento` da `comuni.txt`; la riga sotto il QR da
+  `cartolina.txt`.
+- **Fronte**, fondo verde `#026C37`: in alto il logo su un riquadro
+  bianco con gli angoli tondi (sul verde il logo verde si vedeva male;
+  la fascia verde scuro è stata provata e tolta), accanto nome della
+  scuola e città in bianco; sotto le tre schede degli indirizzi una
+  sotto l'altra, alte uguali. Parte alta, bassa, nel colore
+  dell'indirizzo con il simbolo (10 mm) a sinistra e accanto tipo di
+  scuola (bianco, maiuscolo piccolo) e nome (Arial Black maiuscolo
+  bianco), senza filetto giallo (tolto su richiesta di Alessandra);
+  parte bianca con il claim in verde, centrato, a 9,5 punti perché
+  stia su una riga, e sotto, in blu notte a 8,5 punti, la frase "In questo
+  indirizzo imparerai…" (colonna `frase` di `home.txt`, aggiunta su
+  richiesta di Alessandra); bordo nel colore dell'indirizzo. Niente
+  retino.
+- **Retro**, a fasce come il sito (verde, chiaro, verde). In alto una
+  fascia verde da bordo a bordo con il claim generale in giallo, Arial
+  Black maiuscolo, a capo dopo la prima virgola ("Un'unica scuola," /
+  "tanti modi di imparare."). Poi, su fondo chiaro `#F3F7EC`: i tre
+  simboli degli indirizzi in fila, ognuno in un quadratino del colore
+  dell'indirizzo con bordo sottile blu notte; il QR verso
+  `sito-orientamento` (nero su riquadro bianco largo 45 mm, il codice
+  di circa 3,3 cm, mai sotto 2,5); sotto il QR "Vieni a trovarci!" e,
+  a capo, l'invito a inquadrare il QR (righe `sotto-qr` di
+  `cartolina.txt`); indirizzo scritto
+  per esteso del sito della scuola (campo `sito`, www.itisgiulionatta.it,
+  scelta di Alessandra: il QR porta all'orientamento, la scritta al
+  sito del Natta); fascia verde con telefono, email dell'orientamento e
+  indirizzo.
+- **Non ci vanno**: date
+  degli open day, anno scolastico (la cartolina non deve scadere), i
+  percorsi del liceo (avranno una cartolina a parte), una sezione sui
+  serali.
+- **Stampa**: misure in millimetri, caratteri in punti. Abbondanza di
+  3 mm oltre il taglio (facciata 106 × 156 mm), testi ad almeno 5 mm
+  dal taglio, Arial, nessun testo sotto gli 8 punti.
+  - Versione tipografia: PDF di due pagine da 106 × 156 mm.
+  - Versione scuola (`cartolina.html?foglio=a4`): A4 orizzontale, due
+    cartoline uguali affiancate al centro del foglio, segni di taglio
+    agli angoli; pagina 1 i fronti, pagina 2 i retri, fronte-retro
+    capovolgendo sul lato corto.
+- Il logo è un PNG di 231 pixel: sulla cartolina è largo 18 mm (circa
+  325 punti per pollice) e non va ingrandito.
+- Se cambia l'indirizzo del sito, prima di stampare si controlla che il
+  QR porti a quello nuovo.
+- Ancora aperti: tipografia o stampa a scuola e numero di copie,
+  dominio del sito, logo in un file per la stampa.

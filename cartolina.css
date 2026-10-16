@@ -1,0 +1,498 @@
+/* ==================================================================
+   LA CARTOLINA DI PRESENTAZIONE (cartolina.html)
+
+   Formato 10 x 15 cm verticale, fronte e retro. Le misure sono in
+   millimetri e i caratteri in punti, come in tipografia.
+
+   - Ogni facciata è di 106 x 156 mm: la cartolina (100 x 150) più
+     3 mm di ABBONDANZA su ogni lato, cioè il fondo che esce oltre il
+     taglio. Serve perché la lama non taglia mai esattamente sulla
+     linea: senza, resterebbe un filo bianco sul bordo.
+   - I testi stanno ad almeno 5 mm dal taglio, cioè a 8 mm dal bordo
+     della facciata: la ZONA DI SICUREZZA.
+   - Carattere Arial, nessun testo sotto gli 8 punti.
+
+   Questo file non usa stile.css: il sito e la cartolina si cambiano
+   ognuno per conto suo.
+   ================================================================== */
+
+:root {
+  /* Gli stessi colori di stile.css. Se là cambia un colore, si cambia
+     anche qui. */
+  --verde:         #026C37;
+  --chiaro:       #F3F7EC;
+  --blu-notte:     #00193C;
+  --giallo:        #FFF33F;
+  --bianco:        #FFFFFF;
+  --bordo-scheda:  #A9C9B4;
+  --meccanica:     #C2410C;
+  --grafica:       #B8326F;
+  --liceo:         #1F5FA8;
+
+  /* I simboli di immagini/simboli.svg prendono i colori da qui */
+  --simbolo-interno:  var(--bianco);
+  --simbolo-contorno: var(--blu-notte);
+  --simbolo-iride:    var(--liceo);
+
+  --carattere:     Arial, Helvetica, sans-serif;
+  --titolo-grande: "Arial Black", Arial, Helvetica, sans-serif;
+
+  /* Le misure della cartolina */
+  --abbondanza: 3mm;
+  --sicurezza:  8mm;   /* 3 mm di abbondanza + 5 mm dal taglio */
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* I colori di fondo si stampano sempre, anche se nella finestra di
+   stampa la "Grafica di sfondo" è rimasta spenta (Edge e Chrome) */
+html {
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  margin: 0;
+  font-family: var(--carattere);
+  color: var(--blu-notte);
+  background: #D9DED6;
+}
+
+h1, h2, p, ul { margin: 0; }
+
+
+/* ---------------------------------------------------------------
+   LO SCHERMO: comandi, istruzioni e anteprima
+   --------------------------------------------------------------- */
+
+.comandi {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 1rem;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.comandi h1 {
+  margin-bottom: 1rem;
+  font-family: var(--titolo-grande);
+  font-size: 1.4rem;
+  color: var(--verde);
+  text-transform: uppercase;
+}
+
+.comandi p, .comandi ul { margin-bottom: 0.8rem; }
+.spiegazioni { padding-left: 1.2rem; }
+.spiegazioni li { margin-bottom: 0.4rem; }
+
+.pulsanti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.pulsante {
+  min-height: 44px;
+  padding: 0.6rem 1.3rem;
+  font: bold 1rem var(--carattere);
+  color: var(--bianco);
+  background: var(--verde);
+  border: 0;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.pulsante:hover { text-decoration: underline; }
+.pulsante:focus-visible { outline: 3px solid var(--blu-notte); outline-offset: 3px; }
+
+.legenda-taglio { color: #C0007A; font-weight: bold; }
+.legenda-sicurezza { color: #0077B6; font-weight: bold; }
+
+.avviso {
+  padding: 0.8rem 1rem;
+  background: var(--giallo);
+  border-radius: 8px;
+}
+
+/* L'anteprima: i fogli uno accanto all'altro, come pezzi di carta */
+#fogli {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 1rem 1rem 3rem;
+}
+
+.foglio {
+  position: relative;
+  flex: none;
+  overflow: hidden;
+  background: var(--bianco);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Sopra ogni foglio, sullo schermo, il suo nome ("Fronte", "Retro") */
+.foglio-nome {
+  margin-bottom: 0.4rem;
+  font: bold 14px var(--carattere);
+  text-align: center;
+}
+
+.foglio-tipografia {
+  width: 106mm;
+  height: 156mm;
+}
+
+.foglio-a4 {
+  width: 297mm;
+  height: 210mm;
+}
+
+/* Le linee guida, solo sullo schermo: il taglio (fucsia tratteggiata)
+   e la zona di sicurezza (azzurra punteggiata) */
+.facciata::before,
+.facciata::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+.facciata::before {
+  inset: var(--abbondanza);
+  border: 0.35mm dashed #FF2FB0;
+}
+.facciata::after {
+  inset: var(--sicurezza);
+  border: 0.35mm dotted #33C3FF;
+}
+
+
+/* ---------------------------------------------------------------
+   LA FACCIATA (fronte o retro), 106 x 156 mm
+   --------------------------------------------------------------- */
+
+.facciata {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 106mm;
+  height: 156mm;
+  overflow: hidden;
+  padding: var(--sicurezza);
+}
+
+
+/* ---------------------------------------------------------------
+   IL FRONTE: fondo verde, logo e nome, le tre schede
+   --------------------------------------------------------------- */
+
+.fronte {
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+/* La testata: logo e nome della scuola, sul fondo verde */
+.fronte-testata {
+  display: flex;
+  align-items: center;
+  gap: 3.5mm;
+  margin-bottom: 3.5mm;
+}
+
+/* Il logo è un PNG di 231 pixel di larghezza: a 18 mm sono circa 325
+   punti per pollice, il minimo per la stampa. Non va ingrandito.
+   Sta su un riquadro bianco: sul verde il logo, che è verde, si
+   vedrebbe male. */
+.fronte-logo {
+  display: block;
+  flex: none;
+  box-sizing: content-box;
+  width: 18mm;
+  height: auto;
+  padding: 1.6mm;
+  background: var(--bianco);
+  border-radius: 2mm;
+}
+
+.fronte-nome {
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 14pt;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.fronte-citta {
+  display: block;
+  margin-top: 1mm;
+  font-family: var(--carattere);
+  font-weight: bold;
+  font-size: 10pt;
+  text-transform: none;
+}
+
+/* Le tre schede, una sotto l'altra, alte uguali */
+.fronte-schede {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 2.5mm;
+}
+
+.tono-meccanica { --tono: var(--meccanica); }
+.tono-grafica   { --tono: var(--grafica); }
+.tono-liceo     { --tono: var(--liceo); }
+
+.scheda {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  /* Il fondo della scheda è nel colore dell'indirizzo, non bianco: così
+     agli angoli in alto non resta un filo chiaro fra bordo e colore */
+  background: var(--tono, var(--verde));
+  border: 0.8mm solid var(--tono, var(--verde));
+  border-radius: 3mm;
+}
+
+/* La parte alta, piena nel colore dell'indirizzo: il simbolo a
+   sinistra, accanto tipo di scuola e nome */
+.scheda-testa {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  padding: 1.5mm 3mm;
+  color: var(--bianco);
+  background: var(--tono, var(--verde));
+}
+
+.scheda-simbolo {
+  display: block;
+  flex: none;
+  width: 10mm;
+  height: 10mm;
+}
+
+/* Il tipo di scuola: bianco, piccolo, maiuscolo, spaziato */
+.scheda-tipo {
+  margin-bottom: 0.8mm;
+  font-weight: bold;
+  font-size: 8pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Il nome: Arial Black, maiuscolo, bianco */
+.scheda-nome {
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 11pt;
+  line-height: 1.12;
+  text-transform: uppercase;
+}
+
+/* La parte bianca: il claim in verde, centrato, e sotto la frase */
+.scheda-corpo {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  padding: 1.6mm 3mm;
+  background: var(--bianco);
+}
+
+/* Il blocco dei testi occupa tutta la larghezza, così il claim si
+   centra nella scheda */
+.scheda-corpo > div { flex: 1; }
+
+.scheda-claim {
+  font-weight: bold;
+  font-size: 9.5pt;
+  line-height: 1.25;
+  color: var(--verde);
+  text-align: center;
+}
+
+/* La frase concreta sotto il claim, in blu notte */
+.scheda-frase {
+  margin-top: 2.2mm;
+  font-size: 8.5pt;
+  line-height: 1.25;
+  color: var(--blu-notte);
+}
+
+
+/* ---------------------------------------------------------------
+   IL RETRO: fondo chiaro, claim, codice QR, sito, fascia dei contatti
+   --------------------------------------------------------------- */
+
+.retro {
+  background: var(--chiaro);
+}
+
+.retro-alto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* La fascia verde in alto: esce oltre il taglio in alto e ai lati, come
+   quella dei contatti in basso. Così il retro è a fasce come il sito:
+   verde, chiaro, verde. */
+.retro-testa {
+  margin: calc(-1 * var(--sicurezza)) calc(-1 * var(--sicurezza)) 0;
+  padding: var(--sicurezza) var(--sicurezza) 5mm;
+  background: var(--verde);
+}
+
+/* Il claim: giallo, Arial Black maiuscolo, come i titoli delle fasce
+   verdi del sito (giallo su verde 5,7) */
+.retro-claim {
+  font-family: var(--titolo-grande);
+  font-weight: 900;
+  font-size: 13pt;
+  line-height: 1.2;
+  color: var(--giallo);
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* I tre simboli degli indirizzi in fila, ognuno nel suo quadratino
+   del colore dell'indirizzo, con un bordo sottile blu notte */
+.retro-simboli {
+  display: flex;
+  justify-content: center;
+  gap: 4mm;
+  margin-bottom: 5mm;
+}
+
+.retro-quadratino {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11mm;
+  height: 11mm;
+  background: var(--tono, var(--verde));
+  border: 0.3mm solid var(--blu-notte);
+  border-radius: 1.5mm;
+}
+
+.retro-simbolo {
+  display: block;
+  width: 8mm;
+  height: 8mm;
+}
+
+/* Il riquadro bianco del QR. Il disegno del QR ha già dentro il suo
+   margine bianco di quattro quadretti: il riquadro aggiunge spazio. */
+.retro-qr {
+  width: 45mm;
+  padding: 2.5mm;
+  margin-bottom: 4mm;
+  background: var(--bianco);
+  border: 0.3mm solid var(--bordo-scheda);
+  border-radius: 3mm;
+}
+
+.retro-sotto-qr {
+  margin-bottom: 2mm;
+  font-size: 10pt;
+  line-height: 1.3;
+}
+
+/* Ogni riga "sotto-qr" su una riga sua; se è lunga va a capo in due
+   righe di lunghezza simile, senza una parola sola in fondo */
+.retro-riga {
+  display: block;
+  text-wrap: balance;
+}
+
+/* L'indirizzo del sito: va a capo solo dopo una barra "/" */
+.retro-sito {
+  font-weight: bold;
+  font-size: 9.5pt;
+  line-height: 1.3;
+  color: var(--verde);
+}
+.retro-sito span { white-space: nowrap; }
+
+/* La fascia verde in fondo: esce oltre il taglio a destra, a sinistra
+   e in basso, ma i testi restano nella zona di sicurezza */
+.retro-fascia {
+  margin: 6mm calc(-1 * var(--sicurezza)) calc(-1 * var(--sicurezza));
+  padding: 4.5mm var(--sicurezza) var(--sicurezza);
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+.retro-contatti {
+  padding: 0;
+  list-style: none;
+  font-size: 9pt;
+  line-height: 1.3;
+}
+
+.retro-contatti li {
+  display: flex;
+  align-items: center;
+  gap: 2.2mm;
+}
+.retro-contatti li + li { margin-top: 1.6mm; }
+
+.retro-icona {
+  display: block;
+  flex: none;
+  width: 4.2mm;
+  height: 4.2mm;
+}
+
+
+/* ---------------------------------------------------------------
+   IL FOGLIO A4 PER LA STAMPA A SCUOLA
+
+   Due cartoline affiancate, con le abbondanze che si toccano: fra i
+   due tagli restano 6 mm di fondo, da buttare. Il gruppo è al centro
+   del foglio, così fronte e retro combaciano anche quando la
+   stampante gira il foglio. I segni di taglio stanno fuori dal fondo,
+   agli angoli.
+   --------------------------------------------------------------- */
+
+.coppia {
+  position: absolute;
+  top: 27mm;       /* (210 - 156) / 2 */
+  left: 42.5mm;    /* (297 - 212) / 2 */
+  display: flex;
+  width: 212mm;
+  height: 156mm;
+}
+
+.segno-taglio {
+  position: absolute;
+  background: #000000;
+}
+.segno-verticale   { width: 0.25mm; height: 6mm; }
+.segno-orizzontale { width: 6mm; height: 0.25mm; }
+
+
+/* ---------------------------------------------------------------
+   LA STAMPA
+   La misura del foglio (@page) la scrive js/cartolina.js.
+   --------------------------------------------------------------- */
+
+@media print {
+  body { background: none; }
+  .comandi, .foglio-nome { display: none; }
+  .facciata::before, .facciata::after { display: none; }
+
+  #fogli {
+    display: block;
+    padding: 0;
+  }
+  .foglio {
+    box-shadow: none;
+    break-after: page;
+  }
+  .foglio-gruppo:last-child .foglio { break-after: auto; }
+}

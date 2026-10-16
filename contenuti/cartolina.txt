@@ -1,0 +1,21 @@
+# TESTI DELLA CARTOLINA (cartolina.html)
+# ------------------------------------------------------------------
+# Quasi tutti i testi della cartolina arrivano da altri file, così sito
+# e cartolina restano uguali:
+#   - claim generale, tipo, nome e claim dei tre indirizzi: home.txt
+#   - nome della scuola, città, telefono, email dell'orientamento,
+#     indirizzo e indirizzo del sito: comuni.txt
+# Qui stanno solo i testi che esistono soltanto sulla cartolina.
+#
+# Sulla cartolina non vanno date né anni scolastici: deve restare
+# valida a lungo.
+#
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+# ------------------------------------------------------------------
+
+== RETRO ==
+# Il testo sotto il codice QR. Ogni riga "sotto-qr" va a capo: se ne
+# possono scrivere una o più.
+sotto-qr: Vieni a trovarci!
+sotto-qr: Inquadra il QR code per prenotare la tua visita e scoprire il Natta.

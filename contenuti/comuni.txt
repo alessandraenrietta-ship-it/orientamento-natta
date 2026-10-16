@@ -10,13 +10,23 @@
 
 == SCUOLA ==
 nome: IIS "Giulio Natta"
+# La città compare sulla cartolina, sotto il nome della scuola.
+città: Rivoli
 indirizzo: Via XX Settembre 14A, 10098 Rivoli (TO)
 mappa: https://www.google.com/maps/search/?api=1&query=Via+XX+Settembre+14A%2C+10098+Rivoli+TO
 telefono: 011 956 32 13
 email: tois059003@istruzione.it
 email-orientamento: orientamento@itisgiulionatta.it
 email-liceo-digitale: liceodigitale@itisgiulionatta.it
+# Il sito della scuola compare nel piede e, scritto per esteso, sul
+# retro della cartolina.
 sito: https://www.itisgiulionatta.it
+# L'indirizzo di questo sito di orientamento. Lo usa la cartolina per
+# il codice QR. ATTENZIONE: se l'indirizzo
+# cambia (per esempio con un dominio nuovo), le cartoline già stampate
+# portano al vecchio. Prima di stampare si apre cartolina.html e si
+# controlla che il QR porti all'indirizzo giusto.
+sito-orientamento: https://alessandraenrietta-ship-it.github.io/orientamento-natta/
 # Oggi non compare nella home: resta qui per la futura pagina del liceo.
 sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale/
 # Il link alla pagina dei serali sta in serali.txt.
