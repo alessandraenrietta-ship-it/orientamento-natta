@@ -5,37 +5,40 @@ note. Non serve toccare nessun altro file.
 
 - `comuni.txt`: contatti e open day, validi per tutte le pagine.
   - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
-    usato dal pulsante "Dove siamo".
+    usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
     `indirizzo`, `telefono`, `email` (la segreteria) e `sito`.
+  - `nome-breve` è il nome senza virgolette (IIS Giulio Natta): nella
+    home compare in maiuscolo nella testata e lungo il timbro del piede.
 
   Nella sezione degli open day:
-  - `nota-turni`, se c'è, è la frase che compare sotto il titolo della
-    fascia; se manca, sotto il titolo non resta spazio vuoto;
+  - `nota-turni`, se c'è, è la frase che compare sotto le date; se la
+    riga si toglie, non resta spazio vuoto;
   - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
     a cui porta;
   - la tabella ha **quattro colonne**: `giorno | data | primo turno |
-    secondo turno`. La data si scrive come `21 novembre`: dal mese il
-    sito ricava la sigla del foglietto da calendario (NOV). Gli orari si
+    secondo turno`. La data si scrive come `21 novembre`. Gli orari si
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
   - quando un turno è al completo si scrive `esaurito` dopo l'orario,
-    come `10.00-11.00 esaurito`: sulla pagina compare una croce rossa
-    con la scritta del campo `esaurito` (oggi "Esaurito"). I turni liberi
-    hanno una spunta verde.
+    come `10.00-11.00 esaurito`: sulla pagina compare, accanto al turno,
+    la scritta rossa del campo `esaurito` (oggi "Esaurito").
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
-  ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
+  `occhiello` è la riga piccola sopra il titolo (il sito ci aggiunge
+  l'anno degli open day) e `claim` è il titolo grande (lo usa anche la
+  cartolina); ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
-  pulsanti che portano alla fascia degli indirizzi e a quella dei
+  pulsanti che portano alla sezione degli indirizzi e a quella dei
   serali. Righe e pulsanti senza testo non compaiono. Nella tabella
   `INDIRIZZI`, la colonna `frase` è la frase concreta che compare subito
-  sotto il claim; se è vuota non compare. La tabella `CONTATTI` elenca
-  i pulsanti d'azione della fascia dei contatti, con **tre colonne**:
-  `azione | campo del dato in comuni.txt | campo del link`. L'azione è
-  la scritta in grassetto, sotto compare il dato. La terza colonna si
+  sotto il claim; se è vuota non compare. La colonna `colore`
+  (meccanica, grafica, liceo) decide il colore del trattino accanto al
+  nome. La tabella `CONTATTI` elenca le azioni della sezione dei
+  contatti, con **tre colonne**: `azione | campo del dato in comuni.txt
+  | campo del link`. L'azione è il link sottolineato, sotto compare il
+  dato, che si può copiare. La terza colonna si
   può lasciare vuota: il sito capisce da solo che il telefono chiama e
-  l'email apre la posta. Se c'è (come `mappa`), il pulsante apre quel
-  link in una nuova scheda. Se nella sezione `SEZIONI` si aggiunge il
-  campo `apri-mappa`, la sua scritta compare sotto il dato; oggi non c'è.
+  l'email apre la posta. Se c'è (come `mappa`), l'azione apre quel
+  link in una nuova scheda.
 - `serali.txt`: i testi dei corsi serali per adulti.
 - `liceo.txt`: i testi della pagina del liceo (`liceo.html`) e delle
   pagine dei tre percorsi. Vedi più sotto.
@@ -57,10 +60,11 @@ note. Non serve toccare nessun altro file.
 
 `serali.txt` ha due sezioni.
 
-- `== HOME ==` è la scheda dei serali nella pagina iniziale: ha gli
-  stessi campi delle schede degli indirizzi (`tipo`, `nome`, `claim`,
-  `in breve`, `pagina`, `stato`) più `titolo`, il titolo della fascia.
-  I nomi dei campi non vanno cambiati.
+- `== HOME ==` è la sezione dei serali nella pagina iniziale: i campi
+  `titolo`, `tipo`, `claim`, `in breve`, `pagina`, `stato` e una
+  tabella con i percorsi, `nome | colore` (meccanica o grafica: il
+  colore del trattino accanto al nome). I nomi dei campi non vanno
+  cambiati.
 - `== PAGINA ==` contiene le informazioni per la futura pagina dei
   serali. Oggi non compaiono da nessuna parte.
 

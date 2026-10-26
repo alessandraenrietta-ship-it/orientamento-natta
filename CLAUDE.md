@@ -73,11 +73,24 @@ adulti interessati ai corsi serali.
 - Testo alternativo per le immagini, `alt=""` per quelle solo decorative.
 - **Nessun testo dentro le immagini.**
 - Tutto usabile da tastiera, con l'elemento attivo ben visibile.
-- Carattere **Arial** (`Arial, Helvetica, sans-serif`), testo di base
-  almeno 16 px. Titoli in **Arial Black** maiuscolo: sui telefoni dove
-  manca compare il carattere più nero disponibile.
+- **Un solo carattere in tutto il sito: Cutive Mono** (licenza SIL OFL,
+  testo in `fonts/OFL.txt`). Il file è `fonts/cutive-mono-regular.ttf`,
+  caricato con `@font-face` in `grafica.css`: nessun collegamento a
+  Google Fonts. Ha un solo spessore, senza grassetto: titoli e nomi si
+  distinguono per grandezza, colore e maiuscolo, e `font-synthesis:
+  none` impedisce il grassetto finto. Testi ad almeno 16 px (di base
+  17), interlinea ampia (1,75). Non è più Arial: oggi lo usa la home;
+  le altre pagine sono ancora in Arial finché non passano alla grafica
+  nuova (punto 13).
 
 ## 6. Grafica
+
+**Attenzione:** la home (`index.html`) ha la grafica nuova "a
+cartolina", descritta al punto 13. Le regole di questo punto valgono
+per le altre pagine, che usano ancora `stile.css`, finché non si
+rifanno anche loro; le parti che parlano della home (fasce della home,
+schede degli indirizzi, open day, serali, contatti, piede della home)
+sono superate.
 
 - **Un solo tema, chiaro.** Il tema scuro è stato eliminato: niente
   interruttore, niente regole CSS o codice JavaScript per il tema scuro.
@@ -397,3 +410,71 @@ Digitale) e `contenuti/cartolina.txt`.
   QR porti a quello nuovo.
 - Ancora aperti: tipografia o stampa a scuola e numero di copie,
   dominio del sito, logo in un file per la stampa.
+
+## 13. La grafica "a cartolina" (home)
+
+Decisa con Alessandra il 26 ottobre 2026. Per ora la ha solo la home;
+le altre pagine passano dopo. Lo stato del sito prima del cambio è
+segnato dall'etichetta Git `grafica-ottobre`; il lavoro sta sul ramo
+`grafica-cartolina` finché Alessandra non dice di unirlo a `main`.
+File: `grafica.css` (lo usa solo `index.html`; `stile.css` resta per
+le altre pagine), `js/home.js`, `immagini/linee-scuola.svg`, `fonts/`.
+
+- **Fondo tutto bianco.** Niente fasce verdi o chiare, niente retino,
+  niente filetti gialli, niente schede colorate, niente simboli ad
+  adesivo né icone. Le sezioni sono separate da un filetto grigio
+  sottile (`#D5D9DE`, solo decorativo).
+- **Verde** `#026C37` per titoli, pulsanti e link. Testo blu notte
+  `#00193C`. Grigio `#5B6B80` (5,4 sul bianco) per tipo di scuola,
+  anno dei serali, occhiello, "Pagina in preparazione" e nota dei
+  turni.
+- **Arancione, rosa e blu indicano solo i tre indirizzi** (Meccanica
+  `#C2410C`, Grafica `#B8326F`, Liceo `#1F5FA8`) e non si usano per
+  altro: le linee del disegno e il trattino accanto al nome. Nei
+  serali il trattino ha il colore dell'indirizzo (Meccanica e
+  meccatronica arancione, Grafica e comunicazione rosa).
+- **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga; verde
+  per le date degli open day.
+- **Testata**: bianca, logo e nome breve della scuola (`nome-breve` in
+  `comuni.txt`) in maiuscolo verde, filetto sotto.
+- **Apertura**, centrata: occhiello "ORIENTAMENTO 2026/27" (campo
+  `occhiello` di `home.txt` più l'anno degli open day); titolo = il
+  `claim` di `home.txt`; sotto, il disegno delle tre linee; poi i
+  pulsanti "Dopo la terza media" (pieno) e "Corsi serali per adulti"
+  (vuoto). Lo spazio fra le due torri del disegno resta vuoto.
+- **Il disegno** `immagini/linee-scuola.svg` resta com'è (spessore
+  1.6, quello della cartolina). `js/home.js` lo legge e lo mette nella
+  pagina; lo spessore sullo schermo è sempre circa 2,4 px (lo ricalcola
+  il JS al cambiare della larghezza). Sul telefono è largo quanto lo
+  schermo, sui più larghi al massimo 60rem. Le linee si disegnano
+  all'apertura, una dopo l'altra (arancione, rosa, blu); con
+  `prefers-reduced-motion` compaiono già intere. `aria-hidden`.
+- **Ordine delle sezioni**: apertura, open day (subito dopo, perché le
+  date scadono), indirizzi ("Dopo la terza media"), serali, contatti.
+- **Open day**: lista; ogni data con trattino verde, giorno e data in
+  verde, sotto i due turni; turno esaurito con la scritta rossa
+  "Esaurito" accanto (rosso `#B91C1C` solo qui, sempre con la
+  scritta); poi la nota sui turni e il pulsante pieno "Prenota un open
+  day". Al computer le date stanno in colonne.
+- **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
+  maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
+  "Pagina in preparazione" o il pulsante vuoto "Scopri di più". Al
+  computer tutti e tre su una riga, mai due più uno.
+- **Serali**: "Corsi serali per adulti", anno in grigio maiuscolo, "Per
+  chi lavora o vuole riprendere gli studi.", i due percorsi con il
+  trattino, "Pagina in preparazione" o il pulsante. Tono da adulti.
+- **Contatti**: "Chiama", "Scrivi all'orientamento", "Come arrivare",
+  link sottolineati in verde alti almeno 44 px, con il dato sotto,
+  fuori dal link, così si copia. Niente icone. "Come arrivare" apre
+  Google Maps in una nuova scheda, con il testo nascosto per il
+  lettore di schermo. Al computer affiancati.
+- **Piede**: bianco; il timbro rotondo blu inchiostro `#1F3A6B` (colore
+  solo per il timbro) con il logo al centro tinto di blu e "IIS GIULIO
+  NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola
+  (nome, indirizzo, telefono, email della segreteria, sito; link
+  verdi). Il timbro è decorativo (`aria-hidden`), le parole vengono da
+  `comuni.txt` e `home.txt`.
+- **Pulsanti**: rettangolo ad angoli vivi, freccia "›" (nascosta al
+  lettore di schermo); pieni verdi con testo bianco, oppure bianchi con
+  bordo e testo verdi; altezza minima 44 px.
+- **Focus da tastiera**: contorno blu notte di 3 px.

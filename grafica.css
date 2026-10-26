@@ -1,0 +1,590 @@
+/* =================================================================
+   GRAFICA "A CARTOLINA" - SITO ORIENTAMENTO
+   IIS Giulio Natta, Rivoli
+
+   Decisa con Alessandra il 26 ottobre 2026. Per ora la usa solo la
+   home (index.html); le altre pagine usano ancora stile.css, con la
+   grafica a fasce, finché non si rifanno anche loro.
+
+   IN BREVE
+     - un solo carattere, Cutive Mono, salvato nella cartella fonts/
+     - fondo tutto bianco; le sezioni sono separate da un filetto
+       grigio sottile
+     - il verde della scuola per titoli, pulsanti e link
+     - arancione, rosa e blu indicano SOLO i tre indirizzi: un
+       trattino corto del loro colore accanto al nome
+     - pulsanti rettangolari ad angoli vivi, con la freccia "›"
+
+   Si scrive PRIMA PER LO SMARTPHONE: le regole qui sotto valgono per
+   lo schermo piccolo, e quelle per computer e LIM stanno in fondo,
+   nella sezione SCHERMI PIÙ LARGHI.
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   IL CARATTERE
+   Cutive Mono, licenza SIL Open Font License (testo in fonts/OFL.txt).
+   Il file sta nel sito: nessun collegamento a Google Fonts.
+   Ha un solo spessore, senza grassetto: titoli e nomi si distinguono
+   per grandezza, colore e maiuscolo. font-synthesis: none impedisce
+   al browser di inventare un grassetto finto.
+   ----------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Cutive Mono";
+  src: url("fonts/cutive-mono-regular.ttf?v=1") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* -----------------------------------------------------------------
+   COLORI
+   Verificati per il contrasto (testo almeno 4,5:1) e per la
+   deuteranopia e la protanopia. Non si cambiano senza dirlo ad
+   Alessandra.
+   ----------------------------------------------------------------- */
+
+:root {
+  --verde:         #026C37;  /* titoli, pulsanti, link: 6,6 sul bianco */
+  --verde-scuro:   #014A26;  /* pulsante pieno al passaggio del mouse */
+  --blu-notte:     #00193C;  /* il testo: 17,9 sul bianco */
+  --grigio:        #5B6B80;  /* tipo di scuola, scritte secondarie: 5,4 sul bianco */
+  --filetto:       #D5D9DE;  /* il filetto fra le sezioni: solo decorativo */
+  --bianco:        #FFFFFF;
+
+  /* Un colore per indirizzo, SOLO per il trattino accanto al nome e
+     per le linee del disegno. Non si usano per nient'altro. */
+  --meccanica:     #C2410C;  /* arancione bruciato */
+  --grafica:       #B8326F;  /* rosa scuro */
+  --liceo:         #1F5FA8;  /* blu */
+
+  /* Rosso SOLO per la scritta "Esaurito" dei turni degli open day:
+     6,5 sul bianco. Sempre con la scritta, mai da solo. */
+  --rosso:         #B91C1C;
+
+  /* Blu inchiostro SOLO per il timbro del piede */
+  --inchiostro:    #1F3A6B;
+
+  --carattere:     "Cutive Mono", "Courier New", monospace;
+
+  /* Misure */
+  --spazio:        1.25rem;
+  --massimo:       72rem;    /* larghezza massima del contenuto */
+  --trattino:      1.5rem;   /* lunghezza del trattino colorato */
+}
+
+
+/* -----------------------------------------------------------------
+   BASE
+   ----------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: var(--carattere);
+  font-size: 1.0625rem;   /* 17 pixel: il minimo è 16 */
+  font-weight: normal;
+  font-synthesis: none;
+  line-height: 1.75;
+  color: var(--blu-notte);
+  background: var(--bianco);
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.6em;
+  font-weight: normal;
+  line-height: 1.25;
+  color: var(--verde);
+}
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+a { color: var(--verde); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Testo nascosto alla vista ma letto dai lettori di schermo */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Un dato che manca: [DA COMPLETARE: ...], ben visibile */
+.da-completare {
+  padding: 0 0.3em;
+  border: 2px dashed currentColor;
+}
+
+
+/* -----------------------------------------------------------------
+   ACCESSIBILITÀ
+   Il contorno di messa a fuoco serve a chi naviga con la tastiera:
+   non va tolto. Blu notte, ben visibile sul bianco e sul verde.
+   ----------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 3px;
+}
+
+/* I titoli che ricevono il focus dai pulsanti dell'apertura: niente
+   contorno, il lettore di schermo li legge comunque */
+[tabindex="-1"]:focus { outline: none; }
+
+/* Salta al contenuto: compare solo premendo Tab appena aperta la
+   pagina, e porta dritti al contenuto senza passare dalla testata */
+.salta {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 10;
+  padding: 0.6em 1em;
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+.salta:focus { left: 0.75rem; }
+
+
+/* -----------------------------------------------------------------
+   LE SEZIONI
+   Tutte su fondo bianco. Dentro, il contenuto è largo al massimo
+   --massimo. Fra una sezione e l'altra, un filetto grigio sottile.
+   ----------------------------------------------------------------- */
+
+.interno {
+  max-width: var(--massimo);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sezione {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--filetto);
+}
+
+.titolo-sezione {
+  font-size: 1.75rem;
+  margin-bottom: 1.2em;
+}
+
+.titolo-sezione:focus { outline: none; }
+
+/* La riga in fondo a una sezione, con il pulsante */
+.fondo-sezione { margin-top: 2rem; }
+
+
+/* -----------------------------------------------------------------
+   IL TRATTINO COLORATO
+   Un trattino corto accanto al testo, alla prima riga: verde per le
+   date degli open day, nel colore dell'indirizzo per gli indirizzi e
+   i percorsi serali. Solo decorativo.
+   ----------------------------------------------------------------- */
+
+.con-trattino {
+  position: relative;
+  padding-left: calc(var(--trattino) + 0.75rem);
+}
+
+.con-trattino::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.82em;              /* a metà della prima riga */
+  width: var(--trattino);
+  height: 3px;
+  background: var(--tono, var(--verde));
+}
+
+.tono-meccanica { --tono: var(--meccanica); }
+.tono-grafica   { --tono: var(--grafica); }
+.tono-liceo     { --tono: var(--liceo); }
+
+
+/* -----------------------------------------------------------------
+   I PULSANTI
+   Rettangolo ad angoli vivi, con la freccia "›" dopo la scritta, alti
+   almeno 44 pixel (la misura minima per il dito).
+     - pulsante pieno: fondo verde, testo bianco (6,6)
+     - pulsante vuoto: fondo bianco, bordo e testo verdi
+   ----------------------------------------------------------------- */
+
+.pulsante {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 2.75rem;      /* 44 pixel */
+  padding: 0.45em 1.1em;
+  border: 2px solid var(--verde);
+  border-radius: 0;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+/* La freccia è solo un disegno: dopo la barra c'è il suo testo per i
+   lettori di schermo, cioè niente */
+.pulsante::after {
+  content: "›";
+  content: "›" / "";
+  font-size: 1.3em;
+  line-height: 1;
+}
+
+.pulsante:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+
+.pulsante-pieno {
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+.pulsante-pieno:hover { background: var(--verde-scuro); border-color: var(--verde-scuro); }
+
+.pulsante-vuoto {
+  color: var(--verde);
+  background: var(--bianco);
+}
+
+
+/* -----------------------------------------------------------------
+   TESTATA
+   Bianca: il logo e il nome della scuola, con il filetto sotto.
+   ----------------------------------------------------------------- */
+
+.testata {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--filetto);
+}
+
+.marchio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--verde);
+}
+
+/* Il logo è piccolo (231 per 155 pixel): non va ingrandito oltre */
+.logo-scuola {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: auto;
+}
+
+
+/* -----------------------------------------------------------------
+   APERTURA
+   Occhiello, titolo, il disegno delle tre linee e i due pulsanti,
+   centrati. La sezione d'apertura non ha il filetto sopra: c'è già
+   quello della testata.
+   ----------------------------------------------------------------- */
+
+.apertura {
+  border-top: 0;
+  text-align: center;
+}
+
+.occhiello {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.titolo-sito {
+  max-width: 20em;
+  margin: 0 auto 0.5em;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.presentazione { max-width: 40rem; margin: 0 auto 1rem; }
+
+/* Il disegno: largo quanto lo schermo sul telefono, quanto il
+   contenuto (al massimo 60rem) sui più larghi. Lo spessore delle
+   linee lo calcola js/home.js (--spessore), perché sullo schermo
+   resti sempre di circa 2,4 pixel. Lo spazio fra le due torri resta
+   vuoto. */
+.disegno {
+  max-width: 60rem;
+  margin: 1.5rem auto 2rem;
+}
+
+.disegno svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.disegno path {
+  stroke-width: var(--spessore, 2.4px);
+}
+
+/* Le linee si disegnano all'apertura della pagina, una dopo l'altra:
+   arancione, rosa, blu. Ogni linea è lunga 1 (pathLength, vedi
+   js/home.js): il tratto visibile parte nascosto e si allunga fino a
+   coprirla tutta. */
+@keyframes disegna {
+  from { stroke-dashoffset: 1.01; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.disegno path {
+  stroke-dasharray: 1 2;
+  animation: disegna 1.6s ease-in-out both;
+}
+
+.disegno path:nth-child(1) { animation-delay: 0.2s; }
+.disegno path:nth-child(2) { animation-delay: 1.4s; }
+.disegno path:nth-child(3) { animation-delay: 2.6s; }
+
+/* Chi ha chiesto al computer di ridurre il movimento vede il disegno
+   già completo */
+@media (prefers-reduced-motion: reduce) {
+  .disegno path {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
+.per-adulti { max-width: 40rem; margin: 0 auto 1rem; }
+
+.pulsanti {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+
+/* -----------------------------------------------------------------
+   OPEN DAY
+   Una lista: per ogni data il trattino verde, il giorno e sotto i due
+   turni. Poi la nota sui turni e il pulsante per prenotare.
+   ----------------------------------------------------------------- */
+
+.date {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.data-giorno {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--verde);
+}
+
+.data-turni { line-height: 1.6; }
+
+.turno-scritta { color: var(--rosso); }
+
+.nota {
+  margin-top: 2rem;
+  max-width: 40rem;
+  color: var(--grigio);
+}
+
+
+/* -----------------------------------------------------------------
+   INDIRIZZI
+   Per ogni indirizzo: trattino del suo colore accanto a tipo di
+   scuola (grigio, maiuscolo) e nome; sotto il claim in verde, la frase
+   e "Pagina in preparazione" o il pulsante.
+   ----------------------------------------------------------------- */
+
+.indirizzi {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.indirizzo {
+  display: flex;
+  flex-direction: column;
+}
+
+.indirizzo-testa { margin-bottom: 0.9rem; }
+
+/* Il trattino sta a metà della riga del tipo di scuola */
+.indirizzo.con-trattino::before { top: 0.8rem; }
+
+.indirizzo-tipo {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.indirizzo-nome {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--blu-notte);
+}
+
+.indirizzo-claim {
+  margin-bottom: 0.5em;
+  font-size: 1.125rem;
+  color: var(--verde);
+}
+
+.indirizzo-fondo { margin-top: auto; padding-top: 1.2rem; }
+
+.in-preparazione { color: var(--grigio); }
+
+
+/* -----------------------------------------------------------------
+   CORSI SERALI
+   Titolo, anno, a chi si rivolgono e i due percorsi, ognuno con il
+   trattino del colore del suo indirizzo.
+   ----------------------------------------------------------------- */
+
+.serali-tipo {
+  margin-top: -0.6rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.serali-breve { font-size: 1.125rem; }
+
+.serali-percorsi {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+
+/* -----------------------------------------------------------------
+   CONTATTI
+   Tre azioni sottolineate in verde, con il dato sotto. Niente icone.
+   Il dato non è dentro il link: si può selezionare e copiare.
+   ----------------------------------------------------------------- */
+
+.contatti {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.contatto-azione {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* Il link è alto almeno 44 pixel, per il dito */
+.contatto-azione a {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+  text-decoration: underline;
+  text-decoration-color: var(--verde);
+}
+
+.contatto-dato { margin: 0; }
+
+
+/* -----------------------------------------------------------------
+   PIEDE
+   Bianco: il timbro rotondo blu inchiostro e, accanto, i dati della
+   scuola.
+   ----------------------------------------------------------------- */
+
+.piede {
+  padding: 2rem 0 2.5rem;
+  border-top: 1px solid var(--filetto);
+  font-size: 1rem;
+}
+
+.piede-interno {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Il timbro: due cerchi, la scritta lungo il cerchio e il logo al
+   centro, tutto in blu inchiostro */
+.timbro {
+  position: relative;
+  flex: none;
+  width: 6rem;
+  height: 6rem;
+  color: var(--inchiostro);
+}
+
+.timbro svg { display: block; width: 100%; height: 100%; }
+
+.timbro-bordo {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+.timbro-scritta {
+  font-family: var(--carattere);
+  font-size: 9.5px;
+  fill: currentColor;
+}
+
+/* Il logo al centro, tinto di blu inchiostro: il disegno del logo fa
+   da stampo (mask) e il colore lo riempie */
+.timbro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46%;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: currentColor;
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+.piede-voci {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.7;
+}
+
+.piede-voci a { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   SCHERMI PIÙ LARGHI
+   ----------------------------------------------------------------- */
+
+@media (min-width: 40rem) {
+  .interno { padding: 0 1.5rem; }
+  .sezione { padding: 3.5rem 0; }
+  .titolo-sito { font-size: 2.75rem; }
+  .titolo-sezione { font-size: 2rem; }
+  .pulsanti { flex-direction: row; justify-content: center; flex-wrap: wrap; }
+  .date { grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 2rem 1.5rem; }
+  .contatti { grid-template-columns: repeat(3, auto); justify-content: start; gap: 1.75rem 4rem; }
+  .piede-interno { gap: 2rem; }
+  .timbro { width: 7.5rem; height: 7.5rem; }
+}
+
+/* I tre indirizzi affiancati, di pari importanza: tutti e tre su una
+   riga, mai due più uno */
+@media (min-width: 56rem) {
+  .indirizzi { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .titolo-sito { font-size: 3.25rem; }
+}

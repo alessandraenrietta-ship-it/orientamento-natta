@@ -22,21 +22,23 @@
     vecchia e le modifiche non si vedono.
     QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO DI UNO
     in tutte le pagine che lo caricano.
+
+    La home usa la grafica nuova, "a cartolina" (grafica.css). Le altre
+    pagine usano ancora quella a fasce (stile.css), finché non si
+    rifanno anche loro.
   -->
-  <link rel="stylesheet" href="stile.css?v=27">
+  <link rel="stylesheet" href="grafica.css?v=1">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
 
   <a class="salta" href="#contenuto">Salta al contenuto</a>
 
-  <!-- La testata: logo e nome della scuola -->
-  <header class="fascia fascia-testata">
-    <div class="fascia-interno testata-interno">
+  <!-- La testata: logo e nome della scuola, su fondo bianco -->
+  <header class="testata">
+    <div class="interno testata-interno">
       <p class="marchio">
-        <!-- Il logo con lo sfondo trasparente, direttamente sul verde
-             scuro. alt vuoto: il nome della scuola è scritto subito
-             accanto. -->
+        <!-- alt vuoto: il nome della scuola è scritto subito accanto -->
         <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
         <span id="nome-scuola"></span>
       </p>
@@ -47,67 +49,72 @@
        contenuti/: home.txt, comuni.txt e serali.txt. Il contenuto resta
        nascosto finché i testi non sono stati letti, così non si vedono
        titoli vuoti.
-       Le fasce si alternano: verde, chiara, verde, chiara, verde. -->
+       Le sezioni sono tutte su fondo bianco, separate da un filetto
+       grigio sottile. -->
   <main id="contenuto" tabindex="-1" hidden>
 
-    <!-- Apertura: l'unica fascia con il testo centrato -->
-    <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
-      <div class="fascia-interno">
+    <!-- Apertura: occhiello, titolo, il disegno delle tre linee e i
+         due pulsanti -->
+    <section class="sezione apertura" aria-labelledby="titolo">
+      <div class="interno">
         <p class="occhiello" id="occhiello"></p>
         <h1 class="titolo-sito" id="titolo"></h1>
-        <p class="claim" id="claim"></p>
         <div class="presentazione" id="presentazione"></div>
+      </div>
+      <!-- Il disegno della scuola con le tre linee degli indirizzi. Lo
+           mette qui js/home.js, leggendo immagini/linee-scuola.svg. È
+           solo decorativo: nascosto ai lettori di schermo. -->
+      <div class="disegno" id="disegno" aria-hidden="true"></div>
+      <div class="interno">
         <!-- La riga per gli adulti (compare solo se c'è nel file) e i due
-             pulsanti che portano alle fasce degli indirizzi e dei
+             pulsanti che portano alle sezioni degli indirizzi e dei
              serali, più in basso in questa stessa pagina -->
         <p class="per-adulti" id="testo-adulti"></p>
         <p class="pulsanti">
-          <a class="pulsante" id="pulsante-diurno" href="#titolo-indirizzi"></a>
-          <a class="pulsante" id="pulsante-adulti" href="#titolo-serali"></a>
+          <a class="pulsante pulsante-pieno" id="pulsante-diurno" href="#titolo-indirizzi"></a>
+          <a class="pulsante pulsante-vuoto" id="pulsante-adulti" href="#titolo-serali"></a>
         </p>
       </div>
     </section>
 
     <!-- Gli open day subito dopo l'apertura: le date scadono, devono
          vedersi presto -->
-    <section class="fascia fascia-chiara" aria-labelledby="titolo-open-day">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-open-day"></h2>
-        <p class="sottotitolo" id="open-day-nota"></p>
-        <!-- Un'unica scheda: le date come foglietti da calendario e, in
-             fondo, il pulsante per prenotare -->
-        <div class="carta calendario">
-          <ul class="date" id="elenco-open-day"></ul>
-          <p class="calendario-fondo" id="prenotazione"></p>
-        </div>
+    <section class="sezione" aria-labelledby="titolo-open-day">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-open-day"></h2>
+        <!-- Una lista: per ogni data il trattino verde, il giorno e
+             sotto i due turni. Poi la nota sui turni e il pulsante per
+             prenotare. -->
+        <ul class="date" id="elenco-open-day"></ul>
+        <p class="nota" id="open-day-nota"></p>
+        <p class="fondo-sezione" id="prenotazione"></p>
       </div>
     </section>
 
-    <section class="fascia fascia-verde" aria-labelledby="titolo-indirizzi">
-      <div class="fascia-interno">
+    <section class="sezione" aria-labelledby="titolo-indirizzi">
+      <div class="interno">
         <!-- tabindex="-1": il titolo può ricevere il focus, ci arriva il
              pulsante "Dopo la terza media" dell'apertura -->
-        <h2 class="titolo-fascia" id="titolo-indirizzi" tabindex="-1"></h2>
-        <div class="schede" id="schede"></div>
+        <h2 class="titolo-sezione" id="titolo-indirizzi" tabindex="-1"></h2>
+        <ul class="indirizzi" id="schede"></ul>
       </div>
     </section>
 
-    <!-- I corsi serali: una fascia tutta loro, separata dagli indirizzi
-         del diurno, con una sola scheda costruita come quelle degli
-         indirizzi. Il titolo può ricevere il focus (tabindex="-1"): ci
-         arriva il pulsante dell'apertura. -->
-    <section class="fascia fascia-chiara" aria-labelledby="titolo-serali">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-serali" tabindex="-1"></h2>
-        <div id="scheda-serali"></div>
+    <!-- I corsi serali, separati dagli indirizzi del diurno. Il titolo
+         può ricevere il focus (tabindex="-1"): ci arriva il pulsante
+         dell'apertura. -->
+    <section class="sezione" aria-labelledby="titolo-serali">
+      <div class="interno" id="serali">
+        <h2 class="titolo-sezione" id="titolo-serali" tabindex="-1"></h2>
       </div>
     </section>
 
-    <section class="fascia fascia-verde" aria-labelledby="titolo-contatti">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-contatti"></h2>
-        <!-- Tre pulsanti d'azione: chiamare, scrivere, arrivare -->
-        <ul class="azioni" id="elenco-contatti"></ul>
+    <section class="sezione" aria-labelledby="titolo-contatti">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-contatti"></h2>
+        <!-- Tre azioni: chiamare, scrivere, arrivare. Sotto ognuna il
+             dato, che si può selezionare e copiare. -->
+        <ul class="contatti" id="elenco-contatti"></ul>
       </div>
     </section>
 
@@ -115,20 +122,20 @@
 
   <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
        possono leggere. -->
-  <section class="fascia fascia-verde" id="avviso" hidden>
-    <div class="fascia-interno">
-      <h1 class="titolo-fascia">Orientamento I.I.S. Giulio Natta</h1>
+  <section class="sezione" id="avviso" hidden>
+    <div class="interno">
+      <h1 class="titolo-sezione">Orientamento I.I.S. Giulio Natta</h1>
       <p>Non riesco a caricare i testi di questa pagina.</p>
       <p>Se hai aperto il file dal computer con un doppio clic, usa invece
-         <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
+         anteprima.bat. Altrimenti ricarica la pagina, oppure
          visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
     </div>
   </section>
 
   <!-- Se JavaScript è spento, la pagina non può leggere i testi -->
   <noscript>
-    <section class="fascia fascia-verde">
-      <div class="fascia-interno">
+    <section class="sezione">
+      <div class="interno">
         <p>Per vedere questa pagina serve JavaScript attivo nel browser.
            In alternativa visita il
            <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
@@ -136,15 +143,18 @@
     </section>
   </noscript>
 
-  <!-- Il piede: i dati istituzionali della scuola -->
-  <footer class="fascia fascia-piede">
-    <div class="fascia-interno">
+  <!-- Il piede: il timbro rotondo e, accanto, i dati della scuola -->
+  <footer class="piede">
+    <div class="interno piede-interno">
+      <!-- Il timbro lo disegna js/home.js. È solo decorativo: i dati
+           sono scritti per intero accanto. -->
+      <div class="timbro" id="timbro" aria-hidden="true"></div>
       <ul class="piede-voci" id="piede"></ul>
     </div>
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/home.js?v=18"></script>
+  <script src="js/home.js?v=19"></script>
 </body>
 </html>

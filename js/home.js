@@ -1,8 +1,12 @@
 /* ==================================================================
    LA PAGINA INIZIALE
 
-   Legge contenuti/home.txt e contenuti/comuni.txt e riempie la pagina.
-   I testi non stanno qui: si cambiano nei file di testo.
+   Legge contenuti/home.txt, contenuti/comuni.txt e contenuti/serali.txt
+   e riempie la pagina. I testi non stanno qui: si cambiano nei file di
+   testo.
+
+   Grafica "a cartolina" (vedi grafica.css): fondo bianco, un trattino
+   colorato accanto a ogni indirizzo e a ogni data, niente simboli.
 
    Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
    prima di questo.
@@ -15,16 +19,19 @@
 
   /* I pezzi comuni a tutte le pagine stanno in js/comuni.js */
   var P = window.Pezzi;
-  var icona = P.icona, segno = P.segno, elemento = P.elemento;
-  var linkTelefono = P.linkTelefono, scriviDato = P.scriviDato;
+  var elemento = P.elemento, linkTelefono = P.linkTelefono, scriviDato = P.scriviDato;
 
-  /* Il simbolo di ogni indirizzo, scelto dalla colonna "colore" */
-  var SIMBOLI = {
-    meccanica: "rotella",
-    grafica: "occhio",
-    liceo: "lampadina",
-    serali: "luna"
-  };
+  /* I colori che si possono scrivere nella colonna "colore". Arancione,
+     rosa e blu indicano solo i tre indirizzi: non si usano per altro. */
+  var COLORI = ["meccanica", "grafica", "liceo"];
+
+  /* Il disegno delle tre linee. Se si cambia il disegno, si aumenta il
+     numero ?v= qui sotto. */
+  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
+
+  /* Lo spessore delle linee sullo schermo, in pixel. Resta lo stesso
+     su telefono, computer e LIM. */
+  var SPESSORE_LINEE = 2.4;
 
   Promise.all([
     C.leggi("contenuti/home.txt"),
@@ -35,6 +42,7 @@
       riempi(file[0], file[1]);
       serali(file[2], file[0]);
       document.getElementById("contenuto").hidden = false;
+      disegno();
     })
     .catch(function (errore) {
       console.error(errore);
@@ -42,23 +50,26 @@
     });
 
   function riempi(home, comuni) {
-    /* Testata */
-    P.testata(comuni);
+    /* Testata: il nome breve della scuola, senza virgolette (il
+       maiuscolo lo mette grafica.css) */
+    C.scrivi(document.getElementById("nome-scuola"),
+      comuni.campo("SCUOLA", "nome-breve") || comuni.campo("SCUOLA", "nome"));
 
-    /* Apertura. La riga piccola sopra al titolo compare solo se nel
-       file c'è il campo "occhiello". */
+    /* Apertura. Accanto all'occhiello il sito aggiunge l'anno scritto
+       in comuni.txt: "Orientamento 2026/27". */
     var occhiello = document.getElementById("occhiello");
     if (home.campo("APERTURA", "occhiello")) {
-      C.scrivi(occhiello, home.campo("APERTURA", "occhiello"));
+      C.scrivi(occhiello, home.campo("APERTURA", "occhiello") + " " + comuni.campo("OPEN DAY", "anno"));
     } else {
       occhiello.hidden = true;
     }
-    C.scrivi(document.getElementById("titolo"), home.campo("APERTURA", "titolo"));
-    C.scrivi(document.getElementById("claim"), home.campo("APERTURA", "claim"));
+    /* Il titolo grande è il claim generale della scuola */
+    C.scrivi(document.getElementById("titolo"), home.campo("APERTURA", "claim"));
     var presentazione = document.getElementById("presentazione");
     home.campi("APERTURA", "testo").forEach(function (testo) {
       presentazione.appendChild(C.scrivi(document.createElement("p"), testo));
     });
+    if (!presentazione.firstChild) { presentazione.hidden = true; }
     /* La riga per gli adulti compare solo se nel file c'è */
     var testoAdulti = document.getElementById("testo-adulti");
     if (home.campo("APERTURA", "testo-adulti")) {
@@ -66,9 +77,9 @@
     } else {
       testoAdulti.hidden = true;
     }
-    /* I due pulsanti dell'apertura portano alle fasce degli indirizzi
+    /* I due pulsanti dell'apertura portano alle sezioni degli indirizzi
        e dei serali, più in basso. Dopo il salto il focus va sul titolo
-       della fascia: chi usa la tastiera riparte da lì, e il lettore di
+       della sezione: chi usa la tastiera riparte da lì, e il lettore di
        schermo legge il titolo. Un pulsante senza scritta nel file non
        compare. */
     [["pulsante-diurno", "titolo-indirizzi"], ["pulsante-adulti", "titolo-serali"]]
@@ -83,33 +94,81 @@
         });
       });
 
-    /* Titoli delle fasce */
+    /* Titoli delle sezioni */
     C.scrivi(document.getElementById("titolo-indirizzi"), home.campo("SEZIONI", "indirizzi"));
     C.scrivi(document.getElementById("titolo-open-day"),
       home.campo("SEZIONI", "open-day") + " " + comuni.campo("OPEN DAY", "anno"));
     C.scrivi(document.getElementById("titolo-contatti"), home.campo("SEZIONI", "contatti"));
 
-    schede(home);
+    indirizzi(home);
     openDay(comuni);
     contatti(home, comuni);
 
     P.piede(comuni);
+    timbro(home, comuni);
   }
 
 
   /* ---------------------------------------------------------------
-     LE SCHEDE DEGLI INDIRIZZI
+     IL DISEGNO DELLE TRE LINEE
+     Si legge immagini/linee-scuola.svg e lo si mette dentro la pagina:
+     così il CSS può cambiare lo spessore delle linee e farle disegnare
+     una dopo l'altra (vedi grafica.css). Se il file non si legge, lo
+     spazio resta vuoto e la pagina funziona lo stesso.
      --------------------------------------------------------------- */
 
-  /* Le tre schede hanno tutte la stessa struttura, in due parti:
-     - in alto, su fondo pieno nel colore dell'indirizzo: il simbolo,
-       il tipo di scuola, il nome e un filetto giallo;
-     - sotto, la parte bianca: claim, frase, testo breve e, in fondo,
-       il pulsante "Scopri di più" o "Pagina in preparazione".
-     La scheda dei serali è costruita in un altro modo (vedi più sotto,
-     funzione scheda). */
-  function schede(home) {
-    var contenitore = document.getElementById("schede");
+  function disegno() {
+    var contenitore = document.getElementById("disegno");
+    fetch(FILE_DISEGNO)
+      .then(function (risposta) {
+        if (!risposta.ok) { throw new Error(risposta.status); }
+        return risposta.text();
+      })
+      .then(function (testo) {
+        var svg = new DOMParser().parseFromString(testo, "image/svg+xml").documentElement;
+        if (svg.nodeName !== "svg") { throw new Error("il file non è un disegno SVG"); }
+        svg.setAttribute("focusable", "false");
+        /* pathLength="1": ogni linea è lunga 1, così l'animazione del
+           CSS funziona qualunque sia la sua vera lunghezza */
+        Array.prototype.forEach.call(svg.querySelectorAll("path"), function (linea) {
+          linea.setAttribute("pathLength", "1");
+        });
+        contenitore.appendChild(document.importNode(svg, true));
+        spessore(contenitore.querySelector("svg"));
+      })
+      .catch(function (errore) {
+        console.warn("Non riesco a leggere il disegno " + FILE_DISEGNO + ": " + errore.message);
+      });
+  }
+
+  /* Il disegno si allarga e si stringe con lo schermo, e con lui lo
+     spessore delle linee. Qui lo si ricalcola ogni volta che cambia la
+     larghezza, perché sullo schermo resti sempre di 2,4 pixel. */
+  function spessore(svg) {
+    var larghezzaDisegno = svg.viewBox.baseVal.width;
+    function aggiorna() {
+      var larghezza = svg.getBoundingClientRect().width;
+      if (!larghezza) { return; }
+      svg.style.setProperty("--spessore", (SPESSORE_LINEE * larghezzaDisegno / larghezza) + "px");
+    }
+    aggiorna();
+    if (window.ResizeObserver) {
+      new ResizeObserver(aggiorna).observe(svg);
+    } else {
+      window.addEventListener("resize", aggiorna);
+    }
+  }
+
+
+  /* ---------------------------------------------------------------
+     GLI INDIRIZZI
+     Per ogni indirizzo: il trattino del suo colore accanto a tipo di
+     scuola e nome; sotto il claim, la frase e "Pagina in preparazione"
+     oppure il pulsante.
+     --------------------------------------------------------------- */
+
+  function indirizzi(home) {
+    var elenco = document.getElementById("schede");
 
     home.righe("INDIRIZZI").forEach(function (riga, i) {
       if (riga.length !== 8) {
@@ -120,92 +179,39 @@
         nome: riga[0], tipo: riga[1], claim: riga[2], frase: riga[3], breve: riga[4],
         pagina: riga[5], stato: riga[6].toLowerCase(), colore: riga[7].toLowerCase()
       };
-      contenitore.appendChild(schedaIndirizzo(dati, home));
+      if (COLORI.indexOf(dati.colore) === -1) {
+        console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
+      }
+
+      var voce = document.createElement("li");
+      voce.className = "indirizzo con-trattino tono-" + dati.colore;
+      /* Il trattino colorato (lo disegna grafica.css) sta accanto a tipo
+         di scuola e nome; tutto il resto è allineato a loro */
+      var testa = document.createElement("div");
+      testa.className = "indirizzo-testa";
+      testa.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
+      testa.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
+      voce.appendChild(testa);
+
+      if (dati.claim) { voce.appendChild(elemento("p", "indirizzo-claim", dati.claim)); }
+      if (dati.frase) { voce.appendChild(elemento("p", "indirizzo-frase", dati.frase)); }
+      if (dati.breve) { voce.appendChild(elemento("p", "", dati.breve)); }
+
+      var fondo = document.createElement("p");
+      fondo.className = "indirizzo-fondo";
+      if (dati.stato === "pronta") {
+        fondo.appendChild(pulsantePagina(dati, home, fondo));
+      } else {
+        fondo.appendChild(inPreparazione(home));
+      }
+      voce.appendChild(fondo);
+
+      elenco.appendChild(voce);
     });
   }
 
-  function schedaIndirizzo(dati, home) {
-    var articolo = document.createElement("article");
-    articolo.className = "carta scheda-indirizzo tono-indirizzo-" + dati.colore;
-
-    /* La parte alta. Il simbolo è solo un disegno: il lettore di
-       schermo sente il tipo di scuola e il nome. */
-    var testa = document.createElement("div");
-    testa.className = "indirizzo-testa";
-    if (SIMBOLI[dati.colore]) {
-      testa.appendChild(segno(SIMBOLI[dati.colore], "indirizzo-simbolo"));
-    } else {
-      console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
-    }
-    testa.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
-    testa.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
-    var filetto = elemento("span", "indirizzo-filetto", "");
-    filetto.setAttribute("aria-hidden", "true");
-    testa.appendChild(filetto);
-    articolo.appendChild(testa);
-
-    /* La parte bianca */
-    var corpo = document.createElement("div");
-    corpo.className = "indirizzo-corpo";
-    if (dati.claim) { corpo.appendChild(elemento("p", "scheda-claim", dati.claim)); }
-    if (dati.frase) { corpo.appendChild(elemento("p", "scheda-frase", dati.frase)); }
-    if (dati.breve) { corpo.appendChild(elemento("p", "", dati.breve)); }
-    var fondo = document.createElement("div");
-    fondo.className = "scheda-fondo";
-    if (dati.stato === "pronta") {
-      fondo.appendChild(pulsantePagina(dati, home, fondo));
-    } else {
-      fondo.appendChild(inPreparazione(home));
-    }
-    corpo.appendChild(fondo);
-    articolo.appendChild(corpo);
-    return articolo;
-  }
-
-  /* La scheda dei serali: il quadratino con il simbolo, tipo, nome,
-     claim, testo breve e, in fondo, il pulsante o "Pagina in
-     preparazione" (disposta in orizzontale da stile.css). */
-  function scheda(dati, home) {
-    var articolo = document.createElement("article");
-    articolo.className = "carta scheda";
-
-    /* La testa della scheda: il quadratino con il simbolo a sinistra e,
-       accanto, il tipo di scuola e il nome. Il resto segue sotto, a
-       tutta larghezza. */
-    var testa = document.createElement("div");
-    testa.className = "scheda-testa";
-    if (SIMBOLI[dati.colore]) {
-      testa.appendChild(icona(SIMBOLI[dati.colore], "icona-" + dati.colore));
-    } else {
-      console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
-    }
-    var titoli = document.createElement("div");
-    titoli.className = "scheda-titoli";
-    titoli.appendChild(elemento("p", "etichetta", dati.tipo));
-    titoli.appendChild(elemento("h3", "", dati.nome));
-    testa.appendChild(titoli);
-    articolo.appendChild(testa);
-    if (dati.claim) { articolo.appendChild(elemento("p", "scheda-claim", dati.claim)); }
-    /* La frase concreta, subito sotto il claim, in testo normale. Come
-       gli altri campi, se è vuota non compare. */
-    if (dati.frase) { articolo.appendChild(elemento("p", "scheda-frase", dati.frase)); }
-    if (dati.breve) { articolo.appendChild(elemento("p", "", dati.breve)); }
-
-    var fondo = document.createElement("div");
-    fondo.className = "scheda-fondo";
-
-    if (dati.stato === "pronta") {
-      fondo.appendChild(pulsantePagina(dati, home, fondo));
-    } else {
-      fondo.appendChild(inPreparazione(home));
-    }
-
-    articolo.appendChild(fondo);
-    return articolo;
-  }
-
   function inPreparazione(home) {
-    return elemento("p", "scheda-stato", home.campo("SEZIONI", "in-preparazione"));
+    return elemento("span", "in-preparazione", home.campo("SEZIONI", "in-preparazione"));
   }
 
   /* Il pulsante verso la pagina dell'indirizzo. Per chi usa un lettore
@@ -215,7 +221,7 @@
      manca, al posto del pulsante torna "Pagina in preparazione". */
   function pulsantePagina(dati, home, fondo) {
     var a = document.createElement("a");
-    a.className = "pulsante";
+    a.className = "pulsante pulsante-vuoto";
     a.href = dati.pagina;
     a.textContent = home.campo("SEZIONI", "vai-alla-pagina");
     var nascosto = document.createElement("span");
@@ -240,32 +246,20 @@
      OPEN DAY
      --------------------------------------------------------------- */
 
-  /* Il mese abbreviato del foglietto, ricavato dalla data scritta nel
-     file: "21 novembre" diventa NOV. */
-  var MESI = {
-    gennaio: "GEN", febbraio: "FEB", marzo: "MAR", aprile: "APR",
-    maggio: "MAG", giugno: "GIU", luglio: "LUG", agosto: "AGO",
-    settembre: "SET", ottobre: "OTT", novembre: "NOV", dicembre: "DIC"
-  };
-
   /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
      "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
-     "sold out").
-     - turno libero: spunta verde
-     - turno esaurito: croce rossa e la scritta del campo "esaurito" di
-       comuni.txt
-     La differenza non sta solo nel colore (rosso e verde si confondono
-     per chi è daltonico) ma anche nella forma e nella scritta. Chi usa
-     un lettore di schermo sente "posti liberi" oppure la scritta. */
+     "sold out"). Accanto al turno esaurito compare in rosso la scritta
+     del campo "esaurito" di comuni.txt: la differenza non sta solo nel
+     colore (rosso e verde si confondono per chi è daltonico) ma anche
+     nella scritta. Chi usa un lettore di schermo sente "posti liberi"
+     oppure la scritta. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
   function turnoConStato(testo, scrittaEsaurito) {
     var esaurito = TURNO_PIENO.test(testo);
-    var orario = testo.replace(TURNO_PIENO, "");
     var voce = document.createElement("li");
-    voce.className = "turno " + (esaurito ? "turno-esaurito" : "turno-libero");
-    voce.appendChild(segno(esaurito ? "croce" : "spunta", "turno-segno"));
-    C.scrivi(voce, orario);
+    voce.className = "turno" + (esaurito ? " turno-esaurito" : "");
+    C.scrivi(voce, testo.replace(TURNO_PIENO, ""));
     if (esaurito) {
       voce.appendChild(elemento("span", "turno-scritta", " " + scrittaEsaurito));
     } else {
@@ -275,7 +269,26 @@
   }
 
   function openDay(comuni) {
-    /* La nota sui turni, sotto il titolo: compare solo se c'è */
+    /* Ogni data: il trattino verde, il giorno e sotto i due turni */
+    var elenco = document.getElementById("elenco-open-day");
+    comuni.righe("OPEN DAY").forEach(function (riga, i) {
+      if (riga.length !== 4) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
+        return;
+      }
+      var voce = document.createElement("li");
+      voce.className = "data con-trattino";
+      voce.appendChild(elemento("p", "data-giorno", riga[0] + " " + riga[1]));
+      var turni = document.createElement("ul");
+      turni.className = "data-turni";
+      [riga[2], riga[3]].forEach(function (orario) {
+        turni.appendChild(turnoConStato(orario, comuni.campo("OPEN DAY", "esaurito") || "Esaurito"));
+      });
+      voce.appendChild(turni);
+      elenco.appendChild(voce);
+    });
+
+    /* La nota sui turni, sotto le date: compare solo se c'è */
     var nota = document.getElementById("open-day-nota");
     if (comuni.campo("OPEN DAY", "nota-turni")) {
       C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
@@ -283,54 +296,13 @@
       nota.hidden = true;
     }
 
-    /* Ogni data: un foglietto da calendario (mese e giorno) e, accanto
-       o sotto, il giorno della settimana e i due turni. Il foglietto è
-       solo un disegno: chi usa un lettore di schermo sente la data per
-       intero, scritta accanto al giorno della settimana. */
-    var elenco = document.getElementById("elenco-open-day");
-    comuni.righe("OPEN DAY").forEach(function (riga, i) {
-      if (riga.length !== 4) {
-        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
-        return;
-      }
-      var parti = riga[1].split(/\s+/);
-      var numero = parti[0];
-      var mese = MESI[(parti[1] || "").toLowerCase()] || (parti[1] || "").slice(0, 3).toUpperCase();
-
-      var voce = document.createElement("li");
-      voce.className = "data";
-
-      var foglietto = document.createElement("div");
-      foglietto.className = "foglietto";
-      foglietto.setAttribute("aria-hidden", "true");
-      foglietto.appendChild(elemento("span", "foglietto-mese", mese));
-      foglietto.appendChild(elemento("span", "foglietto-giorno", numero));
-      voce.appendChild(foglietto);
-
-      var testi = document.createElement("div");
-      testi.className = "data-testi";
-      var quando = elemento("p", "data-settimana", riga[0]);
-      quando.appendChild(elemento("span", "solo-lettori", " " + riga[1]));
-      testi.appendChild(quando);
-      /* I due turni, uno sotto l'altro */
-      var turni = document.createElement("ul");
-      turni.className = "data-turni";
-      [riga[2], riga[3]].forEach(function (orario) {
-        turni.appendChild(turnoConStato(orario, comuni.campo("OPEN DAY", "esaurito") || "Esaurito"));
-      });
-      testi.appendChild(turni);
-      voce.appendChild(testi);
-
-      elenco.appendChild(voce);
-    });
-
-    /* In fondo alla scheda, il pulsante per prenotare. Se il link manca,
-       resta solo il testo. */
+    /* In fondo, il pulsante per prenotare. Se il link manca, resta solo
+       il testo. */
     var prenota = document.getElementById("prenotazione");
     var testo = comuni.campo("OPEN DAY", "come-prenotare");
     var link = comuni.campo("OPEN DAY", "prenotazione");
     if (link && !C.daCompletare(link)) {
-      var a = elemento("a", "pulsante", testo);
+      var a = elemento("a", "pulsante pulsante-pieno", testo);
       a.href = link;
       prenota.appendChild(a);
     } else {
@@ -341,28 +313,55 @@
 
   /* ---------------------------------------------------------------
      CORSI SERALI
-     Legge la sezione HOME di contenuti/serali.txt e costruisce una
-     scheda uguale a quelle degli indirizzi, con la stessa funzione.
-     Le informazioni dettagliate (sezione PAGINA) servono alla futura
-     pagina dei serali e qui non si usano.
+     Legge la sezione HOME di contenuti/serali.txt: titolo, tipo, testo
+     breve, i percorsi (ognuno con il trattino del colore del suo
+     indirizzo) e, in fondo, il pulsante verso la pagina dei serali
+     oppure "Pagina in preparazione". La sezione PAGINA serve alla
+     futura pagina dei serali e qui non si usa.
      --------------------------------------------------------------- */
 
   function serali(file, home) {
+    var contenitore = document.getElementById("serali");
     C.scrivi(document.getElementById("titolo-serali"), file.campo("HOME", "titolo"));
+
+    if (file.campo("HOME", "tipo")) {
+      contenitore.appendChild(elemento("p", "serali-tipo", file.campo("HOME", "tipo")));
+    }
+    if (file.campo("HOME", "claim")) {
+      contenitore.appendChild(elemento("p", "indirizzo-claim", file.campo("HOME", "claim")));
+    }
+    if (file.campo("HOME", "in breve")) {
+      contenitore.appendChild(elemento("p", "serali-breve", file.campo("HOME", "in breve")));
+    }
+
+    var elenco = document.createElement("ul");
+    elenco.className = "serali-percorsi";
+    file.righe("HOME").forEach(function (riga, i) {
+      if (riga.length !== 2) {
+        console.warn("serali.txt, HOME, riga " + (i + 1) + ": servono 2 colonne, ne ho trovate " + riga.length);
+        return;
+      }
+      var colore = riga[1].toLowerCase();
+      if (COLORI.indexOf(colore) === -1) {
+        console.warn("serali.txt: colore sconosciuto \"" + colore + "\" per " + riga[0]);
+      }
+      elenco.appendChild(elemento("li", "con-trattino tono-" + colore, riga[0]));
+    });
+    if (elenco.firstChild) { contenitore.appendChild(elenco); }
+
     var dati = {
-      nome:   file.campo("HOME", "nome"),
-      tipo:   file.campo("HOME", "tipo"),
-      claim:  file.campo("HOME", "claim"),
-      breve:  file.campo("HOME", "in breve"),
+      nome: file.campo("HOME", "titolo"),
       pagina: file.campo("HOME", "pagina"),
-      stato:  file.campo("HOME", "stato").toLowerCase(),
-      colore: "serali"
+      stato: file.campo("HOME", "stato").toLowerCase()
     };
-    /* Stessa scheda degli indirizzi, ma disposta in orizzontale: lunga
-       e bassa */
-    var articolo = scheda(dati, home);
-    articolo.className += " scheda-orizzontale";
-    document.getElementById("scheda-serali").appendChild(articolo);
+    var fondo = document.createElement("p");
+    fondo.className = "fondo-sezione";
+    if (dati.stato === "pronta") {
+      fondo.appendChild(pulsantePagina(dati, home, fondo));
+    } else {
+      fondo.appendChild(inPreparazione(home));
+    }
+    contenitore.appendChild(fondo);
   }
 
 
@@ -370,9 +369,10 @@
      CONTATTI
      --------------------------------------------------------------- */
 
-  /* I pulsanti d'azione della fascia dei contatti. Ogni riga di
-     home.txt: azione | campo del dato | campo del link (facoltativo).
-     Ogni pulsante è un unico link, cliccabile per intero. */
+  /* Le azioni della sezione dei contatti. Ogni riga di home.txt:
+     azione | campo del dato | campo del link (facoltativo).
+     L'azione è un link sottolineato in verde; il dato sta sotto, fuori
+     dal link, così si può selezionare e copiare. Niente icone. */
   function contatti(home, comuni) {
     var elenco = document.getElementById("elenco-contatti");
     home.righe("CONTATTI").forEach(function (riga, i) {
@@ -388,52 +388,89 @@
 
       /* Il link: quello della terza colonna se c'è, altrimenti il sito
          lo capisce dal dato (il telefono chiama, l'email apre la posta) */
-      var simbolo, link = null, esterno = false;
+      var link = null, esterno = false;
       if (riga[2]) {
         link = comuni.campo("SCUOLA", riga[2]);
         if (!link) { console.warn("home.txt, CONTATTI: in comuni.txt non trovo il campo " + riga[2]); }
         esterno = true;
-        simbolo = /^https?:\/\//.test(valore) ? "globo" : "luogo";
       } else if (riga[1] === "telefono") {
         link = linkTelefono(valore);
-        simbolo = "telefono";
       } else if (valore.indexOf("@") !== -1) {
         link = "mailto:" + valore;
-        simbolo = "busta";
-      } else {
-        simbolo = "luogo";
       }
       if (!link || C.daCompletare(link) || C.daCompletare(valore)) { return; }
 
-      var a = document.createElement("a");
-      a.className = "carta azione";
+      var voce = document.createElement("li");
+      voce.className = "contatto";
+      var azione = document.createElement("p");
+      azione.className = "contatto-azione";
+      var a = elemento("a", "", riga[0]);
       a.href = link;
       if (esterno) {
         a.target = "_blank";
         a.rel = "noopener";
-      }
-      a.appendChild(icona(simbolo));
-
-      var testi = document.createElement("span");
-      testi.className = "azione-testi";
-      testi.appendChild(elemento("span", "azione-nome", riga[0]));
-      testi.appendChild(scriviDato(elemento("span", "azione-dato", ""), valore));
-      if (esterno) {
-        /* Chi usa un lettore di schermo sente dove si apre il link.
-           Se in home.txt c'è il campo apri-mappa, la sua scritta compare
-           anche sotto il dato, in una riga piccola; oggi non c'è. */
+        /* Chi usa un lettore di schermo sente dove si apre il link */
         /* TESTO MODIFICABILE */
         var dove = /google\.[^/]+\/maps/.test(link) ? "Google Maps" : "un altro sito";
-        testi.appendChild(elemento("span", "solo-lettori", " (si apre " + dove + " in una nuova scheda)"));
-        if (home.campo("SEZIONI", "apri-mappa")) {
-          testi.appendChild(elemento("span", "azione-apri", home.campo("SEZIONI", "apri-mappa")));
-        }
+        a.appendChild(elemento("span", "solo-lettori", " (si apre " + dove + " in una nuova scheda)"));
       }
-      a.appendChild(testi);
-
-      var voce = document.createElement("li");
-      voce.appendChild(a);
+      azione.appendChild(a);
+      voce.appendChild(azione);
+      voce.appendChild(scriviDato(elemento("p", "contatto-dato", ""), valore));
       elenco.appendChild(voce);
     });
+  }
+
+
+  /* ---------------------------------------------------------------
+     IL TIMBRO DEL PIEDE
+     Un timbro rotondo blu inchiostro: due cerchi, la scritta "IIS GIULIO
+     NATTA · ORIENTAMENTO" lungo il cerchio e il logo al centro. Le
+     parole vengono dai file di testo (nome breve della scuola e
+     occhiello). È solo decorativo: i dati sono scritti accanto.
+     --------------------------------------------------------------- */
+
+  function timbro(home, comuni) {
+    var SVG = "http://www.w3.org/2000/svg";
+    var contenitore = document.getElementById("timbro");
+    var nome = comuni.campo("SCUOLA", "nome-breve") || comuni.campo("SCUOLA", "nome");
+    var scritta = (nome + " · " + home.campo("APERTURA", "occhiello") + " · ").toUpperCase();
+
+    function nuovo(tag, attributi) {
+      var e = document.createElementNS(SVG, tag);
+      Object.keys(attributi).forEach(function (k) { e.setAttribute(k, attributi[k]); });
+      return e;
+    }
+
+    /* Il disegno è largo 120: il bordo esterno ha raggio 58, quello
+       interno 38; la scritta poggia sul raggio 44 e sta a metà fra i
+       due */
+    var raggio = 44;
+    var svg = nuovo("svg", { viewBox: "0 0 120 120", focusable: "false" });
+    svg.appendChild(nuovo("circle", { cx: 60, cy: 60, r: 58, "class": "timbro-bordo" }));
+    svg.appendChild(nuovo("circle", { cx: 60, cy: 60, r: 38, "class": "timbro-bordo" }));
+    /* Il cerchio su cui corre la scritta: parte da sinistra e gira in
+       senso orario, così la scritta in alto si legge dritta */
+    svg.appendChild(nuovo("path", {
+      id: "timbro-cerchio",
+      d: "M " + (60 - raggio) + " 60 a " + raggio + " " + raggio + " 0 1 1 " + (2 * raggio) + " 0" +
+         " a " + raggio + " " + raggio + " 0 1 1 " + (-2 * raggio) + " 0",
+      fill: "none"
+    }));
+    var testo = nuovo("text", { "class": "timbro-scritta" });
+    var percorso = nuovo("textPath", {
+      href: "#timbro-cerchio",
+      textLength: (2 * Math.PI * raggio).toFixed(1),
+      lengthAdjust: "spacing"
+    });
+    percorso.textContent = scritta;
+    testo.appendChild(percorso);
+    svg.appendChild(testo);
+    contenitore.appendChild(svg);
+
+    /* Il logo al centro, tinto di blu inchiostro da grafica.css */
+    var logo = document.createElement("span");
+    logo.className = "timbro-logo";
+    contenitore.appendChild(logo);
   }
 }());
