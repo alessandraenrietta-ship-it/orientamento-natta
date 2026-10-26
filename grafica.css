@@ -90,7 +90,7 @@ body {
   font-size: 1.0625rem;   /* 17 pixel: il minimo è 16 */
   font-weight: normal;
   font-synthesis: none;
-  line-height: 1.75;
+  line-height: 1.6;
   color: var(--blu-notte);
   background: var(--bianco);
 }
@@ -187,9 +187,9 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* -----------------------------------------------------------------
    IL TRATTINO COLORATO
-   Un trattino corto accanto al testo, alla prima riga: verde per le
-   date degli open day, nel colore dell'indirizzo per gli indirizzi e
-   i percorsi serali. Solo decorativo.
+   Un trattino corto accanto al testo, alla prima riga, nel colore
+   dell'indirizzo: per gli indirizzi e i percorsi serali. Solo
+   decorativo.
    ----------------------------------------------------------------- */
 
 .con-trattino {
@@ -232,13 +232,18 @@ a:hover { text-decoration-thickness: 2px; }
   text-decoration: none;
 }
 
-/* La freccia è solo un disegno: dopo la barra c'è il suo testo per i
-   lettori di schermo, cioè niente */
+/* La freccia "›" è disegnata con due lati di un quadratino ruotato: il
+   "›" del Cutive Mono è uguale al segno di maggiore. È solo un disegno,
+   senza testo: il lettore di schermo non la legge. */
 .pulsante::after {
-  content: "›";
-  content: "›" / "";
-  font-size: 1.3em;
-  line-height: 1;
+  content: "";
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
+  margin-right: 0.15em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
 }
 
 .pulsante:hover { text-decoration: underline; text-decoration-thickness: 1px; }
@@ -316,14 +321,13 @@ a:hover { text-decoration-thickness: 2px; }
 
 .presentazione { max-width: 40rem; margin: 0 auto 1rem; }
 
-/* Il disegno: largo quanto lo schermo sul telefono, quanto il
-   contenuto (al massimo 60rem) sui più larghi. Lo spessore delle
-   linee lo calcola js/home.js (--spessore), perché sullo schermo
-   resti sempre di circa 2,4 pixel. Lo spazio fra le due torri resta
-   vuoto. */
+/* Il disegno: largo quanto la finestra. La scuola al centro è larga
+   al massimo 60rem; sui più larghi js/home.js allunga i tratti
+   orizzontali esterni fino ai bordi. Lo spessore delle linee lo
+   calcola js/home.js (--spessore), perché sullo schermo resti sempre
+   di circa 2,4 pixel. Lo spazio fra le due torri resta vuoto. */
 .disegno {
-  max-width: 60rem;
-  margin: 1.5rem auto 2rem;
+  margin: 1.5rem 0 2rem;
 }
 
 .disegno svg {
@@ -365,19 +369,25 @@ a:hover { text-decoration-thickness: 2px; }
 
 .per-adulti { max-width: 40rem; margin: 0 auto 1rem; }
 
+/* Sul telefono i due pulsanti uno sotto l'altro, larghi uguali, a
+   tutta larghezza; sul computer affiancati (SCHERMI PIÙ LARGHI) */
 .pulsanti {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   gap: 0.9rem;
   margin: 0;
 }
 
+.pulsanti .pulsante { justify-content: center; }
+
 
 /* -----------------------------------------------------------------
    OPEN DAY
-   Una lista: per ogni data il trattino verde, il giorno e sotto i due
-   turni. Poi la nota sui turni e il pulsante per prenotare.
+   Una lista: per ogni data un foglietto da calendario e, accanto, il
+   giorno della settimana con sotto i due turni. Poi la nota sui turni
+   e il pulsante per prenotare. Telefono: un foglietto per riga;
+   computer: tre colonne.
    ----------------------------------------------------------------- */
 
 .date {
@@ -385,13 +395,56 @@ a:hover { text-decoration-thickness: 2px; }
   gap: 1.5rem;
 }
 
-.data-giorno {
-  margin: 0;
-  font-size: 1.25rem;
+.data {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Il foglietto: contorno sottile blu notte, angoli vivi; dentro il
+   mese in grigio e il numero del giorno grande in verde. Niente
+   anellini, niente striscia piena. Solo un disegno: la data per intero
+   è scritta per il lettore di schermo accanto al giorno. */
+.foglietto {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 58px;
+  padding: 0.35rem 0 0.4rem;
+  border: 1px solid var(--blu-notte);
+  line-height: 1;
+}
+
+.foglietto-mese {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-left: 0.12em;     /* bilancia la spaziatura dopo l'ultima lettera */
+  color: var(--grigio);
+}
+
+.foglietto-giorno {
+  margin-top: 0.3rem;
+  font-size: 30px;
   color: var(--verde);
 }
 
-.data-turni { line-height: 1.6; }
+.data-testi { min-width: 0; }
+
+.data-settimana {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* I due turni su una riga. Un turno non si spezza mai; se la riga non
+   ci sta (un turno esaurito sul telefono), va a capo solo dopo il
+   punto medio. Sugli schermi stretti scende a 14 pixel. */
+.data-turni {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.turno { white-space: nowrap; }
 
 .turno-scritta { color: var(--rosso); }
 
@@ -401,12 +454,18 @@ a:hover { text-decoration-thickness: 2px; }
   color: var(--grigio);
 }
 
+/* Quando non resta nessuna data, la frase al posto della lista */
+.nota-nessuna-data { margin-top: 0; color: var(--blu-notte); }
+
 
 /* -----------------------------------------------------------------
    INDIRIZZI
    Per ogni indirizzo: trattino del suo colore accanto a tipo di
    scuola (grigio, maiuscolo) e nome; sotto il claim in verde, la frase
    e "Pagina in preparazione" o il pulsante.
+   Ogni indirizzo ha sempre cinque pezzi: tipo, nome, claim, testi,
+   fondo. Al computer stanno su cinque righe comuni alle tre colonne
+   (subgrid, in SCHERMI PIÙ LARGHI).
    ----------------------------------------------------------------- */
 
 .indirizzi {
@@ -418,8 +477,6 @@ a:hover { text-decoration-thickness: 2px; }
   display: flex;
   flex-direction: column;
 }
-
-.indirizzo-testa { margin-bottom: 0.9rem; }
 
 /* Il trattino sta a metà della riga del tipo di scuola */
 .indirizzo.con-trattino::before { top: 0.8rem; }
@@ -433,18 +490,20 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 .indirizzo-nome {
-  margin: 0;
+  margin: 0 0 0.9rem;
   font-size: 1.5rem;
   color: var(--blu-notte);
 }
 
 .indirizzo-claim {
   margin-bottom: 0.5em;
-  font-size: 1.125rem;
+  font-size: 1.1875rem;     /* 19 pixel */
   color: var(--verde);
 }
 
-.indirizzo-fondo { margin-top: auto; padding-top: 1.2rem; }
+.indirizzo-claim:empty { display: none; }
+
+.indirizzo-fondo { margin: 0; padding-top: 1.2rem; }
 
 .in-preparazione { color: var(--grigio); }
 
@@ -524,8 +583,8 @@ a:hover { text-decoration-thickness: 2px; }
 .timbro {
   position: relative;
   flex: none;
-  width: 6rem;
-  height: 6rem;
+  width: 110px;
+  height: 110px;
   color: var(--inchiostro);
 }
 
@@ -537,9 +596,11 @@ a:hover { text-decoration-thickness: 2px; }
   stroke-width: 1.5;
 }
 
+/* Il disegno del timbro è largo 120 unità: 12 unità sono 11 pixel
+   quando il timbro è largo 110 pixel (telefono), 12 al computer */
 .timbro-scritta {
   font-family: var(--carattere);
-  font-size: 9.5px;
+  font-size: 12px;
   fill: currentColor;
 }
 
@@ -575,16 +636,40 @@ a:hover { text-decoration-thickness: 2px; }
   .sezione { padding: 3.5rem 0; }
   .titolo-sito { font-size: 2.75rem; }
   .titolo-sezione { font-size: 2rem; }
-  .pulsanti { flex-direction: row; justify-content: center; flex-wrap: wrap; }
-  .date { grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 2rem 1.5rem; }
+  .pulsanti { flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .date { gap: 2rem 1.5rem; }
+  .data-turni { font-size: 1rem; }
   .contatti { grid-template-columns: repeat(3, auto); justify-content: start; gap: 1.75rem 4rem; }
   .piede-interno { gap: 2rem; }
-  .timbro { width: 7.5rem; height: 7.5rem; }
+  .timbro { width: 120px; height: 120px; }
 }
 
 /* I tre indirizzi affiancati, di pari importanza: tutti e tre su una
-   riga, mai due più uno */
+   riga, mai due più uno. Tipo, nome, claim, testi e fondo stanno su
+   righe comuni (subgrid): ogni pezzo parte alla stessa altezza nelle
+   tre colonne, anche quando un nome va su più righe. */
 @media (min-width: 56rem) {
-  .indirizzi { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .indirizzi {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 0 2.5rem;
+  }
+  .indirizzo {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+  .indirizzo-claim:empty { display: block; }
   .titolo-sito { font-size: 3.25rem; }
+}
+
+/* Le date in colonne solo quando i due turni ci stanno su una riga:
+   due colonne sui tablet, tre sul computer */
+@media (min-width: 48rem) {
+  .date { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 66rem) {
+  .date { grid-template-columns: repeat(3, 1fr); }
 }

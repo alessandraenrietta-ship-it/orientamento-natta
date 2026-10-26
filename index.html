@@ -27,7 +27,7 @@
     pagine usano ancora quella a fasce (stile.css), finché non si
     rifanno anche loro.
   -->
-  <link rel="stylesheet" href="grafica.css?v=1">
+  <link rel="stylesheet" href="grafica.css?v=2">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -78,20 +78,22 @@
     </section>
 
     <!-- Gli open day subito dopo l'apertura: le date scadono, devono
-         vedersi presto -->
-    <section class="sezione" aria-labelledby="titolo-open-day">
+         vedersi presto. Le date passate il sito le nasconde da solo;
+         quando non ne resta nessuna, js/home.js sposta questa sezione
+         dopo gli indirizzi. -->
+    <section class="sezione" id="sezione-open-day" aria-labelledby="titolo-open-day">
       <div class="interno">
         <h2 class="titolo-sezione" id="titolo-open-day"></h2>
-        <!-- Una lista: per ogni data il trattino verde, il giorno e
-             sotto i due turni. Poi la nota sui turni e il pulsante per
-             prenotare. -->
+        <!-- Una lista: per ogni data un foglietto da calendario e,
+             accanto, il giorno della settimana con sotto i due turni.
+             Poi la nota sui turni e il pulsante per prenotare. -->
         <ul class="date" id="elenco-open-day"></ul>
         <p class="nota" id="open-day-nota"></p>
         <p class="fondo-sezione" id="prenotazione"></p>
       </div>
     </section>
 
-    <section class="sezione" aria-labelledby="titolo-indirizzi">
+    <section class="sezione" id="sezione-indirizzi" aria-labelledby="titolo-indirizzi">
       <div class="interno">
         <!-- tabindex="-1": il titolo può ricevere il focus, ci arriva il
              pulsante "Dopo la terza media" dell'apertura -->
@@ -155,6 +157,6 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/home.js?v=19"></script>
+  <script src="js/home.js?v=20"></script>
 </body>
 </html>

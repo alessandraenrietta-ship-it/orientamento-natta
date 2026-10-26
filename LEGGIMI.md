@@ -8,16 +8,24 @@ note. Non serve toccare nessun altro file.
     usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
     `indirizzo`, `telefono`, `email` (la segreteria) e `sito`.
-  - `nome-breve` è il nome senza virgolette (IIS Giulio Natta): nella
-    home compare in maiuscolo nella testata e lungo il timbro del piede.
+  - `nome` si scrive senza virgolette (IIS Giulio Natta): nella home
+    compare in maiuscolo nella testata e lungo il timbro del piede.
 
   Nella sezione degli open day:
   - `nota-turni`, se c'è, è la frase che compare sotto le date; se la
     riga si toglie, non resta spazio vuoto;
+  - le date già passate il sito le nasconde da solo, il giorno dopo.
+    Quando non ne resta nessuna, la sezione degli open day scende dopo
+    gli indirizzi e mostra solo la frase del campo `nessuna-data`, senza
+    pulsante. Per il nuovo anno basta cambiare `anno` e scrivere le
+    date nuove;
   - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
     a cui porta;
   - la tabella ha **quattro colonne**: `giorno | data | primo turno |
-    secondo turno`. La data si scrive come `21 novembre`. Gli orari si
+    secondo turno`. La data si scrive come `21 novembre`, senza anno: il sito lo
+    ricava da `anno` (da settembre a dicembre il primo anno, da gennaio
+    ad agosto il secondo) e dal mese ricava la sigla del foglietto da
+    calendario (NOV). Gli orari si
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
   - quando un turno è al completo si scrive `esaurito` dopo l'orario,
     come `10.00-11.00 esaurito`: sulla pagina compare, accanto al turno,

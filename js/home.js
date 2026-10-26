@@ -33,6 +33,9 @@
      su telefono, computer e LIM. */
   var SPESSORE_LINEE = 2.4;
 
+  /* La larghezza massima della scuola al centro del disegno, in rem */
+  var MASSIMO_DISEGNO = 60;
+
   Promise.all([
     C.leggi("contenuti/home.txt"),
     C.leggi("contenuti/comuni.txt"),
@@ -50,10 +53,8 @@
     });
 
   function riempi(home, comuni) {
-    /* Testata: il nome breve della scuola, senza virgolette (il
-       maiuscolo lo mette grafica.css) */
-    C.scrivi(document.getElementById("nome-scuola"),
-      comuni.campo("SCUOLA", "nome-breve") || comuni.campo("SCUOLA", "nome"));
+    /* Testata: il nome della scuola (il maiuscolo lo mette grafica.css) */
+    C.scrivi(document.getElementById("nome-scuola"), comuni.campo("SCUOLA", "nome"));
 
     /* Apertura. Accanto all'occhiello il sito aggiunge l'anno scritto
        in comuni.txt: "Orientamento 2026/27". */
@@ -134,26 +135,59 @@
           linea.setAttribute("pathLength", "1");
         });
         contenitore.appendChild(document.importNode(svg, true));
-        spessore(contenitore.querySelector("svg"));
+        adatta(contenitore, contenitore.querySelector("svg"));
       })
       .catch(function (errore) {
         console.warn("Non riesco a leggere il disegno " + FILE_DISEGNO + ": " + errore.message);
       });
   }
 
-  /* Il disegno si allarga e si stringe con lo schermo, e con lui lo
-     spessore delle linee. Qui lo si ricalcola ogni volta che cambia la
-     larghezza, perché sullo schermo resti sempre di 2,4 pixel. */
-  function spessore(svg) {
-    var larghezzaDisegno = svg.viewBox.baseVal.width;
+  /* Il disegno occupa tutta la larghezza della finestra, ma la scuola
+     al centro resta larga al massimo MASSIMO_DISEGNO. Quando la
+     finestra è più larga (computer, LIM), si allungano solo i tratti
+     orizzontali esterni delle tre linee, alle stesse altezze, fino ai
+     bordi. Sul telefono la scuola è già larga quanto lo schermo e non
+     cambia nulla.
+     Insieme si ricalcola lo spessore, perché sullo schermo resti sempre
+     di 2,4 pixel. Tutto si rifà ogni volta che cambia la larghezza. */
+  function adatta(contenitore, svg) {
+    var box = svg.viewBox.baseVal;
+    var sinistra = box.x, destra = box.x + box.width, alto = box.y, altezza = box.height;
+    var larghezzaScuola = box.width;
+    var linee = Array.prototype.map.call(svg.querySelectorAll("path"), function (linea) {
+      var d = linea.getAttribute("d");
+      var numeri = d.match(/-?\d+(\.\d+)?/g).map(Number);
+      return {
+        linea: linea,
+        d: d,
+        yInizio: numeri[1],                     /* il primo punto: x, y */
+        yFine: numeri[numeri.length - 1]        /* l'ultimo punto: x, y */
+      };
+    });
+
     function aggiorna() {
-      var larghezza = svg.getBoundingClientRect().width;
-      if (!larghezza) { return; }
-      svg.style.setProperty("--spessore", (SPESSORE_LINEE * larghezzaDisegno / larghezza) + "px");
+      var finestra = contenitore.getBoundingClientRect().width;
+      if (!finestra) { return; }
+      var rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+      var scuola = Math.min(finestra, MASSIMO_DISEGNO * rem);
+      var scala = scuola / larghezzaScuola;          /* pixel per unità del disegno */
+      var fuori = (finestra - scuola) / 2 / scala;   /* unità da aggiungere per lato */
+      if (fuori < 0.5) { fuori = 0; }
+
+      svg.setAttribute("viewBox", [sinistra - fuori, alto, larghezzaScuola + 2 * fuori, altezza].join(" "));
+      linee.forEach(function (l) {
+        var d = l.d;
+        if (fuori) {
+          d = "M" + (sinistra - fuori) + " " + l.yInizio + " L" + l.d.replace(/^\s*M/, "") +
+              " L" + (destra + fuori) + " " + l.yFine;
+        }
+        l.linea.setAttribute("d", d);
+      });
+      svg.style.setProperty("--spessore", (SPESSORE_LINEE / scala) + "px");
     }
     aggiorna();
     if (window.ResizeObserver) {
-      new ResizeObserver(aggiorna).observe(svg);
+      new ResizeObserver(aggiorna).observe(contenitore);
     } else {
       window.addEventListener("resize", aggiorna);
     }
@@ -183,19 +217,23 @@
         console.warn("home.txt: colore sconosciuto \"" + dati.colore + "\" per " + dati.nome);
       }
 
+      /* Il trattino colorato (lo disegna grafica.css) sta accanto a tipo
+         di scuola e nome; tutto il resto è allineato a loro.
+         Ogni indirizzo ha sempre gli stessi cinque pezzi, anche vuoti:
+         tipo, nome, claim, testi, fondo. Al computer grafica.css li mette
+         su righe comuni alle tre colonne, così ogni pezzo parte alla
+         stessa altezza anche quando un nome va su più righe. */
       var voce = document.createElement("li");
       voce.className = "indirizzo con-trattino tono-" + dati.colore;
-      /* Il trattino colorato (lo disegna grafica.css) sta accanto a tipo
-         di scuola e nome; tutto il resto è allineato a loro */
-      var testa = document.createElement("div");
-      testa.className = "indirizzo-testa";
-      testa.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
-      testa.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
-      voce.appendChild(testa);
+      voce.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
+      voce.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
+      voce.appendChild(elemento("p", "indirizzo-claim", dati.claim));
 
-      if (dati.claim) { voce.appendChild(elemento("p", "indirizzo-claim", dati.claim)); }
-      if (dati.frase) { voce.appendChild(elemento("p", "indirizzo-frase", dati.frase)); }
-      if (dati.breve) { voce.appendChild(elemento("p", "", dati.breve)); }
+      var testi = document.createElement("div");
+      testi.className = "indirizzo-testi";
+      if (dati.frase) { testi.appendChild(elemento("p", "indirizzo-frase", dati.frase)); }
+      if (dati.breve) { testi.appendChild(elemento("p", "", dati.breve)); }
+      voce.appendChild(testi);
 
       var fondo = document.createElement("p");
       fondo.className = "indirizzo-fondo";
@@ -255,41 +293,119 @@
      oppure la scritta. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
+  /* Un turno: l'orario e, se è esaurito, la scritta. Non si spezza mai
+     (grafica.css). */
   function turnoConStato(testo, scrittaEsaurito) {
     var esaurito = TURNO_PIENO.test(testo);
-    var voce = document.createElement("li");
-    voce.className = "turno" + (esaurito ? " turno-esaurito" : "");
-    C.scrivi(voce, testo.replace(TURNO_PIENO, ""));
+    var turno = document.createElement("span");
+    turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
+    C.scrivi(turno, testo.replace(TURNO_PIENO, ""));
     if (esaurito) {
-      voce.appendChild(elemento("span", "turno-scritta", " " + scrittaEsaurito));
+      turno.appendChild(elemento("span", "turno-scritta", " " + scrittaEsaurito));
     } else {
-      voce.appendChild(elemento("span", "solo-lettori", ", posti liberi"));
+      turno.appendChild(elemento("span", "solo-lettori", ", posti liberi"));
     }
-    return voce;
+    return turno;
+  }
+
+  /* I mesi: il numero serve a capire se la data è passata, la sigla
+     va sul foglietto */
+  var MESI = {
+    gennaio: [1, "GEN"], febbraio: [2, "FEB"], marzo: [3, "MAR"], aprile: [4, "APR"],
+    maggio: [5, "MAG"], giugno: [6, "GIU"], luglio: [7, "LUG"], agosto: [8, "AGO"],
+    settembre: [9, "SET"], ottobre: [10, "OTT"], novembre: [11, "NOV"], dicembre: [12, "DIC"]
+  };
+
+  /* La data di un open day. Nel file c'è solo "21 novembre": l'anno si
+     ricava dall'anno scolastico ("2026/27"). Da settembre a dicembre è
+     il primo anno (2026), da gennaio ad agosto il secondo (2027).
+     Se la data non si capisce, si restituisce null. */
+  function dataOpenDay(testo, annoScolastico) {
+    var parti = testo.trim().split(/\s+/);
+    var giorno = parseInt(parti[0], 10);
+    var mese = MESI[(parti[1] || "").toLowerCase()];
+    var primoAnno = parseInt(annoScolastico, 10);
+    if (!giorno || !mese || !primoAnno) { return null; }
+    var anno = mese[0] >= 9 ? primoAnno : primoAnno + 1;
+    return { quando: new Date(anno, mese[0] - 1, giorno), giorno: giorno, sigla: mese[1] };
   }
 
   function openDay(comuni) {
-    /* Ogni data: il trattino verde, il giorno e sotto i due turni */
     var elenco = document.getElementById("elenco-open-day");
+    var anno = comuni.campo("OPEN DAY", "anno");
+    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
+
+    /* Oggi, a mezzanotte: una data resta visibile per tutto il suo
+       giorno e sparisce dal giorno dopo */
+    var oggi = new Date();
+    oggi.setHours(0, 0, 0, 0);
+
+    /* Ogni data: un foglietto da calendario (mese e giorno) e, accanto,
+       il giorno della settimana con sotto i due turni. Il foglietto è
+       solo un disegno: chi usa un lettore di schermo sente la data per
+       intero, scritta accanto al giorno della settimana. */
     comuni.righe("OPEN DAY").forEach(function (riga, i) {
       if (riga.length !== 4) {
         console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
         return;
       }
+      var data = dataOpenDay(riga[1], anno);
+      if (!data) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": non capisco la data \"" + riga[1] + "\" (si scrive come 21 novembre)");
+      } else if (data.quando < oggi) {
+        return;   /* data passata: non si mostra */
+      }
+
       var voce = document.createElement("li");
-      voce.className = "data con-trattino";
-      voce.appendChild(elemento("p", "data-giorno", riga[0] + " " + riga[1]));
-      var turni = document.createElement("ul");
+      voce.className = "data";
+
+      var foglietto = document.createElement("div");
+      foglietto.className = "foglietto";
+      foglietto.setAttribute("aria-hidden", "true");
+      if (data) {
+        foglietto.appendChild(elemento("span", "foglietto-mese", data.sigla));
+        foglietto.appendChild(elemento("span", "foglietto-giorno", String(data.giorno)));
+      }
+      voce.appendChild(foglietto);
+
+      var testi = document.createElement("div");
+      testi.className = "data-testi";
+      var settimana = elemento("p", "data-settimana", riga[0]);
+      settimana.appendChild(elemento("span", "solo-lettori", " " + riga[1]));
+      testi.appendChild(settimana);
+
+      /* I due turni su una riga, separati da " · ". Lo spazio prima del
+         punto medio non va a capo: se la riga non ci sta (un turno
+         esaurito sul telefono), va a capo solo dopo il punto medio. */
+      var turni = document.createElement("p");
       turni.className = "data-turni";
-      [riga[2], riga[3]].forEach(function (orario) {
-        turni.appendChild(turnoConStato(orario, comuni.campo("OPEN DAY", "esaurito") || "Esaurito"));
-      });
-      voce.appendChild(turni);
+      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
+      turni.appendChild(elemento("span", "turni-separa", " · "));
+      turni.lastChild.setAttribute("aria-hidden", "true");
+      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
+      testi.appendChild(turni);
+
+      voce.appendChild(testi);
       elenco.appendChild(voce);
     });
 
-    /* La nota sui turni, sotto le date: compare solo se c'è */
     var nota = document.getElementById("open-day-nota");
+    var prenota = document.getElementById("prenotazione");
+
+    /* Nessuna data ancora da venire: la sezione scende dopo gli
+       indirizzi e mostra solo la frase "nessuna-data" di comuni.txt,
+       senza la nota sui turni e senza il pulsante per prenotare */
+    if (!elenco.firstChild) {
+      elenco.hidden = true;
+      prenota.hidden = true;
+      C.scrivi(nota, comuni.campo("OPEN DAY", "nessuna-data"));
+      nota.className += " nota-nessuna-data";
+      var indirizzi = document.getElementById("sezione-indirizzi");
+      indirizzi.parentNode.insertBefore(document.getElementById("sezione-open-day"), indirizzi.nextSibling);
+      return;
+    }
+
+    /* La nota sui turni, sotto le date: compare solo se c'è */
     if (comuni.campo("OPEN DAY", "nota-turni")) {
       C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
     } else {
@@ -298,7 +414,6 @@
 
     /* In fondo, il pulsante per prenotare. Se il link manca, resta solo
        il testo. */
-    var prenota = document.getElementById("prenotazione");
     var testo = comuni.campo("OPEN DAY", "come-prenotare");
     var link = comuni.campo("OPEN DAY", "prenotazione");
     if (link && !C.daCompletare(link)) {
@@ -433,7 +548,7 @@
   function timbro(home, comuni) {
     var SVG = "http://www.w3.org/2000/svg";
     var contenitore = document.getElementById("timbro");
-    var nome = comuni.campo("SCUOLA", "nome-breve") || comuni.campo("SCUOLA", "nome");
+    var nome = comuni.campo("SCUOLA", "nome");
     var scritta = (nome + " · " + home.campo("APERTURA", "occhiello") + " · ").toUpperCase();
 
     function nuovo(tag, attributi) {

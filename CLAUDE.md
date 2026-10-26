@@ -79,7 +79,7 @@ adulti interessati ai corsi serali.
   Google Fonts. Ha un solo spessore, senza grassetto: titoli e nomi si
   distinguono per grandezza, colore e maiuscolo, e `font-synthesis:
   none` impedisce il grassetto finto. Testi ad almeno 16 px (di base
-  17), interlinea ampia (1,75). Non è più Arial: oggi lo usa la home;
+  17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: oggi lo usa la home;
   le altre pagine sono ancora in Arial finché non passano alla grafica
   nuova (punto 13).
 
@@ -413,7 +413,10 @@ Digitale) e `contenuti/cartolina.txt`.
 
 ## 13. La grafica "a cartolina" (home)
 
-Decisa con Alessandra il 26 ottobre 2026. Per ora la ha solo la home;
+Decisa con Alessandra il 26 ottobre 2026, corretta la sera stessa.
+Le decisioni complete, anche sulla nuova cartolina "Vieni a
+trovarci", stanno in `docs/decisioni-grafica.md`: si leggono prima
+di lavorare sulla grafica. Per ora la grafica nuova la ha solo la home;
 le altre pagine passano dopo. Lo stato del sito prima del cambio è
 segnato dall'etichetta Git `grafica-ottobre`; il lavoro sta sul ramo
 `grafica-cartolina` finché Alessandra non dice di unirlo a `main`.
@@ -433,33 +436,56 @@ le altre pagine), `js/home.js`, `immagini/linee-scuola.svg`, `fonts/`.
   altro: le linee del disegno e il trattino accanto al nome. Nei
   serali il trattino ha il colore dell'indirizzo (Meccanica e
   meccatronica arancione, Grafica e comunicazione rosa).
-- **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga; verde
-  per le date degli open day.
-- **Testata**: bianca, logo e nome breve della scuola (`nome-breve` in
-  `comuni.txt`) in maiuscolo verde, filetto sotto.
+- **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo
+  nel colore di un indirizzo (le date degli open day non lo hanno).
+- **Nome della scuola**: "IIS Giulio Natta", senza virgolette (campo
+  `nome` di `comuni.txt`). Il maiuscolo "IIS GIULIO NATTA" solo nella
+  testata (e lungo il timbro, che è un disegno).
+- **Testata**: bianca, logo e nome della scuola in maiuscolo verde,
+  filetto sotto.
 - **Apertura**, centrata: occhiello "ORIENTAMENTO 2026/27" (campo
   `occhiello` di `home.txt` più l'anno degli open day); titolo = il
   `claim` di `home.txt`; sotto, il disegno delle tre linee; poi i
   pulsanti "Dopo la terza media" (pieno) e "Corsi serali per adulti"
-  (vuoto). Lo spazio fra le due torri del disegno resta vuoto.
+  (vuoto): sul telefono uno sotto l'altro, larghi uguali, a tutta
+  larghezza; al computer affiancati. Lo spazio fra le due torri del
+  disegno resta vuoto (ancora aperto se accoglierà qualcosa).
 - **Il disegno** `immagini/linee-scuola.svg` resta com'è (spessore
   1.6, quello della cartolina). `js/home.js` lo legge e lo mette nella
   pagina; lo spessore sullo schermo è sempre circa 2,4 px (lo ricalcola
-  il JS al cambiare della larghezza). Sul telefono è largo quanto lo
-  schermo, sui più larghi al massimo 60rem. Le linee si disegnano
+  il JS al cambiare della larghezza). Il disegno è largo quanto la
+  finestra; la scuola al centro al massimo 60rem. Quando la finestra è
+  più larga, il JS allunga solo i tratti orizzontali esterni delle tre
+  linee fino ai bordi, alle stesse altezze. Sul telefono la scuola è
+  già larga quanto lo schermo. Le linee si disegnano
   all'apertura, una dopo l'altra (arancione, rosa, blu); con
   `prefers-reduced-motion` compaiono già intere. `aria-hidden`.
 - **Ordine delle sezioni**: apertura, open day (subito dopo, perché le
   date scadono), indirizzi ("Dopo la terza media"), serali, contatti.
-- **Open day**: lista; ogni data con trattino verde, giorno e data in
-  verde, sotto i due turni; turno esaurito con la scritta rossa
+  Le date passate il sito le nasconde da solo (l'anno si ricava da
+  `anno` di `comuni.txt`: settembre-dicembre il primo, gennaio-agosto
+  il secondo; una data sparisce dal giorno dopo). Quando non ne resta
+  nessuna, la sezione degli open day scende dopo gli indirizzi e mostra
+  solo la frase `nessuna-data`, senza nota e senza pulsante.
+- **Open day**: per ogni data un foglietto da calendario (contorno di
+  1 px blu notte, angoli vivi, largo 58 px; dentro il mese abbreviato
+  maiuscolo grigio a 12 px, spaziato, e il numero del giorno a 30 px in
+  verde; niente anellini, niente striscia piena; `aria-hidden`, la data
+  per intero è scritta per il lettore di schermo). Accanto il giorno
+  della settimana e sotto i due turni su una riga, separati da " · "; un
+  turno non si spezza mai; la riga va a capo solo dopo il punto medio
+  e solo se non ci sta (un turno esaurito sul telefono). Turni a 14 px
+  sul telefono, 16 dai 40rem. Turno esaurito con la scritta rossa
   "Esaurito" accanto (rosso `#B91C1C` solo qui, sempre con la
-  scritta); poi la nota sui turni e il pulsante pieno "Prenota un open
-  day". Al computer le date stanno in colonne.
+  scritta). Poi la nota sui turni e il pulsante pieno "Prenota un open
+  day". Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
+  i turni non ci starebbero su una riga).
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
   maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
   "Pagina in preparazione" o il pulsante vuoto "Scopri di più". Al
-  computer tutti e tre su una riga, mai due più uno.
+  computer tutti e tre su una riga, mai due più uno, con tipo, nome,
+  claim, testi e fondo su righe comuni (subgrid): ogni pezzo parte alla
+  stessa altezza nelle tre colonne. Claim a 19 px.
 - **Serali**: "Corsi serali per adulti", anno in grigio maiuscolo, "Per
   chi lavora o vuole riprendere gli studi.", i due percorsi con il
   trattino, "Pagina in preparazione" o il pulsante. Tono da adulti.
@@ -472,9 +498,11 @@ le altre pagine), `js/home.js`, `immagini/linee-scuola.svg`, `fonts/`.
   solo per il timbro) con il logo al centro tinto di blu e "IIS GIULIO
   NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola
   (nome, indirizzo, telefono, email della segreteria, sito; link
-  verdi). Il timbro è decorativo (`aria-hidden`), le parole vengono da
-  `comuni.txt` e `home.txt`.
-- **Pulsanti**: rettangolo ad angoli vivi, freccia "›" (nascosta al
-  lettore di schermo); pieni verdi con testo bianco, oppure bianchi con
+  verdi). Il timbro è largo 110 px sul telefono e 120 al computer,
+  scritta lungo il cerchio a 11 px sul telefono; è decorativo
+  (`aria-hidden`), le parole vengono da `comuni.txt` e `home.txt`.
+- **Pulsanti**: rettangolo ad angoli vivi, freccia "›" disegnata con
+  il CSS (il "›" del Cutive Mono è uguale a ">"; scelta di Alessandra),
+  nascosta al lettore di schermo; pieni verdi con testo bianco, oppure bianchi con
   bordo e testo verdi; altezza minima 44 px.
 - **Focus da tastiera**: contorno blu notte di 3 px.
