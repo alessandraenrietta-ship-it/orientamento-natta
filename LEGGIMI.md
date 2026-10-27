@@ -12,7 +12,9 @@ note. Non serve toccare nessun altro file.
   (`pdf-riga-1`, `pdf-riga-2`) e `stato`. Con `stato: in
   preparazione` la riga nel piede non compare; oggi è `pronta`. Il PDF
   si rifà da `cartolina.html` con il pulsante "PDF per i docenti
-  (A4)" e si salva come `materiali/cartolina-natta.pdf`.
+  (A4)" e si salva come `materiali/cartolina-natta.pdf`: due cartoline
+  accostate per foglio, con un solo taglio in mezzo, e sotto le due
+  righe `pdf-riga-1` e `pdf-riga-2`.
   - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
     usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,

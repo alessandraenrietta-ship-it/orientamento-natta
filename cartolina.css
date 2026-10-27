@@ -157,20 +157,34 @@ h1, p, ul { margin: 0; }
 
 /* ---------------------------------------------------------------
    LA VERSIONE A4 PER LA SCUOLA
-   Due cartoline una sopra l'altra, con le abbondanze che si toccano:
-   fra i due tagli restano 6 mm di fondo, da buttare. Il gruppo è al
-   centro del foglio, così fronte e retro combaciano anche quando la
-   stampante gira il foglio. I segni di taglio stanno fuori dal fondo,
-   agli angoli.
+   Due cartoline una sopra l'altra, accostate: il bordo inferiore della
+   prima e quello superiore della seconda coincidono, e si rifilano con
+   un solo taglio (dal 27 ottobre 2026, notte; prima fra le due
+   restavano 6 mm da buttare). L'abbondanza di 3 mm resta solo sui
+   bordi esterni del gruppo. Il gruppo è al centro del foglio, così
+   fronte e retro combaciano anche quando la stampante gira il foglio.
+   I segni di taglio stanno fuori dal fondo, agli angoli e in mezzo.
    --------------------------------------------------------------- */
 
 .coppia {
   position: absolute;
-  top: 42.5mm;     /* (297 - 212) / 2 */
+  top: 45.5mm;     /* (297 - 206) / 2 */
   left: 27mm;      /* (210 - 156) / 2 */
   width: 156mm;
-  height: 212mm;
+  height: 206mm;
 }
+
+/* Le due metà: ognuna mostra la sua cartolina tagliata dove tocca
+   l'altra. La prima (alta 103 mm) nasconde i 3 mm di abbondanza in
+   basso, la seconda nasconde quelli in alto. Lì le cartoline hanno solo
+   il fondo bianco: le linee del disegno escono ai lati. */
+.meta {
+  position: relative;
+  width: 156mm;
+  height: 103mm;
+  overflow: hidden;
+}
+.meta-sotto .facciata { margin-top: -3mm; }
 
 /* ---------------------------------------------------------------
    LA VERSIONE PER I DOCENTI (il PDF di orientatori.html)
@@ -179,12 +193,15 @@ h1, p, ul { margin: 0; }
    grigie a 8 pt.
    --------------------------------------------------------------- */
 
+/* Larga 194 mm (19 mm in più della cartolina per lato, 8 mm dai bordi
+   del foglio), così la riga lunga delle istruzioni, che a 8 pt misura
+   191 mm, sta su una riga */
 .note-docenti {
   position: absolute;
-  top: 226mm;      /* sotto i segni di taglio, che finiscono a 220 mm
-                      dall'alto della coppia: sul foglio a 268,5 mm */
-  left: 0;
-  width: 156mm;
+  top: 220mm;      /* sotto i segni di taglio, che finiscono a 214 mm
+                      dall'alto della coppia: sul foglio a 265,5 mm */
+  left: -19mm;
+  width: 194mm;
   font-size: 8pt;
   line-height: 1.4;
   text-align: center;

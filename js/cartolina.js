@@ -11,8 +11,8 @@
    Tre versioni, scelte con i pulsanti della pagina:
    - tipografia: un foglio per facciata, 156 x 106 mm (la cartolina
      più 3 mm di abbondanza per lato);
-   - a4: due cartoline per foglio A4 verticale, una sopra l'altra, con
-     i segni di taglio;
+   - a4: due cartoline per foglio A4 verticale, una sopra l'altra,
+     accostate (un solo taglio in mezzo), con i segni di taglio;
    - docenti: il PDF che si scarica da orientatori.html
      (materiali/cartolina-natta.pdf). Come a4, due cartoline per foglio
      con i segni di taglio; sotto, fuori dai segni, due righe grigie
@@ -116,30 +116,41 @@
     return foglio;
   }
 
-  /* Due cartoline uguali una sopra l'altra, al centro dell'A4
-     verticale, e i segni di taglio. Le misure sono in millimetri, a
-     partire dall'angolo in alto a sinistra della coppia (156 x 212 mm). */
+  /* Due cartoline uguali una sopra l'altra, accostate, al centro
+     dell'A4 verticale, e i segni di taglio. Il bordo inferiore della
+     prima e quello superiore della seconda coincidono: si rifilano con
+     un solo taglio. L'abbondanza di 3 mm resta solo sui bordi esterni
+     del gruppo: della prima cartolina si nasconde quella in basso,
+     della seconda quella in alto (grafica in cartolina.css, .meta). Le
+     misure sono in millimetri, a partire dall'angolo in alto a sinistra
+     della coppia (156 x 206 mm: 3 + 100 + 100 + 3). */
   function foglioA4(facciata) {
     var foglio = document.createElement("div");
     foglio.className = "foglio foglio-a4";
     var coppia = document.createElement("div");
     coppia.className = "coppia";
-    coppia.appendChild(facciata.cloneNode(true));
+    var sopra = document.createElement("div");
+    sopra.className = "meta meta-sopra";
+    sopra.appendChild(facciata.cloneNode(true));
+    coppia.appendChild(sopra);
+    var sotto = document.createElement("div");
+    sotto.className = "meta meta-sotto";
     var seconda = facciata.cloneNode(true);
     seconda.setAttribute("aria-hidden", "true");
-    coppia.appendChild(seconda);
+    sotto.appendChild(seconda);
+    coppia.appendChild(sotto);
 
-    /* Dove passano i tagli: in orizzontale ai bordi delle due
-       cartoline, in verticale a sinistra e a destra. I segni sono
-       lunghi 6 mm e restano a 2 mm dal fondo, così non si vedono sulla
-       cartolina. */
-    [3, 103, 109, 209].forEach(function (y) {
+    /* Dove passano i tagli: in orizzontale in alto, fra le due
+       cartoline (uno solo) e in basso; in verticale a sinistra e a
+       destra. I segni sono lunghi 6 mm e restano a 2 mm dal fondo,
+       così non si vedono sulla cartolina. */
+    [3, 103, 203].forEach(function (y) {
       coppia.appendChild(segnoTaglio("orizzontale", -8, y - 0.125));
       coppia.appendChild(segnoTaglio("orizzontale", 158, y - 0.125));
     });
     [3, 153].forEach(function (x) {
       coppia.appendChild(segnoTaglio("verticale", x - 0.125, -8));
-      coppia.appendChild(segnoTaglio("verticale", x - 0.125, 214));
+      coppia.appendChild(segnoTaglio("verticale", x - 0.125, 208));
     });
 
     foglio.appendChild(coppia);
