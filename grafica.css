@@ -110,6 +110,14 @@ h1, h2, h3 {
   color: var(--verde);
 }
 
+/* Righe pareggiate: nei titoli e nei testi brevi centrati le righe
+   hanno lunghezze simili, così nessuna parola resta sola a capo
+   ("imparare." da sola). Sui browser vecchi non succede niente. */
+.titolo-sito,
+.titolo-sezione,
+.occhiello,
+.claim-liceo { text-wrap: balance; }
+
 p { margin: 0 0 1em; }
 p:last-child { margin-bottom: 0; }
 
@@ -716,11 +724,12 @@ a:hover { text-decoration-thickness: 2px; }
 /* -----------------------------------------------------------------
    LICEO.HTML: L'APERTURA
    Centrata: il titolo su due righe in verde, sotto il claim del liceo
-   in verde, il disegno della scuola nei tre toni dei percorsi, poi il
-   sottotitolo.
+   in verde e, in fondo, il disegno della scuola nei tre toni dei
+   percorsi.
    ----------------------------------------------------------------- */
 
-.titolo-liceo { margin-bottom: 0.6rem; }
+/* Sul telefono circa 20 pixel fra il titolo su due righe e il claim */
+.titolo-liceo { margin-bottom: 1.25rem; }
 
 /* La seconda riga del titolo, più piccola */
 .titolo-riga-2 {
@@ -742,9 +751,10 @@ a:hover { text-decoration-thickness: 2px; }
 .disegno-liceo path:nth-child(2) { stroke: var(--percorso-matematico); }
 .disegno-liceo path:nth-child(3) { stroke: var(--percorso-digitale); }
 
+/* Il sottotitolo apre la sezione dei percorsi, allineato a sinistra */
 .sottotitolo-liceo {
   max-width: 40rem;
-  margin: 0 auto;
+  margin: 0 0 2.5rem;
   font-size: 1.125rem;
 }
 
@@ -969,6 +979,7 @@ a:hover { text-decoration-thickness: 2px; }
    ----------------------------------------------------------------- */
 
 @media (min-width: 40rem) {
+  .titolo-liceo { margin-bottom: 0.6rem; }
   .orario { font-size: 1rem; }
   .orario-col-anno   { width: 4.5rem; }
   .orario-col-quinto { width: 5.5rem; }
@@ -991,4 +1002,105 @@ a:hover { text-decoration-thickness: 2px; }
   }
   .blocchi { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
   .blocco + .blocco { padding-top: 0; border-top: 0; }
+}
+
+
+/* =================================================================
+   REVISIONE DEL 27 OTTOBRE 2026
+   Le ore a confronto, il dettaglio "Che cosa cambia", "Vieni a
+   trovarci" e gli altri percorsi (pagine del liceo); le etichette del
+   piede (tutte le pagine).
+   ================================================================= */
+
+/* Le etichette davanti ai dati del piede ("Centralino: ...") */
+.piede-etichetta { color: var(--blu-notte); }
+
+/* La riga grigia sotto il titolo di una tabella */
+.nota-tabella {
+  max-width: 40rem;
+  margin-bottom: 1.5rem;
+  color: var(--grigio);
+}
+
+/* Il trattino nel tono del percorso, davanti al nome (tabella del
+   confronto e altri percorsi). Solo decorativo. */
+.trattino {
+  display: inline-block;
+  flex: none;
+  width: 1rem;
+  height: 3px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  background: var(--tono, var(--liceo));
+}
+
+/* Le ore a confronto: nella prima colonna il trattino e il nome del
+   percorso; sul telefono un nome lungo va su due righe, allineato al
+   trattino */
+.orario .orario-percorso {
+  padding-left: 1.5rem;
+  text-indent: -1.5rem;
+}
+
+/* Che cosa cambia: le ore in più in verde, "+2" */
+.orario-in-piu-valore { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   IL PULSANTE "CHE COSA CAMBIA ›"
+   Un elemento details: il summary è un pulsante secondario; quando si
+   apre, la freccia ruota di 90 gradi (subito, senza movimento, per chi
+   ha chiesto di ridurre il movimento) e sotto compaiono la riga grigia
+   e la tabella delle ore in più.
+   ----------------------------------------------------------------- */
+
+.differenze { margin-top: 2rem; }
+
+.differenze > summary {
+  cursor: pointer;
+  list-style: none;          /* niente triangolino del browser */
+}
+
+.differenze > summary::-webkit-details-marker { display: none; }
+
+.differenze > summary::after { transition: transform 0.2s ease; }
+
+.differenze[open] > summary::after { transform: rotate(135deg); }
+
+.differenze[open] > .nota-tabella { margin-top: 1.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .differenze > summary::after { transition: none; }
+}
+
+
+/* -----------------------------------------------------------------
+   VIENI A TROVARCI E GLI ALTRI PERCORSI
+   Sotto il pulsante per prenotare, nelle pagine dei percorsi, la riga
+   grigia maiuscola "Gli altri percorsi" e i collegamenti agli altri
+   due, ognuno con il trattino nel suo tono e il nome sottolineato in
+   verde.
+   ----------------------------------------------------------------- */
+
+.altri-percorsi { margin-top: 2.5rem; }
+
+.altri-titolo {
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.altri-elenco li {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+/* Il collegamento è alto almeno 44 pixel, per il dito */
+.altri-elenco a {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
 }

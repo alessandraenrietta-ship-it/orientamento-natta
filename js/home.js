@@ -96,7 +96,7 @@
     openDay(comuni);
     contatti(home, comuni);
 
-    P.piede(comuni);
+    G.piede(comuni);
     G.timbro(home, comuni);
   }
 
@@ -215,54 +215,17 @@
     return turno;
   }
 
-  /* I mesi: il numero serve a capire se la data è passata, la sigla
-     va sul foglietto */
-  var MESI = {
-    gennaio: [1, "GEN"], febbraio: [2, "FEB"], marzo: [3, "MAR"], aprile: [4, "APR"],
-    maggio: [5, "MAG"], giugno: [6, "GIU"], luglio: [7, "LUG"], agosto: [8, "AGO"],
-    settembre: [9, "SET"], ottobre: [10, "OTT"], novembre: [11, "NOV"], dicembre: [12, "DIC"]
-  };
-
-  /* La data di un open day. Nel file c'è solo "21 novembre": l'anno si
-     ricava dall'anno scolastico ("2026/27"). Da settembre a dicembre è
-     il primo anno (2026), da gennaio ad agosto il secondo (2027).
-     Se la data non si capisce, si restituisce null. */
-  function dataOpenDay(testo, annoScolastico) {
-    var parti = testo.trim().split(/\s+/);
-    var giorno = parseInt(parti[0], 10);
-    var mese = MESI[(parti[1] || "").toLowerCase()];
-    var primoAnno = parseInt(annoScolastico, 10);
-    if (!giorno || !mese || !primoAnno) { return null; }
-    var anno = mese[0] >= 9 ? primoAnno : primoAnno + 1;
-    return { quando: new Date(anno, mese[0] - 1, giorno), giorno: giorno, sigla: mese[1] };
-  }
-
   function openDay(comuni) {
     var elenco = document.getElementById("elenco-open-day");
-    var anno = comuni.campo("OPEN DAY", "anno");
     var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
 
-    /* Oggi, a mezzanotte: una data resta visibile per tutto il suo
-       giorno e sparisce dal giorno dopo */
-    var oggi = new Date();
-    oggi.setHours(0, 0, 0, 0);
-
-    /* Ogni data: un foglietto da calendario (mese e giorno) e, accanto,
-       il giorno della settimana con sotto i due turni. Il foglietto è
-       solo un disegno: chi usa un lettore di schermo sente la data per
-       intero, scritta accanto al giorno della settimana. */
-    comuni.righe("OPEN DAY").forEach(function (riga, i) {
-      if (riga.length !== 4) {
-        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
-        return;
-      }
-      var data = dataOpenDay(riga[1], anno);
-      if (!data) {
-        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": non capisco la data \"" + riga[1] + "\" (si scrive come 21 novembre)");
-      } else if (data.quando < oggi) {
-        return;   /* data passata: non si mostra */
-      }
-
+    /* Ogni data ancora da venire (le passate le toglie js/grafica.js):
+       un foglietto da calendario (mese e giorno) e, accanto, il giorno
+       della settimana con sotto i due turni. Il foglietto è solo un
+       disegno: chi usa un lettore di schermo sente la data per intero,
+       scritta accanto al giorno della settimana. */
+    G.dateOpenDay(comuni).forEach(function (d) {
+      var riga = d.riga, data = d.data;
       var voce = document.createElement("li");
       voce.className = "data";
 
@@ -319,17 +282,8 @@
       nota.hidden = true;
     }
 
-    /* In fondo, il pulsante per prenotare. Se il link manca, resta solo
-       il testo. */
-    var testo = comuni.campo("OPEN DAY", "come-prenotare");
-    var link = comuni.campo("OPEN DAY", "prenotazione");
-    if (link && !C.daCompletare(link)) {
-      var a = elemento("a", "pulsante pulsante-pieno", testo);
-      a.href = link;
-      prenota.appendChild(a);
-    } else {
-      C.scrivi(prenota, testo + " " + (link || ""));
-    }
+    /* In fondo, il pulsante per prenotare */
+    G.pulsantePrenota(comuni, prenota);
   }
 
 
@@ -381,9 +335,28 @@
     if (dati.stato === "pronta") {
       fondo.appendChild(pulsantePagina(dati, home, fondo));
     } else {
-      fondo.appendChild(inPreparazione(home));
+      fondo.appendChild(preiscrizione(file) || inPreparazione(home));
     }
     contenitore.appendChild(fondo);
+  }
+
+  /* Finché la pagina dei serali non c'è, al posto di "Pagina in
+     preparazione" il pulsante verso il modulo di preiscrizione sul sito
+     della scuola: scritta e link dai campi "pulsante" e "link" della
+     sezione PAGINA di serali.txt. Si apre in una nuova scheda, e il
+     lettore di schermo lo dice. Se manca uno dei due campi, si torna a
+     "Pagina in preparazione". */
+  function preiscrizione(file) {
+    var scritta = file.campo("PAGINA", "pulsante");
+    var link = file.campo("PAGINA", "link");
+    if (!scritta || !link || C.daCompletare(link)) { return null; }
+    var a = elemento("a", "pulsante pulsante-vuoto", scritta);
+    a.href = link;
+    a.target = "_blank";
+    a.rel = "noopener";
+    /* TESTO MODIFICABILE */
+    a.appendChild(elemento("span", "solo-lettori", " (si apre il sito della scuola in una nuova scheda)"));
+    return a;
   }
 
 

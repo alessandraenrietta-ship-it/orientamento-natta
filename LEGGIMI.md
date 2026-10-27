@@ -7,7 +7,10 @@ note. Non serve toccare nessun altro file.
   - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
     usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
-    `indirizzo`, `telefono`, `email` (la segreteria) e `sito`.
+    `indirizzo`, `telefono`, `email` (la segreteria) e `sito`. Davanti a
+    telefono, email e sito compaiono le etichette dei campi
+    `etichetta-telefono` ("Centralino"), `etichetta-email` ("Segreteria")
+    e `etichetta-sito` ("Sito della scuola").
   - `nome` si scrive senza virgolette (IIS Giulio Natta): nella home
     compare in maiuscolo nella testata e lungo il timbro del piede.
 
@@ -74,7 +77,9 @@ note. Non serve toccare nessun altro file.
   colore del trattino accanto al nome). I nomi dei campi non vanno
   cambiati.
 - `== PAGINA ==` contiene le informazioni per la futura pagina dei
-  serali. Oggi non compaiono da nessuna parte.
+  serali. Oggi nella home si usano solo `pulsante` e `link`: finché la
+  pagina dei serali è "in preparazione", in fondo alla sezione dei
+  serali compare il pulsante verso il modulo di preiscrizione.
 
 Nella sezione `PAGINA` c'è **un'eccezione** alla prima regola. Quattro
 campi hanno un posto fisso e il loro nome non va cambiato: `titolo`,
@@ -107,9 +112,18 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   toglie il `#`. Il
   claim sotto il titolo non sta qui: è quello del liceo nella tabella
   `INDIRIZZI` di `home.txt`.
-- `== PERCORSI ==`: una riga per percorso, tre colonne, `nome |
-  spiegazione breve | pagina`. Diventano i tre percorsi della pagina del
-  liceo, nello stesso ordine.
+- `== PERCORSI ==`: una riga per percorso, quattro colonne, `nome |
+  spiegazione breve | pagina | ore in più`. Diventano i tre percorsi
+  della pagina del liceo, nello stesso ordine. "ore in più" è il nome
+  della sezione con le ore aggiuntive del percorso (per esempio
+  `ORE AGGIUNTIVE MATEMATICO`); per Scienze applicate resta vuota. Il
+  sito la usa per il quadro orario delle pagine dei percorsi e per
+  calcolare "Le ore a confronto".
+- Nella sezione `LICEO` ci sono anche i testi delle sezioni nuove:
+  "Le ore a confronto" (`titolo-confronto`, `nota-confronto`,
+  `intestazione-percorso`, `pulsante-differenze`, `nota-differenze`),
+  il pulsante sotto il quadro orario (`pulsante-confronta`) e "Vieni a
+  trovarci." (`titolo-visita`, `titolo-altri`).
 - `== QUADRO BASE ==`: le ore settimanali di Scienze applicate, comuni
   ai tre percorsi. Sei colonne: la materia e le ore dal primo al quinto
   anno. Il trattino `-` vuol dire che in quell'anno la materia non c'è.

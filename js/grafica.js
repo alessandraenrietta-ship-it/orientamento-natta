@@ -1,18 +1,24 @@
 /* ==================================================================
    I PEZZI DELLA GRAFICA "A CARTOLINA"
 
-   Le parti disegnate che la home e le pagine del liceo hanno in comune:
+   Le parti che la home e le pagine del liceo hanno in comune:
      - il disegno della scuola con le tre linee (Grafica.disegno)
-     - il timbro rotondo del piede (Grafica.timbro)
+     - il piede con le etichette (Grafica.piede) e il suo timbro
+       rotondo (Grafica.timbro)
+     - le date degli open day ancora da venire (Grafica.dateOpenDay) e
+       il pulsante per prenotare (Grafica.pulsantePrenota)
    I colori e le misure stanno in grafica.css.
 
-   Non ha bisogno di altri file. js/comuni.js resta per i pezzi comuni
-   a tutte le pagine (testata, piede, contatti), cartolina compresa.
+   Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
+   prima di questo. js/comuni.js resta per i pezzi comuni a tutte le
+   pagine, cartolina compresa.
    ================================================================== */
 
 window.Grafica = (function () {
   "use strict";
 
+  var C = window.Contenuti;
+  var P = window.Pezzi;
   var SVG = "http://www.w3.org/2000/svg";
 
   /* Il disegno delle tre linee. Se si cambia il disegno, si aumenta il
@@ -23,8 +29,10 @@ window.Grafica = (function () {
      su telefono, computer e LIM. */
   var SPESSORE_LINEE = 2.4;
 
-  /* La larghezza massima della scuola al centro del disegno, in rem */
-  var MASSIMO_DISEGNO = 60;
+  /* La larghezza massima della scuola al centro del disegno, in rem:
+     44 perché al computer pulsanti e percorsi restino nella prima
+     schermata */
+  var MASSIMO_DISEGNO = 44;
 
 
   /* ---------------------------------------------------------------
@@ -112,6 +120,107 @@ window.Grafica = (function () {
 
 
   /* ---------------------------------------------------------------
+     IL PIEDE
+     Nome della scuola e indirizzo, poi tre dati con un'etichetta
+     davanti: "Centralino: 011 956 32 13", "Segreteria: ...", "Sito
+     della scuola: ...". Il link sta solo sul dato. Tutto da comuni.txt.
+     Va nell'elenco con id="piede".
+     --------------------------------------------------------------- */
+
+  function piede(comuni) {
+    var elenco = document.getElementById("piede");
+    var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
+
+    function voce(etichetta, contenuto) {
+      var li = document.createElement("li");
+      if (etichetta) { li.appendChild(P.elemento("span", "piede-etichetta", etichetta + ": ")); }
+      li.appendChild(contenuto);
+      elenco.appendChild(li);
+    }
+
+    if (campo("nome")) { voce("", C.scrivi(document.createElement("span"), campo("nome"))); }
+    if (campo("indirizzo")) { voce("", C.scrivi(document.createElement("span"), campo("indirizzo"))); }
+    if (campo("telefono")) {
+      voce(campo("etichetta-telefono"), P.collegamento(campo("telefono"), P.linkTelefono(campo("telefono"))));
+    }
+    if (campo("email")) {
+      var email = P.collegamento("", "mailto:" + campo("email"));
+      P.scriviDato(email, campo("email"));
+      voce(campo("etichetta-email"), email);
+    }
+    if (campo("sito")) {
+      voce(campo("etichetta-sito"), P.collegamento(P.sitoDaMostrare(campo("sito")), campo("sito")));
+    }
+  }
+
+
+  /* ---------------------------------------------------------------
+     GLI OPEN DAY
+     --------------------------------------------------------------- */
+
+  /* I mesi: il numero serve a capire se la data è passata, la sigla
+     va sul foglietto */
+  var MESI = {
+    gennaio: [1, "GEN"], febbraio: [2, "FEB"], marzo: [3, "MAR"], aprile: [4, "APR"],
+    maggio: [5, "MAG"], giugno: [6, "GIU"], luglio: [7, "LUG"], agosto: [8, "AGO"],
+    settembre: [9, "SET"], ottobre: [10, "OTT"], novembre: [11, "NOV"], dicembre: [12, "DIC"]
+  };
+
+  /* La data di un open day. Nel file c'è solo "21 novembre": l'anno si
+     ricava dall'anno scolastico ("2026/27"). Da settembre a dicembre è
+     il primo anno (2026), da gennaio ad agosto il secondo (2027).
+     Se la data non si capisce, si restituisce null. */
+  function dataOpenDay(testo, annoScolastico) {
+    var parti = testo.trim().split(/\s+/);
+    var giorno = parseInt(parti[0], 10);
+    var mese = MESI[(parti[1] || "").toLowerCase()];
+    var primoAnno = parseInt(annoScolastico, 10);
+    if (!giorno || !mese || !primoAnno) { return null; }
+    var anno = mese[0] >= 9 ? primoAnno : primoAnno + 1;
+    return { quando: new Date(anno, mese[0] - 1, giorno), giorno: giorno, sigla: mese[1] };
+  }
+
+  /* Le righe della tabella OPEN DAY di comuni.txt ancora da venire, come
+     coppie { riga, data }. Una data resta per tutto il suo giorno e
+     sparisce dal giorno dopo. Una data che non si capisce si tiene (con
+     data null) e si segnala nella console. */
+  function dateOpenDay(comuni) {
+    var anno = comuni.campo("OPEN DAY", "anno");
+    var oggi = new Date();
+    oggi.setHours(0, 0, 0, 0);
+    var future = [];
+    comuni.righe("OPEN DAY").forEach(function (riga, i) {
+      if (riga.length !== 4) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
+        return;
+      }
+      var data = dataOpenDay(riga[1], anno);
+      if (!data) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": non capisco la data \"" + riga[1] + "\" (si scrive come 21 novembre)");
+      } else if (data.quando < oggi) {
+        return;   /* data passata */
+      }
+      future.push({ riga: riga, data: data });
+    });
+    return future;
+  }
+
+  /* Il pulsante pieno per prenotare, dentro l'elemento indicato. Se il
+     link manca, resta solo il testo. */
+  function pulsantePrenota(comuni, dove) {
+    var testo = comuni.campo("OPEN DAY", "come-prenotare");
+    var link = comuni.campo("OPEN DAY", "prenotazione");
+    if (link && !C.daCompletare(link)) {
+      var a = P.elemento("a", "pulsante pulsante-pieno", testo);
+      a.href = link;
+      dove.appendChild(a);
+    } else {
+      C.scrivi(dove, testo + " " + (link || ""));
+    }
+  }
+
+
+  /* ---------------------------------------------------------------
      IL TIMBRO DEL PIEDE
      Un timbro rotondo blu inchiostro: due cerchi, la scritta "IIS GIULIO
      NATTA · ORIENTAMENTO" lungo il cerchio e il logo al centro. Le
@@ -163,5 +272,11 @@ window.Grafica = (function () {
     contenitore.appendChild(logo);
   }
 
-  return { disegno: disegno, timbro: timbro };
+  return {
+    disegno: disegno,
+    piede: piede,
+    timbro: timbro,
+    dateOpenDay: dateOpenDay,
+    pulsantePrenota: pulsantePrenota
+  };
 }());

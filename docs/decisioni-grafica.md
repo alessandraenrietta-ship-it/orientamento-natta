@@ -42,3 +42,18 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Sottotitolo confermato, senza "(da definire)". Spiegazioni brevi dei percorsi ancora provvisorie.
 - Pagine dei percorsi: apertura bianca con occhiello grigio, nome in verde, spiegazione allineata a sinistra (non giustificata). Blocchi come sezioni con titolo verde, elenchi con trattino grigio, al computer in tre colonne. Poi "Quadro orario" e "Dopo il diploma", senza fasce.
 - Quadro orario: tabella classica anche sul telefono, fondo bianco, intestazione grigia maiuscola, filetti grigi, linee verticali blu notte fra i gruppi, riga "In più nel Liceo …" con trattino e scritta nel tono del percorso, "Totale" con filetto blu notte e numeri in verde.
+
+## Revisione di home e pagine del liceo (decisa il 27 ottobre 2026)
+- Titoli e testi brevi centrati con le righe pareggiate (text-wrap: balance): niente parole sole a capo.
+- Home, Liceo: riga grigia "Liceo scientifico", nome "opzione Scienze applicate", come in liceo.html e sulla cartolina.
+- Disegno al computer: la scuola al centro è larga al massimo 44rem, perché pulsanti e percorsi restino nella prima schermata; i tratti esterni arrivano ancora ai bordi.
+- Piede: "Centralino: 011 956 32 13", "Segreteria: tois059003@istruzione.it", "Sito della scuola: [www.itisgiulionatta.it](https://www.itisgiulionatta.it)"; il link solo sul dato.
+- Avviso di errore della home: "Orientamento IIS Giulio Natta".
+- Quadro orario: nessuna riga sotto il titolo (scelta di Alessandra); "biennio" nell'intestazione è un'eccezione voluta alla regola di spiegare i termini.
+- Liceo Digitale: "…opzione Scienze applicate, cioè lo stesso percorso con alcune ore in più." e "senza escludere" al posto di "senza precludere".
+- liceo.html, telefono: circa 20 px fra titolo e claim.
+- Home, serali: finché la pagina dei serali non c'è, il pulsante secondario "Modulo di preiscrizione ›" verso il link di serali.txt al posto di "Pagina in preparazione".
+- liceo.html: l'apertura finisce con il disegno; il sottotitolo apre la sezione dei percorsi, allineato a sinistra. Ordine: apertura, percorsi, "Le ore a confronto", "Vieni a trovarci.", piede.
+- "Le ore a confronto" (id confronto): riga grigia "Ore di lezione alla settimana, anno per anno."; una riga per percorso con le ore totali anno per anno, calcolate dal sito; pulsante "Che cosa cambia ›" (details) con le ore in più rispetto a Scienze applicate. Nelle pagine dei percorsi, sotto il quadro orario, "Confronta con gli altri percorsi ›". Il confronto fra indirizzi si rimanda a quando ci saranno i quadri dei tecnici: ore totali e ore di laboratorio, non materia per materia.
+- Fondo di liceo.html e delle pagine dei percorsi: "Vieni a trovarci." con la nota sui turni e "Prenota un open day ›" (senza date future, solo la frase nessuna-data); nelle pagine dei percorsi anche "Gli altri percorsi".
+- Giustificazione: per ora tutto a sinistra; da rivalutare a sito quasi finito, con tutti i testi lunghi scritti, provando sui telefoni.

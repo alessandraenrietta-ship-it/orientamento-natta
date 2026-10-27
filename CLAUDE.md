@@ -161,20 +161,46 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   poi il disegno della scuola della home con le stesse linee e la
   stessa animazione, ma nei tre toni dei percorsi (esterna azzurro
   `#2A7AB0`, centrale blu `#1F5FA8`, interna blu scuro `#0F3460`), con
-  i tratti esterni fino ai bordi al computer; poi il sottotitolo. I
+  i tratti esterni fino ai bordi al computer: l'apertura finisce con
+  il disegno. Sul telefono circa 20 pixel fra il titolo e il claim. I
   collegamenti "‹ Torna alla home" e, nei percorsi, "‹ Torna al liceo"
   sono nascosti su richiesta di Alessandra (righe commentate in
-  `liceo.txt`). Sotto, i tre percorsi come gli indirizzi della home:
-  trattino corto nel tono del percorso, nome in blu notte, spiegazione
-  breve, pulsante secondario "Scopri il percorso ›". Ogni percorso è un
-  unico collegamento, cliccabile per intero (il link sul nome si
-  allarga a tutto il percorso); il pulsante è solo grafico, nascosto al
-  lettore di schermo. Sul telefono uno sotto l'altro, al computer tre
-  colonne con nome, spiegazione e pulsante su righe comuni (subgrid).
+  `liceo.txt`). Ordine della pagina: apertura, percorsi, "Le ore a
+  confronto", "Vieni a trovarci.", piede.
+  - Percorsi: in testa il sottotitolo, allineato a sinistra; poi i tre
+    percorsi come gli indirizzi della home: trattino corto nel tono del
+    percorso, nome in blu notte, spiegazione breve, pulsante secondario
+    "Scopri il percorso ›". Ogni percorso è un unico collegamento,
+    cliccabile per intero (il link sul nome si allarga a tutto il
+    percorso); il pulsante è solo grafico, nascosto al lettore di
+    schermo. Sul telefono uno sotto l'altro, al computer tre colonne con
+    nome, spiegazione e pulsante su righe comuni (subgrid).
+  - "Le ore a confronto" (`id="confronto"`): titolo e riga grigia
+    "Ore di lezione alla settimana, anno per anno."; una tabella nello
+    stile del quadro orario con una riga per percorso (trattino nel tono
+    e nome) e le ore totali alla settimana anno per anno, calcolate dal
+    sito: QUADRO BASE più le ore della colonna "ore in più" della
+    tabella PERCORSI di `liceo.txt`, mai scritte a mano. Sotto, il
+    pulsante secondario "Che cosa cambia ›", fatto con details/summary
+    (niente JavaScript): chiuso all'apertura; aperto, la freccia ruota di
+    90 gradi (senza movimento con `prefers-reduced-motion`) e compaiono
+    la riga grigia "Le ore in più alla settimana rispetto a Scienze
+    applicate, che è il quadro di base." e una tabella con la stessa
+    intestazione: per ogni percorso con ore in più una riga-titolo con
+    trattino e nome maiuscolo nel tono, poi le materie con "+2", "+1" in
+    verde e il trattino grigio dove non ce ne sono. Tutto in 375 pixel.
+    Il confronto fra indirizzi (tecnici e liceo) si rimanda a quando ci
+    saranno i quadri dei tecnici: ore totali e ore di laboratorio, non
+    materia per materia.
+  - "Vieni a trovarci." (anche in fondo alle pagine dei percorsi): la
+    nota sui turni e il pulsante pieno "Prenota un open day ›", da
+    `comuni.txt` come nella home; se non resta nessuna data futura, solo
+    la frase `nessuna-data`, senza pulsante.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
-  cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
-  `<body>`. Sezioni, in quest'ordine, separate dai filetti grigi:
+  cambiano solo titolo e l'attributo `data-percorso` del `<body>` (le
+  ore in più stanno nella tabella PERCORSI di `liceo.txt`). Sezioni, in
+  quest'ordine, separate dai filetti grigi:
   1. apertura bianca centrata: occhiello grigio maiuscolo "Liceo
      scientifico, opzione Scienze applicate", il nome del percorso in
      verde, poi la spiegazione in blu notte allineata a sinistra;
@@ -183,8 +209,12 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      in verde e il testo sotto; le voci degli elenchi hanno un trattino
      grigio `#5B6B80`. Sul telefono una sotto l'altra separate dal
      filetto, al computer tre colonne;
-  3. "Quadro orario";
-  4. "Dopo il diploma", sezione normale con il titolo in verde.
+  3. "Quadro orario" e sotto il pulsante secondario "Confronta con gli
+     altri percorsi ›", che porta a `liceo.html#confronto`;
+  4. "Dopo il diploma", sezione normale con il titolo in verde;
+  5. "Vieni a trovarci." come in `liceo.html` e, sotto, la riga grigia
+     maiuscola "Gli altri percorsi" con i collegamenti agli altri due,
+     ognuno con il trattino nel suo tono e il nome sottolineato in verde.
   Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
   nessuna delle tre parti sparisce la loro sezione. La fascia
   "Laboratori e progetti" non esiste più. Nessun testo è giustificato
@@ -198,8 +228,9 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
 - Quadro orario: una tabella classica anche sul telefono, che sta in
   375 pixel senza scorrere di lato (testo della tabella a 14 pixel sul
   telefono, 16 dai 40rem; al computer larga al massimo 50rem). Titolo
-  "Quadro orario" in verde; niente fascia colorata, niente scheda
-  bianca, niente intestazione piena.
+  "Quadro orario" in verde, senza nessuna riga sotto (scelta di
+  Alessandra); niente fascia colorata, niente scheda bianca, niente
+  intestazione piena.
   - Intestazione in grigio `#5B6B80` maiuscolo piccolo (12 pixel sul
     telefono, 13 al computer), su due righe: i gruppi "Primo biennio",
     "Secondo biennio", "Quinto anno" (sempre su due righe: "Primo /
@@ -281,7 +312,9 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
 
 - Frasi brevi.
 - I termini scolastici si spiegano la prima volta che compaiono
-  (curvatura, biennio, articolazione, PCTO, ITS).
+  (curvatura, biennio, articolazione, PCTO, ITS). Eccezione voluta:
+  "biennio" nell'intestazione del quadro orario (e delle tabelle del
+  confronto) non si spiega.
 - Niente slogan vuoti: ogni claim è seguito da informazioni concrete.
 - Mai il trattino lungo al posto della virgola.
 - Serali: tono e contenuti per adulti.
@@ -438,6 +471,9 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   meccatronica arancione, Grafica e comunicazione rosa).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo
   nel colore di un indirizzo (le date degli open day non lo hanno).
+- **Righe pareggiate**: titoli e testi brevi centrati (titolo della
+  pagina, occhiello, claim del liceo, titoli delle sezioni) hanno
+  `text-wrap: balance`, così nessuna parola resta sola a capo.
 - **Nome della scuola**: "IIS Giulio Natta", senza virgolette (campo
   `nome` di `comuni.txt`). Il maiuscolo "IIS GIULIO NATTA" solo nella
   testata (e lungo il timbro, che è un disegno).
@@ -451,10 +487,11 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   larghezza; al computer affiancati. Lo spazio fra le due torri del
   disegno resta vuoto (ancora aperto se accoglierà qualcosa).
 - **Il disegno** `immagini/linee-scuola.svg` resta com'è (spessore
-  1.6, quello della cartolina). `js/home.js` lo legge e lo mette nella
+  1.6, quello della cartolina). `js/grafica.js` lo legge e lo mette nella
   pagina; lo spessore sullo schermo è sempre circa 2,4 px (lo ricalcola
   il JS al cambiare della larghezza). Il disegno è largo quanto la
-  finestra; la scuola al centro al massimo 60rem. Quando la finestra è
+  finestra; la scuola al centro al massimo 44rem, perché al computer
+  pulsanti e percorsi restino nella prima schermata. Quando la finestra è
   più larga, il JS allunga solo i tratti orizzontali esterni delle tre
   linee fino ai bordi, alle stesse altezze. Sul telefono la scuola è
   già larga quanto lo schermo. Le linee si disegnano
@@ -488,7 +525,12 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   stessa altezza nelle tre colonne. Claim a 19 px.
 - **Serali**: "Corsi serali per adulti", anno in grigio maiuscolo, "Per
   chi lavora o vuole riprendere gli studi.", i due percorsi con il
-  trattino, "Pagina in preparazione" o il pulsante. Tono da adulti.
+  trattino; in fondo il pulsante verso la pagina dei serali se è
+  "pronta", altrimenti, finché la pagina non c'è, il pulsante
+  secondario "Modulo di preiscrizione ›" (scritta e link dai campi
+  `pulsante` e `link` della sezione PAGINA di `serali.txt`), che si apre
+  in una nuova scheda con il testo nascosto per il lettore di schermo.
+  Tono da adulti.
 - **Contatti**: "Chiama", "Scrivi all'orientamento", "Come arrivare",
   link sottolineati in verde alti almeno 44 px, con il dato sotto,
   fuori dal link, così si copia. Niente icone. "Come arrivare" apre
@@ -496,9 +538,12 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   lettore di schermo. Al computer affiancati.
 - **Piede**: bianco; il timbro rotondo blu inchiostro `#1F3A6B` (colore
   solo per il timbro) con il logo al centro tinto di blu e "IIS GIULIO
-  NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola
-  (nome, indirizzo, telefono, email della segreteria, sito; link
-  verdi). Il timbro è largo 110 px sul telefono e 120 al computer,
+  NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola:
+  nome e indirizzo senza etichetta, poi "Centralino: 011 956 32 13",
+  "Segreteria: tois059003@istruzione.it", "Sito della scuola:
+  www.itisgiulionatta.it", con il link (verde) solo sul dato. Le
+  etichette stanno in `comuni.txt`. Uguale in tutte le pagine.
+  Il timbro è largo 110 px sul telefono e 120 al computer,
   scritta lungo il cerchio a 11 px sul telefono; è decorativo
   (`aria-hidden`), le parole vengono da `comuni.txt` e `home.txt`.
 - **Pulsanti**: rettangolo ad angoli vivi, freccia "›" disegnata con

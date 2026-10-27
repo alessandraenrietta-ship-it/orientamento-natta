@@ -1,25 +1,24 @@
 /* ==================================================================
    LA PAGINA DEL LICEO E LE PAGINE DEI TRE PERCORSI
 
-   Legge contenuti/liceo.txt e contenuti/comuni.txt (la pagina del
-   liceo anche contenuti/home.txt, per il claim) e riempie la pagina.
+   Legge contenuti/liceo.txt, contenuti/comuni.txt e contenuti/home.txt
+   (il claim del liceo e la parola del timbro) e riempie la pagina.
    I testi non stanno qui: si cambiano nei file di testo.
 
-   Le pagine dei percorsi sono uguali fra loro. Nel tag <body> due
-   attributi dicono quale percorso mostrare:
-     data-percorso   la sezione di liceo.txt con i testi del percorso,
-                     per esempio "LICEO MATEMATICO"
-     data-ore        la sezione con le ore in più rispetto al quadro
-                     base, per esempio "ORE AGGIUNTIVE MATEMATICO";
-                     manca per Scienze applicate
+   Le pagine dei percorsi sono uguali fra loro. Nel tag <body>
+   l'attributo data-percorso dice quale percorso mostrare: il nome della
+   sezione di liceo.txt con i suoi testi, per esempio "LICEO
+   MATEMATICO". Le ore in più del percorso si trovano nella tabella
+   PERCORSI di liceo.txt (colonna "ore in più").
    La pagina del liceo non ha data-percorso.
 
    Grafica "a cartolina", come la home (vedi grafica.css): fondo
    bianco, un trattino nel tono del percorso accanto al nome, niente
    simboli.
 
-   Ha bisogno di js/contenuti.js, js/comuni.js e js/grafica.js (il
-   disegno e il timbro), che vanno caricati prima di questo.
+   Ha bisogno di js/contenuti.js, js/comuni.js e js/grafica.js (disegno,
+   piede, timbro, date degli open day), che vanno caricati prima di
+   questo.
    ================================================================== */
 
 (function () {
@@ -30,7 +29,7 @@
   var G = window.Grafica;
   var elemento = P.elemento;
 
-  /* TESTO MODIFICABILE: le scritte fisse delle pagine dei percorsi */
+  /* TESTO MODIFICABILE: le scritte fisse delle tabelle delle ore */
   var TESTI = {
     quadro: "Quadro orario",
     materia: "Materia",
@@ -41,27 +40,31 @@
     anni: ["1°", "2°", "3°", "4°", "5°"],
     anniPerLettori: ["primo anno", "secondo anno", "terzo anno", "quarto anno", "quinto anno"],
     didascalia: "Ore settimanali, ",
-    nessunaOra: "nessuna ora"
+    didascaliaConfronto: "Ore settimanali dei tre percorsi, anno per anno",
+    didascaliaDifferenze: "Ore in più alla settimana rispetto a Scienze applicate",
+    nessunaOra: "nessuna ora",
+    nessunaOraInPiu: "nessuna ora in più",
+    inPiu: "+"
   };
 
   var percorso = document.body.getAttribute("data-percorso");
 
-  /* home.txt serve a tutte le pagine per il timbro del piede, e alla
-     pagina del liceo anche per il claim */
   Promise.all([
     C.leggi("contenuti/liceo.txt"),
     C.leggi("contenuti/comuni.txt"),
     C.leggi("contenuti/home.txt")
   ])
     .then(function (file) {
-      P.testata(file[1]);
-      P.piede(file[1]);
-      G.timbro(file[2], file[1]);
+      var liceo = file[0], comuni = file[1], home = file[2];
+      P.testata(comuni);
+      G.piede(comuni);
+      G.timbro(home, comuni);
       if (percorso) {
-        paginaPercorso(file[0], percorso, document.body.getAttribute("data-ore"));
+        paginaPercorso(liceo, percorso);
       } else {
-        paginaLiceo(file[0], file[2]);
+        paginaLiceo(liceo, home);
       }
+      visita(liceo, comuni, percorso);
       document.getElementById("contenuto").hidden = false;
       if (!percorso) { G.disegno(document.getElementById("disegno")); }
     })
@@ -71,8 +74,37 @@
     });
 
 
+  /* I tre percorsi della tabella PERCORSI di liceo.txt, controllati.
+     Quattro colonne: nome | spiegazione breve | pagina | ore in più.
+     Il tono (il blu del percorso) viene dal nome del file della pagina:
+     liceo-matematico.html dà "tono-liceo-matematico". */
+  function elencoPercorsi(liceo) {
+    var elenco = [];
+    liceo.righe("PERCORSI").forEach(function (riga, i) {
+      if (riga.length !== 4) {
+        console.warn("liceo.txt, PERCORSI, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
+        return;
+      }
+      elenco.push({
+        nome: riga[0], testo: riga[1], pagina: riga[2], ore: riga[3],
+        tono: "tono-" + riga[2].replace(/\.html$/, "")
+      });
+    });
+    return elenco;
+  }
+
+  /* Il trattino nel tono del percorso, prima del nome. Solo decorativo. */
+  function trattino() {
+    var t = elemento("span", "trattino", "");
+    t.setAttribute("aria-hidden", "true");
+    return t;
+  }
+
+
   /* ---------------------------------------------------------------
      LA PAGINA DEL LICEO
+     Apertura (titolo, claim, disegno), poi i percorsi con il
+     sottotitolo sopra, poi "Le ore a confronto".
      --------------------------------------------------------------- */
 
   function paginaLiceo(liceo, home) {
@@ -100,14 +132,13 @@
       h1.appendChild(elemento("span", "solo-lettori", ", "));
       h1.appendChild(elemento("span", "titolo-riga-2", liceo.campo("LICEO", "titolo-riga-2")));
     }
+
+    /* Il sottotitolo apre la sezione dei percorsi */
     C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
 
     /* I tre percorsi, nell'ordine del file, come gli indirizzi della
        home: il trattino nel tono del percorso accanto al nome, sotto la
        spiegazione breve e il pulsante "Scopri il percorso ›".
-       - Il tono segue il percorso, non la posizione: la classe viene dal
-         nome del file della pagina (liceo-matematico.html dà
-         "tono-liceo-matematico").
        - Ogni percorso è cliccabile per intero con un solo link, sul
          nome, che copre tutto il percorso (vedi grafica.css). Il
          pulsante è solo un disegno: il lettore di schermo sente solo il
@@ -116,22 +147,18 @@
          pulsante): al computer grafica.css li mette su righe comuni alle
          tre colonne. */
     var elenco = document.getElementById("percorsi");
-    liceo.righe("PERCORSI").forEach(function (riga, i) {
-      if (riga.length !== 3) {
-        console.warn("liceo.txt, PERCORSI, riga " + (i + 1) + ": servono 3 colonne, ne ho trovate " + riga.length);
-        return;
-      }
+    elencoPercorsi(liceo).forEach(function (p) {
       var voce = document.createElement("li");
-      voce.className = "percorso con-trattino tono-" + riga[2].replace(/\.html$/, "");
+      voce.className = "percorso con-trattino " + p.tono;
 
       var titolo = document.createElement("h2");
       titolo.className = "percorso-nome";
-      var link = elemento("a", "percorso-link", riga[0]);
-      link.href = riga[2];
+      var link = elemento("a", "percorso-link", p.nome);
+      link.href = p.pagina;
       titolo.appendChild(link);
       voce.appendChild(titolo);
 
-      voce.appendChild(elemento("p", "percorso-testo", riga[1]));
+      voce.appendChild(elemento("p", "percorso-testo", p.testo));
 
       var fondo = document.createElement("p");
       fondo.className = "percorso-fondo";
@@ -141,6 +168,8 @@
 
       elenco.appendChild(voce);
     });
+
+    confronto(liceo);
   }
 
   /* Il nome completo del liceo, su una riga: "Liceo scientifico,
@@ -165,31 +194,130 @@
 
 
   /* ---------------------------------------------------------------
+     LE ORE A CONFRONTO (liceo.html, id="confronto")
+     Una tabella nello stile del quadro orario, con una riga per
+     percorso e le ore totali alla settimana anno per anno, calcolate
+     dal sito: QUADRO BASE più le ore in più del percorso. Sotto, il
+     pulsante "Che cosa cambia ›" (details/summary: si apre e si chiude
+     senza JavaScript) con le ore in più rispetto a Scienze applicate.
+     --------------------------------------------------------------- */
+
+  function confronto(liceo) {
+    C.scrivi(document.getElementById("titolo-confronto"), liceo.campo("LICEO", "titolo-confronto"));
+    C.scrivi(document.getElementById("nota-confronto"), liceo.campo("LICEO", "nota-confronto"));
+
+    var percorsi = elencoPercorsi(liceo);
+
+    /* La tabella dei totali */
+    var tabella = document.getElementById("tabella-confronto");
+    tabella.appendChild(elemento("caption", "solo-lettori", TESTI.didascaliaConfronto));
+    intestazione(tabella, liceo.campo("LICEO", "intestazione-percorso"));
+    var corpo = document.createElement("tbody");
+    percorsi.forEach(function (p) {
+      var tr = document.createElement("tr");
+      tr.className = p.tono;
+      var th = document.createElement("th");
+      th.scope = "row";
+      th.className = "orario-percorso";
+      th.appendChild(trattino());
+      C.scrivi(th, p.nome);
+      tr.appendChild(th);
+      totaliPercorso(liceo, p.ore).forEach(function (t) {
+        var td = document.createElement("td");
+        td.textContent = t;
+        tr.appendChild(td);
+      });
+      corpo.appendChild(tr);
+    });
+    tabella.appendChild(corpo);
+
+    /* "Che cosa cambia": le ore in più di ogni percorso che ne ha */
+    C.scrivi(document.getElementById("pulsante-differenze"), liceo.campo("LICEO", "pulsante-differenze"));
+    C.scrivi(document.getElementById("nota-differenze"), liceo.campo("LICEO", "nota-differenze"));
+    var dettaglio = document.getElementById("tabella-differenze");
+    dettaglio.appendChild(elemento("caption", "solo-lettori", TESTI.didascaliaDifferenze));
+    intestazione(dettaglio, TESTI.materia);
+    var quanti = 0;
+    percorsi.forEach(function (p) {
+      var righe = p.ore ? righeOre(liceo, p.ore) : [];
+      if (!righe.length) { return; }
+      quanti++;
+      var gruppo = document.createElement("tbody");
+      gruppo.className = "orario-in-piu " + p.tono;
+      var rigaTitolo = document.createElement("tr");
+      var thTitolo = elemento("th", "orario-titolo-in-piu", p.nome);
+      thTitolo.scope = "rowgroup";
+      thTitolo.colSpan = 6;
+      rigaTitolo.appendChild(thTitolo);
+      gruppo.appendChild(rigaTitolo);
+      righe.forEach(function (r) { gruppo.appendChild(rigaDifferenza(r)); });
+      dettaglio.appendChild(gruppo);
+    });
+    if (!quanti) { document.getElementById("differenze").hidden = true; }
+  }
+
+  /* Le ore totali di un percorso, anno per anno: il quadro base più le
+     ore della sezione "ore in più" (se c'è) */
+  function totaliPercorso(liceo, sezioneOre) {
+    var totali = [0, 0, 0, 0, 0];
+    var righe = righeOre(liceo, "QUADRO BASE");
+    if (sezioneOre) { righe = righe.concat(righeOre(liceo, sezioneOre)); }
+    righe.forEach(function (r) {
+      for (var j = 0; j < 5; j++) { totali[j] += ore(r[j + 1], r[0]); }
+    });
+    return totali;
+  }
+
+  /* Una riga del dettaglio "Che cosa cambia": la materia e le ore in
+     più, scritte "+2"; il trattino grigio dove non ce ne sono. */
+  function rigaDifferenza(r) {
+    var tr = document.createElement("tr");
+    var th = elemento("th", "", r[0]);
+    th.scope = "row";
+    tr.appendChild(th);
+    for (var j = 0; j < 5; j++) {
+      var n = ore(r[j + 1], r[0]);
+      var td = document.createElement("td");
+      if (n > 0) {
+        td.className = "orario-in-piu-valore";
+        td.textContent = TESTI.inPiu + n;
+      } else {
+        segnaNessuna(td, TESTI.nessunaOraInPiu);
+      }
+      tr.appendChild(td);
+    }
+    return tr;
+  }
+
+
+  /* ---------------------------------------------------------------
      LE PAGINE DEI PERCORSI
      --------------------------------------------------------------- */
 
-  function paginaPercorso(liceo, sezione, sezioneOre) {
-    var riga = liceo.righe("PERCORSI").filter(function (r) {
-      return (r[0] || "").toUpperCase() === sezione.toUpperCase();
+  function paginaPercorso(liceo, sezione) {
+    var p = elencoPercorsi(liceo).filter(function (r) {
+      return r.nome.toUpperCase() === sezione.toUpperCase();
     })[0];
-    if (!riga) {
+    if (!p) {
       console.warn("liceo.txt: nella tabella PERCORSI non trovo " + sezione);
-      riga = [sezione];
+      p = { nome: sezione, ore: "", tono: "" };
     }
-    var nome = riga[0];
 
     /* Il tono del percorso (per la riga-titolo "In più nel ..." del
-       quadro orario), dal nome del file della pagina, come nelle schede
-       di liceo.html */
-    if (riga[2]) { document.body.classList.add("tono-" + riga[2].replace(/\.html$/, "")); }
+       quadro orario) */
+    if (p.tono) { document.body.classList.add(p.tono); }
 
     tornaIndietro(liceo.campo("LICEO", "torna-liceo"));
     C.scrivi(document.getElementById("etichetta"), titoloCompleto(liceo));
-    C.scrivi(document.getElementById("titolo"), nome);
+    C.scrivi(document.getElementById("titolo"), p.nome);
     C.scrivi(document.getElementById("spiegazione"), liceo.campo(sezione, "spiegazione"));
 
     C.scrivi(document.getElementById("titolo-quadro"), TESTI.quadro);
-    quadroOrario(liceo, sezioneOre, nome);
+    quadroOrario(liceo, p.ore, p.nome);
+
+    /* Sotto il quadro orario, il pulsante verso "Le ore a confronto" */
+    var confronta = document.getElementById("confronta");
+    C.scrivi(confronta, liceo.campo("LICEO", "pulsante-confronta"));
 
     blocchi(liceo, sezione);
 
@@ -249,6 +377,49 @@
 
 
   /* ---------------------------------------------------------------
+     VIENI A TROVARCI (in fondo a liceo.html e alle pagine dei percorsi)
+     Il titolo da liceo.txt; sotto la nota sui turni e il pulsante per
+     prenotare, da comuni.txt, come nella home. Se non resta nessuna
+     data futura, solo la frase "nessuna-data", senza pulsante. Nelle
+     pagine dei percorsi, sotto, i collegamenti agli altri due percorsi.
+     --------------------------------------------------------------- */
+
+  function visita(liceo, comuni, attuale) {
+    C.scrivi(document.getElementById("titolo-visita"), liceo.campo("LICEO", "titolo-visita"));
+    var nota = document.getElementById("nota-visita");
+    var prenota = document.getElementById("prenota-visita");
+
+    if (!G.dateOpenDay(comuni).length) {
+      C.scrivi(nota, comuni.campo("OPEN DAY", "nessuna-data"));
+      prenota.hidden = true;
+    } else {
+      if (comuni.campo("OPEN DAY", "nota-turni")) {
+        C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
+      } else {
+        nota.hidden = true;
+      }
+      G.pulsantePrenota(comuni, prenota);
+    }
+
+    /* Gli altri percorsi: solo nelle pagine dei percorsi */
+    var altri = document.getElementById("altri-percorsi");
+    if (!attuale || !altri) { return; }
+    C.scrivi(document.getElementById("titolo-altri"), liceo.campo("LICEO", "titolo-altri"));
+    var elenco = document.getElementById("elenco-altri");
+    elencoPercorsi(liceo).forEach(function (p) {
+      if (p.nome.toUpperCase() === attuale.toUpperCase()) { return; }
+      var li = document.createElement("li");
+      li.className = p.tono;
+      li.appendChild(trattino());
+      var a = elemento("a", "", p.nome);
+      a.href = p.pagina;
+      li.appendChild(a);
+      elenco.appendChild(li);
+    });
+  }
+
+
+  /* ---------------------------------------------------------------
      IL QUADRO ORARIO
      Le materie di Scienze applicate (QUADRO BASE) subito sotto le
      intestazioni. Nel Liceo Matematico e nel Liceo Digitale seguono le
@@ -283,9 +454,18 @@
     });
   }
 
+  /* Una cella senza ore: il trattino si vede grigio; il lettore di
+     schermo sente la scritta */
+  function segnaNessuna(td, scritta) {
+    td.className = "orario-nessuna";
+    var vedi = elemento("span", "", "–");
+    vedi.setAttribute("aria-hidden", "true");
+    td.appendChild(vedi);
+    td.appendChild(elemento("span", "solo-lettori", scritta));
+  }
+
   /* Una riga della tabella: la materia e le ore dei cinque anni, che
-     si aggiungono ai totali. Il trattino si vede grigio; il lettore di
-     schermo sente "nessuna ora". */
+     si aggiungono ai totali. */
   function rigaMateria(r, totali) {
     var tr = document.createElement("tr");
     var th = elemento("th", "", r[0]);
@@ -298,24 +478,23 @@
       if (n > 0) {
         td.textContent = n;
       } else {
-        td.className = "orario-nessuna";
-        var vedi = elemento("span", "", "–");
-        vedi.setAttribute("aria-hidden", "true");
-        td.appendChild(vedi);
-        td.appendChild(elemento("span", "solo-lettori", TESTI.nessunaOra));
+        segnaNessuna(td, TESTI.nessunaOra);
       }
       tr.appendChild(td);
     }
     return tr;
   }
 
-  function quadroOrario(liceo, sezioneOre, nome) {
-    var tabella = document.getElementById("orario");
-    tabella.appendChild(elemento("caption", "solo-lettori", TESTI.didascalia + nome));
-
-    /* Le colonne: la materia, poi i cinque anni. I primi quattro sono
-       larghi uguali; il quinto è un po' più largo, perché sopra c'è
-       "Quinto anno" da solo (le larghezze stanno in grafica.css). */
+  /* Le colonne e le intestazioni comuni alle tabelle delle ore (quadro
+     orario, confronto, che cosa cambia).
+     Colonne: la prima (materia o percorso), poi i cinque anni. I primi
+     quattro sono larghi uguali; il quinto è un po' più largo, perché
+     sopra c'è "Quinto anno" da solo (le larghezze stanno in
+     grafica.css).
+     Intestazioni su due righe: sopra i gruppi (Primo biennio, Secondo
+     biennio, Quinto anno), sotto i cinque anni. La prima intestazione
+     occupa tutte e due le righe. */
+  function intestazione(tabella, primaColonna) {
     var colonne = document.createElement("colgroup");
     var colMateria = document.createElement("col");
     colMateria.className = "orario-col-materia";
@@ -327,16 +506,13 @@
     }
     tabella.appendChild(colonne);
 
-    /* Le intestazioni, su due righe: sopra i gruppi (Primo biennio,
-       Secondo biennio, Quinto anno), sotto i cinque anni. "Materia"
-       occupa tutte e due le righe. */
     var testa = document.createElement("thead");
     var rigaGruppi = document.createElement("tr");
     rigaGruppi.className = "orario-gruppi";
-    var thMateria = elemento("th", "orario-materia", TESTI.materia);
-    thMateria.scope = "col";
-    thMateria.rowSpan = 2;
-    rigaGruppi.appendChild(thMateria);
+    var thPrima = elemento("th", "orario-materia", primaColonna);
+    thPrima.scope = "col";
+    thPrima.rowSpan = 2;
+    rigaGruppi.appendChild(thPrima);
     /* Ogni gruppo sempre su due righe, a capo dopo la prima parola
        ("Primo / biennio", "Quinto / anno"), così sono tutti uguali:
        "Quinto anno" su una riga sola non entra nella sua colonna. */
@@ -371,6 +547,12 @@
     });
     testa.appendChild(rigaAnni);
     tabella.appendChild(testa);
+  }
+
+  function quadroOrario(liceo, sezioneOre, nome) {
+    var tabella = document.getElementById("orario");
+    tabella.appendChild(elemento("caption", "solo-lettori", TESTI.didascalia + nome));
+    intestazione(tabella, TESTI.materia);
 
     /* Le materie del quadro base */
     var totali = [0, 0, 0, 0, 0];

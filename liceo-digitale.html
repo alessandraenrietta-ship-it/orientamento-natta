@@ -16,13 +16,14 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="grafica.css?v=3">
+  <link rel="stylesheet" href="grafica.css?v=4">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <!-- Le tre pagine dei percorsi sono uguali: cambiano solo il titolo qui
-     sopra e i due attributi qui sotto, che dicono quali sezioni di
-     contenuti/liceo.txt leggere. -->
-<body data-percorso="LICEO DIGITALE" data-ore="ORE AGGIUNTIVE DIGITALE">
+     sopra e l'attributo qui sotto, che dice quale sezione di
+     contenuti/liceo.txt leggere. Le ore in più del percorso stanno nella
+     tabella PERCORSI di liceo.txt. -->
+<body data-percorso="LICEO DIGITALE">
 
   <a class="salta" href="#contenuto">Salta al contenuto</a>
 
@@ -67,6 +68,8 @@
       <div class="interno">
         <h2 class="titolo-sezione" id="titolo-quadro"></h2>
         <table class="orario" id="orario"></table>
+        <!-- Il pulsante verso "Le ore a confronto" della pagina del liceo -->
+        <p class="fondo-sezione"><a class="pulsante pulsante-vuoto" id="confronta" href="liceo.html#confronto"></a></p>
       </div>
     </section>
 
@@ -77,6 +80,21 @@
       </div>
     </section>
 
+    <!-- Vieni a trovarci: la nota sui turni e il pulsante per prenotare
+         un open day, presi da comuni.txt come nella home (se non resta
+         nessuna data, solo la frase "nessuna-data", senza pulsante). Sotto,
+         i collegamenti agli altri due percorsi. -->
+    <section class="sezione" aria-labelledby="titolo-visita">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-visita"></h2>
+        <p class="testo-sezione" id="nota-visita"></p>
+        <p class="fondo-sezione" id="prenota-visita"></p>
+        <nav class="altri-percorsi" id="altri-percorsi" aria-labelledby="titolo-altri">
+          <p class="altri-titolo" id="titolo-altri"></p>
+          <ul class="altri-elenco" id="elenco-altri"></ul>
+        </nav>
+      </div>
+    </section>
   </main>
 
   <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
@@ -112,7 +130,7 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/grafica.js?v=1"></script>
-  <script src="js/liceo.js?v=8"></script>
+  <script src="js/grafica.js?v=2"></script>
+  <script src="js/liceo.js?v=9"></script>
 </body>
 </html>
