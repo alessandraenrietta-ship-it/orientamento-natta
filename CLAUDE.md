@@ -86,7 +86,10 @@ adulti interessati ai corsi serali.
   none` impedisce il grassetto finto. Niente legature
   (`font-variant-ligatures: none` in `grafica.css`,
   `cartolina-facciate.css` e `cartolina.css`): "fi" resta di due
-  lettere, come vuole la griglia del Cutive Mono. Testi ad almeno 16 px (di base
+  lettere, come vuole la griglia del Cutive Mono. Nel sito il testo ha
+  un contorno di 0,3 px nel suo colore (`-webkit-text-stroke` in
+  `grafica.css`), che lo rende un po' più pieno: non sul timbro e non
+  sulla cartolina (dal 27 ottobre 2026 sera). Testi ad almeno 16 px (di base
   17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: lo
   usano la home e le pagine del liceo (punto 13); solo la vecchia
   cartolina resta in Arial. Eccezioni volute sotto i 16 px: i turni

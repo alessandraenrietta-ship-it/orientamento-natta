@@ -108,10 +108,20 @@ body {
      lettere, come vuole il Cutive Mono, che ha tutte le lettere larghe
      uguali */
   font-variant-ligatures: none;
+  /* Il Cutive Mono ha un solo spessore, piuttosto sottile: un contorno
+     di 0,3 pixel nello stesso colore del testo lo rende un po' più
+     pieno e più leggibile (scelta di Alessandra, 27 ottobre 2026
+     sera). Non vale per il timbro e per la cartolina (più sotto). */
+  -webkit-text-stroke: 0.3px currentColor;
   line-height: 1.6;
   color: var(--blu-notte);
   background: var(--bianco);
 }
+
+/* Il timbro e la cartolina in orientatori.html restano come sulla
+   carta, senza il contorno */
+.timbro,
+.facciata { -webkit-text-stroke: 0; }
 
 /* I pulsanti veri (button) non prendono da soli il carattere della
    pagina: qui almeno le legature */
