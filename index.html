@@ -27,7 +27,7 @@
     pagine usano ancora quella a fasce (stile.css), finché non si
     rifanno anche loro.
   -->
-  <link rel="stylesheet" href="grafica.css?v=7">
+  <link rel="stylesheet" href="grafica.css?v=8">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -58,7 +58,27 @@
     <section class="sezione apertura" aria-labelledby="titolo">
       <div class="interno">
         <p class="occhiello" id="occhiello"></p>
-        <h1 class="titolo-sito titolo-home" id="titolo"></h1>
+        <!-- Il titolo che si gira: un solo h1 con le due frasi, in inglese
+             e in italiano, una sul davanti e una sul retro. Il lettore di
+             schermo le legge tutte e due. Toccando il titolo o il segno
+             sotto (il comando "Gira il titolo", che si usa anche da
+             tastiera) le due frasi si scambiano. -->
+        <div class="titolo-gira" id="titolo-gira">
+          <h1 class="titolo-sito titolo-home" id="titolo">
+            <span class="titolo-giro">
+              <span class="titolo-faccia titolo-faccia-en" lang="en" id="titolo-inglese"></span>
+              <span class="titolo-faccia titolo-faccia-it" id="titolo-italiano"></span>
+            </span>
+          </h1>
+          <!-- TESTO MODIFICABILE: il nome del comando per il lettore di
+               schermo. Il segno è una freccia circolare, solo disegno. -->
+          <button type="button" class="titolo-freccia" id="titolo-freccia" aria-label="Gira il titolo">
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M20 12a8 8 0 1 1-2.34-5.66"/>
+              <path d="M20 4v4.5h-4.5"/>
+            </svg>
+          </button>
+        </div>
         <div class="presentazione" id="presentazione"></div>
       </div>
       <!-- Il disegno della scuola con le tre linee degli indirizzi. Lo
@@ -157,7 +177,7 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/grafica.js?v=5"></script>
-  <script src="js/home.js?v=25"></script>
+  <script src="js/grafica.js?v=6"></script>
+  <script src="js/home.js?v=26"></script>
 </body>
 </html>

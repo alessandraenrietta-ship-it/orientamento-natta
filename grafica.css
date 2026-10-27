@@ -264,6 +264,12 @@ a:hover { text-decoration-thickness: 2px; }
 
 .pulsante:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 
+/* I pulsanti veri (button) non prendono da soli il carattere della pagina */
+button.pulsante {
+  font: inherit;
+  cursor: pointer;
+}
+
 .pulsante-pieno {
   color: var(--bianco);
   background: var(--verde);
@@ -335,13 +341,68 @@ a:hover { text-decoration-thickness: 2px; }
   line-height: 1.2;
 }
 
-/* Il titolo della home, sempre su due righe: js/home.js mette dopo la
-   prima virgola la seconda parte in un blocco a sé ("Un'unica
-   scuola," / "tanti modi di imparare."). Sul telefono 24 pixel, perché
-   la seconda riga stia intera in 375 pixel; dai 40rem torna grande
+/* Il titolo della home che si gira: "The next step is yours." sul
+   davanti, "Il prossimo passo è tuo." sul retro. Le due frasi stanno
+   nella stessa casella della griglia, una sopra l'altra: occupano lo
+   stesso spazio, quello della più lunga. Toccando il titolo o la
+   freccia sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
+   gradi in orizzontale in 0,8 secondi, come la cartolina. Sul telefono
+   24 pixel, al massimo due righe per frase; dai 40rem torna grande
    (SCHERMI PIÙ LARGHI). */
-.titolo-home { font-size: 1.5rem; }
-.titolo-seconda-riga { display: block; }
+.titolo-gira { cursor: pointer; }
+.titolo-home {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  perspective: 1200px;
+}
+.titolo-giro {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+/* La frase più corta (sul telefono l'inglese, su una riga) sta in
+   mezzo allo spazio, non in alto */
+.titolo-faccia {
+  grid-area: 1 / 1;
+  align-self: center;
+  text-wrap: balance;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.titolo-faccia-it { transform: rotateY(180deg); }
+.titolo-gira.girato .titolo-giro { transform: rotateY(180deg); }
+
+/* Il segno sotto il titolo: una piccola freccia circolare grigia, alta
+   16 pixel, dentro un pulsante di 44 pixel facile da toccare */
+.titolo-freccia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--grigio);
+  cursor: pointer;
+}
+.titolo-freccia svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Chi ha chiesto di ridurre il movimento: le frasi si scambiano
+   subito, senza rotazione */
+@media (prefers-reduced-motion: reduce) {
+  .titolo-giro { transition: none; }
+}
 
 .presentazione { max-width: 40rem; margin: 0 auto 1rem; }
 
@@ -1206,4 +1267,105 @@ a:hover { text-decoration-thickness: 2px; }
     hyphenate-limit-chars: 10 4 4;
   }
   .testo-lungo .colonna { display: block; }
+}
+
+
+/* =================================================================
+   PER I DOCENTI ORIENTATORI (orientatori.html)
+   Tutto centrato: il titolo, l'anteprima della cartolina "Vieni a
+   trovarci" e i due pulsanti. L'anteprima è larga al massimo 42rem,
+   con le proporzioni della cartolina (3:2), un bordo sottile grigio e
+   un'ombra leggera. Si gira di 180 gradi in orizzontale in 0,8
+   secondi; per chi ha chiesto di ridurre il movimento il cambio di
+   faccia è immediato. L'aspetto delle facciate sta in
+   cartolina-facciate.css, lo stesso della cartolina da stampare: qui
+   le facciate si rimpiccioliscono (--scala, la calcola
+   js/orientatori.js) e si mostra solo la cartolina rifilata, senza i
+   3 mm di abbondanza.
+   ================================================================= */
+
+.orientatori { text-align: center; }
+.orientatori .titolo-sito { margin-bottom: 1.5rem; }
+
+.cartolina-gira {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  aspect-ratio: 3 / 2;
+  margin: 0 auto;
+  perspective: 2000px;
+  cursor: pointer;
+}
+
+.cartolina-gira:focus-visible {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 4px;
+}
+
+.cartolina-giro {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+.cartolina-gira.girata .cartolina-giro { transform: rotateY(180deg); }
+
+.cartolina-faccia {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bianco);
+  box-shadow: 0 2px 12px rgba(0, 25, 60, 0.14);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  text-align: left;
+}
+
+.cartolina-faccia-retro { transform: rotateY(180deg); }
+
+/* Il bordo sottile grigio, sopra la facciata */
+.cartolina-faccia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--filetto);
+  pointer-events: none;
+}
+
+/* La facciata (156 x 106 mm) rimpicciolita e spostata di 3 mm, così
+   si vede solo la cartolina rifilata (150 x 100 mm) */
+.cartolina-faccia .facciata {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--scala, 1)) translate(-3mm, -3mm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartolina-giro { transition: none; }
+}
+
+/* I due pulsanti sotto la cartolina: sul telefono uno sotto l'altro a
+   tutta larghezza, come nell'apertura; dai 40rem affiancati e
+   centrati (SCHERMI PIÙ LARGHI) */
+.pulsanti-docenti { margin-top: 1.5rem; }
+
+
+/* La riga per i docenti in cima al piede di tutte le pagine (tranne
+   orientatori.html): "Sei un docente orientatore?" in grigio e il link
+   verde sottolineato, con la freccia "›" disegnata come nei pulsanti.
+   La mette js/grafica.js, solo con "stato: pronta" in comuni.txt. */
+.piede-orientatori { margin-bottom: 0.6rem; color: var(--grigio); }
+
+.link-freccia::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-left: 0.45em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-0.08em) rotate(45deg);
 }

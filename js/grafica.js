@@ -136,9 +136,14 @@ window.Grafica = (function () {
      stanno accanto all'etichetta, vanno interi alla riga sotto
      (classe "dato-intero"); l'email va a capo dopo la chiocciola.
      Va nell'elenco con id="piede".
+     In cima, sopra i dati della scuola, la riga per i docenti: "Sei
+     un docente orientatore? Scarica la cartolina del Natta ›", che
+     porta a orientatori.html. Compare solo con "stato: pronta" nella
+     sezione ORIENTATORI di comuni.txt, e mai su orientatori.html
+     stessa, che chiama Grafica.piede(comuni, true).
      --------------------------------------------------------------- */
 
-  function piede(comuni) {
+  function piede(comuni, senzaOrientatori) {
     var elenco = document.getElementById("piede");
     var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
 
@@ -147,6 +152,15 @@ window.Grafica = (function () {
       if (etichetta) { li.appendChild(P.elemento("span", "piede-etichetta", etichetta + ": ")); }
       li.appendChild(contenuto);
       elenco.appendChild(li);
+      return li;
+    }
+
+    if (!senzaOrientatori && comuni.campo("ORIENTATORI", "stato") === "pronta") {
+      var docenti = voce("", C.scrivi(document.createElement("span"), comuni.campo("ORIENTATORI", "domanda") + " "));
+      docenti.className = "piede-orientatori";
+      var link = P.collegamento(comuni.campo("ORIENTATORI", "collegamento"), "orientatori.html");
+      link.className = "link-freccia";
+      docenti.appendChild(link);
     }
 
     if (campo("nome")) { voce("", C.scrivi(document.createElement("span"), campo("nome"))); }

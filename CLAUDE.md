@@ -433,16 +433,26 @@ hanno `NON-PUBBLICARE` nel nome: `.gitignore` li tiene fuori dal sito.
 
 Decisa con Alessandra il 26 ottobre 2026, fatta il 27 (sostituisce la
 cartolina del 16 ottobre, che resta nell'etichetta Git
-`grafica-ottobre`). File: `cartolina.html`, `cartolina.css`,
-`js/cartolina.js`, `js/qr.js` (copiato dal Liceo Digitale),
-`js/grafica.js` (il timbro), `contenuti/cartolina.txt`,
-`immagini/firma-natta.png`. Il modello, in PDF, è
+`grafica-ottobre`). File:
+- `cartolina-facciate.css` e `js/cartolina-facciate.js`: l'aspetto e il
+  disegno di fronte e retro. Li usano sia la pagina da stampare sia
+  `orientatori.html`, così la cartolina è una sola. Le regole del CSS
+  valgono solo dentro la cartolina (cominciano con `.facciata`) e non
+  toccano il sito;
+- `cartolina.html`, `cartolina.css` e `js/cartolina.js`: la pagina da
+  stampare (comandi, fogli, versione A4, stampa);
+- `js/qr.js` (copiato dal Liceo Digitale), `js/grafica.js` (il
+  timbro), `contenuti/cartolina.txt`, `immagini/firma-natta.png`.
+
+Il modello, in PDF, è
 `materiali-grezzi/cartolina-modello-NON-PUBBLICARE.pdf`: resta solo sul
 computer di Alessandra.
 
 - Cartolina fronte e retro, 15 × 10 cm orizzontale, fondo bianco, da
   salvare in PDF con la funzione Stampa di Edge o Chrome. Nessuna
-  pagina del sito la collega; ha il `noindex` come le altre.
+  pagina del sito la collega; ha il `noindex` come le altre. Ai
+  docenti la cartolina arriva da `orientatori.html` (punto 13), con
+  l'anteprima che si gira e il PDF da scaricare.
 - I testi si leggono dai file di contenuto, mai scritti nel codice:
   tipo e nome dei tre indirizzi da `home.txt` (nello stesso ordine
   della home) e l'occhiello per il timbro; nome, `città`, indirizzo,
@@ -505,7 +515,7 @@ computer di Alessandra.
   timbro ufficiale (da proporre alla dirigente), file originale del
   logo, leggibilità dei contatti in Cutive Mono su una prova di stampa.
 
-## 13. La grafica "a cartolina" (home e pagine del liceo)
+## 13. La grafica "a cartolina" (home, pagine del liceo, docenti orientatori)
 
 Decisa con Alessandra il 26 ottobre 2026, corretta la sera stessa.
 Le decisioni complete, anche sulla nuova cartolina "Vieni a
@@ -516,9 +526,9 @@ mancano ancora le pagine degli indirizzi tecnici e dei serali. Lo stato del sito
 segnato dall'etichetta Git `grafica-ottobre`; il lavoro sta sul ramo
 `grafica-cartolina` finché Alessandra non dice di unirlo a `main`.
 File: `grafica.css` (tutte le pagine del sito tranne la cartolina),
-`js/grafica.js` (il disegno delle linee e il timbro, per la home e il
-liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
-`fonts/`.
+`js/grafica.js` (il disegno delle linee, il piede e il timbro, per la
+home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
+`js/orientatori.js`, `immagini/linee-scuola.svg`, `fonts/`.
 
 - **Fondo tutto bianco.** Niente fasce verdi o chiare, niente retino,
   niente filetti gialli, niente schede colorate, niente simboli ad
@@ -544,12 +554,31 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
 - **Testata**: bianca, logo e nome della scuola in maiuscolo verde,
   filetto sotto.
 - **Apertura**, centrata: occhiello "ORIENTAMENTO 2026/27" (campo
-  `occhiello` di `home.txt` più l'anno degli open day); titolo = il
-  `claim` di `home.txt`, sempre su due righe: il sito va a capo dopo la
-  prima virgola ("Un'unica scuola," / "tanti modi di imparare."), il
-  testo nel file resta intero; sul telefono il titolo è a 24 pixel,
-  perché la seconda riga stia intera a 375 pixel. Sotto, il disegno
-  delle tre linee; poi i
+  `occhiello` di `home.txt` più l'anno degli open day); titolo "The
+  next step is yours." (campo `titolo-inglese` di `home.txt`) che si
+  gira e diventa "Il prossimo passo è tuo." (`titolo-italiano`).
+  Deciso il 27 ottobre 2026; il `claim` resta in `home.txt` ma non
+  compare.
+  - Stesso posto e stile del titolo di prima: verde, centrato, 24
+    pixel sul telefono. Le due frasi occupano lo stesso spazio (una
+    sopra l'altra nella stessa casella), al massimo due righe ciascuna
+    sul telefono, con `text-wrap: balance`; la più corta sta in mezzo
+    allo spazio.
+  - Un tocco o un clic sul titolo lo gira di 180 gradi in orizzontale
+    in 0,8 secondi, come la cartolina; un secondo tocco torna
+    all'inglese. Sotto, centrata, una piccola freccia circolare grigia
+    `#5B6B80` alta 16 px: è un pulsante vero, "Gira il titolo" per il
+    lettore di schermo, con Invio e barra spaziatrice e il contorno di
+    messa a fuoco; l'area da toccare è di 44 px.
+  - Quando le tre linee del disegno hanno finito di disegnarsi, il
+    titolo fa da solo un giro di andata e ritorno (in italiano per
+    circa 2 secondi), una volta sola e solo se la persona non l'ha già
+    toccato.
+  - Un unico h1 con le due frasi: il lettore di schermo le legge tutte
+    e due; la frase inglese ha `lang="en"`.
+  - Con `prefers-reduced-motion` niente giro automatico e niente
+    rotazione: il tocco scambia le frasi.
+  Sotto, il disegno delle tre linee; poi i
   pulsanti "Dopo la terza media" (pieno) e "Corsi serali per adulti"
   (vuoto): sul telefono uno sotto l'altro, larghi uguali, a tutta
   larghezza; al computer affiancati. Lo spazio fra le due torri del
@@ -616,6 +645,39 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   accanto all'etichetta, vanno interi alla riga sotto; l'email va a
   capo dopo la chiocciola. Le
   etichette stanno in `comuni.txt`. Uguale in tutte le pagine.
+  - In cima, sopra i dati della scuola, la riga "Sei un docente
+    orientatore?" in grigio e il link verde sottolineato "Scarica la
+    cartolina del Natta ›" verso `orientatori.html` (sezione
+    `ORIENTATORI` di `comuni.txt`; la freccia la aggiunge il sito).
+    Non compare su `orientatori.html` stessa. Interruttore: `stato`
+    della sezione. Con "in preparazione" la riga non compare su
+    nessuna pagina; si scrive "pronta" solo quando la cartolina per la
+    stampa è definitiva e il PDF `materiali/cartolina-natta.pdf` è
+    salvato.
+- **Pagina per i docenti orientatori** (`orientatori.html`, con
+  `noindex`): testata e piede come le altre pagine; al centro il
+  titolo "Per i docenti orientatori", l'anteprima della cartolina
+  "Vieni a trovarci" (larga al massimo 42rem, proporzioni 3:2, bordo
+  sottile grigio e ombra leggera; si vede la cartolina rifilata, senza
+  abbondanza) e sotto i pulsanti "Scarica la cartolina in PDF ›"
+  (pieno) e "Gira la cartolina ›" (vuoto): affiancati al computer, sul
+  telefono uno sotto l'altro a tutta larghezza. Nessun altro testo
+  visibile. Le scritte stanno nella sezione `ORIENTATORI` di
+  `comuni.txt`.
+  - Fronte e retro li disegna `js/cartolina-facciate.js`, lo stesso
+    codice di `cartolina.html`, con gli stessi file: niente immagini
+    copiate. `cartolina.html` resta la pagina da stampare.
+  - La cartolina è un pulsante (`role="button"`): con un tocco, Invio o
+    la barra spaziatrice si gira di 180 gradi in orizzontale in 0,8
+    secondi; anche il pulsante "Gira la cartolina" la gira. Con
+    `prefers-reduced-motion` il cambio di faccia è immediato. Per il
+    lettore di schermo si chiama "Cartolina del Natta: tocca per
+    girarla" e, dopo ogni giro, un testo nascosto annuncia "Fronte della
+    cartolina" o "Retro della cartolina".
+  - Il PDF è `materiali/cartolina-natta.pdf` (va online, a differenza di
+    `materiali-grezzi/`), salvato da Alessandra con la funzione Stampa
+    di Edge quando la cartolina è approvata. Se il file non c'è, il
+    pulsante non compare.
   Il timbro è largo 110 px sul telefono e 120 al computer,
   scritta lungo il cerchio a 11 px sul telefono; è decorativo
   (`aria-hidden`), le parole vengono da `comuni.txt` e `home.txt`.

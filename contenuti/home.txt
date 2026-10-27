@@ -12,9 +12,14 @@
 # aggiunge l'anno degli open day scritto in comuni.txt: "ORIENTAMENTO
 # 2026/27". La stessa parola compare anche nel timbro del piede.
 occhiello: Orientamento
+# Il titolo grande della home, in due lingue: compare la frase in
+# inglese e, toccandola, si gira e diventa quella in italiano. Le due
+# frasi compaiono esattamente come sono scritte qui.
+titolo-inglese: The next step is yours.
+titolo-italiano: Il prossimo passo è tuo.
 # Il claim generale della scuola (provvisorio, da rivedere insieme agli
-# altri). Nella home è il titolo grande, scritto esattamente così,
-# maiuscole comprese; lo usa anche la cartolina.
+# altri). Dal 27 ottobre 2026 non compare: nella home il titolo è
+# quello qui sopra. Resta qui per quando servirà di nuovo.
 claim: Un'unica scuola, tanti modi di imparare.
 # Si possono aggiungere, sotto il titolo, righe "testo" (ognuna è un
 # paragrafo) e una riga "testo-adulti" sopra il pulsante. Per ora non

@@ -89,3 +89,9 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Vanno online con i segnaposto, per scelta: [DA COMPLETARE] in Scienze applicate e Liceo Matematico, "(da definire)" nelle frasi brevi dei percorsi. Prima di dare il link alle famiglie o di stampare la cartolina, questi testi vanno completati.
 - Restano da fare dopo: testi di Scienze applicate e Liceo Matematico, frasi brevi "(da definire)", spazi larghi nelle colonne strette, blu del Liceo Digitale.
 - L'etichetta grafica-ottobre conserva la versione precedente.
+
+## Titolo della home e pagina per i docenti orientatori (decisi il 27 ottobre 2026, pomeriggio)
+- Titolo della home: "The next step is yours.", che toccandolo si gira in orizzontale come la cartolina (0,8 s) e diventa "Il prossimo passo è tuo."; un secondo tocco torna all'inglese. Scelta di Alessandra; Claude aveva consigliato di tenere "Un'unica scuola, tanti modi di imparare." (titolo non compreso da tutti, traduzione dietro un gesto, legame con il disegno). Il claim resta in home.txt ma non compare.
+- Accorgimenti: un unico h1 con entrambe le frasi per i lettori di schermo, la frase inglese con lang="en"; sotto il titolo un piccolo segno grigio a forma di freccia circolare; un solo giro automatico di andata e ritorno dopo il disegno delle linee; per chi riduce il movimento niente rotazioni.
+- Sezione per i docenti nella home: scartata. Al suo posto, nel piede di tutte le pagine, "Sei un docente orientatore? Scarica la cartolina del Natta ›" verso orientatori.html: titolo, cartolina che si gira (al massimo 42rem, stesso codice di cartolina.html) e i pulsanti "Scarica la cartolina in PDF ›" e "Gira la cartolina ›". cartolina.html resta la pagina da stampare.
+- La riga nel piede resta nascosta ("stato: in preparazione" in comuni.txt) finché la cartolina per la stampa non è definitiva e il PDF materiali/cartolina-natta.pdf non è salvato.

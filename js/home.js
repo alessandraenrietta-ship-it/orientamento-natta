@@ -37,11 +37,63 @@
       serali(file[2], file[0]);
       document.getElementById("contenuto").hidden = false;
       G.disegno(document.getElementById("disegno"));
+      giroAutomatico(document.getElementById("disegno"));
     })
     .catch(function (errore) {
       console.error(errore);
       document.getElementById("avviso").hidden = false;
     });
+
+  /* ---------------------------------------------------------------
+     IL TITOLO CHE SI GIRA
+     "The next step is yours." sul davanti e "Il prossimo passo è tuo."
+     sul retro. Toccando il titolo o la freccia circolare sotto (un vero
+     pulsante, "Gira il titolo", che si usa anche da tastiera) si gira
+     di 180 gradi in orizzontale in 0,8 secondi, come la cartolina; un
+     secondo tocco torna all'inglese. Quando le tre linee del disegno
+     hanno finito di disegnarsi, il titolo fa da solo un giro di andata
+     e ritorno, una sola volta, se la persona non l'ha già toccato. Per
+     chi ha chiesto di ridurre il movimento niente giro automatico, e il
+     tocco scambia le frasi senza movimento (grafica.css).
+     --------------------------------------------------------------- */
+
+  var titoloToccato = false;
+  var MENO_MOVIMENTO = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* Quanto dura il giro e quanto resta in italiano il giro automatico,
+     in millisecondi */
+  var DURATA_GIRO = 800;
+  var ATTESA_ITALIANO = 2000;
+
+  function giraTitolo() {
+    document.getElementById("titolo-gira").classList.toggle("girato");
+  }
+
+  function titoloCheSiGira() {
+    /* Un solo ascoltatore per tutta l'area: titolo e freccia. Il
+       pulsante della freccia riceve anche Invio e barra spaziatrice
+       dalla tastiera, e il browser li trasforma in un clic. */
+    document.getElementById("titolo-gira").addEventListener("click", function () {
+      titoloToccato = true;
+      giraTitolo();
+    });
+  }
+
+  /* Il giro automatico, dopo l'ultima delle tre linee del disegno */
+  function giroAutomatico(disegno) {
+    if (MENO_MOVIMENTO) { return; }
+    var finite = 0;
+    disegno.addEventListener("animationend", function fine() {
+      finite++;
+      if (finite < 3) { return; }
+      disegno.removeEventListener("animationend", fine);
+      if (titoloToccato) { return; }
+      giraTitolo();
+      setTimeout(function () {
+        if (!titoloToccato) { giraTitolo(); }
+      }, DURATA_GIRO + ATTESA_ITALIANO);
+    });
+  }
 
   function riempi(home, comuni) {
     /* Testata: il nome della scuola (il maiuscolo lo mette grafica.css) */
@@ -55,19 +107,11 @@
     } else {
       occhiello.hidden = true;
     }
-    /* Il titolo grande è il claim generale della scuola, sempre su due
-       righe: va a capo dopo la prima virgola ("Un'unica scuola," /
-       "tanti modi di imparare."). Il testo in home.txt resta intero; il
-       lettore di schermo legge la frase di seguito. */
-    var claimGenerale = home.campo("APERTURA", "claim");
-    var titolo = document.getElementById("titolo");
-    var virgola = claimGenerale.indexOf(",");
-    if (virgola === -1) {
-      C.scrivi(titolo, claimGenerale);
-    } else {
-      C.scrivi(titolo, claimGenerale.slice(0, virgola + 1) + " ");
-      titolo.appendChild(elemento("span", "titolo-seconda-riga", claimGenerale.slice(virgola + 1).trim()));
-    }
+    /* Il titolo grande, in inglese sul davanti e in italiano sul retro:
+       si gira toccandolo (vedi titoloCheSiGira, più sopra) */
+    C.scrivi(document.getElementById("titolo-inglese"), home.campo("APERTURA", "titolo-inglese"));
+    C.scrivi(document.getElementById("titolo-italiano"), home.campo("APERTURA", "titolo-italiano"));
+    titoloCheSiGira();
     var presentazione = document.getElementById("presentazione");
     home.campi("APERTURA", "testo").forEach(function (testo) {
       presentazione.appendChild(C.scrivi(document.createElement("p"), testo));

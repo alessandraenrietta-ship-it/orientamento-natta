@@ -61,3 +61,22 @@ venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30
 sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00
 mercoledì | 16 dicembre | 17.30-18.30 | 18.30-19.30
 venerdì | 15 gennaio | 17.30-18.30 | 18.30-19.30
+
+== ORIENTATORI ==
+# La pagina per i docenti orientatori (orientatori.html) e la riga che
+# la annuncia in cima al piede di tutte le altre pagine: "Sei un
+# docente orientatore? Scarica la cartolina del Natta ›". Le frecce
+# "›" le aggiunge il sito.
+domanda: Sei un docente orientatore?
+collegamento: Scarica la cartolina del Natta
+titolo: Per i docenti orientatori
+pulsante-pdf: Scarica la cartolina in PDF
+pulsante-gira: Gira la cartolina
+# Il PDF della cartolina, salvato da Alessandra con la funzione Stampa
+# di Edge (da cartolina.html) quando la cartolina è definitiva. Se il
+# file non c'è, il pulsante per scaricarlo non compare.
+pdf: materiali/cartolina-natta.pdf
+# pronta oppure in preparazione. Con "in preparazione" la riga nel
+# piede non compare su nessuna pagina; si scrive "pronta" solo quando
+# la cartolina per la stampa è definitiva e il PDF è salvato.
+stato: in preparazione

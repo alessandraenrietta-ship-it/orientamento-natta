@@ -3,7 +3,12 @@
 Tutti i testi stanno nella cartella `contenuti/`. Si aprono con il Blocco
 note. Non serve toccare nessun altro file.
 
-- `comuni.txt`: contatti e open day, validi per tutte le pagine.
+- `comuni.txt`: contatti e open day, validi per tutte le pagine. La
+  sezione `ORIENTATORI` contiene le scritte della pagina per i docenti
+  orientatori (`orientatori.html`) e della riga che la annuncia nel
+  piede, il PDF della cartolina e `stato`. Con `stato: in
+  preparazione` la riga nel piede non compare; si scrive `pronta` solo
+  quando la cartolina è definitiva e il PDF è salvato in `materiali/`.
   - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
     usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
@@ -35,8 +40,9 @@ note. Non serve toccare nessun altro file.
     la scritta rossa del campo `esaurito` (oggi "Esaurito").
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   `occhiello` è la riga piccola sopra il titolo (il sito ci aggiunge
-  l'anno degli open day) e `claim` è il titolo grande (lo usa anche la
-  cartolina); ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
+  l'anno degli open day); `titolo-inglese` e `titolo-italiano` sono il
+  titolo grande, in inglese e, quando lo si gira, in italiano; `claim`
+  oggi non compare; ogni riga `testo` è un paragrafo; `testo-adulti` è la riga per gli
   adulti; `pulsante-diurno` e `pulsante-adulti` sono le scritte dei due
   pulsanti che portano alla sezione degli indirizzi e a quella dei
   serali. Righe e pulsanti senza testo non compaiono. Nella tabella

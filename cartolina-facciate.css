@@ -1,0 +1,311 @@
+/* ==================================================================
+   LE DUE FACCIATE DELLA CARTOLINA "VIENI A TROVARCI"
+
+   L'aspetto di fronte e retro, disegnati da js/cartolina-facciate.js.
+   Lo usano la pagina da stampare (cartolina.html) e la pagina per
+   i docenti orientatori (orientatori.html): la cartolina è una sola.
+
+   Formato 15 x 10 cm orizzontale, fondo bianco. Le misure sono in
+   millimetri e i caratteri in punti, come in tipografia. Il modello è
+   materiali-grezzi/cartolina-modello-NON-PUBBLICARE.pdf (solo sul
+   computer di Alessandra).
+
+   - Ogni facciata è di 156 x 106 mm: la cartolina (150 x 100) più
+     3 mm di ABBONDANZA su ogni lato, cioè il fondo che esce oltre il
+     taglio. Serve perché la lama non taglia mai esattamente sulla
+     linea: senza, resterebbe un filo bianco sul bordo.
+   - I testi stanno ad almeno 5 mm dal taglio, cioè a 8 mm dal bordo
+     della facciata: la ZONA DI SICUREZZA.
+   - Un solo carattere, Cutive Mono, come nel sito.
+
+   Tutte le regole valgono solo dentro la cartolina (cominciano con
+   .facciata): colori e misure della cartolina non toccano il sito.
+   I colori sono gli stessi del sito, ma scritti qui: se là ne cambia
+   uno, si cambia anche qui.
+   ================================================================== */
+
+@font-face {
+  font-family: "Cutive Mono";
+  src: url("fonts/cutive-mono-regular.ttf?v=1") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+/* ---------------------------------------------------------------
+   LA FACCIATA (fronte o retro), 156 x 106 mm, fondo bianco.
+   Tutti i pezzi hanno una posizione fissa, in millimetri dall'angolo
+   in alto a sinistra della facciata (abbondanza compresa).
+   --------------------------------------------------------------- */
+
+.facciata {
+  --verde:         #026C37;
+  --blu-notte:     #00193C;
+  --grigio:        #5B6B80;
+  --inchiostro:    #1F3A6B;   /* il timbro */
+  --filetto:       #C9C9C4;   /* i filetti del retro */
+  --bianco:        #FFFFFF;
+  --meccanica:     #C2410C;
+  --grafica:       #B8326F;
+  --liceo:         #1F5FA8;
+  --carattere:     "Cutive Mono", "Courier New", monospace;
+  --abbondanza: 3mm;
+  --sicurezza:  8mm;   /* 3 mm di abbondanza + 5 mm dal taglio */
+
+  position: relative;
+  width: 156mm;
+  height: 106mm;
+  overflow: hidden;
+  font-family: var(--carattere);
+  font-size: 12pt;
+  font-weight: normal;
+  font-synthesis: none;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  color: var(--blu-notte);
+  background: var(--bianco);
+}
+
+.facciata *,
+.facciata *::before,
+.facciata *::after { box-sizing: border-box; }
+
+.facciata p,
+.facciata ul { margin: 0; padding: 0; list-style: none; }
+
+.facciata .tono-meccanica { --tono: var(--meccanica); }
+.facciata .tono-grafica   { --tono: var(--grafica); }
+.facciata .tono-liceo     { --tono: var(--liceo); }
+
+
+/* ---------------------------------------------------------------
+   IL FRONTE
+   La scuola disegnata dalle tre linee, larga quanto la facciata: le
+   linee entrano ed escono dai bordi, abbondanza compresa. Le linee
+   sono di 0,4 mm (lo spessore lo mette js/cartolina-facciate.js). Il
+   QR prende il posto del portone, sotto il tetto curvo fra le due
+   torri, a circa 5 mm dalle linee. Sotto, il nome della scuola.
+   --------------------------------------------------------------- */
+
+.facciata .fronte-disegno {
+  position: absolute;
+  top: 26mm;
+  left: 0;
+  width: 156mm;
+  height: auto;
+}
+
+/* Il QR, largo 25 mm con il suo margine bianco: blu notte su riquadro
+   bianco. Al centro della facciata, in orizzontale. */
+.facciata .fronte-qr {
+  position: absolute;
+  top: 46mm;
+  left: 65.5mm;    /* (156 - 25) / 2 */
+  width: 25mm;
+  height: 25mm;
+  background: var(--bianco);
+}
+.facciata .fronte-qr svg { display: block; width: 100%; height: 100%; }
+
+.facciata .fronte-nome {
+  position: absolute;
+  top: 91mm;
+  left: var(--sicurezza);
+  right: var(--sicurezza);
+  font-size: 9pt;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--blu-notte);
+}
+
+
+/* ---------------------------------------------------------------
+   IL RETRO, come una cartolina postale, diviso a metà da un filetto
+   verticale grigio. A sinistra l'invito, gli indirizzi e la firma; a
+   destra onde, timbro, francobollo e destinatario; in basso, a tutta
+   larghezza, il sottopancia con i contatti.
+   --------------------------------------------------------------- */
+
+.facciata .retro-sinistra {
+  position: absolute;
+  top: 15mm;
+  left: 9mm;
+  width: 66mm;
+}
+
+.facciata .retro-invito {
+  margin-bottom: 6mm;
+  font-size: 18pt;   /* circa 19: a 18 sta su una riga nei 66 mm della colonna */
+  line-height: 1.1;
+  color: var(--verde);
+}
+
+/* I tre indirizzi: trattino del loro colore, tipo in grigio e sotto
+   il nome, come nella home */
+.facciata .retro-indirizzi li {
+  position: relative;
+  margin-bottom: 3mm;
+  padding-left: 6.5mm;
+  line-height: 1.3;
+}
+
+.facciata .retro-indirizzi li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5mm;
+  width: 4.5mm;
+  height: 0.5mm;
+  background: var(--tono);
+}
+
+.facciata .retro-tipo {
+  display: block;
+  font-size: 7.5pt;
+  color: var(--grigio);
+}
+
+.facciata .retro-nome {
+  display: block;
+  font-size: 8.5pt;
+  color: var(--blu-notte);
+}
+
+.facciata .retro-saluto {
+  margin-top: 5mm;
+  font-size: 8.5pt;
+}
+
+/* La firma di Giulio Natta, larga 37 mm, in blu notte: l'immagine fa
+   da stampo (mask) e il colore la riempie, qualunque sia il colore del
+   file */
+.facciata .retro-firma {
+  display: block;
+  width: 37mm;
+  aspect-ratio: 2000 / 534;
+  margin-top: 1.5mm;
+  background: var(--blu-notte);
+  -webkit-mask: var(--firma) left center / contain no-repeat;
+          mask: var(--firma) left center / contain no-repeat;
+}
+
+.facciata .retro-filetto {
+  position: absolute;
+  top: 12mm;
+  left: 78mm;
+  width: 0.25mm;
+  height: 76mm;
+  background: var(--filetto);
+}
+
+/* Le onde di annullo, a sinistra del timbro */
+.facciata .retro-onde {
+  position: absolute;
+  top: 15.5mm;
+  left: 85mm;
+  width: 16.5mm;
+  height: 7mm;
+  overflow: visible;
+}
+.facciata .onda {
+  fill: none;
+  stroke: var(--tono);
+  stroke-width: 3.5;   /* 0,35 mm */
+  stroke-linecap: round;
+}
+
+/* Il timbro rotondo blu inchiostro, leggermente ruotato: lo disegna
+   js/grafica.js, come nel piede del sito */
+.facciata .retro-timbro {
+  position: absolute;
+  top: 9.5mm;
+  left: 105mm;
+  width: 19mm;
+  height: 19mm;
+  color: var(--inchiostro);
+  transform: rotate(-12deg);
+}
+.facciata .retro-timbro svg { display: block; width: 100%; height: 100%; }
+.facciata .timbro-bordo { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.facciata .timbro-scritta { font-family: var(--carattere); font-size: 12px; fill: currentColor; }
+.facciata .timbro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46%;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: currentColor;
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+/* Il francobollo verde, 17,7 x 21 mm, in alto a destra, dentro la zona
+   di sicurezza. Il logo è il file piccolo (231 x 155 pixel), largo
+   11 mm, colorato di bianco: per la stampa servirà l'originale. */
+.facciata .retro-francobollo {
+  position: absolute;
+  top: 8.5mm;
+  left: 129.5mm;
+  width: 17.7mm;
+  height: 21mm;
+}
+.facciata .retro-francobollo svg { display: block; width: 100%; height: 100%; }
+.facciata .francobollo-fondo { fill: var(--verde); }
+.facciata .francobollo-dente { fill: var(--bianco); }
+.facciata .francobollo-cornice {
+  fill: none;
+  stroke: var(--bianco);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+.facciata .francobollo-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11mm;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: var(--bianco);
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+/* Il destinatario: l'etichetta grigia maiuscola, poi tre righe con il
+   filetto sotto; l'ultima resta vuota per il nome */
+.facciata .retro-destinatario {
+  position: absolute;
+  top: 55mm;
+  left: 85.5mm;
+  width: 61.5mm;
+}
+
+.facciata .retro-etichetta {
+  margin-bottom: 2mm;
+  font-size: 7pt;
+  letter-spacing: 0.25em;
+  color: var(--grigio);
+}
+
+.facciata .retro-riga {
+  height: 6.5mm;
+  padding-top: 1.6mm;
+  font-size: 8.5pt;
+  border-bottom: 0.25mm solid var(--filetto);
+}
+
+/* Il sottopancia: filetto orizzontale e, sotto, i contatti su una riga */
+.facciata .retro-sottopancia {
+  position: absolute;
+  top: 92mm;
+  left: 9mm;
+  right: 9mm;
+  padding-top: 1.8mm;
+  font-size: 7pt;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--grigio);
+  border-top: 0.25mm solid var(--filetto);
+}
