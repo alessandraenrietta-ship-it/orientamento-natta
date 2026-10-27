@@ -629,6 +629,11 @@ button.pulsante {
   font-size: 1.25rem;
 }
 
+/* Il nome del corso serale nel colore del suo indirizzo, come il
+   trattino e come i nomi degli indirizzi del diurno: arancione e rosa
+   (scelta di Alessandra, 27 ottobre 2026 sera) */
+.serali-percorsi li { color: var(--tono, var(--blu-notte)); }
+
 
 /* -----------------------------------------------------------------
    CONTATTI
