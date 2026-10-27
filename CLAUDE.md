@@ -79,18 +79,22 @@ adulti interessati ai corsi serali.
   Google Fonts. Ha un solo spessore, senza grassetto: titoli e nomi si
   distinguono per grandezza, colore e maiuscolo, e `font-synthesis:
   none` impedisce il grassetto finto. Testi ad almeno 16 px (di base
-  17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: oggi lo usa la home;
-  le altre pagine sono ancora in Arial finché non passano alla grafica
-  nuova (punto 13).
+  17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: lo
+  usano la home e le pagine del liceo (punto 13); solo la vecchia
+  cartolina resta in Arial. Eccezioni volute sotto i 16 px: i turni
+  degli open day e la tabella del quadro orario sul telefono (14), le
+  intestazioni della tabella (12-13), la scritta del timbro.
 
 ## 6. Grafica
 
-**Attenzione:** la home (`index.html`) ha la grafica nuova "a
-cartolina", descritta al punto 13. Le regole di questo punto valgono
-per le altre pagine, che usano ancora `stile.css`, finché non si
-rifanno anche loro; le parti che parlano della home (fasce della home,
-schede degli indirizzi, open day, serali, contatti, piede della home)
-sono superate.
+**Attenzione:** la home (`index.html`) e le quattro pagine del liceo
+hanno la grafica nuova "a cartolina", descritta al punto 13, e usano
+`grafica.css`. Le regole sulla grafica "a fasce" di questo punto non
+valgono più per nessuna pagina del sito: restano come memoria della
+versione precedente (etichetta Git `grafica-ottobre`). `stile.css` e
+`immagini/simboli.svg` non li usa più nessuna pagina; restano finché
+il ramo `grafica-cartolina` non viene unito a `main`. Valgono ancora,
+di questo punto, le regole su colori, contrasti, grafia e contenuti.
 
 - **Un solo tema, chiaro.** Il tema scuro è stato eliminato: niente
   interruttore, niente regole CSS o codice JavaScript per il tema scuro.
@@ -149,76 +153,69 @@ sono superate.
   "esaurito" dopo l'orario; la scritta sta nel campo `esaurito`). Il rosso `#B91C1C` (contrasto 6,5 sul
   bianco) si usa solo qui e sempre insieme a forma e scritta, mai da
   solo: per chi è daltonico rosso e verde si confondono.
-- Pagina del liceo (`liceo.html`): testata e piede della home; apertura
-  verde centrata (i collegamenti "‹ Torna alla home" e, nei percorsi,
-  "‹ Torna al liceo" sono nascosti su richiesta di Alessandra: righe
-  commentate in `liceo.txt`), il quadratino blu con la lampadina, il claim del liceo (preso da
-  `home.txt`) piccolo sopra il titolo; il titolo è un solo h1 su due
-  righe, "titolo" e, al 60% della grandezza, "titolo-riga-2".
-  Disposizione mista, solo con il CSS: sul telefono lampadina (quadratino
-  di 80 pixel), claim, titolo e sottotitolo uno sotto l'altro; dai 600
-  pixel in su claim in alto, poi lampadina e titolo affiancati (quadratino
-  alto quanto le due righe del titolo, gruppo centrato), poi il
-  sottotitolo. Fra 600 e circa 770 pixel il titolo rimpicciolisce per
-  restare su due righe. Sotto,
-  su fascia chiara, le tre schede dei percorsi, ognuna un unico link
-  cliccabile per intero, nessun simbolo, con un bordo di 2 pixel nel
-  tono del percorso:
-  - parte alta piena nel tono del percorso (vedi più sotto), con il
-    nome in Arial Black maiuscolo bianco centrato (24 pixel a 375 di
-    schermo, 26 più largo, mai sotto 22: non deve andare a capo) e un
-    filetto giallo decorativo di 56×5 pixel;
-  - parte bianca con la spiegazione breve e la pillola "Scopri il
-    percorso ›", nello stesso tono della parte alta, testo bianco in
-    grassetto, larga quanto la scheda, in fondo. La pillola è solo
-    grafica (nascosta al lettore di schermo), non un secondo link.
+- Pagina del liceo (`liceo.html`), grafica a cartolina (punto 13):
+  testata e piede della home, con logo e nome che portano alla home.
+  Apertura bianca centrata: il titolo è un solo h1 su due righe,
+  "titolo" in verde e, al 60% della grandezza, "titolo-riga-2"; sotto
+  il claim del liceo (preso da `home.txt`) in verde, niente occhiello;
+  poi il disegno della scuola della home con le stesse linee e la
+  stessa animazione, ma nei tre toni dei percorsi (esterna azzurro
+  `#2A7AB0`, centrale blu `#1F5FA8`, interna blu scuro `#0F3460`), con
+  i tratti esterni fino ai bordi al computer; poi il sottotitolo. I
+  collegamenti "‹ Torna alla home" e, nei percorsi, "‹ Torna al liceo"
+  sono nascosti su richiesta di Alessandra (righe commentate in
+  `liceo.txt`). Sotto, i tre percorsi come gli indirizzi della home:
+  trattino corto nel tono del percorso, nome in blu notte, spiegazione
+  breve, pulsante secondario "Scopri il percorso ›". Ogni percorso è un
+  unico collegamento, cliccabile per intero (il link sul nome si
+  allarga a tutto il percorso); il pulsante è solo grafico, nascosto al
+  lettore di schermo. Sul telefono uno sotto l'altro, al computer tre
+  colonne con nome, spiegazione e pulsante su righe comuni (subgrid).
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e gli attributi `data-percorso` e `data-ore` del
-  `<body>`. Fasce, in quest'ordine:
-  1. apertura verde: etichetta e titolo centrati, sotto la spiegazione
-     larga quanto la fascia interna;
-  2. fascia chiara con tre schede: "Che cosa si impara" (elenco),
-     "Come si studia" (paragrafo), "A chi si rivolge" (elenco). Stile
-     delle schede dei percorsi di `liceo.html`: parte alta nel tono del
-     percorso con il titolo (h2) bianco in Arial Black maiuscolo circa
-     1.05rem, parte bianca con il retino, bordo di 2 pixel. Dagli 800
-     pixel affiancate e alte uguali;
-  3. quadro orario su fascia blu (tono del percorso);
-  4. "Dopo il diploma", fascia chiara.
-  Nelle pagine dei percorsi i titoli delle fasce ("Quadro orario", "Dopo
-  il diploma") sono scritti in minuscolo, non in maiuscolo come nel resto
-  del sito.
+  `<body>`. Sezioni, in quest'ordine, separate dai filetti grigi:
+  1. apertura bianca centrata: occhiello grigio maiuscolo "Liceo
+     scientifico, opzione Scienze applicate", il nome del percorso in
+     verde, poi la spiegazione in blu notte allineata a sinistra;
+  2. "Che cosa si impara" (elenco), "Come si studia" (paragrafo), "A chi
+     si rivolge" (elenco): non sono schede, ma tre parti con il titolo
+     in verde e il testo sotto; le voci degli elenchi hanno un trattino
+     grigio `#5B6B80`. Sul telefono una sotto l'altra separate dal
+     filetto, al computer tre colonne;
+  3. "Quadro orario";
+  4. "Dopo il diploma", sezione normale con il titolo in verde.
   Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
-  nessuna delle tre schede sparisce la loro fascia. La fascia
-  "Laboratori e progetti" non esiste più. Tutti i testi (spiegazione,
-  schede, Dopo il diploma) sono giustificati, anche sul telefono, con
-  la sillabazione automatica. Nella
+  nessuna delle tre parti sparisce la loro sezione. La fascia
+  "Laboratori e progetti" non esiste più. Nessun testo è giustificato
+  e non c'è la sillabazione automatica. I segnaposto `[DA COMPLETARE]`
+  di Scienze applicate e Liceo Matematico restano visibili. Nella
   pagina del Liceo Digitale nessun collegamento al sito del Liceo
   Digitale.
 - Grafia: sempre "Liceo scientifico, opzione Scienze applicate", con la
   virgola, nei testi, nei titoli delle schede del browser e nelle
   descrizioni delle pagine.
-- Quadro orario: una vera tabella in una scheda bianca senza retino,
-  che sul telefono sta in 375 pixel senza scorrere di lato.
-  - La fascia del quadro orario (`fascia-quadro`) ha il fondo pieno nel
-    tono del percorso, con il titolo "Quadro orario" giallo, centrato, scritto in minuscolo, e la
-    tabella sulla sua scheda bianca.
-  - Intestazione: una fascia piena nel tono del percorso, scritte in
-    bianco grassetto, su due righe: i gruppi "Primo biennio", "Secondo
-    biennio", "Quinto anno" (11 pixel sul telefono, 13 al computer,
-    sempre su due righe: "Primo / biennio") e sotto "Materia" e gli
-    anni. Due linee verticali di 2 pixel dividono i gruppi: bianche
-    nell'intestazione, blu notte nel resto della tabella.
-  - Colonne degli anni: le prime quattro larghe uguali (2,6rem sul
-    telefono, il minimo perché "Quinto" ci entri; 4,5rem al computer),
-    il quinto anno più largo (3,2rem; 5,5rem al computer). Righe
-    bianche, numeri in grassetto blu notte, trattini grigi `#5B6B80`.
-  - Ore in più (Matematico e Digitale): dopo il quadro base, sotto una
-    riga-titolo "In più nel ..." nel tono del percorso, testo bianco
-    maiuscolo. Niente giallo, niente legenda.
-  - Ultima riga "Totale", con i totali calcolati dal sito in Arial
-    Black.
+- Quadro orario: una tabella classica anche sul telefono, che sta in
+  375 pixel senza scorrere di lato (testo della tabella a 14 pixel sul
+  telefono, 16 dai 40rem; al computer larga al massimo 50rem). Titolo
+  "Quadro orario" in verde; niente fascia colorata, niente scheda
+  bianca, niente intestazione piena.
+  - Intestazione in grigio `#5B6B80` maiuscolo piccolo (12 pixel sul
+    telefono, 13 al computer), su due righe: i gruppi "Primo biennio",
+    "Secondo biennio", "Quinto anno" (sempre su due righe: "Primo /
+    biennio") e sotto "Materia" e gli anni.
+  - Righe separate da filetti grigi sottili; due linee verticali di 1
+    pixel blu notte `#00193C` fra primo biennio, secondo biennio e
+    quinto anno, dall'intestazione al totale.
+  - Colonne degli anni: le prime quattro larghe uguali (2,3rem sul
+    telefono, 4,5rem al computer), il quinto anno più largo (3,3rem;
+    5,5rem al computer). Numeri in blu notte, trattini grigi.
+  - Ore in più (Matematico e Digitale): dopo il quadro base, la riga
+    "In più nel Liceo Matematico" / "In più nel Liceo Digitale" con un
+    trattino e la scritta maiuscola nel tono del percorso, senza fondo
+    pieno. Niente giallo, niente legenda.
+  - Ultima riga "Totale", con un filetto blu notte sopra e i totali,
+    calcolati dal sito, in verde `#026C37`.
 - I serali hanno tono da adulti: nei loro testi non si usa il "tu". I
   loro testi stanno in `contenuti/serali.txt`.
 - **Il colore della scuola è il verde** `#026C37`: fasce verdi, pulsanti,
@@ -232,15 +229,15 @@ sono superate.
   - Grafica: rosa scuro `#B8326F` (bianco 5,6), occhio
   - Liceo: blu `#1F5FA8` (bianco 6,4), lampadina
   - Serali: ardesia `#3A4756`, luna (colore da rivedere)
-- Percorsi del liceo: tre toni di blu, legati al percorso e non alla
-  posizione, usati come fondo della parte alta delle schede e della
-  pillola "Scopri il percorso", sempre con testo bianco grande o in
-  grassetto (mai testo piccolo e sottile su questi fondi):
-  - Scienze applicate: azzurro `#2A7AB0` (bianco 4,7)
-  - Liceo Matematico: blu `#1F5FA8` (bianco 6,4)
-  - Liceo Digitale: blu scuro `#0F3460` (bianco 12,5)
-  Simboli previsti ma non ancora usati: beuta (Scienze applicate), π
-  disegnato come forma (Liceo Matematico), `</>` (Liceo Digitale).
+- Percorsi del liceo: tre toni del blu del liceo, legati al percorso e
+  non alla posizione, usati solo nelle pagine del liceo per le linee
+  del disegno, il trattino accanto al nome e la riga "In più nel ..."
+  del quadro orario (sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5):
+  - Scienze applicate: azzurro `#2A7AB0`
+  - Liceo Matematico: blu `#1F5FA8`
+  - Liceo Digitale: blu scuro `#0F3460` (molto vicino al blu notte del
+    testo: da tenere d'occhio)
+  Nessun simbolo per i percorsi.
 - I colori sono stati verificati per contrasto (testo almeno 4,5:1) e per
   deuteranopia e protanopia. **Non si cambiano senza dirlo ad
   Alessandra.**
@@ -411,17 +408,20 @@ Digitale) e `contenuti/cartolina.txt`.
 - Ancora aperti: tipografia o stampa a scuola e numero di copie,
   dominio del sito, logo in un file per la stampa.
 
-## 13. La grafica "a cartolina" (home)
+## 13. La grafica "a cartolina" (home e pagine del liceo)
 
 Decisa con Alessandra il 26 ottobre 2026, corretta la sera stessa.
 Le decisioni complete, anche sulla nuova cartolina "Vieni a
 trovarci", stanno in `docs/decisioni-grafica.md`: si leggono prima
-di lavorare sulla grafica. Per ora la grafica nuova la ha solo la home;
-le altre pagine passano dopo. Lo stato del sito prima del cambio è
+di lavorare sulla grafica. La grafica nuova la hanno la home e le
+quattro pagine del liceo (le regole del liceo sono al punto 6);
+mancano ancora le pagine degli indirizzi tecnici e dei serali. Lo stato del sito prima del cambio è
 segnato dall'etichetta Git `grafica-ottobre`; il lavoro sta sul ramo
 `grafica-cartolina` finché Alessandra non dice di unirlo a `main`.
-File: `grafica.css` (lo usa solo `index.html`; `stile.css` resta per
-le altre pagine), `js/home.js`, `immagini/linee-scuola.svg`, `fonts/`.
+File: `grafica.css` (tutte le pagine del sito tranne la cartolina),
+`js/grafica.js` (il disegno delle linee e il timbro, per la home e il
+liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
+`fonts/`.
 
 - **Fondo tutto bianco.** Niente fasce verdi o chiare, niente retino,
   niente filetti gialli, niente schede colorate, niente simboli ad

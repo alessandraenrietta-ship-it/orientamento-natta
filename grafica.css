@@ -60,6 +60,14 @@
   --grafica:       #B8326F;  /* rosa scuro */
   --liceo:         #1F5FA8;  /* blu */
 
+  /* I tre percorsi del liceo: tre toni del blu del liceo, solo nelle
+     pagine del liceo, per le linee del disegno, il trattino accanto al
+     nome e la riga "In più nel ..." del quadro orario.
+     Sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5. */
+  --percorso-scienze:    #2A7AB0;  /* Scienze applicate, azzurro */
+  --percorso-matematico: #1F5FA8;  /* Liceo Matematico, blu */
+  --percorso-digitale:   #0F3460;  /* Liceo Digitale, blu scuro */
+
   /* Rosso SOLO per la scritta "Esaurito" dei turni degli open day:
      6,5 sul bianco. Sempre con la scritta, mai da solo. */
   --rosso:         #B91C1C;
@@ -672,4 +680,315 @@ a:hover { text-decoration-thickness: 2px; }
 
 @media (min-width: 66rem) {
   .date { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+/* =================================================================
+   LE PAGINE DEL LICEO
+   liceo.html e le tre pagine dei percorsi (liceo-scienze-applicate,
+   liceo-matematico, liceo-digitale). Valgono tutte le regole qui
+   sopra; qui ci sono solo le parti che la home non ha.
+   Prima lo smartphone; computer e LIM in fondo.
+   ================================================================= */
+
+/* Il tono di ogni percorso: la classe viene dal nome del file della
+   pagina (liceo-matematico.html dà "tono-liceo-matematico") */
+.tono-liceo-scienze-applicate { --tono: var(--percorso-scienze); }
+.tono-liceo-matematico        { --tono: var(--percorso-matematico); }
+.tono-liceo-digitale          { --tono: var(--percorso-digitale); }
+
+/* Nelle pagine interne logo e nome sono un collegamento alla home */
+.marchio-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--verde);
+  text-decoration: none;
+}
+
+.marchio-link:hover .marchio-nome { text-decoration: underline; }
+
+/* "‹ Torna alla home" e "‹ Torna al liceo": oggi nascosti (righe
+   commentate in liceo.txt); se tornano, stanno in alto a sinistra */
+.torna { margin: 0 0 1rem; text-align: left; font-size: 1rem; }
+
+
+/* -----------------------------------------------------------------
+   LICEO.HTML: L'APERTURA
+   Centrata: il titolo su due righe in verde, sotto il claim del liceo
+   in verde, il disegno della scuola nei tre toni dei percorsi, poi il
+   sottotitolo.
+   ----------------------------------------------------------------- */
+
+.titolo-liceo { margin-bottom: 0.6rem; }
+
+/* La seconda riga del titolo, più piccola */
+.titolo-riga-2 {
+  display: block;
+  font-size: 0.6em;
+  line-height: 1.3;
+}
+
+.claim-liceo {
+  margin: 0;
+  font-size: 1.1875rem;
+  color: var(--verde);
+}
+
+/* Le tre linee nei toni dei percorsi, dall'esterno all'interno:
+   azzurro, blu, blu scuro (il colore scritto nel disegno è quello
+   degli indirizzi; qui lo sostituisce il CSS) */
+.disegno-liceo path:nth-child(1) { stroke: var(--percorso-scienze); }
+.disegno-liceo path:nth-child(2) { stroke: var(--percorso-matematico); }
+.disegno-liceo path:nth-child(3) { stroke: var(--percorso-digitale); }
+
+.sottotitolo-liceo {
+  max-width: 40rem;
+  margin: 0 auto;
+  font-size: 1.125rem;
+}
+
+
+/* -----------------------------------------------------------------
+   LICEO.HTML: I TRE PERCORSI
+   Come gli indirizzi della home: trattino nel tono del percorso
+   accanto al nome, sotto la spiegazione breve e il pulsante
+   secondario "Scopri il percorso ›". Ogni percorso è un unico
+   collegamento: il link sul nome si allarga a coprire tutto il
+   percorso. Il pulsante è solo un disegno.
+   ----------------------------------------------------------------- */
+
+.percorsi {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.percorso {
+  display: flex;
+  flex-direction: column;
+}
+
+.percorso-nome {
+  margin: 0 0 0.6rem;
+  font-size: 1.5rem;
+  color: var(--blu-notte);
+}
+
+.percorso-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Il link si allarga a tutto il percorso */
+.percorso-link::after {
+  content: "";
+  position: absolute;
+  inset: -0.75rem;
+}
+
+.percorso:hover .percorso-nome { text-decoration: underline; text-decoration-thickness: 1px; }
+.percorso:hover .pulsante { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* Il contorno di messa a fuoco gira intorno a tutto il percorso */
+.percorso-link:focus-visible { outline: none; }
+.percorso-link:focus-visible::after {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 0;
+}
+
+.percorso-testo { margin: 0; }
+
+.percorso-fondo { margin: 0; padding-top: 1.2rem; }
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEI PERCORSI: L'APERTURA
+   Centrata: occhiello grigio maiuscolo, il nome del percorso in verde,
+   poi la spiegazione in blu notte allineata a sinistra. In queste
+   pagine nessun testo è giustificato.
+   ----------------------------------------------------------------- */
+
+.apertura-percorso .titolo-sito { margin-bottom: 1.2rem; }
+
+.spiegazione {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEI PERCORSI: CHE COSA SI IMPARA, COME SI STUDIA, A CHI SI
+   RIVOLGE
+   Tre parti con il titolo in verde e il testo sotto. Sul telefono una
+   sotto l'altra, separate dal filetto; al computer tre colonne.
+   Le voci degli elenchi hanno un trattino grigio.
+   ----------------------------------------------------------------- */
+
+.blocchi {
+  display: grid;
+  gap: 2rem;
+}
+
+.blocco + .blocco {
+  padding-top: 2rem;
+  border-top: 1px solid var(--filetto);
+}
+
+.blocco-titolo {
+  margin-bottom: 0.8rem;
+  font-size: 1.375rem;
+}
+
+.blocco-elenco li {
+  position: relative;
+  margin-bottom: 0.7rem;
+  padding-left: 1.6rem;
+}
+
+.blocco-elenco li:last-child { margin-bottom: 0; }
+
+.blocco-elenco li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.9rem;
+  height: 2px;
+  background: var(--grigio);
+}
+
+.testo-sezione { max-width: 46rem; }
+
+
+/* -----------------------------------------------------------------
+   IL QUADRO ORARIO
+   Una tabella classica, anche sul telefono, che sta in 375 pixel
+   senza scorrere di lato (14 pixel sul telefono). Fondo bianco,
+   intestazione in grigio maiuscolo piccolo, righe separate da filetti
+   grigi, due linee verticali blu notte fra primo biennio, secondo
+   biennio e quinto anno. Numeri in blu notte, trattini grigi.
+   "In più nel ..." con un trattino e la scritta nel tono del percorso;
+   "Totale" con un filetto blu notte sopra e i numeri in verde.
+   ----------------------------------------------------------------- */
+
+.orario {
+  width: 100%;
+  max-width: 50rem;     /* al computer le righe non diventano troppo lunghe */
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+/* Colonne degli anni: le prime quattro larghe uguali, il quinto anno
+   più largo, perché sopra c'è "Quinto / anno" da solo */
+.orario-col-anno   { width: 2.3rem; }
+.orario-col-quinto { width: 3.3rem; }
+
+.orario th,
+.orario td {
+  padding: 0.5em 0.2em;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* I nomi delle materie, a sinistra */
+.orario tbody th,
+.orario tfoot th {
+  padding-left: 0;
+  text-align: left;
+}
+
+/* L'intestazione: grigio maiuscolo piccolo (12 pixel) */
+.orario thead th {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.orario thead .orario-materia {
+  padding-left: 0;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.orario thead tr:last-child th { border-bottom: 1px solid var(--filetto); }
+
+.orario tbody tr { border-bottom: 1px solid var(--filetto); }
+
+.orario-nessuna { color: var(--grigio); }
+
+/* Le due linee verticali blu notte: prima del secondo biennio (3°) e
+   prima del quinto anno (5°), dall'intestazione al totale */
+.orario-gruppi th:nth-child(3),
+.orario-gruppi th:nth-child(4),
+.orario-anni th:nth-child(3),
+.orario-anni th:nth-child(5),
+.orario tbody tr > td:nth-of-type(3),
+.orario tbody tr > td:nth-of-type(5),
+.orario tfoot td:nth-of-type(3),
+.orario tfoot td:nth-of-type(5) {
+  border-left: 1px solid var(--blu-notte);
+}
+
+/* La riga "In più nel ...": trattino e scritta nel tono del percorso,
+   senza fondo pieno */
+.orario .orario-titolo-in-piu {
+  padding: 1.2rem 0 0.5rem;
+  text-align: left;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tono, var(--liceo));
+}
+
+.orario-titolo-in-piu::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background: currentColor;
+}
+
+/* Il totale: filetto blu notte sopra, numeri in verde. Il filetto
+   sta sulle celle, non sulla riga: così vince sul filetto grigio
+   della riga di sopra. */
+.orario tfoot th,
+.orario tfoot td { border-top: 1px solid var(--blu-notte); }
+.orario tfoot td { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEL LICEO SU SCHERMI PIÙ LARGHI
+   ----------------------------------------------------------------- */
+
+@media (min-width: 40rem) {
+  .orario { font-size: 1rem; }
+  .orario-col-anno   { width: 4.5rem; }
+  .orario-col-quinto { width: 5.5rem; }
+  .orario thead th { font-size: 0.8125rem; }
+}
+
+/* Al computer i tre percorsi su righe comuni (nome, spiegazione,
+   pulsante) e le tre parti del percorso affiancate */
+@media (min-width: 56rem) {
+  .percorsi {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 0 2.5rem;
+  }
+  .percorso {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+  .blocchi { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+  .blocco + .blocco { padding-top: 0; border-top: 0; }
 }

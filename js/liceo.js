@@ -14,8 +14,12 @@
                      manca per Scienze applicate
    La pagina del liceo non ha data-percorso.
 
-   Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
-   prima di questo.
+   Grafica "a cartolina", come la home (vedi grafica.css): fondo
+   bianco, un trattino nel tono del percorso accanto al nome, niente
+   simboli.
+
+   Ha bisogno di js/contenuti.js, js/comuni.js e js/grafica.js (il
+   disegno e il timbro), che vanno caricati prima di questo.
    ================================================================== */
 
 (function () {
@@ -23,6 +27,7 @@
 
   var C = window.Contenuti;
   var P = window.Pezzi;
+  var G = window.Grafica;
   var elemento = P.elemento;
 
   /* TESTO MODIFICABILE: le scritte fisse delle pagine dei percorsi */
@@ -41,19 +46,24 @@
 
   var percorso = document.body.getAttribute("data-percorso");
 
-  var daLeggere = [C.leggi("contenuti/liceo.txt"), C.leggi("contenuti/comuni.txt")];
-  if (!percorso) { daLeggere.push(C.leggi("contenuti/home.txt")); }
-
-  Promise.all(daLeggere)
+  /* home.txt serve a tutte le pagine per il timbro del piede, e alla
+     pagina del liceo anche per il claim */
+  Promise.all([
+    C.leggi("contenuti/liceo.txt"),
+    C.leggi("contenuti/comuni.txt"),
+    C.leggi("contenuti/home.txt")
+  ])
     .then(function (file) {
       P.testata(file[1]);
       P.piede(file[1]);
+      G.timbro(file[2], file[1]);
       if (percorso) {
         paginaPercorso(file[0], percorso, document.body.getAttribute("data-ore"));
       } else {
         paginaLiceo(file[0], file[2]);
       }
       document.getElementById("contenuto").hidden = false;
+      if (!percorso) { G.disegno(document.getElementById("disegno")); }
     })
     .catch(function (errore) {
       console.error(errore);
@@ -68,11 +78,8 @@
   function paginaLiceo(liceo, home) {
     tornaIndietro(liceo.campo("LICEO", "torna-home"));
 
-    /* Il quadratino blu con la lampadina, come nella scheda della home */
-    document.getElementById("simbolo").appendChild(P.icona("lampadina", "icona-liceo"));
-
-    /* Il claim è quello della scheda del liceo nella home: la riga della
-       tabella INDIRIZZI di home.txt con il colore "liceo" */
+    /* Il claim, sotto il titolo, è quello del liceo nella home: la riga
+       della tabella INDIRIZZI di home.txt con il colore "liceo" */
     var claim = document.getElementById("claim");
     var rigaLiceo = home.righe("INDIRIZZI").filter(function (riga) {
       return (riga[7] || "").toLowerCase() === "liceo";
@@ -95,15 +102,19 @@
     }
     C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
 
-    /* Le tre schede dei percorsi, nell'ordine del file. Ognuna ha una
-       parte alta colorata con il nome e, sotto, la parte bianca con la
-       spiegazione e la pillola "Scopri il percorso".
-       - Il colore della parte alta segue il percorso, non la posizione:
-         la classe viene dal nome del file della pagina
-         (liceo-matematico.html dà "tono-liceo-matematico").
-       - La scheda è cliccabile per intero con un solo link, sul nome,
-         che copre tutta la scheda (vedi stile.css). La pillola è solo
-         un disegno: il lettore di schermo sente solo il nome. */
+    /* I tre percorsi, nell'ordine del file, come gli indirizzi della
+       home: il trattino nel tono del percorso accanto al nome, sotto la
+       spiegazione breve e il pulsante "Scopri il percorso ›".
+       - Il tono segue il percorso, non la posizione: la classe viene dal
+         nome del file della pagina (liceo-matematico.html dà
+         "tono-liceo-matematico").
+       - Ogni percorso è cliccabile per intero con un solo link, sul
+         nome, che copre tutto il percorso (vedi grafica.css). Il
+         pulsante è solo un disegno: il lettore di schermo sente solo il
+         nome.
+       - Ogni percorso ha sempre gli stessi tre pezzi (nome, spiegazione,
+         pulsante): al computer grafica.css li mette su righe comuni alle
+         tre colonne. */
     var elenco = document.getElementById("percorsi");
     liceo.righe("PERCORSI").forEach(function (riga, i) {
       if (riga.length !== 3) {
@@ -111,28 +122,22 @@
         return;
       }
       var voce = document.createElement("li");
-      voce.className = "carta percorso tono-" + riga[2].replace(/\.html$/, "");
+      voce.className = "percorso con-trattino tono-" + riga[2].replace(/\.html$/, "");
 
-      var testa = document.createElement("div");
-      testa.className = "percorso-testa";
       var titolo = document.createElement("h2");
       titolo.className = "percorso-nome";
       var link = elemento("a", "percorso-link", riga[0]);
       link.href = riga[2];
       titolo.appendChild(link);
-      testa.appendChild(titolo);
-      var filetto = elemento("span", "percorso-filetto", "");
-      filetto.setAttribute("aria-hidden", "true");
-      testa.appendChild(filetto);
-      voce.appendChild(testa);
+      voce.appendChild(titolo);
 
-      var corpo = document.createElement("div");
-      corpo.className = "percorso-corpo";
-      corpo.appendChild(elemento("p", "percorso-testo", riga[1]));
-      var vai = elemento("p", "percorso-vai", liceo.campo("LICEO", "pulsante-percorso") + " ›");
-      vai.setAttribute("aria-hidden", "true");
-      corpo.appendChild(vai);
-      voce.appendChild(corpo);
+      voce.appendChild(elemento("p", "percorso-testo", riga[1]));
+
+      var fondo = document.createElement("p");
+      fondo.className = "percorso-fondo";
+      fondo.setAttribute("aria-hidden", "true");
+      fondo.appendChild(elemento("span", "pulsante pulsante-vuoto", liceo.campo("LICEO", "pulsante-percorso")));
+      voce.appendChild(fondo);
 
       elenco.appendChild(voce);
     });
@@ -191,11 +196,12 @@
     fasciaFacoltativa("dopo-il-diploma", liceo.campo("LICEO", "titolo-dopo"), liceo.campo(sezione, "dopo-il-diploma"));
   }
 
-  /* Le tre schede sotto l'apertura: "Che cosa si impara" e "A chi si
-     rivolge" sono elenchi puntati (una riga del file per voce), "Come si
+  /* Le tre parti sotto l'apertura, ognuna con il titolo in verde e il
+     testo sotto: "Che cosa si impara" e "A chi si rivolge" sono elenchi
+     (una riga del file per voce, con un trattino grigio), "Come si
      studia" è un paragrafo. I titoli stanno nella sezione LICEO di
-     liceo.txt. Una scheda senza testo non compare; se non ne compare
-     nessuna, sparisce tutta la fascia. */
+     liceo.txt. Una parte senza testo non compare; se non ne compare
+     nessuna, sparisce tutta la sezione. */
   function blocchi(liceo, sezione) {
     var contenitore = document.getElementById("blocchi");
     var schede = [
@@ -210,34 +216,26 @@
       if (!testi.length) { return; }
       quante++;
 
-      var scheda = document.createElement("div");
-      scheda.className = "carta blocco";
-
-      var testa = document.createElement("div");
-      testa.className = "blocco-testa";
-      testa.appendChild(elemento("h2", "blocco-titolo", liceo.campo("LICEO", s.titolo)));
-      scheda.appendChild(testa);
-
-      var corpo = document.createElement("div");
-      corpo.className = "blocco-corpo";
+      var blocco = document.createElement("div");
+      blocco.className = "blocco";
+      blocco.appendChild(elemento("h2", "blocco-titolo", liceo.campo("LICEO", s.titolo)));
       if (s.elenco) {
         var ul = document.createElement("ul");
         ul.className = "blocco-elenco";
         testi.forEach(function (t) { ul.appendChild(elemento("li", "", t)); });
-        corpo.appendChild(ul);
+        blocco.appendChild(ul);
       } else {
-        testi.forEach(function (t) { corpo.appendChild(elemento("p", "", t)); });
+        testi.forEach(function (t) { blocco.appendChild(elemento("p", "", t)); });
       }
-      scheda.appendChild(corpo);
-      contenitore.appendChild(scheda);
+      contenitore.appendChild(blocco);
     });
 
     if (!quante) { contenitore.closest("section").hidden = true; }
   }
 
-  /* La fascia "Dopo il diploma" compare solo se in liceo.txt c'è il suo
-     campo. Per nasconderla si mette un # davanti alla riga; per farla
-     ricomparire lo si toglie. */
+  /* La sezione "Dopo il diploma" compare solo se in liceo.txt c'è il
+     suo campo. Per nasconderla si mette un # davanti alla riga; per
+     farla ricomparire lo si toglie. */
   function fasciaFacoltativa(id, titolo, testo) {
     var paragrafo = document.getElementById(id);
     var fascia = paragrafo.closest("section");
@@ -255,7 +253,8 @@
      Le materie di Scienze applicate (QUADRO BASE) subito sotto le
      intestazioni. Nel Liceo Matematico e nel Liceo Digitale seguono le
      ore aggiuntive del percorso, in una seconda parte della tabella che
-     si apre con la riga-titolo "In più nel ..." nel tono del percorso
+     si apre con la riga-titolo "In più nel ...", con un trattino e la
+     scritta nel tono del percorso, senza fondo pieno
      (nel Matematico c'è così una seconda riga "Matematica" con le sole
      ore in più). In fondo il totale, calcolato dal sito.
      Le colonne degli anni sono raggruppate: primo biennio (1° e 2°),
@@ -316,7 +315,7 @@
 
     /* Le colonne: la materia, poi i cinque anni. I primi quattro sono
        larghi uguali; il quinto è un po' più largo, perché sopra c'è
-       "Quinto anno" da solo (le larghezze stanno in stile.css). */
+       "Quinto anno" da solo (le larghezze stanno in grafica.css). */
     var colonne = document.createElement("colgroup");
     var colMateria = document.createElement("col");
     colMateria.className = "orario-col-materia";

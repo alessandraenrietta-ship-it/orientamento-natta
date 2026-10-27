@@ -15,7 +15,7 @@
 == LICEO ==
 titolo: Liceo scientifico
 titolo-riga-2: opzione Scienze applicate
-sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere. (da definire)
+sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere.
 pulsante-percorso: Scopri il percorso
 # I titoli dei blocchi delle pagine dei percorsi, uguali per tutte e tre
 titolo-impara: Che cosa si impara

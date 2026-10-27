@@ -105,10 +105,10 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   `torna-home` e `torna-liceo` sono i collegamenti in alto a sinistra;
   oggi hanno un `#` davanti e non compaiono: per farli comparire si
   toglie il `#`. Il
-  claim piccolo sopra il titolo non sta qui: è quello della scheda del
-  liceo nella tabella `INDIRIZZI` di `home.txt`.
+  claim sotto il titolo non sta qui: è quello del liceo nella tabella
+  `INDIRIZZI` di `home.txt`.
 - `== PERCORSI ==`: una riga per percorso, tre colonne, `nome |
-  spiegazione breve | pagina`. Diventano le tre schede della pagina del
+  spiegazione breve | pagina`. Diventano i tre percorsi della pagina del
   liceo, nello stesso ordine.
 - `== QUADRO BASE ==`: le ore settimanali di Scienze applicate, comuni
   ai tre percorsi. Sei colonne: la materia e le ore dal primo al quinto
@@ -121,7 +121,7 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   - `come-si-studia`: "Come si studia", un paragrafo;
   - `a-chi`: "A chi si rivolge", un elenco: **una riga per voce**,
     ripetendo ogni volta `a-chi:`;
-  - `dopo-il-diploma`: la fascia "Dopo il diploma", un paragrafo.
+  - `dopo-il-diploma`: la sezione "Dopo il diploma", un paragrafo.
 
   I titoli dei blocchi (`titolo-impara`, `titolo-studio`,
   `titolo-a-chi`, `titolo-dopo`) stanno nella sezione `LICEO` e valgono
@@ -130,7 +130,7 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   **Un blocco senza testo non compare.** Per nasconderlo basta mettere
   un `#` davanti alle sue righe; se mancano tutti e tre i blocchi "Che
   cosa si impara", "Come si studia" e "A chi si rivolge", sparisce anche
-  la loro fascia. Oggi Scienze applicate e Liceo Matematico hanno le
+  la loro sezione. Oggi Scienze applicate e Liceo Matematico hanno le
   righe pronte con il `#` davanti e `[DA COMPLETARE]`: per riempirle si
   toglie il `#` e si scrive il testo.
 
