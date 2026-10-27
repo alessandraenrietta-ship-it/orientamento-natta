@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="stile.css?v=27">
+  <link rel="stylesheet" href="grafica.css?v=8">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -24,8 +24,8 @@
   <a class="salta" href="#contenuto">Salta al contenuto</a>
 
   <!-- La testata: logo e nome della scuola, come nella home -->
-  <header class="fascia fascia-testata">
-    <div class="fascia-interno testata-interno">
+  <header class="testata">
+    <div class="interno testata-interno">
       <!-- Logo e nome sono un collegamento alla home. Il lettore di
            schermo sente anche "pagina iniziale" (TESTO MODIFICABILE). -->
       <p class="marchio">
@@ -41,27 +41,58 @@
        da contenuti/home.txt. -->
   <main id="contenuto" tabindex="-1" hidden>
 
-    <!-- Apertura: testo centrato, il collegamento per tornare in alto a
-         sinistra -->
-    <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
-      <div class="fascia-interno">
+    <!-- Apertura, centrata: titolo su due righe, claim del liceo e, in
+         fondo, il disegno della scuola nei tre toni dei percorsi -->
+    <section class="sezione apertura" aria-labelledby="titolo">
+      <div class="interno">
         <p class="torna"><a href="index.html"><span aria-hidden="true">‹ </span><span id="torna"></span></a></p>
-        <!-- Telefono: lampadina, claim, titolo e sottotitolo uno sotto
-             l'altro. Dai 600 pixel in su: claim in alto, poi lampadina e
-             titolo affiancati, poi il sottotitolo (vedi stile.css). -->
-        <div class="apertura-liceo">
-          <div class="apertura-simbolo" id="simbolo"></div>
-          <p class="occhiello-frase" id="claim"></p>
-          <h1 class="titolo-pagina" id="titolo"></h1>
-          <p class="apertura-testo" id="sottotitolo"></p>
-        </div>
+        <h1 class="titolo-sito titolo-liceo" id="titolo"></h1>
+        <p class="claim-liceo" id="claim"></p>
+      </div>
+      <!-- Il disegno lo mette qui js/grafica.js; i blu dei percorsi li
+           decide grafica.css. Solo decorativo. -->
+      <div class="disegno disegno-liceo" id="disegno" aria-hidden="true"></div>
+    </section>
+
+    <!-- I tre percorsi, come gli indirizzi della home: ognuno si clicca
+         per intero. Sopra, il titolo "I tre percorsi" (solo per i lettori
+         di schermo) e il sottotitolo. -->
+    <section class="sezione" aria-labelledby="titolo-percorsi">
+      <div class="interno">
+        <h2 class="solo-lettori" id="titolo-percorsi"></h2>
+        <p class="sottotitolo-liceo" id="sottotitolo"></p>
+        <ul class="percorsi" id="percorsi"></ul>
       </div>
     </section>
 
-    <!-- I tre percorsi: una scheda ciascuno, cliccabile per intero -->
-    <section class="fascia fascia-chiara">
-      <div class="fascia-interno">
-        <ul class="percorsi" id="percorsi"></ul>
+    <!-- Le ore a confronto: una riga per percorso con le ore totali alla
+         settimana, anno per anno, calcolate dal sito. Sotto, "Che cosa
+         cambia": si apre e si chiude da solo (details), senza JavaScript.
+         Le pagine dei percorsi portano qui (liceo.html#confronto). -->
+    <section class="sezione" id="confronto" aria-labelledby="titolo-confronto">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-confronto"></h2>
+        <p class="nota-tabella" id="nota-confronto"></p>
+        <table class="orario orario-confronto" id="tabella-confronto"></table>
+        <details class="differenze" id="differenze">
+          <summary class="pulsante pulsante-vuoto" id="pulsante-differenze"></summary>
+          <p class="nota-tabella" id="nota-differenze"></p>
+          <table class="orario orario-differenze" id="tabella-differenze"></table>
+        </details>
+      </div>
+    </section>
+
+    <!-- Vieni a trovarci: i foglietti delle date, la nota sui turni e il
+         pulsante per prenotare un open day, presi da comuni.txt come
+         nella home. Se non resta nessuna data, solo la frase
+         "nessuna-data", senza foglietti né pulsante. -->
+    <section class="sezione" aria-labelledby="titolo-visita">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-visita"></h2>
+        <!-- I foglietti delle date, come nella home -->
+        <ul class="date" id="date-visita"></ul>
+        <p class="nota" id="nota-visita"></p>
+        <p class="fondo-sezione" id="prenota-visita"></p>
       </div>
     </section>
 
@@ -69,19 +100,19 @@
 
   <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
        possono leggere. -->
-  <section class="fascia fascia-verde" id="avviso" hidden>
-    <div class="fascia-interno">
-      <h1 class="titolo-fascia">Liceo scientifico, opzione Scienze applicate</h1>
+  <section class="sezione" id="avviso" hidden>
+    <div class="interno">
+      <h1 class="titolo-sezione">Liceo scientifico, opzione Scienze applicate</h1>
       <p>Non riesco a caricare i testi di questa pagina.</p>
       <p>Se hai aperto il file dal computer con un doppio clic, usa invece
-         <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
+         anteprima.bat. Altrimenti ricarica la pagina, oppure
          visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
     </div>
   </section>
 
   <noscript>
-    <section class="fascia fascia-verde">
-      <div class="fascia-interno">
+    <section class="sezione">
+      <div class="interno">
         <p>Per vedere questa pagina serve JavaScript attivo nel browser.
            In alternativa visita il
            <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
@@ -89,15 +120,18 @@
     </section>
   </noscript>
 
-  <!-- Il piede: i dati istituzionali della scuola, come nella home -->
-  <footer class="fascia fascia-piede">
-    <div class="fascia-interno">
+  <!-- Il piede, come nella home: il timbro rotondo e i dati della
+       scuola. Il timbro è solo decorativo. -->
+  <footer class="piede">
+    <div class="interno piede-interno">
+      <div class="timbro" id="timbro" aria-hidden="true"></div>
       <ul class="piede-voci" id="piede"></ul>
     </div>
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/liceo.js?v=7"></script>
+  <script src="js/grafica.js?v=6"></script>
+  <script src="js/liceo.js?v=11"></script>
 </body>
 </html>

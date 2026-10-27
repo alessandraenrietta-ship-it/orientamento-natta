@@ -1,0 +1,1371 @@
+/* =================================================================
+   GRAFICA "A CARTOLINA" - SITO ORIENTAMENTO
+   IIS Giulio Natta, Rivoli
+
+   Decisa con Alessandra il 26 ottobre 2026. Per ora la usa solo la
+   home (index.html); le altre pagine usano ancora stile.css, con la
+   grafica a fasce, finché non si rifanno anche loro.
+
+   IN BREVE
+     - un solo carattere, Cutive Mono, salvato nella cartella fonts/
+     - fondo tutto bianco; le sezioni sono separate da un filetto
+       grigio sottile
+     - il verde della scuola per titoli, pulsanti e link
+     - arancione, rosa e blu indicano SOLO i tre indirizzi: un
+       trattino corto del loro colore accanto al nome
+     - pulsanti rettangolari ad angoli vivi, con la freccia "›"
+
+   Si scrive PRIMA PER LO SMARTPHONE: le regole qui sotto valgono per
+   lo schermo piccolo, e quelle per computer e LIM stanno in fondo,
+   nella sezione SCHERMI PIÙ LARGHI.
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   IL CARATTERE
+   Cutive Mono, licenza SIL Open Font License (testo in fonts/OFL.txt).
+   Il file sta nel sito: nessun collegamento a Google Fonts.
+   Ha un solo spessore, senza grassetto: titoli e nomi si distinguono
+   per grandezza, colore e maiuscolo. font-synthesis: none impedisce
+   al browser di inventare un grassetto finto.
+   ----------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Cutive Mono";
+  src: url("fonts/cutive-mono-regular.ttf?v=1") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* -----------------------------------------------------------------
+   COLORI
+   Verificati per il contrasto (testo almeno 4,5:1) e per la
+   deuteranopia e la protanopia. Non si cambiano senza dirlo ad
+   Alessandra.
+   ----------------------------------------------------------------- */
+
+:root {
+  --verde:         #026C37;  /* titoli, pulsanti, link: 6,6 sul bianco */
+  --verde-scuro:   #014A26;  /* pulsante pieno al passaggio del mouse */
+  --blu-notte:     #00193C;  /* il testo: 17,9 sul bianco */
+  --grigio:        #5B6B80;  /* tipo di scuola, scritte secondarie: 5,4 sul bianco */
+  --filetto:       #D5D9DE;  /* il filetto fra le sezioni: solo decorativo */
+  --bianco:        #FFFFFF;
+
+  /* Un colore per indirizzo, SOLO per il trattino accanto al nome e
+     per le linee del disegno. Non si usano per nient'altro. */
+  --meccanica:     #C2410C;  /* arancione bruciato */
+  --grafica:       #B8326F;  /* rosa scuro */
+  --liceo:         #1F5FA8;  /* blu */
+
+  /* I tre percorsi del liceo: tre toni del blu del liceo, solo nelle
+     pagine del liceo, per le linee del disegno, il trattino accanto al
+     nome e la riga "In più nel ..." del quadro orario.
+     Sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5. */
+  --percorso-scienze:    #2A7AB0;  /* Scienze applicate, azzurro */
+  --percorso-matematico: #1F5FA8;  /* Liceo Matematico, blu */
+  --percorso-digitale:   #0F3460;  /* Liceo Digitale, blu scuro */
+
+  /* Rosso SOLO per la scritta "Esaurito" dei turni degli open day:
+     6,5 sul bianco. Sempre con la scritta, mai da solo. */
+  --rosso:         #B91C1C;
+
+  /* Blu inchiostro SOLO per il timbro del piede */
+  --inchiostro:    #1F3A6B;
+
+  --carattere:     "Cutive Mono", "Courier New", monospace;
+
+  /* Misure */
+  --spazio:        1.25rem;
+  --massimo:       72rem;    /* larghezza massima del contenuto */
+  --trattino:      1.5rem;   /* lunghezza del trattino colorato */
+}
+
+
+/* -----------------------------------------------------------------
+   BASE
+   ----------------------------------------------------------------- */
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: var(--carattere);
+  font-size: 1.0625rem;   /* 17 pixel: il minimo è 16 */
+  font-weight: normal;
+  font-synthesis: none;
+  line-height: 1.6;
+  color: var(--blu-notte);
+  background: var(--bianco);
+}
+
+h1, h2, h3 {
+  margin: 0 0 0.6em;
+  font-weight: normal;
+  line-height: 1.25;
+  color: var(--verde);
+}
+
+/* Righe pareggiate: nei titoli e nei testi brevi centrati le righe
+   hanno lunghezze simili, così nessuna parola resta sola a capo
+   ("imparare." da sola). Sui browser vecchi non succede niente. */
+.titolo-sito,
+.titolo-sezione,
+.occhiello,
+.claim-liceo { text-wrap: balance; }
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+ul { margin: 0; padding: 0; list-style: none; }
+
+a { color: var(--verde); text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+
+/* Testo nascosto alla vista ma letto dai lettori di schermo */
+.solo-lettori {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Un dato che manca: [DA COMPLETARE: ...], ben visibile */
+.da-completare {
+  padding: 0 0.3em;
+  border: 2px dashed currentColor;
+}
+
+
+/* -----------------------------------------------------------------
+   ACCESSIBILITÀ
+   Il contorno di messa a fuoco serve a chi naviga con la tastiera:
+   non va tolto. Blu notte, ben visibile sul bianco e sul verde.
+   ----------------------------------------------------------------- */
+
+:focus-visible {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 3px;
+}
+
+/* I titoli che ricevono il focus dai pulsanti dell'apertura: niente
+   contorno, il lettore di schermo li legge comunque */
+[tabindex="-1"]:focus { outline: none; }
+
+/* Salta al contenuto: compare solo premendo Tab appena aperta la
+   pagina, e porta dritti al contenuto senza passare dalla testata */
+.salta {
+  position: absolute;
+  left: -999px;
+  top: 0.5rem;
+  z-index: 10;
+  padding: 0.6em 1em;
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+.salta:focus { left: 0.75rem; }
+
+
+/* -----------------------------------------------------------------
+   LE SEZIONI
+   Tutte su fondo bianco. Dentro, il contenuto è largo al massimo
+   --massimo. Fra una sezione e l'altra, un filetto grigio sottile.
+   ----------------------------------------------------------------- */
+
+.interno {
+  max-width: var(--massimo);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.sezione {
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--filetto);
+}
+
+.titolo-sezione {
+  font-size: 1.75rem;
+  margin-bottom: 1.2em;
+}
+
+.titolo-sezione:focus { outline: none; }
+
+/* La riga in fondo a una sezione, con il pulsante */
+.fondo-sezione { margin-top: 2rem; }
+
+
+/* -----------------------------------------------------------------
+   IL TRATTINO COLORATO
+   Un trattino corto accanto al testo, alla prima riga, nel colore
+   dell'indirizzo: per gli indirizzi e i percorsi serali. Solo
+   decorativo.
+   ----------------------------------------------------------------- */
+
+.con-trattino {
+  position: relative;
+  padding-left: calc(var(--trattino) + 0.75rem);
+}
+
+.con-trattino::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.82em;              /* a metà della prima riga */
+  width: var(--trattino);
+  height: 3px;
+  background: var(--tono, var(--verde));
+}
+
+.tono-meccanica { --tono: var(--meccanica); }
+.tono-grafica   { --tono: var(--grafica); }
+.tono-liceo     { --tono: var(--liceo); }
+
+
+/* -----------------------------------------------------------------
+   I PULSANTI
+   Rettangolo ad angoli vivi, con la freccia "›" dopo la scritta, alti
+   almeno 44 pixel (la misura minima per il dito).
+     - pulsante pieno: fondo verde, testo bianco (6,6)
+     - pulsante vuoto: fondo bianco, bordo e testo verdi
+   ----------------------------------------------------------------- */
+
+.pulsante {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 2.75rem;      /* 44 pixel */
+  padding: 0.45em 1.1em;
+  border: 2px solid var(--verde);
+  border-radius: 0;
+  line-height: 1.3;
+  text-decoration: none;
+}
+
+/* La freccia "›" è disegnata con due lati di un quadratino ruotato: il
+   "›" del Cutive Mono è uguale al segno di maggiore. È solo un disegno,
+   senza testo: il lettore di schermo non la legge. */
+.pulsante::after {
+  content: "";
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
+  margin-right: 0.15em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.pulsante:hover { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* I pulsanti veri (button) non prendono da soli il carattere della pagina */
+button.pulsante {
+  font: inherit;
+  cursor: pointer;
+}
+
+.pulsante-pieno {
+  color: var(--bianco);
+  background: var(--verde);
+}
+
+.pulsante-pieno:hover { background: var(--verde-scuro); border-color: var(--verde-scuro); }
+
+.pulsante-vuoto {
+  color: var(--verde);
+  background: var(--bianco);
+}
+
+
+/* -----------------------------------------------------------------
+   TESTATA
+   Bianca: il logo e il nome della scuola, con il filetto sotto.
+   ----------------------------------------------------------------- */
+
+.testata {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--filetto);
+}
+
+.marchio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--verde);
+}
+
+/* Il logo è piccolo (231 per 155 pixel): non va ingrandito oltre */
+.logo-scuola {
+  display: block;
+  flex: none;
+  width: 56px;
+  height: auto;
+}
+
+
+/* -----------------------------------------------------------------
+   APERTURA
+   Occhiello, titolo, il disegno delle tre linee e i due pulsanti,
+   centrati. La sezione d'apertura non ha il filetto sopra: c'è già
+   quello della testata.
+   ----------------------------------------------------------------- */
+
+.apertura {
+  border-top: 0;
+  text-align: center;
+}
+
+.occhiello {
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.titolo-sito {
+  max-width: 20em;
+  margin: 0 auto 0.5em;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+/* Il titolo della home che si gira: "The next step is yours." sul
+   davanti, "Il prossimo passo è tuo." sul retro. Le due frasi stanno
+   nella stessa casella della griglia, una sopra l'altra: occupano lo
+   stesso spazio, quello della più lunga. Toccando il titolo o la
+   freccia sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
+   gradi in orizzontale in 0,8 secondi, come la cartolina. Sul telefono
+   24 pixel, al massimo due righe per frase; dai 40rem torna grande
+   (SCHERMI PIÙ LARGHI). */
+.titolo-gira { cursor: pointer; }
+.titolo-home {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+  perspective: 1200px;
+}
+.titolo-giro {
+  display: grid;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+/* La frase più corta (sul telefono l'inglese, su una riga) sta in
+   mezzo allo spazio, non in alto */
+.titolo-faccia {
+  grid-area: 1 / 1;
+  align-self: center;
+  text-wrap: balance;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.titolo-faccia-it { transform: rotateY(180deg); }
+.titolo-gira.girato .titolo-giro { transform: rotateY(180deg); }
+
+/* Il segno sotto il titolo: una piccola freccia circolare grigia, alta
+   16 pixel, dentro un pulsante di 44 pixel facile da toccare */
+.titolo-freccia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 0.25rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--grigio);
+  cursor: pointer;
+}
+.titolo-freccia svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Chi ha chiesto di ridurre il movimento: le frasi si scambiano
+   subito, senza rotazione */
+@media (prefers-reduced-motion: reduce) {
+  .titolo-giro { transition: none; }
+}
+
+.presentazione { max-width: 40rem; margin: 0 auto 1rem; }
+
+/* Il disegno: largo quanto la finestra. La scuola al centro è larga
+   al massimo 60rem; sui più larghi js/home.js allunga i tratti
+   orizzontali esterni fino ai bordi. Lo spessore delle linee lo
+   calcola js/home.js (--spessore), perché sullo schermo resti sempre
+   di circa 2,4 pixel. Lo spazio fra le due torri resta vuoto. */
+.disegno {
+  margin: 1.5rem 0 2rem;
+}
+
+.disegno svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.disegno path {
+  stroke-width: var(--spessore, 2.4px);
+}
+
+/* Le linee si disegnano all'apertura della pagina, una dopo l'altra:
+   arancione, rosa, blu. Ogni linea è lunga 1 (pathLength, vedi
+   js/home.js): il tratto visibile parte nascosto e si allunga fino a
+   coprirla tutta. */
+@keyframes disegna {
+  from { stroke-dashoffset: 1.01; }
+  to   { stroke-dashoffset: 0; }
+}
+
+.disegno path {
+  stroke-dasharray: 1 2;
+  animation: disegna 1.6s ease-in-out both;
+}
+
+.disegno path:nth-child(1) { animation-delay: 0.2s; }
+.disegno path:nth-child(2) { animation-delay: 1.4s; }
+.disegno path:nth-child(3) { animation-delay: 2.6s; }
+
+/* Chi ha chiesto al computer di ridurre il movimento vede il disegno
+   già completo */
+@media (prefers-reduced-motion: reduce) {
+  .disegno path {
+    animation: none;
+    stroke-dasharray: none;
+  }
+}
+
+.per-adulti { max-width: 40rem; margin: 0 auto 1rem; }
+
+/* Sul telefono i due pulsanti uno sotto l'altro, larghi uguali, a
+   tutta larghezza; sul computer affiancati (SCHERMI PIÙ LARGHI) */
+.pulsanti {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.9rem;
+  margin: 0;
+}
+
+.pulsanti .pulsante { justify-content: center; }
+
+
+/* -----------------------------------------------------------------
+   OPEN DAY
+   Una lista: per ogni data un foglietto da calendario e, accanto, il
+   giorno della settimana con sotto i due turni. Poi la nota sui turni
+   e il pulsante per prenotare. Telefono: un foglietto per riga;
+   computer: tre colonne.
+   ----------------------------------------------------------------- */
+
+.date {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Il foglietto: contorno sottile blu notte, angoli vivi; dentro il
+   mese in grigio e il numero del giorno grande in verde. Niente
+   anellini, niente striscia piena. Solo un disegno: la data per intero
+   è scritta per il lettore di schermo accanto al giorno. */
+.foglietto {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 58px;
+  padding: 0.35rem 0 0.4rem;
+  border: 1px solid var(--blu-notte);
+  line-height: 1;
+}
+
+.foglietto-mese {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  margin-left: 0.12em;     /* bilancia la spaziatura dopo l'ultima lettera */
+  color: var(--grigio);
+}
+
+.foglietto-giorno {
+  margin-top: 0.3rem;
+  font-size: 30px;
+  color: var(--verde);
+}
+
+.data-testi { min-width: 0; }
+
+.data-settimana {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* I due turni su una riga. Un turno non si spezza mai; se la riga non
+   ci sta (un turno esaurito sul telefono), va a capo solo dopo il
+   punto medio. Sugli schermi stretti scende a 14 pixel. */
+.data-turni {
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.turno { white-space: nowrap; }
+
+.turno-scritta { color: var(--rosso); }
+
+.nota {
+  margin-top: 2rem;
+  max-width: 40rem;
+  color: var(--grigio);
+}
+
+/* Quando non resta nessuna data, la frase al posto della lista */
+.nota-nessuna-data { margin-top: 0; color: var(--blu-notte); }
+
+
+/* -----------------------------------------------------------------
+   INDIRIZZI
+   Per ogni indirizzo: trattino del suo colore accanto a tipo di
+   scuola (grigio, maiuscolo) e nome; sotto il claim in verde, la frase
+   e "Pagina in preparazione" o il pulsante.
+   Ogni indirizzo ha sempre cinque pezzi: tipo, nome, claim, testi,
+   fondo. Al computer stanno su cinque righe comuni alle tre colonne
+   (subgrid, in SCHERMI PIÙ LARGHI).
+   ----------------------------------------------------------------- */
+
+.indirizzi {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.indirizzo {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Il trattino sta a metà della riga del tipo di scuola */
+.indirizzo.con-trattino::before { top: 0.8rem; }
+
+.indirizzo-tipo {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.indirizzo-nome {
+  margin: 0 0 0.9rem;
+  font-size: 1.5rem;
+  color: var(--blu-notte);
+}
+
+.indirizzo-claim {
+  margin-bottom: 0.5em;
+  font-size: 1.1875rem;     /* 19 pixel */
+  color: var(--verde);
+}
+
+.indirizzo-claim:empty { display: none; }
+
+.indirizzo-fondo { margin: 0; padding-top: 1.2rem; }
+
+.in-preparazione { color: var(--grigio); }
+
+
+/* -----------------------------------------------------------------
+   CORSI SERALI
+   Titolo, anno, a chi si rivolgono e i due percorsi, ognuno con il
+   trattino del colore del suo indirizzo.
+   ----------------------------------------------------------------- */
+
+.serali-tipo {
+  margin-top: -0.6rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.serali-breve { font-size: 1.125rem; }
+
+.serali-percorsi {
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+}
+
+
+/* -----------------------------------------------------------------
+   CONTATTI
+   Tre azioni sottolineate in verde, con il dato sotto. Niente icone.
+   Il dato non è dentro il link: si può selezionare e copiare.
+   ----------------------------------------------------------------- */
+
+.contatti {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.contatto-azione {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+/* Il link è alto almeno 44 pixel, per il dito */
+.contatto-azione a {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+  text-decoration: underline;
+  text-decoration-color: var(--verde);
+}
+
+.contatto-dato { margin: 0; }
+
+
+/* -----------------------------------------------------------------
+   PIEDE
+   Bianco: il timbro rotondo blu inchiostro e, accanto, i dati della
+   scuola.
+   ----------------------------------------------------------------- */
+
+.piede {
+  padding: 2rem 0 2.5rem;
+  border-top: 1px solid var(--filetto);
+  font-size: 1rem;
+}
+
+.piede-interno {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Il timbro: due cerchi, la scritta lungo il cerchio e il logo al
+   centro, tutto in blu inchiostro */
+.timbro {
+  position: relative;
+  flex: none;
+  width: 110px;
+  height: 110px;
+  color: var(--inchiostro);
+}
+
+.timbro svg { display: block; width: 100%; height: 100%; }
+
+.timbro-bordo {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+}
+
+/* Il disegno del timbro è largo 120 unità: 12 unità sono 11 pixel
+   quando il timbro è largo 110 pixel (telefono), 12 al computer */
+.timbro-scritta {
+  font-family: var(--carattere);
+  font-size: 12px;
+  fill: currentColor;
+}
+
+/* Il logo al centro, tinto di blu inchiostro: il disegno del logo fa
+   da stampo (mask) e il colore lo riempie */
+.timbro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46%;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: currentColor;
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+.piede-voci {
+  flex: 1 1 auto;
+  min-width: 0;
+  line-height: 1.7;
+}
+
+.piede-voci a { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   SCHERMI PIÙ LARGHI
+   ----------------------------------------------------------------- */
+
+@media (min-width: 40rem) {
+  .interno { padding: 0 1.5rem; }
+  .sezione { padding: 3.5rem 0; }
+  .titolo-sito { font-size: 2.75rem; }
+  .titolo-sezione { font-size: 2rem; }
+  .pulsanti { flex-direction: row; justify-content: center; align-items: center; flex-wrap: wrap; }
+  .date { gap: 2rem 1.5rem; }
+  .data-turni { font-size: 1rem; }
+  .contatti { grid-template-columns: repeat(3, auto); justify-content: start; gap: 1.75rem 4rem; }
+  .piede-interno { gap: 2rem; }
+  .timbro { width: 120px; height: 120px; }
+}
+
+/* I tre indirizzi affiancati, di pari importanza: tutti e tre su una
+   riga, mai due più uno. Tipo, nome, claim, testi e fondo stanno su
+   righe comuni (subgrid): ogni pezzo parte alla stessa altezza nelle
+   tre colonne, anche quando un nome va su più righe. */
+@media (min-width: 56rem) {
+  .indirizzi {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, auto);
+    gap: 0 2.5rem;
+  }
+  .indirizzo {
+    display: grid;
+    grid-row: span 5;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+  .indirizzo-claim:empty { display: block; }
+  .titolo-sito { font-size: 3.25rem; }
+}
+
+/* Le date in colonne solo quando i due turni ci stanno su una riga:
+   due colonne sui tablet, tre sul computer */
+@media (min-width: 48rem) {
+  .date { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 66rem) {
+  .date { grid-template-columns: repeat(3, 1fr); }
+}
+
+
+/* =================================================================
+   LE PAGINE DEL LICEO
+   liceo.html e le tre pagine dei percorsi (liceo-scienze-applicate,
+   liceo-matematico, liceo-digitale). Valgono tutte le regole qui
+   sopra; qui ci sono solo le parti che la home non ha.
+   Prima lo smartphone; computer e LIM in fondo.
+   ================================================================= */
+
+/* Il tono di ogni percorso: la classe viene dal nome del file della
+   pagina (liceo-matematico.html dà "tono-liceo-matematico") */
+.tono-liceo-scienze-applicate { --tono: var(--percorso-scienze); }
+.tono-liceo-matematico        { --tono: var(--percorso-matematico); }
+.tono-liceo-digitale          { --tono: var(--percorso-digitale); }
+
+/* Nelle pagine interne logo e nome sono un collegamento alla home */
+.marchio-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--verde);
+  text-decoration: none;
+}
+
+.marchio-link:hover .marchio-nome { text-decoration: underline; }
+
+/* "‹ Torna alla home" e "‹ Torna al liceo": oggi nascosti (righe
+   commentate in liceo.txt); se tornano, stanno in alto a sinistra */
+.torna { margin: 0 0 1rem; text-align: left; font-size: 1rem; }
+
+
+/* -----------------------------------------------------------------
+   LICEO.HTML: L'APERTURA
+   Centrata: il titolo su due righe in verde, sotto il claim del liceo
+   in verde e, in fondo, il disegno della scuola nei tre toni dei
+   percorsi.
+   ----------------------------------------------------------------- */
+
+/* Sul telefono circa 20 pixel fra il titolo su due righe e il claim */
+.titolo-liceo { margin-bottom: 1.25rem; }
+
+/* La seconda riga del titolo, più piccola */
+.titolo-riga-2 {
+  display: block;
+  font-size: 0.6em;
+  line-height: 1.3;
+}
+
+.claim-liceo {
+  margin: 0;
+  font-size: 1.1875rem;
+  color: var(--verde);
+}
+
+/* Le tre linee nei toni dei percorsi, dall'esterno all'interno:
+   azzurro, blu, blu scuro (il colore scritto nel disegno è quello
+   degli indirizzi; qui lo sostituisce il CSS) */
+.disegno-liceo path:nth-child(1) { stroke: var(--percorso-scienze); }
+.disegno-liceo path:nth-child(2) { stroke: var(--percorso-matematico); }
+.disegno-liceo path:nth-child(3) { stroke: var(--percorso-digitale); }
+
+/* Il sottotitolo apre la sezione dei percorsi, allineato a sinistra */
+.sottotitolo-liceo {
+  margin: 0 0 2.5rem;
+  font-size: 1.125rem;
+  text-wrap: balance;        /* al computer sta su una riga sola */
+}
+
+
+/* -----------------------------------------------------------------
+   LICEO.HTML: I TRE PERCORSI
+   Come gli indirizzi della home: trattino nel tono del percorso
+   accanto al nome, sotto la spiegazione breve e il pulsante
+   secondario "Scopri il percorso ›". Ogni percorso è un unico
+   collegamento: il link sul nome si allarga a coprire tutto il
+   percorso. Il pulsante è solo un disegno.
+   ----------------------------------------------------------------- */
+
+.percorsi {
+  display: grid;
+  gap: 2.75rem;
+}
+
+.percorso {
+  display: flex;
+  flex-direction: column;
+}
+
+.percorso-nome {
+  margin: 0 0 0.6rem;
+  font-size: 1.5rem;
+  color: var(--blu-notte);
+}
+
+.percorso-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Il link si allarga a tutto il percorso */
+.percorso-link::after {
+  content: "";
+  position: absolute;
+  inset: -0.75rem;
+}
+
+.percorso:hover .percorso-nome { text-decoration: underline; text-decoration-thickness: 1px; }
+.percorso:hover .pulsante { text-decoration: underline; text-decoration-thickness: 1px; }
+
+/* Il contorno di messa a fuoco gira intorno a tutto il percorso */
+.percorso-link:focus-visible { outline: none; }
+.percorso-link:focus-visible::after {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 0;
+}
+
+.percorso-testo { margin: 0; }
+
+.percorso-fondo { margin: 0; padding-top: 1.2rem; }
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEI PERCORSI: L'APERTURA
+   Centrata: occhiello grigio maiuscolo, il nome del percorso in verde,
+   poi la spiegazione in blu notte allineata a sinistra. In queste
+   pagine nessun testo è giustificato.
+   ----------------------------------------------------------------- */
+
+.apertura-percorso .titolo-sito { margin-bottom: 1.2rem; }
+
+.spiegazione {
+  max-width: 46rem;
+  margin: 0 auto;
+  text-align: left;
+}
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEI PERCORSI: CHE COSA SI IMPARA, COME SI STUDIA, A CHI SI
+   RIVOLGE
+   Tre parti con il titolo in verde e il testo sotto. Sul telefono una
+   sotto l'altra, separate dal filetto; al computer tre colonne.
+   Le voci degli elenchi hanno un trattino grigio.
+   ----------------------------------------------------------------- */
+
+.blocchi {
+  display: grid;
+  gap: 2rem;
+}
+
+.blocco + .blocco {
+  padding-top: 2rem;
+  border-top: 1px solid var(--filetto);
+}
+
+.blocco-titolo {
+  margin-bottom: 0.8rem;
+  font-size: 1.375rem;
+}
+
+.blocco-elenco li {
+  position: relative;
+  margin-bottom: 0.7rem;
+  padding-left: 1.6rem;
+}
+
+.blocco-elenco li:last-child { margin-bottom: 0; }
+
+.blocco-elenco li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.8em;
+  width: 0.9rem;
+  height: 2px;
+  background: var(--grigio);
+}
+
+.testo-sezione { max-width: 46rem; }
+
+
+/* -----------------------------------------------------------------
+   IL QUADRO ORARIO
+   Una tabella classica, anche sul telefono, che sta in 375 pixel
+   senza scorrere di lato (14 pixel sul telefono). Fondo bianco,
+   intestazione in grigio maiuscolo piccolo, righe separate da filetti
+   grigi, due linee verticali blu notte fra primo biennio, secondo
+   biennio e quinto anno. Numeri in blu notte, trattini grigi.
+   "In più nel ..." con un trattino e la scritta nel tono del percorso;
+   "Totale" con un filetto blu notte sopra e i numeri in verde.
+   ----------------------------------------------------------------- */
+
+.orario {
+  width: 100%;
+  max-width: 50rem;     /* al computer le righe non diventano troppo lunghe */
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+/* Colonne degli anni: le prime quattro larghe uguali, il quinto anno
+   più largo, perché sopra c'è "Quinto / anno" da solo */
+.orario-col-anno   { width: 2.3rem; }
+.orario-col-quinto { width: 3.3rem; }
+
+.orario th,
+.orario td {
+  padding: 0.5em 0.2em;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* I nomi delle materie, a sinistra */
+.orario tbody th,
+.orario tfoot th {
+  padding-left: 0;
+  text-align: left;
+}
+
+/* L'intestazione: grigio maiuscolo piccolo (12 pixel) */
+.orario thead th {
+  font-size: 0.75rem;
+  line-height: 1.25;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.orario thead .orario-materia {
+  padding-left: 0;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.orario thead tr:last-child th { border-bottom: 1px solid var(--filetto); }
+
+.orario tbody tr { border-bottom: 1px solid var(--filetto); }
+
+.orario-nessuna { color: var(--grigio); }
+
+/* Le due linee verticali blu notte: prima del secondo biennio (3°) e
+   prima del quinto anno (5°), dall'intestazione al totale */
+.orario-gruppi th:nth-child(3),
+.orario-gruppi th:nth-child(4),
+.orario-anni th:nth-child(3),
+.orario-anni th:nth-child(5),
+.orario tbody tr > td:nth-of-type(3),
+.orario tbody tr > td:nth-of-type(5),
+.orario tfoot td:nth-of-type(3),
+.orario tfoot td:nth-of-type(5) {
+  border-left: 1px solid var(--blu-notte);
+}
+
+/* La riga "In più nel ...": trattino e scritta nel tono del percorso,
+   senza fondo pieno */
+.orario .orario-titolo-in-piu {
+  padding: 1.2rem 0 0.5rem;
+  text-align: left;
+  font-size: 0.8125rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--tono, var(--liceo));
+}
+
+.orario-titolo-in-piu::before {
+  content: "";
+  display: inline-block;
+  width: 1.5rem;
+  height: 3px;
+  margin-right: 0.6rem;
+  vertical-align: middle;
+  background: currentColor;
+}
+
+/* Il totale: filetto blu notte sopra, numeri in verde. Il filetto
+   sta sulle celle, non sulla riga: così vince sul filetto grigio
+   della riga di sopra. */
+.orario tfoot th,
+.orario tfoot td { border-top: 1px solid var(--blu-notte); }
+.orario tfoot td { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   PAGINE DEL LICEO SU SCHERMI PIÙ LARGHI
+   ----------------------------------------------------------------- */
+
+@media (min-width: 40rem) {
+  .titolo-liceo { margin-bottom: 0.6rem; }
+  .orario { font-size: 1rem; }
+  .orario-col-anno   { width: 4.5rem; }
+  .orario-col-quinto { width: 5.5rem; }
+  .orario thead th { font-size: 0.8125rem; }
+}
+
+/* Al computer i tre percorsi su righe comuni (nome, spiegazione,
+   pulsante). Le tre parti del percorso stanno in righe (in fondo al
+   file, GIUSTIFICATO AL COMPUTER). */
+@media (min-width: 56rem) {
+  .percorsi {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: 0 2.5rem;
+  }
+  .percorso {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    align-content: start;
+  }
+}
+
+
+/* =================================================================
+   REVISIONE DEL 27 OTTOBRE 2026
+   Le ore a confronto, il dettaglio "Che cosa cambia", "Vieni a
+   trovarci" e gli altri percorsi (pagine del liceo); le etichette del
+   piede (tutte le pagine).
+   ================================================================= */
+
+/* Le etichette davanti ai dati del piede ("Centralino: ...") */
+.piede-etichetta { color: var(--blu-notte); }
+
+/* La riga grigia sotto il titolo di una tabella */
+.nota-tabella {
+  max-width: 40rem;
+  margin-bottom: 1.5rem;
+  color: var(--grigio);
+}
+
+/* Il trattino nel tono del percorso, davanti al nome (tabella del
+   confronto e altri percorsi). Solo decorativo. */
+.trattino {
+  display: inline-block;
+  flex: none;
+  width: 1rem;
+  height: 3px;
+  margin-right: 0.5rem;
+  vertical-align: middle;
+  background: var(--tono, var(--liceo));
+}
+
+/* Le ore a confronto: nella prima colonna il trattino e il nome del
+   percorso; sul telefono un nome lungo va su due righe, allineato al
+   trattino */
+.orario .orario-percorso {
+  padding-left: 1.5rem;
+  text-indent: -1.5rem;
+}
+
+/* Che cosa cambia: le ore in più in verde, "+2" */
+.orario-in-piu-valore { color: var(--verde); }
+
+
+/* -----------------------------------------------------------------
+   IL PULSANTE "CHE COSA CAMBIA ›"
+   Un elemento details: il summary è un pulsante secondario; quando si
+   apre, la freccia ruota di 90 gradi (subito, senza movimento, per chi
+   ha chiesto di ridurre il movimento) e sotto compaiono la riga grigia
+   e la tabella delle ore in più.
+   ----------------------------------------------------------------- */
+
+.differenze { margin-top: 2rem; }
+
+.differenze > summary {
+  cursor: pointer;
+  list-style: none;          /* niente triangolino del browser */
+}
+
+.differenze > summary::-webkit-details-marker { display: none; }
+
+.differenze > summary::after { transition: transform 0.2s ease; }
+
+.differenze[open] > summary::after { transform: rotate(135deg); }
+
+.differenze[open] > .nota-tabella { margin-top: 1.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  .differenze > summary::after { transition: none; }
+}
+
+
+/* -----------------------------------------------------------------
+   VIENI A TROVARCI E GLI ALTRI PERCORSI
+   Sotto il pulsante per prenotare, nelle pagine dei percorsi, la riga
+   grigia maiuscola "Gli altri percorsi" e i collegamenti agli altri
+   due, ognuno con il trattino nel suo tono e il nome sottolineato in
+   verde.
+   ----------------------------------------------------------------- */
+
+.altri-percorsi { margin-top: 2.5rem; }
+
+.altri-titolo {
+  margin-bottom: 0.6rem;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+
+.altri-elenco li {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+/* Il collegamento è alto almeno 44 pixel, per il dito */
+.altri-elenco a {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.35rem 0;
+}
+
+
+/* =================================================================
+   SECONDA REVISIONE DEL 27 OTTOBRE 2026
+   ================================================================= */
+
+/* Nel piede il numero del centralino e l'indirizzo del sito non si
+   spezzano mai: se non stanno accanto all'etichetta, vanno interi alla
+   riga sotto. L'email invece va a capo dopo la chiocciola. */
+.dato-intero { white-space: nowrap; }
+
+/* -----------------------------------------------------------------
+   GIUSTIFICATO AL COMPUTER
+   L'unica eccezione all'allineamento a sinistra del sito, solo al
+   computer. Sotto i 56rem (telefono, tablet stretti) tutto resta a
+   sinistra. Restano a sinistra anche titoli, occhielli, claim,
+   contatti, piede, tabelle, date, pulsanti e righe brevi.
+     - paragrafi larghi (due colonne): sillabazione solo per parole di
+       almeno 10 lettere, con almeno 4 lettere prima e dopo il taglio
+       (10 4 4);
+     - colonne strette (frasi degli indirizzi nella home, spiegazioni
+       brevi dei percorsi in liceo.html) e righe dei tre blocchi:
+       sillabazione più frequente (6 3 3), per non lasciare buchi fra
+       le parole.
+   Le parole con il trattino ("post-diploma") non si spezzano mai: le
+   chiude in un pezzo intero js/grafica.js (classe "parola-intera").
+   Le pagine hanno lang="it": il browser sillaba in italiano.
+   ----------------------------------------------------------------- */
+
+.parola-intera {
+  white-space: nowrap;
+  -webkit-hyphens: manual;
+          hyphens: manual;
+}
+
+/* Le due parti di un paragrafo lungo (js/liceo.js lo divide fra due
+   frasi): sul telefono di seguito, come un paragrafo normale */
+.colonna { display: inline; }
+
+@media (min-width: 56rem) {
+
+  /* I tre blocchi delle pagine dei percorsi: tre righe una sotto
+     l'altra, separate dal filetto; in ogni riga il titolo a sinistra
+     (un terzo) e il testo a destra (due terzi, al massimo 46rem),
+     giustificato. Nelle voci degli elenchi il trattino grigio resta
+     fuori, a sinistra. */
+  .blocchi { grid-template-columns: 1fr; gap: 2rem; }
+  .blocco {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 2.5rem;
+    align-items: start;
+  }
+  .blocco + .blocco { padding-top: 2rem; border-top: 1px solid var(--filetto); }
+  .blocco > :not(.blocco-titolo) { grid-column: 2; max-width: 46rem; }
+  .blocco-titolo { grid-column: 1; margin-bottom: 0; }
+  .blocco > p,
+  .blocco-elenco li {
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;   /* con 10 4 4 restavano righe con spazi molto larghi */
+  }
+
+  /* Le colonne strette */
+  .indirizzo-frase,
+  .percorso-testo {
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;
+  }
+}
+
+/* I paragrafi lunghi su due colonne: spiegazione delle pagine dei
+   percorsi e "Dopo il diploma", solo quando sono lunghi almeno 350
+   caratteri (classe "testo-lungo", messa da js/liceo.js). Dai 66rem il
+   paragrafo occupa tutta la larghezza del contenuto, diviso fra due
+   frasi in due colonne giustificate, che possono finire ad altezze
+   diverse. Nell'apertura le due colonne stanno centrate sotto il
+   titolo. Sotto i 66rem, e per i testi più corti, una colonna sola
+   allineata a sinistra. */
+@media (min-width: 66rem) {
+  .testo-lungo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+    align-items: start;
+    max-width: none;
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
+  }
+  .testo-lungo .colonna { display: block; }
+}
+
+
+/* =================================================================
+   PER I DOCENTI ORIENTATORI (orientatori.html)
+   Tutto centrato: il titolo, l'anteprima della cartolina "Vieni a
+   trovarci" e i due pulsanti. L'anteprima è larga al massimo 42rem,
+   con le proporzioni della cartolina (3:2), un bordo sottile grigio e
+   un'ombra leggera. Si gira di 180 gradi in orizzontale in 0,8
+   secondi; per chi ha chiesto di ridurre il movimento il cambio di
+   faccia è immediato. L'aspetto delle facciate sta in
+   cartolina-facciate.css, lo stesso della cartolina da stampare: qui
+   le facciate si rimpiccioliscono (--scala, la calcola
+   js/orientatori.js) e si mostra solo la cartolina rifilata, senza i
+   3 mm di abbondanza.
+   ================================================================= */
+
+.orientatori { text-align: center; }
+.orientatori .titolo-sito { margin-bottom: 1.5rem; }
+
+.cartolina-gira {
+  position: relative;
+  width: 100%;
+  max-width: 42rem;
+  aspect-ratio: 3 / 2;
+  margin: 0 auto;
+  perspective: 2000px;
+  cursor: pointer;
+}
+
+.cartolina-gira:focus-visible {
+  outline: 3px solid var(--blu-notte);
+  outline-offset: 4px;
+}
+
+.cartolina-giro {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease-in-out;
+}
+
+.cartolina-gira.girata .cartolina-giro { transform: rotateY(180deg); }
+
+.cartolina-faccia {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bianco);
+  box-shadow: 0 2px 12px rgba(0, 25, 60, 0.14);
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  text-align: left;
+}
+
+.cartolina-faccia-retro { transform: rotateY(180deg); }
+
+/* Il bordo sottile grigio, sopra la facciata */
+.cartolina-faccia::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--filetto);
+  pointer-events: none;
+}
+
+/* La facciata (156 x 106 mm) rimpicciolita e spostata di 3 mm, così
+   si vede solo la cartolina rifilata (150 x 100 mm) */
+.cartolina-faccia .facciata {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  transform: scale(var(--scala, 1)) translate(-3mm, -3mm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cartolina-giro { transition: none; }
+}
+
+/* I due pulsanti sotto la cartolina: sul telefono uno sotto l'altro a
+   tutta larghezza, come nell'apertura; dai 40rem affiancati e
+   centrati (SCHERMI PIÙ LARGHI) */
+.pulsanti-docenti { margin-top: 1.5rem; }
+
+
+/* La riga per i docenti in cima al piede di tutte le pagine (tranne
+   orientatori.html): "Sei un docente orientatore?" in grigio e il link
+   verde sottolineato, con la freccia "›" disegnata come nei pulsanti.
+   La mette js/grafica.js, solo con "stato: pronta" in comuni.txt. */
+.piede-orientatori { margin-bottom: 0.6rem; color: var(--grigio); }
+
+.link-freccia::after {
+  content: "";
+  display: inline-block;
+  width: 0.42em;
+  height: 0.42em;
+  margin-left: 0.45em;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+  transform: translateY(-0.08em) rotate(45deg);
+}

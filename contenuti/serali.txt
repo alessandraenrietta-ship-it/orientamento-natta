@@ -7,22 +7,31 @@
 # ------------------------------------------------------------------
 
 == HOME ==
-# La fascia dei serali nella pagina iniziale. La scheda ha la stessa
-# struttura di quelle degli indirizzi: tipo, nome, claim, testo breve
-# e, in fondo, il pulsante verso la pagina dei serali oppure "Pagina in
+# La sezione dei serali nella pagina iniziale: titolo, tipo (la riga
+# piccola grigia sotto il titolo), claim, testo breve, i percorsi e, in
+# fondo, il pulsante verso la pagina dei serali oppure "Pagina in
 # preparazione". I nomi dei campi non vanno cambiati.
 #
-#   titolo   il titolo della fascia
+#   titolo   il titolo della sezione
 #   stato    pronta oppure in preparazione. Si scrive "pronta" solo
 #            quando la pagina esiste davvero.
 #   claim    si può lasciare vuoto
 titolo: Corsi serali per adulti
 tipo: Anno scolastico 2026/27
-nome: Meccanica e meccatronica; Grafica e comunicazione
 claim:
 in breve: Per chi lavora o vuole riprendere gli studi.
 pagina: serali.html
 stato: in preparazione
+#
+# I percorsi serali, uno per riga, due colonne:
+#
+#   nome | colore
+#
+#   colore   meccanica oppure grafica: il trattino accanto al nome ha il
+#            colore dell'indirizzo (arancione per meccanica, rosa per
+#            grafica). Non va cambiato.
+Meccanica e meccatronica | meccanica
+Grafica e comunicazione | grafica
 
 == PAGINA ==
 # Le informazioni per la futura pagina dei serali (serali.html). Oggi
@@ -31,7 +40,8 @@ stato: in preparazione
 # QUATTRO CAMPI FISSI, con il nome da non cambiare:
 #   titolo      il titolo della pagina
 #   etichetta   la riga piccola in alto (l'anno)
-#   pulsante    la scritta sul pulsante verso il modulo
+#   pulsante    la scritta sul pulsante verso la pagina della scuola
+#               con la domanda di iscrizione (la freccia la aggiunge il sito)
 #   link        l'indirizzo a cui porta il pulsante. Contiene l'anno:
 #               va aggiornato ogni anno.
 #
@@ -49,6 +59,6 @@ orari: [DA COMPLETARE: giorni e orari delle lezioni]
 durata e frequenza: [DA COMPLETARE: durata del percorso e frequenza richiesta]
 requisiti: [DA COMPLETARE: chi può iscriversi]
 studi già fatti: [DA COMPLETARE: come si riconoscono gli studi e le esperienze di lavoro già fatti]
-iscrizione: Si compila il modulo di preiscrizione pubblicato sul sito della scuola.
-pulsante: Modulo di preiscrizione
+iscrizione: Si scarica la domanda di iscrizione dal sito della scuola, si compila e si invia per email alla segreteria (tois059003@istruzione.it) oppure si consegna allo sportello della Segreteria Didattica, negli orari di apertura al pubblico.
+pulsante: Come iscriversi
 link: https://www.itisgiulionatta.it/pagine/corso-serale-per-adulti-as-2026-2027---online-il-modulo-per-le-preiscrizioni

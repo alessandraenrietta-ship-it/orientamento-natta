@@ -8,25 +8,33 @@
 # ------------------------------------------------------------------
 
 == APERTURA ==
-# Il titolo compare esattamente come è scritto qui, maiuscole comprese:
-# la pagina non lo trasforma in maiuscolo.
-titolo: ORIENTAMENTO I.I.S. Giulio Natta
-# claim provvisorio, da rivedere insieme agli altri
+# La riga piccola sopra il titolo. Il sito la scrive in maiuscolo e ci
+# aggiunge l'anno degli open day scritto in comuni.txt: "ORIENTAMENTO
+# 2026/27". La stessa parola compare anche nel timbro del piede.
+occhiello: Orientamento
+# Il titolo grande della home, in due lingue: compare la frase in
+# inglese e, toccandola, si gira e diventa quella in italiano. Le due
+# frasi compaiono esattamente come sono scritte qui.
+titolo-inglese: The next step is yours.
+titolo-italiano: Il prossimo passo è tuo.
+# Il claim generale della scuola (provvisorio, da rivedere insieme agli
+# altri). Dal 27 ottobre 2026 non compare: nella home il titolo è
+# quello qui sopra. Resta qui per quando servirà di nuovo.
 claim: Un'unica scuola, tanti modi di imparare.
-# Si possono aggiungere, sotto il claim, righe "testo" (ognuna è un
+# Si possono aggiungere, sotto il titolo, righe "testo" (ognuna è un
 # paragrafo) e una riga "testo-adulti" sopra il pulsante. Per ora non
 # ci sono: l'apertura deve restare breve.
-# Le scritte dei due pulsanti dell'apertura: il primo porta alla fascia
-# degli indirizzi, il secondo alla fascia dei serali, più in basso
-# nella stessa pagina.
+# Le scritte dei due pulsanti dell'apertura, sotto il disegno: il primo
+# porta alla sezione degli indirizzi, il secondo a quella dei serali,
+# più in basso nella stessa pagina.
 pulsante-diurno: Dopo la terza media
 pulsante-adulti: Corsi serali per adulti
 
 == SEZIONI ==
-# I titoli delle parti della pagina e le scritte fisse delle schede.
+# I titoli delle parti della pagina e le scritte fisse degli indirizzi.
 # Accanto al titolo degli open day il sito aggiunge l'anno scritto in
 # comuni.txt. Il titolo dei serali sta in serali.txt.
-indirizzi: Indirizzi e corsi
+indirizzi: Dopo la terza media
 open-day: Open day
 contatti: Contatti
 in-preparazione: Pagina in preparazione
@@ -35,38 +43,41 @@ vai-alla-pagina: Scopri di più
 # sotto l'indirizzo nel pulsante della mappa. Per ora non c'è.
 
 == INDIRIZZI ==
-# Una riga per scheda, otto colonne in quest'ordine:
+# Una riga per indirizzo, otto colonne in quest'ordine:
 #
 #   nome | tipo | claim | frase | in breve | pagina | stato | colore
 #
 #   frase    la frase concreta che compare subito sotto il claim.
 #   stato    pronta oppure in preparazione.
-#            Con "in preparazione" la scheda compare senza link.
+#            Con "in preparazione" l'indirizzo compare senza link.
 #            Si scrive "pronta" solo quando la pagina esiste davvero.
-#   colore   meccanica, grafica oppure liceo: non va cambiato.
+#   colore   meccanica, grafica oppure liceo: non va cambiato. È il
+#            colore del trattino accanto al nome (arancione, rosa,
+#            blu), che si usa solo per i tre indirizzi.
 #
 # Una colonna vuota si lascia vuota fra due barre.
-# Le tre schede hanno tutte la stessa struttura: niente link in più
-# dentro una scheda sola.
+# I tre indirizzi hanno tutti la stessa struttura: niente link in più
+# in uno solo.
 #
 # Testi per le future pagine degli indirizzi (non compaiono in home)
 # meccanica.html: Dalla terza si sceglie un'articolazione, cioè una specializzazione: Meccanica e meccatronica oppure Energia.
 # liceo.html: Tre percorsi sulla stessa base scientifica: Scienze applicate; Liceo Matematico, con più ore di matematica; Liceo Digitale, con ore in più di intelligenza artificiale, coding, diritto e pensiero critico.
 Meccanica, meccatronica ed energia | Istituto tecnico tecnologico | Un'auto? Non la guarderai più come prima. | In questo indirizzo imparerai a capire un motore e a progettarne i componenti. | | meccanica.html | in preparazione | meccanica
 Grafica e comunicazione | Istituto tecnico tecnologico | Una pubblicità? Non la guarderai più come prima. | In questo indirizzo imparerai a progettare una campagna e a capire perché funziona. | | grafica.html | in preparazione | grafica
-Scienze applicate | Liceo scientifico, opzione | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | pronta | liceo
+opzione Scienze applicate | Liceo scientifico | Un temporale? Non lo guarderai più come prima. | In questo indirizzo imparerai a spiegare un temporale con la fisica senza smettere di stupirti. | | liceo.html | pronta | liceo
 
 == CONTATTI ==
-# I pulsanti d'azione della fascia dei contatti, in quest'ordine.
+# Le azioni della sezione dei contatti, in quest'ordine.
 # Tre colonne:
 #
 #   azione | campo del dato in comuni.txt | campo del link (facoltativo)
 #
-# L'azione è la scritta in grassetto; sotto compare il dato.
+# L'azione è il link sottolineato in verde; sotto compare il dato,
+# che si può copiare.
 # Se la terza colonna è vuota, il sito capisce da solo il link:
 # il telefono chiama, l'email apre la posta.
 # L'email della segreteria, il sito della scuola e l'email del
 # Liceo Digitale non stanno qui: sono nel piede o nelle pagine.
+Chiama | telefono |
 Scrivi all'orientamento | email-orientamento |
-Chiamaci | telefono |
-Dove siamo | indirizzo | mappa
+Come arrivare | indirizzo | mappa

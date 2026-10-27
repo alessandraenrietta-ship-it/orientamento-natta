@@ -16,19 +16,20 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="stile.css?v=27">
+  <link rel="stylesheet" href="grafica.css?v=8">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <!-- Le tre pagine dei percorsi sono uguali: cambiano solo il titolo qui
-     sopra e i due attributi qui sotto, che dicono quali sezioni di
-     contenuti/liceo.txt leggere. -->
-<body data-percorso="LICEO DIGITALE" data-ore="ORE AGGIUNTIVE DIGITALE">
+     sopra e l'attributo qui sotto, che dice quale sezione di
+     contenuti/liceo.txt leggere. Le ore in più del percorso stanno nella
+     tabella PERCORSI di liceo.txt. -->
+<body data-percorso="LICEO DIGITALE">
 
   <a class="salta" href="#contenuto">Salta al contenuto</a>
 
   <!-- La testata: logo e nome della scuola, come nella home -->
-  <header class="fascia fascia-testata">
-    <div class="fascia-interno testata-interno">
+  <header class="testata">
+    <div class="interno testata-interno">
       <!-- Logo e nome sono un collegamento alla home. Il lettore di
            schermo sente anche "pagina iniziale" (TESTO MODIFICABILE). -->
       <p class="marchio">
@@ -43,57 +44,77 @@
   <!-- Tutti i testi qui sotto arrivano da contenuti/liceo.txt -->
   <main id="contenuto" tabindex="-1" hidden>
 
-    <section class="fascia fascia-verde fascia-apertura" aria-labelledby="titolo">
-      <div class="fascia-interno">
+    <!-- Apertura, centrata: occhiello grigio, nome del percorso, poi la
+         spiegazione allineata a sinistra -->
+    <section class="sezione apertura apertura-percorso" aria-labelledby="titolo">
+      <div class="interno">
         <p class="torna"><a href="liceo.html"><span aria-hidden="true">‹ </span><span id="torna"></span></a></p>
         <p class="occhiello" id="etichetta"></p>
-        <h1 class="titolo-pagina" id="titolo"></h1>
-        <p class="apertura-testo" id="spiegazione"></p>
+        <h1 class="titolo-sito" id="titolo"></h1>
+        <p class="spiegazione" id="spiegazione"></p>
       </div>
     </section>
 
-    <!-- Tre schede: Che cosa si impara, Come si studia, A chi si rivolge.
-         Una scheda senza testo non compare; se non ce n'è nessuna, non
-         compare la fascia. -->
-    <section class="fascia fascia-chiara fascia-blocchi">
-      <div class="fascia-interno">
+    <!-- Che cosa si impara, Come si studia, A chi si rivolge: tre parti
+         con il titolo in verde. Una parte senza testo non compare; se non
+         ce n'è nessuna, non compare la sezione. -->
+    <section class="sezione" aria-label="Il percorso">
+      <div class="interno">
         <div class="blocchi" id="blocchi"></div>
       </div>
     </section>
 
-    <section class="fascia fascia-quadro" aria-labelledby="titolo-quadro">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-quadro"></h2>
-        <div class="carta quadro">
-          <table class="orario" id="orario"></table>
-        </div>
+    <section class="sezione" aria-labelledby="titolo-quadro">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-quadro"></h2>
+        <table class="orario" id="orario"></table>
+        <!-- Il pulsante verso "Le ore a confronto" della pagina del liceo -->
+        <p class="fondo-sezione"><a class="pulsante pulsante-vuoto" id="confronta" href="liceo.html#confronto"></a></p>
       </div>
     </section>
 
-    <section class="fascia fascia-chiara" aria-labelledby="titolo-dopo">
-      <div class="fascia-interno">
-        <h2 class="titolo-fascia" id="titolo-dopo"></h2>
-        <p class="testo-fascia" id="dopo-il-diploma"></p>
+    <section class="sezione" aria-labelledby="titolo-dopo">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-dopo"></h2>
+        <p class="testo-sezione" id="dopo-il-diploma"></p>
       </div>
     </section>
 
+    <!-- Vieni a trovarci: i foglietti delle date, la nota sui turni e il
+         pulsante per prenotare un open day, presi da comuni.txt come
+         nella home (se non resta nessuna data, solo la frase
+         "nessuna-data", senza foglietti né pulsante). Sotto, i
+         collegamenti agli altri due percorsi. -->
+    <section class="sezione" aria-labelledby="titolo-visita">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-visita"></h2>
+        <!-- I foglietti delle date, come nella home -->
+        <ul class="date" id="date-visita"></ul>
+        <p class="nota" id="nota-visita"></p>
+        <p class="fondo-sezione" id="prenota-visita"></p>
+        <nav class="altri-percorsi" id="altri-percorsi" aria-labelledby="titolo-altri">
+          <p class="altri-titolo" id="titolo-altri"></p>
+          <ul class="altri-elenco" id="elenco-altri"></ul>
+        </nav>
+      </div>
+    </section>
   </main>
 
   <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
        possono leggere. -->
-  <section class="fascia fascia-verde" id="avviso" hidden>
-    <div class="fascia-interno">
-      <h1 class="titolo-fascia">Liceo Digitale</h1>
+  <section class="sezione" id="avviso" hidden>
+    <div class="interno">
+      <h1 class="titolo-sezione">Liceo Digitale</h1>
       <p>Non riesco a caricare i testi di questa pagina.</p>
       <p>Se hai aperto il file dal computer con un doppio clic, usa invece
-         <strong>anteprima.bat</strong>. Altrimenti ricarica la pagina, oppure
+         anteprima.bat. Altrimenti ricarica la pagina, oppure
          visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
     </div>
   </section>
 
   <noscript>
-    <section class="fascia fascia-verde">
-      <div class="fascia-interno">
+    <section class="sezione">
+      <div class="interno">
         <p>Per vedere questa pagina serve JavaScript attivo nel browser.
            In alternativa visita il
            <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
@@ -101,15 +122,18 @@
     </section>
   </noscript>
 
-  <!-- Il piede: i dati istituzionali della scuola, come nella home -->
-  <footer class="fascia fascia-piede">
-    <div class="fascia-interno">
+  <!-- Il piede, come nella home: il timbro rotondo e i dati della
+       scuola. Il timbro è solo decorativo. -->
+  <footer class="piede">
+    <div class="interno piede-interno">
+      <div class="timbro" id="timbro" aria-hidden="true"></div>
       <ul class="piede-voci" id="piede"></ul>
     </div>
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/liceo.js?v=7"></script>
+  <script src="js/grafica.js?v=6"></script>
+  <script src="js/liceo.js?v=11"></script>
 </body>
 </html>

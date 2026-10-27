@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TESTO MODIFICABILE: titolo della scheda del browser e descrizione
+       che compare su Google e nelle anteprime quando si condivide il
+       link. -->
+  <title>Per i docenti orientatori | IIS Giulio Natta, Rivoli</title>
+  <meta name="description" content="La cartolina &quot;Vieni a trovarci&quot; dell'IIS Giulio Natta di Rivoli, da scaricare in PDF, per i docenti orientatori delle scuole medie.">
+
+  <!-- BOZZA: chiede ai motori di ricerca di non mostrare questa pagina.
+       Va TOLTA quando il sito è approvato. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
+       DI UNO in tutte le pagine che lo caricano. -->
+  <link rel="stylesheet" href="grafica.css?v=8">
+  <link rel="stylesheet" href="cartolina-facciate.css?v=1">
+  <link rel="icon" href="immagini/logo-natta.png">
+</head>
+<body>
+
+  <a class="salta" href="#contenuto">Salta al contenuto</a>
+
+  <!-- La testata: logo e nome della scuola, come nella home -->
+  <header class="testata">
+    <div class="interno testata-interno">
+      <!-- Logo e nome sono un collegamento alla home. Il lettore di
+           schermo sente anche "pagina iniziale" (TESTO MODIFICABILE). -->
+      <p class="marchio">
+        <a class="marchio-link" href="index.html">
+          <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
+          <span class="marchio-nome" id="nome-scuola"></span><span class="solo-lettori">, pagina iniziale</span>
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <!-- I testi arrivano da contenuti/comuni.txt (sezione ORIENTATORI);
+       la cartolina da home.txt, comuni.txt e cartolina.txt, come in
+       cartolina.html. -->
+  <main id="contenuto" tabindex="-1" hidden>
+
+    <!-- Tutto centrato: il titolo, la cartolina che si gira e i due
+         pulsanti. Nessun altro testo visibile. -->
+    <section class="sezione apertura orientatori" aria-labelledby="titolo">
+      <div class="interno">
+        <h1 class="titolo-sito" id="titolo"></h1>
+
+        <!-- La cartolina: fronte e retro li disegna
+             js/cartolina-facciate.js, lo stesso codice di cartolina.html.
+             Si gira toccandola, con Invio o con la barra spaziatrice; il
+             nome per il lettore di schermo lo scrive js/orientatori.js.
+             Le due facciate sono nascoste al lettore di schermo: quale si
+             vede lo annuncia la riga nascosta qui sotto. -->
+        <div class="cartolina-gira" id="cartolina-gira" role="button" tabindex="0">
+          <div class="cartolina-giro">
+            <div class="cartolina-faccia cartolina-faccia-fronte" id="faccia-fronte" aria-hidden="true"></div>
+            <div class="cartolina-faccia cartolina-faccia-retro" id="faccia-retro" aria-hidden="true"></div>
+          </div>
+        </div>
+        <p class="solo-lettori" id="cartolina-faccia" aria-live="polite"></p>
+
+        <!-- Il pulsante del PDF compare solo se il file esiste -->
+        <p class="pulsanti pulsanti-docenti">
+          <a class="pulsante pulsante-pieno" id="pulsante-pdf" download hidden></a>
+          <button type="button" class="pulsante pulsante-vuoto" id="pulsante-gira"></button>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
+       possono leggere. -->
+  <section class="sezione" id="avviso" hidden>
+    <div class="interno">
+      <h1 class="titolo-sezione">Per i docenti orientatori</h1>
+      <p>Non riesco a caricare i testi di questa pagina.</p>
+      <p>Se hai aperto il file dal computer con un doppio clic, usa invece
+         anteprima.bat. Altrimenti ricarica la pagina, oppure
+         visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+    </div>
+  </section>
+
+  <noscript>
+    <section class="sezione">
+      <div class="interno">
+        <p>Per vedere questa pagina serve JavaScript attivo nel browser.
+           In alternativa visita il
+           <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+      </div>
+    </section>
+  </noscript>
+
+  <!-- Il piede, come nelle altre pagine, ma senza la riga per i docenti
+       orientatori. Il timbro è solo decorativo. -->
+  <footer class="piede">
+    <div class="interno piede-interno">
+      <div class="timbro" id="timbro" aria-hidden="true"></div>
+      <ul class="piede-voci" id="piede"></ul>
+    </div>
+  </footer>
+
+  <script src="js/contenuti.js?v=2"></script>
+  <script src="js/comuni.js?v=2"></script>
+  <script src="js/grafica.js?v=6"></script>
+  <script src="js/qr.js?v=1"></script>
+  <script src="js/cartolina-facciate.js?v=1"></script>
+  <script src="js/orientatori.js?v=1"></script>
+</body>
+</html>

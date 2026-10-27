@@ -58,6 +58,8 @@ while ($listener.IsListening) {
       ".jpg"  { $tipo = "image/jpeg" }
       ".jpeg" { $tipo = "image/jpeg" }
       ".gif"  { $tipo = "image/gif" }
+      ".ttf"  { $tipo = "font/ttf" }
+      ".woff2" { $tipo = "font/woff2" }
       default { $tipo = "application/octet-stream" }
     }
     $contesto.Response.ContentType = $tipo
