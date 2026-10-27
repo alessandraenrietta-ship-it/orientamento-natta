@@ -163,7 +163,12 @@
      di schermo si aggiunge il nome dell'indirizzo, altrimenti sentirebbe
      più volte "Scopri di più" senza sapere quale.
      Per sicurezza si controlla anche che la pagina esista davvero: se
-     manca, al posto del pulsante torna "Pagina in preparazione". */
+     il server risponde che non c'è (errore 404), al posto del pulsante
+     torna "Pagina in preparazione". Con qualunque altra risposta il
+     pulsante resta: alcuni servizi di anteprima (raw.githack.com)
+     rifiutano le richieste di controllo anche se la pagina c'è. Si usa
+     una richiesta normale (GET), perché quella "leggera" (HEAD) quei
+     servizi la rifiutano sempre. */
   function pulsantePagina(dati, home, fondo) {
     var a = document.createElement("a");
     a.className = "pulsante pulsante-vuoto";
@@ -174,13 +179,15 @@
     nascosto.textContent = ": " + dati.nome;
     a.appendChild(nascosto);
 
-    fetch(dati.pagina, { method: "HEAD", cache: "no-cache" })
+    fetch(dati.pagina, { cache: "no-cache" })
       .then(function (risposta) {
-        if (!risposta.ok) { throw new Error(risposta.status); }
+        if (risposta.status === 404) {
+          console.warn("home.txt: " + dati.nome + " è segnata \"pronta\" ma la pagina " + dati.pagina + " non esiste");
+          fondo.replaceChild(inPreparazione(home), a);
+        }
       })
       .catch(function () {
-        console.warn("home.txt: " + dati.nome + " è segnata \"pronta\" ma la pagina " + dati.pagina + " non esiste");
-        fondo.replaceChild(inPreparazione(home), a);
+        /* Nessuna risposta (per esempio senza rete): il pulsante resta */
       });
 
     return a;

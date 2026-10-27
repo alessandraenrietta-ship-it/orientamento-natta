@@ -65,6 +65,11 @@ adulti interessati ai corsi serali.
 - `in preparazione`: la scheda compare **senza link**, con la scritta
   "Pagina in preparazione". Così nessuno finisce sulla pagina di errore.
 - Prima di ogni push si controlla che ogni pagina `pronta` esista davvero.
+  La home lo controlla anche da sola: se il server risponde che la
+  pagina non c'è (404), al posto del pulsante mette "Pagina in
+  preparazione". Con altre risposte il pulsante resta, perché alcuni
+  servizi di anteprima (raw.githack.com) rifiutano il controllo anche
+  quando la pagina c'è.
 
 ## 5. Prima lo smartphone, accessibilità sempre
 
