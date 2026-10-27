@@ -204,31 +204,25 @@ window.Grafica = (function () {
     return future;
   }
 
-  /* Un turno con il suo stato, su una riga sua: l'orario e accanto
-     "Posti liberi" in verde oppure "Posti esauriti" in rosso (campi
-     "libero" ed "esaurito" di comuni.txt). Nessun simbolo: la
-     differenza non sta solo nel colore (rosso e verde si confondono per
-     chi è daltonico) ma nella scritta. Nel file, dopo l'orario, si
-     scrive "esaurito" quando il turno è pieno: "10.00-11.00 esaurito"
-     (funziona anche il vecchio "sold out"); senza, il turno ha posti
-     liberi. Sul telefono la scritta è breve, "Libero" o "Esaurito"
-     (campi "libero-breve" ed "esaurito-breve"): nella pagina ci sono
-     tutte e due, e grafica.css mostra solo quella che serve; quella
-     nascosta non la sente nemmeno il lettore di schermo. L'orario non
-     si spezza mai; se la scritta non ci sta accanto, va intera alla
-     riga sotto. */
+  /* Un turno su una riga sua: l'orario e, solo se il turno è pieno,
+     accanto la scritta rossa del campo "esaurito" di comuni.txt
+     ("Esaurito"). Accanto ai turni con posti non c'è niente. Nessun
+     simbolo: la differenza non sta solo nel colore ma nella scritta.
+     Nel file, dopo l'orario, si scrive "esaurito" quando il turno è
+     pieno: "10.00-11.00 esaurito" (funziona anche il vecchio "sold
+     out"). Il sito non legge le prenotazioni del modulo: si segna a
+     mano. Orario e scritta non si spezzano mai. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
-  function turnoConStato(testo, scritte) {
+  function turnoConStato(testo, scrittaEsaurito) {
     var esaurito = TURNO_PIENO.test(testo);
     var turno = document.createElement("li");
-    turno.className = "turno" + (esaurito ? " turno-esaurito" : " turno-libero");
+    turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
     turno.appendChild(P.elemento("span", "turno-orario", testo.replace(TURNO_PIENO, "")));
-    turno.appendChild(document.createTextNode(" "));
-    var stato = P.elemento("span", "turno-stato", "");
-    stato.appendChild(P.elemento("span", "stato-lungo", esaurito ? scritte.esaurito : scritte.libero));
-    stato.appendChild(P.elemento("span", "stato-breve", esaurito ? scritte.esauritoBreve : scritte.liberoBreve));
-    turno.appendChild(stato);
+    if (esaurito) {
+      turno.appendChild(document.createTextNode(" "));
+      turno.appendChild(P.elemento("span", "turno-stato", scrittaEsaurito));
+    }
     return turno;
   }
 
@@ -240,12 +234,7 @@ window.Grafica = (function () {
      giorno della settimana. Restituisce quante date ha messo. Lo stesso
      componente serve alla home e alle pagine del liceo. */
   function listaDate(comuni, elenco) {
-    var scritte = {
-      libero: comuni.campo("OPEN DAY", "libero") || "Posti liberi",
-      esaurito: comuni.campo("OPEN DAY", "esaurito") || "Posti esauriti",
-      liberoBreve: comuni.campo("OPEN DAY", "libero-breve") || "Libero",
-      esauritoBreve: comuni.campo("OPEN DAY", "esaurito-breve") || "Esaurito"
-    };
+    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
     var future = dateOpenDay(comuni);
     future.forEach(function (d) {
       var riga = d.riga, data = d.data;
@@ -267,11 +256,11 @@ window.Grafica = (function () {
       settimana.appendChild(P.elemento("span", "solo-lettori", " " + riga[1]));
       testi.appendChild(settimana);
 
-      /* I due turni uno sotto l'altro, ognuno con il suo stato */
+      /* I due turni uno sotto l'altro; accanto a quello pieno "Esaurito" */
       var turni = document.createElement("ul");
       turni.className = "data-turni";
-      turni.appendChild(turnoConStato(riga[2], scritte));
-      turni.appendChild(turnoConStato(riga[3], scritte));
+      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
+      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
       testi.appendChild(turni);
 
       voce.appendChild(testi);

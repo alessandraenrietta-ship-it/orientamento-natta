@@ -74,7 +74,7 @@
   --percorso-matematico: #2563B3;  /* Liceo Matematico, blu */
   --percorso-digitale:   #2348D6;  /* Liceo Digitale, blu violetto */
 
-  /* Rosso SOLO per la scritta "Posti esauriti" dei turni degli open day:
+  /* Rosso SOLO per la scritta "Esaurito" dei turni degli open day:
      6,5 sul bianco. Sempre con la scritta, mai da solo. */
   --rosso:         #B91C1C;
 
@@ -526,10 +526,9 @@ button.pulsante {
   font-size: 1.125rem;
 }
 
-/* I due turni uno sotto l'altro: l'orario e accanto "Posti liberi" in
-   verde (6,6 sul bianco) oppure "Posti esauriti" in rosso (6,5). Né
-   l'orario né la scritta si spezzano: se la scritta non ci sta accanto
-   all'orario, va intera alla riga sotto. Sugli schermi stretti 14
+/* I due turni uno sotto l'altro: l'orario e, solo accanto al turno
+   pieno, "Esaurito" in rosso (6,5 sul bianco). Accanto agli altri
+   niente. Orario e scritta non si spezzano. Sugli schermi stretti 14
    pixel. */
 .data-turni {
   margin: 0;
@@ -539,16 +538,7 @@ button.pulsante {
 .turno-orario,
 .turno-stato { white-space: nowrap; }
 
-.turno-libero .turno-stato   { color: var(--verde); }
 .turno-esaurito .turno-stato { color: var(--rosso); }
-
-/* Sul telefono la scritta breve ("Libero", "Esaurito"), dai 40rem
-   quella intera ("Posti liberi", "Posti esauriti") */
-.stato-lungo { display: none; }
-@media (min-width: 40rem) {
-  .stato-lungo { display: inline; }
-  .stato-breve { display: none; }
-}
 
 .nota {
   margin-top: 2rem;
@@ -772,15 +762,13 @@ button.pulsante {
   .titolo-sito { font-size: 3.25rem; }
 }
 
-/* Le date in colonne solo quando "11.00-12.00 Posti esauriti" ci sta
-   su una riga accanto al foglietto: due colonne sui tablet, tre sul
-   computer. Tre colonne dai 70rem (prima 66rem): fra 66 e 69rem la
-   scritta andava a capo. */
+/* Le date in colonne solo quando "11.00-12.00 Esaurito" ci sta su una
+   riga accanto al foglietto: due colonne sui tablet, tre sul computer */
 @media (min-width: 48rem) {
   .date { grid-template-columns: repeat(2, 1fr); }
 }
 
-@media (min-width: 70rem) {
+@media (min-width: 66rem) {
   .date { grid-template-columns: repeat(3, 1fr); }
 }
 

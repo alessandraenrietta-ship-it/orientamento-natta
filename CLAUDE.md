@@ -646,19 +646,17 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   verde; niente anellini, niente striscia piena; `aria-hidden`, la data
   per intero è scritta per il lettore di schermo). Accanto il giorno
   della settimana e sotto i due turni, uno per riga (dal 27 ottobre
-  2026 sera): l'orario e accanto "Posti liberi" in verde oppure "Posti
-  esauriti" in rosso, senza simboli; sul telefono, sotto i 40rem, solo
-  "Libero" ed "Esaurito" (campi `libero`, `esaurito`, `libero-breve`,
-  `esaurito-breve` di `comuni.txt`). Il turno pieno si segna a mano,
+  2026 sera): l'orario e, solo accanto al turno pieno, "Esaurito" in
+  rosso (campo `esaurito` di `comuni.txt`), senza simboli; accanto agli
+  altri niente. Il turno pieno si segna a mano,
   con `esaurito` dopo l'orario: il sito non legge le prenotazioni del
   modulo. Orario e scritta non si spezzano: se la scritta non ci sta,
   va intera sotto. Turni a 14 px sul telefono, 16 dai 40rem; rosso
   `#B91C1C` solo qui, sempre con la scritta. Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
   dal 27 ottobre 2026 tolta su richiesta di Alessandra: la riga ha il #
   davanti) e il pulsante pieno "Prenota il tuo
-  open day" (dal 27 ottobre 2026 sera; prima "Prenota un open day"). Una colonna sul telefono, due dai 48rem, tre dai 70rem (prima
-  "11.00-12.00 Posti esauriti" non ci starebbe su una riga; fino al 27
-  ottobre 2026 sera erano 66rem).
+  open day" (dal 27 ottobre 2026 sera; prima "Prenota un open day"). Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
+  "11.00-12.00 Esaurito" non ci starebbe su una riga).
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
   maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
   "Pagina in preparazione" o il pulsante vuoto "Scopri di più" (per il
