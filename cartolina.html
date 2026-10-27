@@ -19,8 +19,8 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO. -->
-  <link rel="stylesheet" href="cartolina-facciate.css?v=1">
-  <link rel="stylesheet" href="cartolina.css?v=3">
+  <link rel="stylesheet" href="cartolina-facciate.css?v=3">
+  <link rel="stylesheet" href="cartolina.css?v=4">
   <link rel="icon" href="immagini/logo-natta.png">
 
   <!-- La misura del foglio di stampa: la scrive js/cartolina.js, perché
@@ -36,6 +36,7 @@
     <div class="pulsanti">
       <button type="button" class="pulsante" data-modo="tipografia">Stampa per la tipografia</button>
       <button type="button" class="pulsante" data-modo="a4">Stampa a scuola (A4)</button>
+      <button type="button" class="pulsante" data-modo="docenti">PDF per i docenti (A4)</button>
     </div>
     <p>Ogni pulsante mostra qui sotto la versione scelta e apre la finestra di
       stampa. Per avere il PDF, come stampante si sceglie
@@ -52,6 +53,12 @@
         fronte-retro, <strong>capovolgendo sul lato lungo</strong>. Prima di
         stamparne tante, si fa un foglio di prova e si controlla che il retro
         non esca capovolto. Si taglia sui segni agli angoli.</li>
+      <li><strong>Per i docenti</strong>: il PDF che si scarica dalla pagina
+        per i docenti orientatori. Una cartolina per foglio A4 verticale, al
+        centro, con i segni di taglio e sotto due righe grigie (in
+        <code>comuni.txt</code>, sezione ORIENTATORI). Pagina 1 il fronte,
+        pagina 2 il retro. Si salva come
+        <code>materiali/cartolina-natta.pdf</code>.</li>
       <li>Sullo schermo la <span class="legenda-taglio">linea fucsia
         tratteggiata</span> è il taglio, la <span class="legenda-sicurezza">linea
         azzurra punteggiata</span> è il limite dei testi (5 mm dal taglio).
@@ -66,10 +73,10 @@
   <main id="fogli" hidden></main>
 
   <script src="js/contenuti.js?v=2"></script>
-  <script src="js/comuni.js?v=2"></script>
+  <script src="js/comuni.js?v=3"></script>
   <script src="js/grafica.js?v=6"></script>
   <script src="js/qr.js?v=1"></script>
-  <script src="js/cartolina-facciate.js?v=1"></script>
-  <script src="js/cartolina.js?v=3"></script>
+  <script src="js/cartolina-facciate.js?v=2"></script>
+  <script src="js/cartolina.js?v=4"></script>
 </body>
 </html>

@@ -40,9 +40,10 @@ window.Cartolina = (function () {
   /* Il disegno delle tre linee: lo stesso della home */
   var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
 
-  /* La firma di Giulio Natta: un'immagine con lo sfondo trasparente,
-     colorata di blu notte da cartolina-facciate.css */
-  var FILE_FIRMA = "immagini/firma-natta.png";
+  /* La firma di Giulio Natta: un'immagine blu notte su fondo bianco
+     pieno, senza trasparenze. Se si cambia il file, si aumenta il
+     numero ?v= qui sotto. */
+  var FILE_FIRMA = "immagini/firma-natta.png?v=2";
 
   /* Sul fronte il disegno è largo quanto la facciata, 156 mm, cioè 640
      unità del disegno: un'unità è 156 / 640 mm. Con queste misure si
@@ -130,17 +131,18 @@ window.Cartolina = (function () {
       var li = document.createElement("li");
       li.className = "tono-" + riga[7].toLowerCase();
       li.appendChild(elemento("span", "retro-tipo", riga[1]));
-      li.appendChild(elemento("span", "retro-nome", riga[0]));
+      li.appendChild(elemento("span", "retro-nome", P.nomeIntero(riga[0])));
       elenco.appendChild(li);
     });
     sinistra.appendChild(elenco);
 
     sinistra.appendChild(elemento("p", "retro-saluto", testo("saluto")));
-    var firma = document.createElement("span");
+    var firma = document.createElement("img");
     firma.className = "retro-firma";
-    firma.setAttribute("role", "img");
-    firma.setAttribute("aria-label", "Firma di Giulio Natta");
-    firma.style.setProperty("--firma", "url(\"" + FILE_FIRMA + "\")");
+    firma.src = FILE_FIRMA;
+    firma.alt = "firma di Giulio Natta";
+    firma.width = 2000;
+    firma.height = 534;
     sinistra.appendChild(firma);
     f.appendChild(sinistra);
 

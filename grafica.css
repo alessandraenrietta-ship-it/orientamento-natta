@@ -98,10 +98,18 @@ body {
   font-size: 1.0625rem;   /* 17 pixel: il minimo è 16 */
   font-weight: normal;
   font-synthesis: none;
+  /* Niente legature: "fi" in "Grafica" e "scientifico" resta di due
+     lettere, come vuole il Cutive Mono, che ha tutte le lettere larghe
+     uguali */
+  font-variant-ligatures: none;
   line-height: 1.6;
   color: var(--blu-notte);
   background: var(--bianco);
 }
+
+/* I pulsanti veri (button) non prendono da soli il carattere della
+   pagina: qui almeno le legature */
+button { font-variant-ligatures: none; }
 
 h1, h2, h3 {
   margin: 0 0 0.6em;
@@ -135,6 +143,13 @@ a:hover { text-decoration-thickness: 2px; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Un segno nascosto alla vista dentro una riga di testo, come la
+   virgola fra le due righe del titolo di liceo.html: resta attaccato
+   alla parola prima, così il lettore di schermo legge "Liceo
+   scientifico, opzione Scienze applicate" senza uno spazio prima della
+   virgola (con .solo-lettori lo spazio c'era) */
+.solo-lettori-in-riga { font-size: 0; }
 
 /* Un dato che manca: [DA COMPLETARE: ...], ben visibile */
 .da-completare {
@@ -344,15 +359,14 @@ button.pulsante {
 /* Il titolo della home che si gira: "The next step is yours." sul
    davanti, "Il prossimo passo è tuo." sul retro. Le due frasi stanno
    nella stessa casella della griglia, una sopra l'altra: occupano lo
-   stesso spazio, quello della più lunga. Toccando il titolo o la
-   freccia sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
+   stesso spazio, quello della più lunga. Toccando il titolo o il
+   pulsante sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
    gradi in orizzontale in 0,8 secondi, come la cartolina. Sul telefono
    24 pixel, al massimo due righe per frase; dai 40rem torna grande
    (SCHERMI PIÙ LARGHI). */
 .titolo-gira { cursor: pointer; }
 .titolo-home {
   font-size: 1.5rem;
-  margin-bottom: 0;
   perspective: 1200px;
 }
 .titolo-giro {
@@ -372,31 +386,6 @@ button.pulsante {
 .titolo-faccia-it { transform: rotateY(180deg); }
 .titolo-gira.girato .titolo-giro { transform: rotateY(180deg); }
 
-/* Il segno sotto il titolo: una piccola freccia circolare grigia, alta
-   16 pixel, dentro un pulsante di 44 pixel facile da toccare */
-.titolo-freccia {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 0 auto 0.25rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--grigio);
-  cursor: pointer;
-}
-.titolo-freccia svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
 /* Chi ha chiesto di ridurre il movimento: le frasi si scambiano
    subito, senza rotazione */
@@ -1297,10 +1286,9 @@ button.pulsante {
   cursor: pointer;
 }
 
-.cartolina-gira:focus-visible {
-  outline: 3px solid var(--blu-notte);
-  outline-offset: 4px;
-}
+/* La cartolina si tocca con il mouse o con il dito; da tastiera si
+   gira con il pulsante "Gira la cartolina", per questo non riceve il
+   focus e non ha un contorno suo */
 
 .cartolina-giro {
   position: absolute;
@@ -1349,8 +1337,33 @@ button.pulsante {
 
 /* I due pulsanti sotto la cartolina: sul telefono uno sotto l'altro a
    tutta larghezza, come nell'apertura; dai 40rem affiancati e
-   centrati (SCHERMI PIÙ LARGHI) */
+   centrati (SCHERMI PIÙ LARGHI), allineati in alto perché sotto il
+   pulsante del PDF c'è la riga grigia "Versione non definitiva." */
 .pulsanti-docenti { margin-top: 1.5rem; }
+
+.pulsante-con-nota {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+}
+
+.nota-pdf {
+  margin: 0;
+  font-size: 0.875rem;   /* 14 pixel */
+  color: var(--grigio);
+}
+
+@media (min-width: 40rem) {
+  .pulsanti.pulsanti-docenti { align-items: flex-start; }
+}
+
+/* Il contatto dell'orientamento sotto i pulsanti, come nei contatti
+   della home, centrato come il resto della pagina */
+.contatti-orientatori {
+  justify-content: center;
+  margin-top: 2.5rem;
+}
 
 
 /* La riga per i docenti in cima al piede di tutte le pagine (tranne

@@ -72,11 +72,26 @@ collegamento: Scarica la cartolina del Natta
 titolo: Per i docenti orientatori
 pulsante-pdf: Scarica la cartolina in PDF
 pulsante-gira: Gira la cartolina
-# Il PDF della cartolina, salvato da Alessandra con la funzione Stampa
-# di Edge (da cartolina.html) quando la cartolina è definitiva. Se il
-# file non c'è, il pulsante per scaricarlo non compare.
+# La riga grigia sotto il pulsante del PDF. Se si toglie, non compare.
+nota-pdf: Versione non definitiva.
+# Il contatto sotto i pulsanti: il link apre la posta verso l'indirizzo
+# email-orientamento della sezione SCUOLA, scritto sotto.
+contatto: Scrivi all'orientamento
+# Solo per i lettori di schermo: la descrizione del fronte della
+# cartolina (il retro lo leggono così com'è) e gli avvisi dopo ogni giro.
+descrizione-fronte: Fronte: il disegno della scuola tracciato da tre linee e un codice QR che porta al sito di orientamento.
+avviso-retro: Ora si vede il retro.
+avviso-fronte: Ora si vede il fronte.
+# Il PDF della cartolina, salvato con la funzione Stampa di Edge da
+# cartolina.html?foglio=docenti (pulsante "PDF per i docenti"): A4
+# verticale, una cartolina per pagina, fronte e retro. Se il file non
+# c'è, il pulsante per scaricarlo non compare.
 pdf: materiali/cartolina-natta.pdf
+# Le due righe grigie stampate sotto la cartolina nel PDF per i
+# docenti, fuori dai segni di taglio. Se si tolgono, non compaiono.
+pdf-riga-1: Versione non definitiva · 27 ottobre 2026
+pdf-riga-2: Stampare fronte-retro capovolgendo sul lato lungo, poi rifilare sui segni.
 # pronta oppure in preparazione. Con "in preparazione" la riga nel
-# piede non compare su nessuna pagina; si scrive "pronta" solo quando
-# la cartolina per la stampa è definitiva e il PDF è salvato.
-stato: in preparazione
+# piede non compare su nessuna pagina. "pronta" dal 27 ottobre 2026
+# sera, con il PDF non definitivo, per scelta di Alessandra.
+stato: pronta

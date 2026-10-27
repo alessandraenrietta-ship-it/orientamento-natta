@@ -8,12 +8,19 @@
    sui fogli da stampare. I testi non stanno qui: si cambiano nei file
    di testo.
 
-   Due versioni, scelte con i pulsanti della pagina:
+   Tre versioni, scelte con i pulsanti della pagina:
    - tipografia: un foglio per facciata, 156 x 106 mm (la cartolina
      più 3 mm di abbondanza per lato);
    - a4: due cartoline per foglio A4 verticale, una sopra l'altra, con
-     i segni di taglio.
-   Con l'indirizzo cartolina.html?foglio=a4 si apre già la seconda.
+     i segni di taglio;
+   - docenti: il PDF che si scarica da orientatori.html
+     (materiali/cartolina-natta.pdf). Una cartolina per foglio A4
+     verticale, al centro, con l'abbondanza e i segni di taglio; sotto,
+     fuori dai segni, due righe grigie lette da comuni.txt (sezione
+     ORIENTATORI, pdf-riga-1 e pdf-riga-2). Pagina 1 il fronte, pagina
+     2 il retro.
+   Con l'indirizzo cartolina.html?foglio=a4 o ?foglio=docenti si apre
+   già la versione scelta.
 
    Ha bisogno di js/contenuti.js, js/comuni.js, js/grafica.js,
    js/qr.js e js/cartolina-facciate.js, che vanno caricati prima di
@@ -31,10 +38,11 @@
   /* La misura del foglio di stampa per ogni versione */
   var PAGINA = {
     tipografia: "@page { size: 156mm 106mm; margin: 0; }",
-    a4: "@page { size: 210mm 297mm; margin: 0; }"
+    a4: "@page { size: 210mm 297mm; margin: 0; }",
+    docenti: "@page { size: 210mm 297mm; margin: 0; }"
   };
 
-  var fronte, retro;
+  var fronte, retro, righeDocenti;
 
   Promise.all([
     C.leggi("contenuti/home.txt"),
@@ -48,8 +56,11 @@
     .then(function (file) {
       fronte = K.fronte(file[1], file[3]);
       retro = K.retro(file[0], file[1], file[2]);
+      righeDocenti = ["pdf-riga-1", "pdf-riga-2"]
+        .map(function (nome) { return file[1].campo("ORIENTATORI", nome); })
+        .filter(function (riga) { return riga; });
       var richiesto = new URLSearchParams(location.search).get("foglio");
-      mostra(richiesto === "a4" ? "a4" : "tipografia");
+      mostra(PAGINA.hasOwnProperty(richiesto) ? richiesto : "tipografia");
       document.getElementById("fogli").hidden = false;
       document.querySelectorAll("[data-modo]").forEach(function (pulsante) {
         pulsante.addEventListener("click", function () {
@@ -69,7 +80,7 @@
 
 
   /* ---------------------------------------------------------------
-     LE DUE VERSIONI
+     LE TRE VERSIONI
      --------------------------------------------------------------- */
 
   function mostra(modo) {
@@ -81,6 +92,9 @@
     if (modo === "a4") {
       fogli.appendChild(gruppo("Foglio 1: i fronti", foglioA4(fronte)));
       fogli.appendChild(gruppo("Foglio 2: i retri", foglioA4(retro)));
+    } else if (modo === "docenti") {
+      fogli.appendChild(gruppo("Pagina 1: il fronte", foglioDocenti(fronte)));
+      fogli.appendChild(gruppo("Pagina 2: il retro", foglioDocenti(retro)));
     } else {
       fogli.appendChild(gruppo("Fronte", foglioTipografia(fronte)));
       fogli.appendChild(gruppo("Retro", foglioTipografia(retro)));
@@ -130,6 +144,41 @@
     });
 
     foglio.appendChild(coppia);
+    return foglio;
+  }
+
+  /* Una sola cartolina al centro dell'A4 verticale, con i segni di
+     taglio agli angoli e, sotto, le due righe grigie. Le misure sono in
+     millimetri, a partire dall'angolo in alto a sinistra della
+     cartolina con l'abbondanza (156 x 106 mm). Fronte e retro sono
+     nello stesso punto del foglio, così combaciano quando lo si
+     capovolge sul lato lungo. */
+  function foglioDocenti(facciata) {
+    var foglio = document.createElement("div");
+    foglio.className = "foglio foglio-a4";
+    var sola = document.createElement("div");
+    sola.className = "sola";
+    sola.appendChild(facciata.cloneNode(true));
+
+    /* I tagli passano a 3 mm dai bordi: in orizzontale a 3 e 103 mm,
+       in verticale a 3 e 153 mm. Segni lunghi 6 mm, a 2 mm dal fondo. */
+    [3, 103].forEach(function (y) {
+      sola.appendChild(segnoTaglio("orizzontale", -8, y - 0.125));
+      sola.appendChild(segnoTaglio("orizzontale", 158, y - 0.125));
+    });
+    [3, 153].forEach(function (x) {
+      sola.appendChild(segnoTaglio("verticale", x - 0.125, -8));
+      sola.appendChild(segnoTaglio("verticale", x - 0.125, 108));
+    });
+
+    if (righeDocenti.length) {
+      var note = document.createElement("div");
+      note.className = "note-docenti";
+      righeDocenti.forEach(function (riga) { note.appendChild(elemento("p", "", riga)); });
+      sola.appendChild(note);
+    }
+
+    foglio.appendChild(sola);
     return foglio;
   }
 
