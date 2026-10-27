@@ -8,12 +8,18 @@
    sui fogli da stampare. I testi non stanno qui: si cambiano nei file
    di testo.
 
-   Due versioni, scelte con i pulsanti della pagina:
+   Tre versioni, scelte con i pulsanti della pagina:
    - tipografia: un foglio per facciata, 156 x 106 mm (la cartolina
      più 3 mm di abbondanza per lato);
    - a4: due cartoline per foglio A4 verticale, una sopra l'altra, con
-     i segni di taglio.
-   Con l'indirizzo cartolina.html?foglio=a4 si apre già la seconda.
+     i segni di taglio;
+   - docenti: il PDF che si scarica da orientatori.html
+     (materiali/cartolina-natta.pdf). Come a4, due cartoline per foglio
+     con i segni di taglio; sotto, fuori dai segni, due righe grigie
+     lette da comuni.txt (sezione ORIENTATORI, pdf-riga-1 e
+     pdf-riga-2). Pagina 1 i fronti, pagina 2 i retri.
+   Con l'indirizzo cartolina.html?foglio=a4 o ?foglio=docenti si apre
+   già la versione scelta.
 
    Ha bisogno di js/contenuti.js, js/comuni.js, js/grafica.js,
    js/qr.js e js/cartolina-facciate.js, che vanno caricati prima di
@@ -31,10 +37,11 @@
   /* La misura del foglio di stampa per ogni versione */
   var PAGINA = {
     tipografia: "@page { size: 156mm 106mm; margin: 0; }",
-    a4: "@page { size: 210mm 297mm; margin: 0; }"
+    a4: "@page { size: 210mm 297mm; margin: 0; }",
+    docenti: "@page { size: 210mm 297mm; margin: 0; }"
   };
 
-  var fronte, retro;
+  var fronte, retro, righeDocenti;
 
   Promise.all([
     C.leggi("contenuti/home.txt"),
@@ -48,8 +55,11 @@
     .then(function (file) {
       fronte = K.fronte(file[1], file[3]);
       retro = K.retro(file[0], file[1], file[2]);
+      righeDocenti = ["pdf-riga-1", "pdf-riga-2"]
+        .map(function (nome) { return file[1].campo("ORIENTATORI", nome); })
+        .filter(function (riga) { return riga; });
       var richiesto = new URLSearchParams(location.search).get("foglio");
-      mostra(richiesto === "a4" ? "a4" : "tipografia");
+      mostra(PAGINA.hasOwnProperty(richiesto) ? richiesto : "tipografia");
       document.getElementById("fogli").hidden = false;
       document.querySelectorAll("[data-modo]").forEach(function (pulsante) {
         pulsante.addEventListener("click", function () {
@@ -69,7 +79,7 @@
 
 
   /* ---------------------------------------------------------------
-     LE DUE VERSIONI
+     LE TRE VERSIONI
      --------------------------------------------------------------- */
 
   function mostra(modo) {
@@ -81,6 +91,9 @@
     if (modo === "a4") {
       fogli.appendChild(gruppo("Foglio 1: i fronti", foglioA4(fronte)));
       fogli.appendChild(gruppo("Foglio 2: i retri", foglioA4(retro)));
+    } else if (modo === "docenti") {
+      fogli.appendChild(gruppo("Pagina 1: i fronti", foglioDocenti(fronte)));
+      fogli.appendChild(gruppo("Pagina 2: i retri", foglioDocenti(retro)));
     } else {
       fogli.appendChild(gruppo("Fronte", foglioTipografia(fronte)));
       fogli.appendChild(gruppo("Retro", foglioTipografia(retro)));
@@ -130,6 +143,20 @@
     });
 
     foglio.appendChild(coppia);
+    return foglio;
+  }
+
+  /* Il foglio per i docenti: lo stesso della versione a4 (due
+     cartoline uguali una sopra l'altra, con i segni di taglio) e, sotto
+     la seconda, fuori dai segni, le due righe grigie */
+  function foglioDocenti(facciata) {
+    var foglio = foglioA4(facciata);
+    if (righeDocenti.length) {
+      var note = document.createElement("div");
+      note.className = "note-docenti";
+      righeDocenti.forEach(function (riga) { note.appendChild(elemento("p", "", riga)); });
+      foglio.querySelector(".coppia").appendChild(note);
+    }
     return foglio;
   }
 

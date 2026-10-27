@@ -86,9 +86,20 @@ window.Pezzi = (function () {
     return el;
   }
 
-  /* La testata: il nome della scuola accanto al logo */
+  /* La testata: il nome della scuola accanto al logo. Dove logo e nome
+     portano alla home, il link ha un nome per il lettore di schermo,
+     scritto per intero: "IIS Giulio Natta, pagina iniziale" (la seconda
+     parte è il testo nascosto nella pagina). Senza, il lettore di
+     schermo sentirebbe il maiuscolo della testata e uno spazio prima
+     della virgola. */
   function testata(comuni) {
-    C.scrivi(document.getElementById("nome-scuola"), comuni.campo("SCUOLA", "nome"));
+    var nome = document.getElementById("nome-scuola");
+    C.scrivi(nome, comuni.campo("SCUOLA", "nome"));
+    var link = nome.closest("a");
+    var nascosto = link && link.querySelector(".solo-lettori");
+    if (nascosto) {
+      link.setAttribute("aria-label", comuni.campo("SCUOLA", "nome") + nascosto.textContent);
+    }
   }
 
   /* Il piede: nome della scuola, indirizzo, telefono, email della
@@ -114,6 +125,15 @@ window.Pezzi = (function () {
     if (campo("sito")) { voce(collegamento(sitoDaMostrare(campo("sito")), campo("sito"))); }
   }
 
+  /* Il nome di un indirizzo con le ultime due parole che non si
+     separano mai: "Meccanica, meccatronica ed energia" va a capo prima
+     di "ed energia", e "energia" non resta mai da sola. Fra le due
+     parole il sito mette uno spazio che non va a capo; nel file di
+     testo resta lo spazio normale. */
+  function nomeIntero(nome) {
+    return nome.replace(/ (\S+)$/, " $1");
+  }
+
   return {
     icona: icona,
     segno: segno,
@@ -122,6 +142,7 @@ window.Pezzi = (function () {
     linkTelefono: linkTelefono,
     sitoDaMostrare: sitoDaMostrare,
     scriviDato: scriviDato,
+    nomeIntero: nomeIntero,
     testata: testata,
     piede: piede
   };

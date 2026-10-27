@@ -124,12 +124,13 @@
 
     /* Il titolo su due righe, in un solo h1: "titolo" sopra e, più
        piccola, "titolo-riga-2". Fra le due una virgola che si sente ma
-       non si vede: il lettore di schermo legge "Liceo scientifico,
-       opzione Scienze applicate". */
+       non si vede, attaccata alla prima parte (grafica.css,
+       .solo-lettori-in-riga): il lettore di schermo legge "Liceo
+       scientifico, opzione Scienze applicate". */
     var h1 = document.getElementById("titolo");
     C.scrivi(h1, liceo.campo("LICEO", "titolo"));
     if (liceo.campo("LICEO", "titolo-riga-2")) {
-      h1.appendChild(elemento("span", "solo-lettori", ", "));
+      h1.appendChild(elemento("span", "solo-lettori-in-riga", ","));
       h1.appendChild(elemento("span", "titolo-riga-2", liceo.campo("LICEO", "titolo-riga-2")));
     }
 

@@ -47,10 +47,10 @@
   /* ---------------------------------------------------------------
      IL TITOLO CHE SI GIRA
      "The next step is yours." sul davanti e "Il prossimo passo è tuo."
-     sul retro. Toccando il titolo o la freccia circolare sotto (un vero
-     pulsante, "Gira il titolo", che si usa anche da tastiera) si gira
-     di 180 gradi in orizzontale in 0,8 secondi, come la cartolina; un
-     secondo tocco torna all'inglese. Quando le tre linee del disegno
+     sul retro. Toccandolo si gira di 180 gradi in orizzontale in 0,8
+     secondi, come la cartolina; un secondo tocco torna all'inglese.
+     Nessun segno indica che si gira: scelta di Alessandra. Il lettore
+     di schermo legge comunque tutte e due le frasi. Quando le tre linee del disegno
      hanno finito di disegnarsi, il titolo fa da solo un giro di andata
      e ritorno, una sola volta, se la persona non l'ha già toccato. Per
      chi ha chiesto di ridurre il movimento niente giro automatico, e il
@@ -70,9 +70,6 @@
   }
 
   function titoloCheSiGira() {
-    /* Un solo ascoltatore per tutta l'area: titolo e freccia. Il
-       pulsante della freccia riceve anche Invio e barra spaziatrice
-       dalla tastiera, e il browser li trasforma in un clic. */
     document.getElementById("titolo-gira").addEventListener("click", function () {
       titoloToccato = true;
       giraTitolo();
@@ -188,7 +185,7 @@
       var voce = document.createElement("li");
       voce.className = "indirizzo con-trattino tono-" + dati.colore;
       voce.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
-      voce.appendChild(elemento("h3", "indirizzo-nome", dati.nome));
+      voce.appendChild(nomeColorato(dati.nome));
       voce.appendChild(elemento("p", "indirizzo-claim", dati.claim));
 
       var testi = document.createElement("div");
@@ -210,13 +207,30 @@
     });
   }
 
+  /* Il nome dell'indirizzo, nel colore dell'indirizzo (grafica.css):
+     "Meccanica, meccatronica ed energia" arancione, "Grafica e
+     comunicazione" rosa, "Scienze applicate" blu. Le parole minuscole
+     all'inizio ("opzione") restano in blu notte: si colora il nome vero
+     e proprio, dalla prima maiuscola in poi. */
+  function nomeColorato(nome) {
+    var h3 = elemento("h3", "indirizzo-nome", "");
+    var inizio = nome.match(/^(?:[a-zà-ù]+ )+/);
+    var prima = inizio ? inizio[0] : "";
+    if (prima) { h3.appendChild(document.createTextNode(prima)); }
+    h3.appendChild(elemento("span", "indirizzo-nome-colore", P.nomeIntero(nome.slice(prima.length))));
+    return h3;
+  }
+
   function inPreparazione(home) {
     return elemento("span", "in-preparazione", home.campo("SEZIONI", "in-preparazione"));
   }
 
   /* Il pulsante verso la pagina dell'indirizzo. Per chi usa un lettore
-     di schermo si aggiunge il nome dell'indirizzo, altrimenti sentirebbe
-     più volte "Scopri di più" senza sapere quale.
+     di schermo si aggiungono tipo e nome dell'indirizzo, altrimenti
+     sentirebbe più volte "Scopri di più" senza sapere quale: "Scopri di
+     più: Liceo scientifico, opzione Scienze applicate". Il nome per il
+     lettore di schermo sta in aria-label: un testo nascosto dentro il
+     link farebbe leggere uno spazio prima dei due punti.
      Per sicurezza si controlla anche che la pagina esista davvero: se
      il server risponde che non c'è (errore 404), al posto del pulsante
      torna "Pagina in preparazione". Con qualunque altra risposta il
@@ -229,10 +243,7 @@
     a.className = "pulsante pulsante-vuoto";
     a.href = dati.pagina;
     a.textContent = home.campo("SEZIONI", "vai-alla-pagina");
-    var nascosto = document.createElement("span");
-    nascosto.className = "solo-lettori";
-    nascosto.textContent = ": " + dati.nome;
-    a.appendChild(nascosto);
+    a.setAttribute("aria-label", a.textContent + ": " + dati.tipo + ", " + dati.nome);
 
     fetch(dati.pagina, { cache: "no-cache" })
       .then(function (risposta) {

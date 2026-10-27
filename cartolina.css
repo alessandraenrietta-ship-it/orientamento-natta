@@ -4,7 +4,7 @@
 
    Qui sta solo la pagina: comandi, istruzioni, anteprima dei fogli,
    versione A4 e stampa. L'aspetto di fronte e retro sta in
-   cartolina-facciate.css, che usa anche la home.
+   cartolina-facciate.css, che usa anche orientatori.html.
 
    Le misure dei fogli sono in millimetri, come in tipografia.
    Questo file non usa grafica.css: il sito e la cartolina si cambiano
@@ -16,6 +16,7 @@
      anche qui. */
   --verde:         #026C37;
   --blu-notte:     #00193C;
+  --grigio:        #5B6B80;
   --bianco:        #FFFFFF;
   --carattere:     "Cutive Mono", "Courier New", monospace;
 
@@ -37,9 +38,12 @@ body {
   margin: 0;
   font-family: var(--carattere);
   font-synthesis: none;
+  font-variant-ligatures: none;   /* "fi" resta di due lettere */
   color: var(--blu-notte);
   background: #DCDCD6;
 }
+
+button { font-variant-ligatures: none; }
 
 h1, p, ul { margin: 0; }
 
@@ -166,6 +170,25 @@ h1, p, ul { margin: 0; }
   left: 27mm;      /* (210 - 156) / 2 */
   width: 156mm;
   height: 212mm;
+}
+
+/* ---------------------------------------------------------------
+   LA VERSIONE PER I DOCENTI (il PDF di orientatori.html)
+   Come la versione A4: due cartoline una sopra l'altra (.coppia), con
+   i segni di taglio; sotto la seconda, fuori dai segni, due righe
+   grigie a 8 pt.
+   --------------------------------------------------------------- */
+
+.note-docenti {
+  position: absolute;
+  top: 226mm;      /* sotto i segni di taglio, che finiscono a 220 mm
+                      dall'alto della coppia: sul foglio a 268,5 mm */
+  left: 0;
+  width: 156mm;
+  font-size: 8pt;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--grigio);
 }
 
 .segno-taglio {

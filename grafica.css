@@ -54,19 +54,25 @@
   --filetto:       #D5D9DE;  /* il filetto fra le sezioni: solo decorativo */
   --bianco:        #FFFFFF;
 
-  /* Un colore per indirizzo, SOLO per il trattino accanto al nome e
-     per le linee del disegno. Non si usano per nient'altro. */
-  --meccanica:     #C2410C;  /* arancione bruciato */
-  --grafica:       #B8326F;  /* rosa scuro */
+  /* Un colore per indirizzo, SOLO per il trattino accanto al nome, il
+     nome stesso nella home e le linee del disegno. Non si usano per
+     nient'altro. Sul bianco: arancione 5,0, rosa 6,5, blu 6,4. */
+  --meccanica:     #B45309;  /* arancione: più giallo dal 27 ottobre 2026 sera (prima #C2410C) */
+  --grafica:       #A3288C;  /* rosa che tende al viola: dal 27 ottobre 2026 sera (prima #B8326F) */
   --liceo:         #1F5FA8;  /* blu */
 
   /* I tre percorsi del liceo: tre toni del blu del liceo, solo nelle
      pagine del liceo, per le linee del disegno, il trattino accanto al
-     nome e la riga "In più nel ..." del quadro orario.
-     Sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5. */
-  --percorso-scienze:    #2A7AB0;  /* Scienze applicate, azzurro */
-  --percorso-matematico: #1F5FA8;  /* Liceo Matematico, blu */
-  --percorso-digitale:   #0F3460;  /* Liceo Digitale, blu scuro */
+     nome, il nome stesso in liceo.html e la riga "In più nel ..." del
+     quadro orario. Cambiati il 27 ottobre 2026 sera (prima #2A7AB0,
+     #1F5FA8, #0F3460: il blu scuro sembrava nero). Il Liceo Digitale
+     ha un blu vivo che tende al violetto, perché risalti più degli
+     altri due (scelta di Alessandra). Sul bianco: azzurro 4,5, blu 6,0,
+     blu violetto 7,1; non vanno sotto 4,5, perché la riga "In più
+     nel ..." è a 13 pixel. */
+  --percorso-scienze:    #1B7DB5;  /* Scienze applicate, azzurro */
+  --percorso-matematico: #2563B3;  /* Liceo Matematico, blu */
+  --percorso-digitale:   #2348D6;  /* Liceo Digitale, blu violetto */
 
   /* Rosso SOLO per la scritta "Esaurito" dei turni degli open day:
      6,5 sul bianco. Sempre con la scritta, mai da solo. */
@@ -98,10 +104,28 @@ body {
   font-size: 1.0625rem;   /* 17 pixel: il minimo è 16 */
   font-weight: normal;
   font-synthesis: none;
+  /* Niente legature: "fi" in "Grafica" e "scientifico" resta di due
+     lettere, come vuole il Cutive Mono, che ha tutte le lettere larghe
+     uguali */
+  font-variant-ligatures: none;
+  /* Il Cutive Mono ha un solo spessore, piuttosto sottile: un contorno
+     di 0,3 pixel nello stesso colore del testo lo rende un po' più
+     pieno e più leggibile (scelta di Alessandra, 27 ottobre 2026
+     sera). Non vale per il timbro e per la cartolina (più sotto). */
+  -webkit-text-stroke: 0.3px currentColor;
   line-height: 1.6;
   color: var(--blu-notte);
   background: var(--bianco);
 }
+
+/* Il timbro e la cartolina in orientatori.html restano come sulla
+   carta, senza il contorno */
+.timbro,
+.facciata { -webkit-text-stroke: 0; }
+
+/* I pulsanti veri (button) non prendono da soli il carattere della
+   pagina: qui almeno le legature */
+button { font-variant-ligatures: none; }
 
 h1, h2, h3 {
   margin: 0 0 0.6em;
@@ -135,6 +159,13 @@ a:hover { text-decoration-thickness: 2px; }
   clip: rect(0 0 0 0);
   white-space: nowrap;
 }
+
+/* Un segno nascosto alla vista dentro una riga di testo, come la
+   virgola fra le due righe del titolo di liceo.html: resta attaccato
+   alla parola prima, così il lettore di schermo legge "Liceo
+   scientifico, opzione Scienze applicate" senza uno spazio prima della
+   virgola (con .solo-lettori lo spazio c'era) */
+.solo-lettori-in-riga { font-size: 0; }
 
 /* Un dato che manca: [DA COMPLETARE: ...], ben visibile */
 .da-completare {
@@ -344,15 +375,14 @@ button.pulsante {
 /* Il titolo della home che si gira: "The next step is yours." sul
    davanti, "Il prossimo passo è tuo." sul retro. Le due frasi stanno
    nella stessa casella della griglia, una sopra l'altra: occupano lo
-   stesso spazio, quello della più lunga. Toccando il titolo o la
-   freccia sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
+   stesso spazio, quello della più lunga. Toccando il titolo o il
+   pulsante sotto, js/home.js aggiunge "girato" e il titolo ruota di 180
    gradi in orizzontale in 0,8 secondi, come la cartolina. Sul telefono
    24 pixel, al massimo due righe per frase; dai 40rem torna grande
    (SCHERMI PIÙ LARGHI). */
 .titolo-gira { cursor: pointer; }
 .titolo-home {
   font-size: 1.5rem;
-  margin-bottom: 0;
   perspective: 1200px;
 }
 .titolo-giro {
@@ -372,31 +402,6 @@ button.pulsante {
 .titolo-faccia-it { transform: rotateY(180deg); }
 .titolo-gira.girato .titolo-giro { transform: rotateY(180deg); }
 
-/* Il segno sotto il titolo: una piccola freccia circolare grigia, alta
-   16 pixel, dentro un pulsante di 44 pixel facile da toccare */
-.titolo-freccia {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin: 0 auto 0.25rem;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: var(--grigio);
-  cursor: pointer;
-}
-.titolo-freccia svg {
-  width: 16px;
-  height: 16px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
 /* Chi ha chiesto di ridurre il movimento: le frasi si scambiano
    subito, senza rotazione */
@@ -521,17 +526,19 @@ button.pulsante {
   font-size: 1.125rem;
 }
 
-/* I due turni su una riga. Un turno non si spezza mai; se la riga non
-   ci sta (un turno esaurito sul telefono), va a capo solo dopo il
-   punto medio. Sugli schermi stretti scende a 14 pixel. */
+/* I due turni uno sotto l'altro: l'orario e, solo accanto al turno
+   pieno, "Esaurito" in rosso (6,5 sul bianco). Accanto agli altri
+   niente. Orario e scritta non si spezzano. Sugli schermi stretti 14
+   pixel. */
 .data-turni {
   margin: 0;
   font-size: 0.875rem;
 }
 
-.turno { white-space: nowrap; }
+.turno-orario,
+.turno-stato { white-space: nowrap; }
 
-.turno-scritta { color: var(--rosso); }
+.turno-esaurito .turno-stato { color: var(--rosso); }
 
 .nota {
   margin-top: 2rem;
@@ -579,6 +586,12 @@ button.pulsante {
   font-size: 1.5rem;
   color: var(--blu-notte);
 }
+
+/* Il nome vero e proprio nel colore dell'indirizzo, come il trattino:
+   arancione, rosa, blu (scelta di Alessandra, 27 ottobre 2026 sera).
+   "opzione" davanti a "Scienze applicate" resta in blu notte. Sul
+   bianco: 5,0, 6,5 e 6,4. */
+.indirizzo-nome-colore { color: var(--tono, var(--blu-notte)); }
 
 .indirizzo-claim {
   margin-bottom: 0.5em;
@@ -749,8 +762,8 @@ button.pulsante {
   .titolo-sito { font-size: 3.25rem; }
 }
 
-/* Le date in colonne solo quando i due turni ci stanno su una riga:
-   due colonne sui tablet, tre sul computer */
+/* Le date in colonne solo quando "11.00-12.00 Esaurito" ci sta su una
+   riga accanto al foglietto: due colonne sui tablet, tre sul computer */
 @media (min-width: 48rem) {
   .date { grid-template-columns: repeat(2, 1fr); }
 }
@@ -797,8 +810,12 @@ button.pulsante {
    percorsi.
    ----------------------------------------------------------------- */
 
-/* Sul telefono circa 20 pixel fra il titolo su due righe e il claim */
-.titolo-liceo { margin-bottom: 1.25rem; }
+/* Sul telefono circa 20 pixel fra il titolo su due righe e il claim.
+   Il titolo, tutte e due le righe, nel blu del liceo #1F5FA8 (6,4 sul
+   bianco), come il trattino e il nome del liceo nella home: l'unico
+   titolo di pagina non verde (scelta di Alessandra, 27 ottobre 2026
+   sera). Solo in liceo.html; le pagine dei percorsi restano verdi. */
+.titolo-liceo { margin-bottom: 1.25rem; color: var(--liceo); }
 
 /* La seconda riga del titolo, più piccola */
 .titolo-riga-2 {
@@ -847,10 +864,12 @@ button.pulsante {
   flex-direction: column;
 }
 
+/* Il nome del percorso nel suo blu, come il trattino (scelta di
+   Alessandra, 27 ottobre 2026 sera) */
 .percorso-nome {
   margin: 0 0 0.6rem;
   font-size: 1.5rem;
-  color: var(--blu-notte);
+  color: var(--tono, var(--blu-notte));
 }
 
 .percorso-link {
@@ -1080,8 +1099,8 @@ button.pulsante {
    piede (tutte le pagine).
    ================================================================= */
 
-/* Le etichette davanti ai dati del piede ("Centralino: ...") */
-.piede-etichetta { color: var(--blu-notte); }
+/* (Le etichette davanti ai dati del piede non ci sono più: dal 27
+   ottobre 2026 sera il piede non ha i dati della scuola.) */
 
 /* La riga grigia sotto il titolo di una tabella */
 .nota-tabella {
@@ -1178,10 +1197,8 @@ button.pulsante {
    SECONDA REVISIONE DEL 27 OTTOBRE 2026
    ================================================================= */
 
-/* Nel piede il numero del centralino e l'indirizzo del sito non si
-   spezzano mai: se non stanno accanto all'etichetta, vanno interi alla
-   riga sotto. L'email invece va a capo dopo la chiocciola. */
-.dato-intero { white-space: nowrap; }
+/* (Il numero del centralino e l'indirizzo del sito nel piede non ci
+   sono più: tolta la regola che li teneva interi.) */
 
 /* -----------------------------------------------------------------
    GIUSTIFICATO AL COMPUTER
@@ -1297,10 +1314,9 @@ button.pulsante {
   cursor: pointer;
 }
 
-.cartolina-gira:focus-visible {
-  outline: 3px solid var(--blu-notte);
-  outline-offset: 4px;
-}
+/* La cartolina si tocca con il mouse o con il dito; da tastiera si
+   gira con il pulsante "Gira la cartolina", per questo non riceve il
+   focus e non ha un contorno suo */
 
 .cartolina-giro {
   position: absolute;
@@ -1349,8 +1365,33 @@ button.pulsante {
 
 /* I due pulsanti sotto la cartolina: sul telefono uno sotto l'altro a
    tutta larghezza, come nell'apertura; dai 40rem affiancati e
-   centrati (SCHERMI PIÙ LARGHI) */
+   centrati (SCHERMI PIÙ LARGHI), allineati in alto perché sotto il
+   pulsante del PDF c'è la riga grigia "Versione non definitiva." */
 .pulsanti-docenti { margin-top: 1.5rem; }
+
+.pulsante-con-nota {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+}
+
+.nota-pdf {
+  margin: 0;
+  font-size: 0.875rem;   /* 14 pixel */
+  color: var(--grigio);
+}
+
+@media (min-width: 40rem) {
+  .pulsanti.pulsanti-docenti { align-items: flex-start; }
+}
+
+/* Il contatto dell'orientamento sotto i pulsanti, come nei contatti
+   della home, centrato come il resto della pagina */
+.contatti-orientatori {
+  justify-content: center;
+  margin-top: 2.5rem;
+}
 
 
 /* La riga per i docenti in cima al piede di tutte le pagine (tranne
@@ -1358,6 +1399,7 @@ button.pulsante {
    verde sottolineato, con la freccia "›" disegnata come nei pulsanti.
    La mette js/grafica.js, solo con "stato: pronta" in comuni.txt. */
 .piede-orientatori { margin-bottom: 0.6rem; color: var(--grigio); }
+.piede-orientatori:last-child { margin-bottom: 0; }   /* nella home è da sola */
 
 .link-freccia::after {
   content: "";

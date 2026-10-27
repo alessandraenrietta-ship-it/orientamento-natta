@@ -6,9 +6,13 @@ note. Non serve toccare nessun altro file.
 - `comuni.txt`: contatti e open day, validi per tutte le pagine. La
   sezione `ORIENTATORI` contiene le scritte della pagina per i docenti
   orientatori (`orientatori.html`) e della riga che la annuncia nel
-  piede, il PDF della cartolina e `stato`. Con `stato: in
-  preparazione` la riga nel piede non compare; si scrive `pronta` solo
-  quando la cartolina è definitiva e il PDF è salvato in `materiali/`.
+  piede: titolo, pulsanti, la riga "Versione non definitiva.", il
+  contatto, la descrizione del fronte e gli avvisi per il lettore di
+  schermo, il PDF della cartolina con le due righe stampate sotto
+  (`pdf-riga-1`, `pdf-riga-2`) e `stato`. Con `stato: in
+  preparazione` la riga nel piede non compare; oggi è `pronta`. Il PDF
+  si rifà da `cartolina.html` con il pulsante "PDF per i docenti
+  (A4)" e si salva come `materiali/cartolina-natta.pdf`.
   - Nella sezione `SCUOLA`, il campo `mappa` è il link a Google Maps
     usato da "Come arrivare".
   - **Il piede** di ogni pagina mostra, in quest'ordine, i campi `nome`,
@@ -37,7 +41,9 @@ note. Non serve toccare nessun altro file.
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
   - quando un turno è al completo si scrive `esaurito` dopo l'orario,
     come `10.00-11.00 esaurito`: sulla pagina compare, accanto al turno,
-    la scritta rossa del campo `esaurito` (oggi "Esaurito").
+    la scritta rossa del campo `esaurito` (oggi "Esaurito"). Accanto
+    agli altri turni non compare niente. Il sito non legge le
+    prenotazioni del modulo: il turno pieno si segna a mano.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   `occhiello` è la riga piccola sopra il titolo (il sito ci aggiunge
   l'anno degli open day); `titolo-inglese` e `titolo-italiano` sono il

@@ -83,7 +83,13 @@ adulti interessati ai corsi serali.
   caricato con `@font-face` in `grafica.css`: nessun collegamento a
   Google Fonts. Ha un solo spessore, senza grassetto: titoli e nomi si
   distinguono per grandezza, colore e maiuscolo, e `font-synthesis:
-  none` impedisce il grassetto finto. Testi ad almeno 16 px (di base
+  none` impedisce il grassetto finto. Niente legature
+  (`font-variant-ligatures: none` in `grafica.css`,
+  `cartolina-facciate.css` e `cartolina.css`): "fi" resta di due
+  lettere, come vuole la griglia del Cutive Mono. Nel sito il testo ha
+  un contorno di 0,3 px nel suo colore (`-webkit-text-stroke` in
+  `grafica.css`), che lo rende un po' più pieno: non sul timbro e non
+  sulla cartolina (dal 27 ottobre 2026 sera). Testi ad almeno 16 px (di base
   17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: lo
   usano la home e le pagine del liceo (punto 13); solo la vecchia
   cartolina resta in Arial. Eccezioni volute sotto i 16 px: i turni
@@ -161,11 +167,13 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
 - Pagina del liceo (`liceo.html`), grafica a cartolina (punto 13):
   testata e piede della home, con logo e nome che portano alla home.
   Apertura bianca centrata: il titolo è un solo h1 su due righe,
-  "titolo" in verde e, al 60% della grandezza, "titolo-riga-2"; sotto
+  "titolo" e, al 60% della grandezza, "titolo-riga-2", tutte e due nel
+  blu del liceo `#1F5FA8` (dal 27 ottobre 2026 sera: l'unico titolo di
+  pagina non verde; le pagine dei percorsi restano verdi); sotto
   il claim del liceo (preso da `home.txt`) in verde, niente occhiello;
   poi il disegno della scuola della home con le stesse linee e la
   stessa animazione, ma nei tre toni dei percorsi (esterna azzurro
-  `#2A7AB0`, centrale blu `#1F5FA8`, interna blu scuro `#0F3460`), con
+  `#1B7DB5`, centrale blu `#2563B3`, interna blu violetto `#2348D6`), con
   i tratti esterni fino ai bordi al computer: l'apertura finisce con
   il disegno. Sul telefono circa 20 pixel fra il titolo e il claim. I
   collegamenti "‹ Torna alla home" e, nei percorsi, "‹ Torna al liceo"
@@ -205,7 +213,7 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     della home (`Grafica.listaDate` in `js/grafica.js`: date passate
     nascoste, stessa disposizione su telefono e computer), poi la nota
     sui turni se c'è (oggi tolta: vedi "Open day" al punto 13), poi il
-    pulsante pieno "Prenota un open day ›", tutto da
+    pulsante pieno "Prenota il tuo open day ›", tutto da
     `comuni.txt`; se non resta nessuna data futura, solo la frase
     `nessuna-data`, senza foglietti né pulsante.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
@@ -308,12 +316,16 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   - Serali: ardesia `#3A4756`, luna (colore da rivedere)
 - Percorsi del liceo: tre toni del blu del liceo, legati al percorso e
   non alla posizione, usati solo nelle pagine del liceo per le linee
-  del disegno, il trattino accanto al nome e la riga "In più nel ..."
-  del quadro orario (sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5):
-  - Scienze applicate: azzurro `#2A7AB0`
-  - Liceo Matematico: blu `#1F5FA8`
-  - Liceo Digitale: blu scuro `#0F3460` (molto vicino al blu notte del
-    testo: da tenere d'occhio)
+  del disegno, il trattino accanto al nome, il nome stesso in
+  `liceo.html` e la riga "In più nel ..." del quadro orario (sul
+  bianco: azzurro 4,5, blu 6,0, blu violetto 7,1; mai sotto 4,5, perché
+  la riga "In più nel ..." è a 13 px). Schiariti il 27 ottobre 2026
+  sera: prima erano `#2A7AB0`, `#1F5FA8` e `#0F3460`, e il blu scuro
+  sembrava nero. Il Liceo Digitale ha poi preso un blu vivo che tende
+  al violetto, perché risalti più degli altri due.
+  - Scienze applicate: azzurro `#1B7DB5`
+  - Liceo Matematico: blu `#2563B3`
+  - Liceo Digitale: blu violetto `#2348D6`
   Nessun simbolo per i percorsi.
 - I colori sono stati verificati per contrasto (testo almeno 4,5:1) e per
   deuteranopia e protanopia. **Non si cambiano senza dirlo ad
@@ -440,7 +452,8 @@ cartolina del 16 ottobre, che resta nell'etichetta Git
   valgono solo dentro la cartolina (cominciano con `.facciata`) e non
   toccano il sito;
 - `cartolina.html`, `cartolina.css` e `js/cartolina.js`: la pagina da
-  stampare (comandi, fogli, versione A4, stampa);
+  stampare (comandi, fogli, versione A4, versione per i docenti,
+  stampa);
 - `js/qr.js` (copiato dal Liceo Digitale), `js/grafica.js` (il
   timbro), `contenuti/cartolina.txt`, `immagini/firma-natta.png`.
 
@@ -486,15 +499,21 @@ computer di Alessandra.
   - in basso, a tutta larghezza, il sottopancia dopo un filetto:
     indirizzo, telefono ed email dell'orientamento, 7 pt, grigio, su una
     riga.
-- **Firma di Giulio Natta**: `immagini/firma-natta.png`, sfondo
-  trasparente, colorata di blu notte dal CSS. È pubblicata con la
+- **Firma di Giulio Natta**: `immagini/firma-natta.png`, già blu notte
+  `#00193C` su fondo bianco pieno, senza trasparenze (dal 27 ottobre
+  2026 sera: con la trasparenza nel PDF compariva un riquadro sottile
+  intorno alla firma). La stessa in `orientatori.html`. È pubblicata con la
   cartolina per decisione di Alessandra; restano da verificare la
   licenza del file originale su Wikimedia Commons e il parere della
   dirigente. Il repository pubblico conserva la cronologia: una volta
   pubblicata resta consultabile anche se poi la si toglie.
-- **Logo**: il PNG piccolo (231 × 155 pixel), colorato con il CSS
-  (bianco nel francobollo, blu inchiostro nel timbro), largo al massimo
-  11 mm. Prima di stampare servirà il file originale.
+- **Logo**: il PNG piccolo (231 × 155 pixel), largo al massimo 11 mm.
+  Sulla cartolina due immagini già colorate, senza trasparenze, fatte
+  da `immagini/logo-natta.png`: `immagini/logo-timbro.png` (blu
+  inchiostro su bianco) e `immagini/logo-francobollo.png` (bianco sul
+  verde del francobollo). Con il logo colorato dal CSS (maschera) alcuni
+  lettori PDF disegnavano due rettangoli. Nel piede del sito il logo
+  resta colorato dal CSS. Prima di stampare servirà il file originale.
 - **Non ci vanno**, per scelta di Alessandra: mittente, claim generale,
   invito scritto a inquadrare il QR, date degli open day, anno
   scolastico (la cartolina non deve scadere).
@@ -507,6 +526,18 @@ computer di Alessandra.
     cartoline uguali una sopra l'altra al centro del foglio, segni di
     taglio agli angoli; pagina 1 i fronti, pagina 2 i retri,
     fronte-retro capovolgendo sul lato lungo.
+  - Versione per i docenti (`cartolina.html?foglio=docenti`): A4
+    verticale come la versione scuola: due cartoline uguali una sopra
+    l'altra, con i segni di taglio; sotto la seconda, fuori dai segni,
+    due righe grigie `#5B6B80` a 8 pt (`pdf-riga-1` e `pdf-riga-2`
+    della sezione `ORIENTATORI` di `comuni.txt`). Pagina 1 i fronti,
+    pagina 2 i retri. È il PDF
+    `materiali/cartolina-natta.pdf`, che si scarica da
+    `orientatori.html`; oggi è una versione non definitiva.
+- **Nomi degli indirizzi**: le ultime due parole non si separano mai
+  (`Pezzi.nomeIntero` in `js/comuni.js`), così "Meccanica, meccatronica
+  ed energia" va a capo prima di "ed energia", nella home e sul retro.
+  Nei file di testo resta lo spazio normale.
 - Se cambia l'indirizzo del sito, prima di stampare si controlla che il
   QR porti a quello nuovo. Per ora il QR porta alla home del sito di
   orientamento; da decidere prima della stampa se portare direttamente
@@ -539,8 +570,15 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   anno dei serali, occhiello, "Pagina in preparazione" e nota dei
   turni.
 - **Arancione, rosa e blu indicano solo i tre indirizzi** (Meccanica
-  `#C2410C`, Grafica `#B8326F`, Liceo `#1F5FA8`) e non si usano per
-  altro: le linee del disegno e il trattino accanto al nome. Nei
+  `#B45309`, Grafica `#A3288C`, Liceo `#1F5FA8`; sul bianco 5,0, 6,5
+  e 6,4) e non si usano per
+  altro: le linee del disegno, il trattino accanto al nome e, nella
+  home, il nome dell'indirizzo (dal 27 ottobre 2026 sera; "opzione"
+  davanti a "Scienze applicate" resta in blu notte). Arancione e rosa
+  cambiati il 27 ottobre 2026 sera, perché erano troppo simili: prima
+  `#C2410C` e `#B8326F`; l'arancione ora tende al giallo, il rosa al
+  viola. Valgono anche per il disegno (`immagini/linee-scuola.svg`) e
+  per la cartolina. Nei
   serali il trattino ha il colore dell'indirizzo (Meccanica e
   meccatronica arancione, Grafica e comunicazione rosa).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo
@@ -566,10 +604,11 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
     allo spazio.
   - Un tocco o un clic sul titolo lo gira di 180 gradi in orizzontale
     in 0,8 secondi, come la cartolina; un secondo tocco torna
-    all'inglese. Sotto, centrata, una piccola freccia circolare grigia
-    `#5B6B80` alta 16 px: è un pulsante vero, "Gira il titolo" per il
-    lettore di schermo, con Invio e barra spaziatrice e il contorno di
-    messa a fuoco; l'area da toccare è di 44 px.
+    all'inglese. Nessun segno indica che il titolo si gira, per scelta
+    di Alessandra (27 ottobre 2026 sera): niente freccia circolare e
+    niente pulsante "In italiano ›" / "In English ›". Da tastiera il
+    titolo non si gira; il lettore di schermo legge comunque le due
+    frasi.
   - Quando le tre linee del disegno hanno finito di disegnarsi, il
     titolo fa da solo un giro di andata e ritorno (in italiano per
     circa 2 secondi), una volta sola e solo se la persona non l'ha già
@@ -606,19 +645,23 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   maiuscolo grigio a 12 px, spaziato, e il numero del giorno a 30 px in
   verde; niente anellini, niente striscia piena; `aria-hidden`, la data
   per intero è scritta per il lettore di schermo). Accanto il giorno
-  della settimana e sotto i due turni su una riga, separati da " · "; un
-  turno non si spezza mai; la riga va a capo solo dopo il punto medio
-  e solo se non ci sta (un turno esaurito sul telefono). Turni a 14 px
-  sul telefono, 16 dai 40rem. Turno esaurito con la scritta rossa
-  "Esaurito" accanto (rosso `#B91C1C` solo qui, sempre con la
-  scritta). Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
+  della settimana e sotto i due turni, uno per riga (dal 27 ottobre
+  2026 sera): l'orario e, solo accanto al turno pieno, "Esaurito" in
+  rosso (campo `esaurito` di `comuni.txt`), senza simboli; accanto agli
+  altri niente. Il turno pieno si segna a mano,
+  con `esaurito` dopo l'orario: il sito non legge le prenotazioni del
+  modulo. Orario e scritta non si spezzano: se la scritta non ci sta,
+  va intera sotto. Turni a 14 px sul telefono, 16 dai 40rem; rosso
+  `#B91C1C` solo qui, sempre con la scritta. Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
   dal 27 ottobre 2026 tolta su richiesta di Alessandra: la riga ha il #
-  davanti) e il pulsante pieno "Prenota un open
-  day". Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
-  i turni non ci starebbero su una riga).
+  davanti) e il pulsante pieno "Prenota il tuo
+  open day" (dal 27 ottobre 2026 sera; prima "Prenota un open day"). Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
+  "11.00-12.00 Esaurito" non ci starebbe su una riga).
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
   maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
-  "Pagina in preparazione" o il pulsante vuoto "Scopri di più". Al
+  "Pagina in preparazione" o il pulsante vuoto "Scopri di più" (per il
+  lettore di schermo "Scopri di più: tipo, nome", per esempio "Scopri
+  di più: Liceo scientifico, opzione Scienze applicate"). Al
   computer tutti e tre su una riga, mai due più uno, con tipo, nome,
   claim, testi e fondo su righe comuni (subgrid): ogni pezzo parte alla
   stessa altezza nelle tre colonne. Claim a 19 px.
@@ -637,47 +680,58 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   lettore di schermo. Al computer affiancati.
 - **Piede**: bianco; il timbro rotondo blu inchiostro `#1F3A6B` (colore
   solo per il timbro) con il logo al centro tinto di blu e "IIS GIULIO
-  NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola:
-  nome e indirizzo senza etichetta, poi "Centralino: 011 956 32 13",
-  "Segreteria: tois059003@istruzione.it", "Sito della scuola:
-  www.itisgiulionatta.it", con il link (verde) solo sul dato. Il
-  numero e l'indirizzo del sito non si spezzano mai: se non stanno
-  accanto all'etichetta, vanno interi alla riga sotto; l'email va a
-  capo dopo la chiocciola. Le
-  etichette stanno in `comuni.txt`. Uguale in tutte le pagine.
-  - In cima, sopra i dati della scuola, la riga "Sei un docente
+  NATTA · ORIENTAMENTO" lungo il cerchio. Uguale in tutte le pagine.
+  Niente dati della scuola (nome, indirizzo, centralino, segreteria,
+  sito): ripetevano quasi uguali la sezione Contatti della home e sono
+  stati tolti da tutte le pagine (scelta di Alessandra, 27 ottobre 2026
+  sera). Nelle pagine del liceo quindi non c'è nessun recapito; in
+  `orientatori.html` resta "Scrivi all'orientamento". Le etichette del
+  piede restano in `comuni.txt`, non usate.
+  - Accanto al timbro la riga "Sei un docente
     orientatore?" in grigio e il link verde sottolineato "Scarica la
     cartolina del Natta ›" verso `orientatori.html` (sezione
     `ORIENTATORI` di `comuni.txt`; la freccia la aggiunge il sito).
     Non compare su `orientatori.html` stessa. Interruttore: `stato`
     della sezione. Con "in preparazione" la riga non compare su
-    nessuna pagina; si scrive "pronta" solo quando la cartolina per la
-    stampa è definitiva e il PDF `materiali/cartolina-natta.pdf` è
-    salvato.
+    nessuna pagina. Dal 27 ottobre 2026 sera è "pronta", con il PDF
+    non definitivo, per scelta di Alessandra.
+- **Testata**: dove logo e nome portano alla home, il link si chiama
+  per il lettore di schermo "IIS Giulio Natta, pagina iniziale"
+  (`aria-label` messo da `js/comuni.js`), senza il maiuscolo e senza lo
+  spazio prima della virgola. Nel titolo di `liceo.html` la virgola
+  nascosta sta attaccata alla prima riga (`.solo-lettori-in-riga`): si
+  sente "Liceo scientifico, opzione Scienze applicate".
 - **Pagina per i docenti orientatori** (`orientatori.html`, con
   `noindex`): testata e piede come le altre pagine; al centro il
   titolo "Per i docenti orientatori", l'anteprima della cartolina
   "Vieni a trovarci" (larga al massimo 42rem, proporzioni 3:2, bordo
   sottile grigio e ombra leggera; si vede la cartolina rifilata, senza
   abbondanza) e sotto i pulsanti "Scarica la cartolina in PDF ›"
-  (pieno) e "Gira la cartolina ›" (vuoto): affiancati al computer, sul
-  telefono uno sotto l'altro a tutta larghezza. Nessun altro testo
-  visibile. Le scritte stanno nella sezione `ORIENTATORI` di
-  `comuni.txt`.
+  (pieno, con sotto la riga grigia "Versione non definitiva." a 14 px)
+  e "Gira la cartolina ›" (vuoto): affiancati al computer, sul
+  telefono uno sotto l'altro a tutta larghezza. Sotto i pulsanti
+  "Scrivi all'orientamento", sottolineato in verde, con sotto
+  l'indirizzo email, come nei contatti della home. Le scritte stanno
+  nella sezione `ORIENTATORI` di `comuni.txt`.
   - Fronte e retro li disegna `js/cartolina-facciate.js`, lo stesso
     codice di `cartolina.html`, con gli stessi file: niente immagini
     copiate. `cartolina.html` resta la pagina da stampare.
-  - La cartolina è un pulsante (`role="button"`): con un tocco, Invio o
-    la barra spaziatrice si gira di 180 gradi in orizzontale in 0,8
-    secondi; anche il pulsante "Gira la cartolina" la gira. Con
-    `prefers-reduced-motion` il cambio di faccia è immediato. Per il
-    lettore di schermo si chiama "Cartolina del Natta: tocca per
-    girarla" e, dopo ogni giro, un testo nascosto annuncia "Fronte della
-    cartolina" o "Retro della cartolina".
+  - La cartolina non è un pulsante: con il mouse o con il dito si gira
+    toccandola; da tastiera si gira solo con il pulsante "Gira la
+    cartolina". 180 gradi in orizzontale in 0,8 secondi; con
+    `prefers-reduced-motion` il cambio di faccia è immediato.
+  - Il lettore di schermo legge solo la faccia che si vede (l'altra ha
+    `aria-hidden`): del fronte la descrizione "Fronte: il disegno della
+    scuola tracciato da tre linee e un codice QR che porta al sito di
+    orientamento."; del retro tutto il testo della cartolina, letto dai
+    file di contenuto. Dopo ogni giro un testo nascosto avvisa "Ora si
+    vede il retro." oppure "Ora si vede il fronte.".
   - Il PDF è `materiali/cartolina-natta.pdf` (va online, a differenza di
-    `materiali-grezzi/`), salvato da Alessandra con la funzione Stampa
-    di Edge quando la cartolina è approvata. Se il file non c'è, il
-    pulsante non compare.
+    `materiali-grezzi/`), salvato da `cartolina.html?foglio=docenti`
+    con la funzione Stampa di Edge. Se il file non c'è, il pulsante non
+    compare. Il QR porta all'indirizzo di GitHub Pages
+    (`sito-orientamento`): se il sito cambia indirizzo, le copie già
+    stampate porteranno al vecchio.
   Il timbro è largo 110 px sul telefono e 120 al computer,
   scritta lungo il cerchio a 11 px sul telefono; è decorativo
   (`aria-hidden`), le parole vengono da `comuni.txt` e `home.txt`.

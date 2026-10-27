@@ -26,7 +26,7 @@ window.Grafica = (function () {
 
   /* Il disegno delle tre linee. Se si cambia il disegno, si aumenta il
      numero ?v= qui sotto. */
-  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
+  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=2";
 
   /* Lo spessore delle linee sullo schermo, in pixel: più sottili sul
      telefono (sotto i 40rem), dove il disegno è piccolo; uguale su
@@ -129,57 +129,27 @@ window.Grafica = (function () {
 
   /* ---------------------------------------------------------------
      IL PIEDE
-     Nome della scuola e indirizzo, poi tre dati con un'etichetta
-     davanti: "Centralino: 011 956 32 13", "Segreteria: ...", "Sito
-     della scuola: ...". Il link sta solo sul dato. Tutto da comuni.txt.
-     Il numero e l'indirizzo del sito non si spezzano mai: se non
-     stanno accanto all'etichetta, vanno interi alla riga sotto
-     (classe "dato-intero"); l'email va a capo dopo la chiocciola.
-     Va nell'elenco con id="piede".
-     In cima, sopra i dati della scuola, la riga per i docenti: "Sei
-     un docente orientatore? Scarica la cartolina del Natta ›", che
-     porta a orientatori.html. Compare solo con "stato: pronta" nella
-     sezione ORIENTATORI di comuni.txt, e mai su orientatori.html
-     stessa, che chiama Grafica.piede(comuni, true).
+     Accanto al timbro solo la riga per i docenti: "Sei un docente
+     orientatore? Scarica la cartolina del Natta ›", che porta a
+     orientatori.html. Compare solo con "stato: pronta" nella sezione
+     ORIENTATORI di comuni.txt, e mai su orientatori.html stessa, che
+     chiama Grafica.piede(comuni, true). Va nell'elenco con id="piede".
+     I dati della scuola (nome, indirizzo, centralino, segreteria, sito)
+     nel piede non ci sono più, in nessuna pagina: ripetevano quasi
+     uguali la sezione Contatti della home (scelta di Alessandra, 27
+     ottobre 2026 sera).
      --------------------------------------------------------------- */
 
   function piede(comuni, senzaOrientatori) {
     var elenco = document.getElementById("piede");
-    var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
-
-    function voce(etichetta, contenuto) {
-      var li = document.createElement("li");
-      if (etichetta) { li.appendChild(P.elemento("span", "piede-etichetta", etichetta + ": ")); }
-      li.appendChild(contenuto);
-      elenco.appendChild(li);
-      return li;
-    }
-
-    if (!senzaOrientatori && comuni.campo("ORIENTATORI", "stato") === "pronta") {
-      var docenti = voce("", C.scrivi(document.createElement("span"), comuni.campo("ORIENTATORI", "domanda") + " "));
-      docenti.className = "piede-orientatori";
-      var link = P.collegamento(comuni.campo("ORIENTATORI", "collegamento"), "orientatori.html");
-      link.className = "link-freccia";
-      docenti.appendChild(link);
-    }
-
-    if (campo("nome")) { voce("", C.scrivi(document.createElement("span"), campo("nome"))); }
-    if (campo("indirizzo")) { voce("", C.scrivi(document.createElement("span"), campo("indirizzo"))); }
-    if (campo("telefono")) {
-      var telefono = P.collegamento(campo("telefono"), P.linkTelefono(campo("telefono")));
-      telefono.className = "dato-intero";
-      voce(campo("etichetta-telefono"), telefono);
-    }
-    if (campo("email")) {
-      var email = P.collegamento("", "mailto:" + campo("email"));
-      P.scriviDato(email, campo("email"));
-      voce(campo("etichetta-email"), email);
-    }
-    if (campo("sito")) {
-      var sito = P.collegamento(P.sitoDaMostrare(campo("sito")), campo("sito"));
-      sito.className = "dato-intero";
-      voce(campo("etichetta-sito"), sito);
-    }
+    if (senzaOrientatori || comuni.campo("ORIENTATORI", "stato") !== "pronta") { return; }
+    var docenti = document.createElement("li");
+    docenti.className = "piede-orientatori";
+    docenti.appendChild(C.scrivi(document.createElement("span"), comuni.campo("ORIENTATORI", "domanda") + " "));
+    var link = P.collegamento(comuni.campo("ORIENTATORI", "collegamento"), "orientatori.html");
+    link.className = "link-freccia";
+    docenti.appendChild(link);
+    elenco.appendChild(docenti);
   }
 
 
@@ -234,24 +204,24 @@ window.Grafica = (function () {
     return future;
   }
 
-  /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
-     "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
-     "sold out"). Accanto al turno esaurito compare in rosso la scritta
-     del campo "esaurito" di comuni.txt: la differenza non sta solo nel
-     colore (rosso e verde si confondono per chi è daltonico) ma anche
-     nella scritta. Chi usa un lettore di schermo sente "posti liberi"
-     oppure la scritta. Un turno non si spezza mai (grafica.css). */
+  /* Un turno su una riga sua: l'orario e, solo se il turno è pieno,
+     accanto la scritta rossa del campo "esaurito" di comuni.txt
+     ("Esaurito"). Accanto ai turni con posti non c'è niente. Nessun
+     simbolo: la differenza non sta solo nel colore ma nella scritta.
+     Nel file, dopo l'orario, si scrive "esaurito" quando il turno è
+     pieno: "10.00-11.00 esaurito" (funziona anche il vecchio "sold
+     out"). Il sito non legge le prenotazioni del modulo: si segna a
+     mano. Orario e scritta non si spezzano mai. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
   function turnoConStato(testo, scrittaEsaurito) {
     var esaurito = TURNO_PIENO.test(testo);
-    var turno = document.createElement("span");
+    var turno = document.createElement("li");
     turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
-    C.scrivi(turno, testo.replace(TURNO_PIENO, ""));
+    turno.appendChild(P.elemento("span", "turno-orario", testo.replace(TURNO_PIENO, "")));
     if (esaurito) {
-      turno.appendChild(P.elemento("span", "turno-scritta", " " + scrittaEsaurito));
-    } else {
-      turno.appendChild(P.elemento("span", "solo-lettori", ", posti liberi"));
+      turno.appendChild(document.createTextNode(" "));
+      turno.appendChild(P.elemento("span", "turno-stato", scrittaEsaurito));
     }
     return turno;
   }
@@ -259,7 +229,7 @@ window.Grafica = (function () {
   /* Le date ancora da venire come foglietti da calendario, dentro
      l'elenco indicato (un <ul class="date">). Per ogni data: il
      foglietto (mese e giorno) e, accanto, il giorno della settimana con
-     sotto i due turni. Il foglietto è solo un disegno: chi usa un
+     sotto i due turni, uno per riga. Il foglietto è solo un disegno: chi usa un
      lettore di schermo sente la data per intero, scritta accanto al
      giorno della settimana. Restituisce quante date ha messo. Lo stesso
      componente serve alla home e alle pagine del liceo. */
@@ -286,15 +256,10 @@ window.Grafica = (function () {
       settimana.appendChild(P.elemento("span", "solo-lettori", " " + riga[1]));
       testi.appendChild(settimana);
 
-      /* I due turni su una riga, separati da " · ". Lo spazio prima del
-         punto medio non va a capo: se la riga non ci sta (un turno
-         esaurito sul telefono), va a capo solo dopo il punto medio. */
-      var turni = document.createElement("p");
+      /* I due turni uno sotto l'altro; accanto a quello pieno "Esaurito" */
+      var turni = document.createElement("ul");
       turni.className = "data-turni";
       turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
-      var separa = P.elemento("span", "turni-separa", " · ");
-      separa.setAttribute("aria-hidden", "true");
-      turni.appendChild(separa);
       turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
       testi.appendChild(turni);
 

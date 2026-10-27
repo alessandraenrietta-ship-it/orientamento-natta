@@ -16,8 +16,8 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="grafica.css?v=8">
-  <link rel="stylesheet" href="cartolina-facciate.css?v=1">
+  <link rel="stylesheet" href="grafica.css?v=20">
+  <link rel="stylesheet" href="cartolina-facciate.css?v=4">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -43,31 +43,41 @@
        cartolina.html. -->
   <main id="contenuto" tabindex="-1" hidden>
 
-    <!-- Tutto centrato: il titolo, la cartolina che si gira e i due
-         pulsanti. Nessun altro testo visibile. -->
+    <!-- Tutto centrato: il titolo, la cartolina che si gira, i due
+         pulsanti e il contatto dell'orientamento -->
     <section class="sezione apertura orientatori" aria-labelledby="titolo">
       <div class="interno">
         <h1 class="titolo-sito" id="titolo"></h1>
 
         <!-- La cartolina: fronte e retro li disegna
              js/cartolina-facciate.js, lo stesso codice di cartolina.html.
-             Si gira toccandola, con Invio o con la barra spaziatrice; il
-             nome per il lettore di schermo lo scrive js/orientatori.js.
-             Le due facciate sono nascoste al lettore di schermo: quale si
-             vede lo annuncia la riga nascosta qui sotto. -->
-        <div class="cartolina-gira" id="cartolina-gira" role="button" tabindex="0">
+             Con il mouse e con il dito si gira toccandola; da tastiera si
+             gira con il pulsante "Gira la cartolina". Il lettore di
+             schermo legge solo la faccia che si vede (js/orientatori.js
+             nasconde l'altra): del fronte una descrizione, del retro tutto
+             il testo. Dopo ogni giro la riga nascosta qui sotto avvisa
+             quale faccia si vede. -->
+        <div class="cartolina-gira" id="cartolina-gira">
           <div class="cartolina-giro">
-            <div class="cartolina-faccia cartolina-faccia-fronte" id="faccia-fronte" aria-hidden="true"></div>
+            <div class="cartolina-faccia cartolina-faccia-fronte" id="faccia-fronte"></div>
             <div class="cartolina-faccia cartolina-faccia-retro" id="faccia-retro" aria-hidden="true"></div>
           </div>
         </div>
         <p class="solo-lettori" id="cartolina-faccia" aria-live="polite"></p>
 
-        <!-- Il pulsante del PDF compare solo se il file esiste -->
-        <p class="pulsanti pulsanti-docenti">
-          <a class="pulsante pulsante-pieno" id="pulsante-pdf" download hidden></a>
+        <!-- Il pulsante del PDF, con sotto la riga grigia "Versione non
+             definitiva.", compare solo se il file esiste -->
+        <div class="pulsanti pulsanti-docenti">
+          <div class="pulsante-con-nota" id="scarica-pdf" hidden>
+            <a class="pulsante pulsante-pieno" id="pulsante-pdf" download></a>
+            <p class="nota-pdf" id="nota-pdf"></p>
+          </div>
           <button type="button" class="pulsante pulsante-vuoto" id="pulsante-gira"></button>
-        </p>
+        </div>
+
+        <!-- Il contatto dell'orientamento, come nei contatti della home:
+             il link sottolineato e sotto l'indirizzo, che si può copiare -->
+        <ul class="contatti contatti-orientatori" id="contatto-orientatori"></ul>
       </div>
     </section>
 
@@ -96,7 +106,7 @@
   </noscript>
 
   <!-- Il piede, come nelle altre pagine, ma senza la riga per i docenti
-       orientatori. Il timbro è solo decorativo. -->
+       orientatori: resta solo il timbro, che è decorativo. -->
   <footer class="piede">
     <div class="interno piede-interno">
       <div class="timbro" id="timbro" aria-hidden="true"></div>
@@ -105,10 +115,10 @@
   </footer>
 
   <script src="js/contenuti.js?v=2"></script>
-  <script src="js/comuni.js?v=2"></script>
-  <script src="js/grafica.js?v=6"></script>
+  <script src="js/comuni.js?v=3"></script>
+  <script src="js/grafica.js?v=11"></script>
   <script src="js/qr.js?v=1"></script>
-  <script src="js/cartolina-facciate.js?v=1"></script>
-  <script src="js/orientatori.js?v=1"></script>
+  <script src="js/cartolina-facciate.js?v=3"></script>
+  <script src="js/orientatori.js?v=2"></script>
 </body>
 </html>
