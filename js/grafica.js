@@ -204,37 +204,48 @@ window.Grafica = (function () {
     return future;
   }
 
-  /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
-     "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
-     "sold out"). Accanto al turno esaurito compare in rosso la scritta
-     del campo "esaurito" di comuni.txt: la differenza non sta solo nel
-     colore (rosso e verde si confondono per chi è daltonico) ma anche
-     nella scritta. Chi usa un lettore di schermo sente "posti liberi"
-     oppure la scritta. Un turno non si spezza mai (grafica.css). */
+  /* Un turno con il suo stato, su una riga sua: l'orario e accanto
+     "Posti liberi" in verde oppure "Posti esauriti" in rosso (campi
+     "libero" ed "esaurito" di comuni.txt). Nessun simbolo: la
+     differenza non sta solo nel colore (rosso e verde si confondono per
+     chi è daltonico) ma nella scritta. Nel file, dopo l'orario, si
+     scrive "esaurito" quando il turno è pieno: "10.00-11.00 esaurito"
+     (funziona anche il vecchio "sold out"); senza, il turno ha posti
+     liberi. Sul telefono la scritta è breve, "Libero" o "Esaurito"
+     (campi "libero-breve" ed "esaurito-breve"): nella pagina ci sono
+     tutte e due, e grafica.css mostra solo quella che serve; quella
+     nascosta non la sente nemmeno il lettore di schermo. L'orario non
+     si spezza mai; se la scritta non ci sta accanto, va intera alla
+     riga sotto. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
-  function turnoConStato(testo, scrittaEsaurito) {
+  function turnoConStato(testo, scritte) {
     var esaurito = TURNO_PIENO.test(testo);
-    var turno = document.createElement("span");
-    turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
-    C.scrivi(turno, testo.replace(TURNO_PIENO, ""));
-    if (esaurito) {
-      turno.appendChild(P.elemento("span", "turno-scritta", " " + scrittaEsaurito));
-    } else {
-      turno.appendChild(P.elemento("span", "solo-lettori", ", posti liberi"));
-    }
+    var turno = document.createElement("li");
+    turno.className = "turno" + (esaurito ? " turno-esaurito" : " turno-libero");
+    turno.appendChild(P.elemento("span", "turno-orario", testo.replace(TURNO_PIENO, "")));
+    turno.appendChild(document.createTextNode(" "));
+    var stato = P.elemento("span", "turno-stato", "");
+    stato.appendChild(P.elemento("span", "stato-lungo", esaurito ? scritte.esaurito : scritte.libero));
+    stato.appendChild(P.elemento("span", "stato-breve", esaurito ? scritte.esauritoBreve : scritte.liberoBreve));
+    turno.appendChild(stato);
     return turno;
   }
 
   /* Le date ancora da venire come foglietti da calendario, dentro
      l'elenco indicato (un <ul class="date">). Per ogni data: il
      foglietto (mese e giorno) e, accanto, il giorno della settimana con
-     sotto i due turni. Il foglietto è solo un disegno: chi usa un
+     sotto i due turni, uno per riga. Il foglietto è solo un disegno: chi usa un
      lettore di schermo sente la data per intero, scritta accanto al
      giorno della settimana. Restituisce quante date ha messo. Lo stesso
      componente serve alla home e alle pagine del liceo. */
   function listaDate(comuni, elenco) {
-    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
+    var scritte = {
+      libero: comuni.campo("OPEN DAY", "libero") || "Posti liberi",
+      esaurito: comuni.campo("OPEN DAY", "esaurito") || "Posti esauriti",
+      liberoBreve: comuni.campo("OPEN DAY", "libero-breve") || "Libero",
+      esauritoBreve: comuni.campo("OPEN DAY", "esaurito-breve") || "Esaurito"
+    };
     var future = dateOpenDay(comuni);
     future.forEach(function (d) {
       var riga = d.riga, data = d.data;
@@ -256,16 +267,11 @@ window.Grafica = (function () {
       settimana.appendChild(P.elemento("span", "solo-lettori", " " + riga[1]));
       testi.appendChild(settimana);
 
-      /* I due turni su una riga, separati da " · ". Lo spazio prima del
-         punto medio non va a capo: se la riga non ci sta (un turno
-         esaurito sul telefono), va a capo solo dopo il punto medio. */
-      var turni = document.createElement("p");
+      /* I due turni uno sotto l'altro, ognuno con il suo stato */
+      var turni = document.createElement("ul");
       turni.className = "data-turni";
-      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
-      var separa = P.elemento("span", "turni-separa", " · ");
-      separa.setAttribute("aria-hidden", "true");
-      turni.appendChild(separa);
-      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
+      turni.appendChild(turnoConStato(riga[2], scritte));
+      turni.appendChild(turnoConStato(riga[3], scritte));
       testi.appendChild(turni);
 
       voce.appendChild(testi);

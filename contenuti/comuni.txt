@@ -42,9 +42,14 @@ sito-liceo-digitale: https://alessandraenrietta-ship-it.github.io/liceo-digitale
 anno: 2026/27
 # Il modulo Google per prenotare la visita agli open day
 prenotazione: https://docs.google.com/forms/d/e/1FAIpQLSf2-GVebwM6bBYqMDFJkMnFVoftMnboQnpfZ5nFLPB9T_hnsg/viewform
-come-prenotare: Prenota un open day
-# La scritta accanto ai turni al completo
-esaurito: Esaurito
+come-prenotare: Prenota il tuo open day
+# Le scritte accanto a ogni turno, che sta su una riga sua: la prima in
+# verde quando ci sono posti, la seconda in rosso quando il turno è al
+# completo. Sul telefono, dove c'è meno spazio, le due più brevi.
+libero: Posti liberi
+esaurito: Posti esauriti
+libero-breve: Libero
+esaurito-breve: Esaurito
 # La nota sui turni, sotto le date. Se si toglie la riga (o ci si mette
 # un # davanti), non compare. Tolta su richiesta di Alessandra il 27
 # ottobre 2026: per farla ricomparire si toglie il # (e lo spazio dopo).
@@ -57,7 +62,9 @@ nessuna-data: Le date dei prossimi open day saranno pubblicate qui.
 # Quando un turno è al completo, si scrive "esaurito" dopo l'orario,
 # per esempio: 10.00-11.00 esaurito
 # Sulla pagina, accanto al turno, compare in rosso la scritta del
-# campo "esaurito".
+# campo "esaurito". Se non c'è "esaurito", compare in verde la scritta
+# del campo "libero". Il sito non legge da solo le prenotazioni del
+# modulo: quando un turno è pieno, lo si scrive qui a mano.
 sabato | 21 novembre | 10.00-11.00 | 11.00-12.00
 venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30
 sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00

@@ -213,7 +213,7 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     della home (`Grafica.listaDate` in `js/grafica.js`: date passate
     nascoste, stessa disposizione su telefono e computer), poi la nota
     sui turni se c'è (oggi tolta: vedi "Open day" al punto 13), poi il
-    pulsante pieno "Prenota un open day ›", tutto da
+    pulsante pieno "Prenota il tuo open day ›", tutto da
     `comuni.txt`; se non resta nessuna data futura, solo la frase
     `nessuna-data`, senza foglietti né pulsante.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
@@ -645,16 +645,20 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   maiuscolo grigio a 12 px, spaziato, e il numero del giorno a 30 px in
   verde; niente anellini, niente striscia piena; `aria-hidden`, la data
   per intero è scritta per il lettore di schermo). Accanto il giorno
-  della settimana e sotto i due turni su una riga, separati da " · "; un
-  turno non si spezza mai; la riga va a capo solo dopo il punto medio
-  e solo se non ci sta (un turno esaurito sul telefono). Turni a 14 px
-  sul telefono, 16 dai 40rem. Turno esaurito con la scritta rossa
-  "Esaurito" accanto (rosso `#B91C1C` solo qui, sempre con la
-  scritta). Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
+  della settimana e sotto i due turni, uno per riga (dal 27 ottobre
+  2026 sera): l'orario e accanto "Posti liberi" in verde oppure "Posti
+  esauriti" in rosso, senza simboli; sul telefono, sotto i 40rem, solo
+  "Libero" ed "Esaurito" (campi `libero`, `esaurito`, `libero-breve`,
+  `esaurito-breve` di `comuni.txt`). Il turno pieno si segna a mano,
+  con `esaurito` dopo l'orario: il sito non legge le prenotazioni del
+  modulo. Orario e scritta non si spezzano: se la scritta non ci sta,
+  va intera sotto. Turni a 14 px sul telefono, 16 dai 40rem; rosso
+  `#B91C1C` solo qui, sempre con la scritta. Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
   dal 27 ottobre 2026 tolta su richiesta di Alessandra: la riga ha il #
-  davanti) e il pulsante pieno "Prenota un open
-  day". Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
-  i turni non ci starebbero su una riga).
+  davanti) e il pulsante pieno "Prenota il tuo
+  open day" (dal 27 ottobre 2026 sera; prima "Prenota un open day"). Una colonna sul telefono, due dai 48rem, tre dai 70rem (prima
+  "11.00-12.00 Posti esauriti" non ci starebbe su una riga; fino al 27
+  ottobre 2026 sera erano 66rem).
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
   maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
   "Pagina in preparazione" o il pulsante vuoto "Scopri di più" (per il

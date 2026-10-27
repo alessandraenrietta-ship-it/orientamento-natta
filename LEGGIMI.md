@@ -41,7 +41,11 @@ note. Non serve toccare nessun altro file.
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
   - quando un turno è al completo si scrive `esaurito` dopo l'orario,
     come `10.00-11.00 esaurito`: sulla pagina compare, accanto al turno,
-    la scritta rossa del campo `esaurito` (oggi "Esaurito").
+    la scritta rossa del campo `esaurito` (oggi "Posti esauriti";
+    sul telefono `esaurito-breve`, "Esaurito"). Senza `esaurito`
+    compare in verde la scritta del campo `libero` ("Posti liberi";
+    sul telefono `libero-breve`, "Libero"). Il sito non legge le
+    prenotazioni del modulo: il turno pieno si segna a mano.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   `occhiello` è la riga piccola sopra il titolo (il sito ci aggiunge
   l'anno degli open day); `titolo-inglese` e `titolo-italiano` sono il
