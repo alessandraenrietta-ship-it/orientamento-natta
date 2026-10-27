@@ -661,15 +661,14 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   lettore di schermo. Al computer affiancati.
 - **Piede**: bianco; il timbro rotondo blu inchiostro `#1F3A6B` (colore
   solo per il timbro) con il logo al centro tinto di blu e "IIS GIULIO
-  NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola:
-  nome e indirizzo senza etichetta, poi "Centralino: 011 956 32 13",
-  "Segreteria: tois059003@istruzione.it", "Sito della scuola:
-  www.itisgiulionatta.it", con il link (verde) solo sul dato. Il
-  numero e l'indirizzo del sito non si spezzano mai: se non stanno
-  accanto all'etichetta, vanno interi alla riga sotto; l'email va a
-  capo dopo la chiocciola. Le
-  etichette stanno in `comuni.txt`. Uguale in tutte le pagine.
-  - In cima, sopra i dati della scuola, la riga "Sei un docente
+  NATTA · ORIENTAMENTO" lungo il cerchio. Uguale in tutte le pagine.
+  Niente dati della scuola (nome, indirizzo, centralino, segreteria,
+  sito): ripetevano quasi uguali la sezione Contatti della home e sono
+  stati tolti da tutte le pagine (scelta di Alessandra, 27 ottobre 2026
+  sera). Nelle pagine del liceo quindi non c'è nessun recapito; in
+  `orientatori.html` resta "Scrivi all'orientamento". Le etichette del
+  piede restano in `comuni.txt`, non usate.
+  - Accanto al timbro la riga "Sei un docente
     orientatore?" in grigio e il link verde sottolineato "Scarica la
     cartolina del Natta ›" verso `orientatori.html` (sezione
     `ORIENTATORI` di `comuni.txt`; la freccia la aggiunge il sito).

@@ -1069,8 +1069,8 @@ button.pulsante {
    piede (tutte le pagine).
    ================================================================= */
 
-/* Le etichette davanti ai dati del piede ("Centralino: ...") */
-.piede-etichetta { color: var(--blu-notte); }
+/* (Le etichette davanti ai dati del piede non ci sono più: dal 27
+   ottobre 2026 sera il piede non ha i dati della scuola.) */
 
 /* La riga grigia sotto il titolo di una tabella */
 .nota-tabella {
@@ -1167,10 +1167,8 @@ button.pulsante {
    SECONDA REVISIONE DEL 27 OTTOBRE 2026
    ================================================================= */
 
-/* Nel piede il numero del centralino e l'indirizzo del sito non si
-   spezzano mai: se non stanno accanto all'etichetta, vanno interi alla
-   riga sotto. L'email invece va a capo dopo la chiocciola. */
-.dato-intero { white-space: nowrap; }
+/* (Il numero del centralino e l'indirizzo del sito nel piede non ci
+   sono più: tolta la regola che li teneva interi.) */
 
 /* -----------------------------------------------------------------
    GIUSTIFICATO AL COMPUTER
@@ -1371,6 +1369,7 @@ button.pulsante {
    verde sottolineato, con la freccia "›" disegnata come nei pulsanti.
    La mette js/grafica.js, solo con "stato: pronta" in comuni.txt. */
 .piede-orientatori { margin-bottom: 0.6rem; color: var(--grigio); }
+.piede-orientatori:last-child { margin-bottom: 0; }   /* nella home è da sola */
 
 .link-freccia::after {
   content: "";

@@ -16,15 +16,17 @@ indirizzo: Via XX Settembre 14A, 10098 Rivoli (TO)
 mappa: https://www.google.com/maps/search/?api=1&query=Via+XX+Settembre+14A%2C+10098+Rivoli+TO
 telefono: 011 956 32 13
 email: tois059003@istruzione.it
-# Le etichette davanti a telefono, email e sito nel piede delle pagine:
-# "Centralino: 011 956 32 13". Il link sta solo sul dato.
+# Le etichette davanti a telefono, email e sito, che erano nel piede
+# delle pagine ("Centralino: 011 956 32 13"). Dal 27 ottobre 2026 sera
+# il piede non ha più i dati della scuola: oggi non si usano, restano
+# qui per quando serviranno.
 etichetta-telefono: Centralino
 etichetta-email: Segreteria
 etichetta-sito: Sito della scuola
 email-orientamento: orientamento@itisgiulionatta.it
 email-liceo-digitale: liceodigitale@itisgiulionatta.it
-# Il sito della scuola compare nel piede e, scritto per esteso, sul
-# retro della cartolina.
+# Il sito della scuola. Fino al 27 ottobre 2026 sera compariva nel
+# piede; oggi non compare nelle pagine.
 sito: https://www.itisgiulionatta.it
 # L'indirizzo di questo sito di orientamento. Lo usa la cartolina per
 # il codice QR. ATTENZIONE: se l'indirizzo

@@ -129,57 +129,27 @@ window.Grafica = (function () {
 
   /* ---------------------------------------------------------------
      IL PIEDE
-     Nome della scuola e indirizzo, poi tre dati con un'etichetta
-     davanti: "Centralino: 011 956 32 13", "Segreteria: ...", "Sito
-     della scuola: ...". Il link sta solo sul dato. Tutto da comuni.txt.
-     Il numero e l'indirizzo del sito non si spezzano mai: se non
-     stanno accanto all'etichetta, vanno interi alla riga sotto
-     (classe "dato-intero"); l'email va a capo dopo la chiocciola.
-     Va nell'elenco con id="piede".
-     In cima, sopra i dati della scuola, la riga per i docenti: "Sei
-     un docente orientatore? Scarica la cartolina del Natta ›", che
-     porta a orientatori.html. Compare solo con "stato: pronta" nella
-     sezione ORIENTATORI di comuni.txt, e mai su orientatori.html
-     stessa, che chiama Grafica.piede(comuni, true).
+     Accanto al timbro solo la riga per i docenti: "Sei un docente
+     orientatore? Scarica la cartolina del Natta ›", che porta a
+     orientatori.html. Compare solo con "stato: pronta" nella sezione
+     ORIENTATORI di comuni.txt, e mai su orientatori.html stessa, che
+     chiama Grafica.piede(comuni, true). Va nell'elenco con id="piede".
+     I dati della scuola (nome, indirizzo, centralino, segreteria, sito)
+     nel piede non ci sono più, in nessuna pagina: ripetevano quasi
+     uguali la sezione Contatti della home (scelta di Alessandra, 27
+     ottobre 2026 sera).
      --------------------------------------------------------------- */
 
   function piede(comuni, senzaOrientatori) {
     var elenco = document.getElementById("piede");
-    var campo = function (nome) { return comuni.campo("SCUOLA", nome); };
-
-    function voce(etichetta, contenuto) {
-      var li = document.createElement("li");
-      if (etichetta) { li.appendChild(P.elemento("span", "piede-etichetta", etichetta + ": ")); }
-      li.appendChild(contenuto);
-      elenco.appendChild(li);
-      return li;
-    }
-
-    if (!senzaOrientatori && comuni.campo("ORIENTATORI", "stato") === "pronta") {
-      var docenti = voce("", C.scrivi(document.createElement("span"), comuni.campo("ORIENTATORI", "domanda") + " "));
-      docenti.className = "piede-orientatori";
-      var link = P.collegamento(comuni.campo("ORIENTATORI", "collegamento"), "orientatori.html");
-      link.className = "link-freccia";
-      docenti.appendChild(link);
-    }
-
-    if (campo("nome")) { voce("", C.scrivi(document.createElement("span"), campo("nome"))); }
-    if (campo("indirizzo")) { voce("", C.scrivi(document.createElement("span"), campo("indirizzo"))); }
-    if (campo("telefono")) {
-      var telefono = P.collegamento(campo("telefono"), P.linkTelefono(campo("telefono")));
-      telefono.className = "dato-intero";
-      voce(campo("etichetta-telefono"), telefono);
-    }
-    if (campo("email")) {
-      var email = P.collegamento("", "mailto:" + campo("email"));
-      P.scriviDato(email, campo("email"));
-      voce(campo("etichetta-email"), email);
-    }
-    if (campo("sito")) {
-      var sito = P.collegamento(P.sitoDaMostrare(campo("sito")), campo("sito"));
-      sito.className = "dato-intero";
-      voce(campo("etichetta-sito"), sito);
-    }
+    if (senzaOrientatori || comuni.campo("ORIENTATORI", "stato") !== "pronta") { return; }
+    var docenti = document.createElement("li");
+    docenti.className = "piede-orientatori";
+    docenti.appendChild(C.scrivi(document.createElement("span"), comuni.campo("ORIENTATORI", "domanda") + " "));
+    var link = P.collegamento(comuni.campo("ORIENTATORI", "collegamento"), "orientatori.html");
+    link.className = "link-freccia";
+    docenti.appendChild(link);
+    elenco.appendChild(docenti);
   }
 
 
