@@ -26,7 +26,7 @@ window.Grafica = (function () {
 
   /* Il disegno delle tre linee. Se si cambia il disegno, si aumenta il
      numero ?v= qui sotto. */
-  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
+  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=2";
 
   /* Lo spessore delle linee sullo schermo, in pixel: più sottili sul
      telefono (sotto i 40rem), dove il disegno è piccolo; uguale su

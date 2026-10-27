@@ -54,10 +54,11 @@
   --filetto:       #D5D9DE;  /* il filetto fra le sezioni: solo decorativo */
   --bianco:        #FFFFFF;
 
-  /* Un colore per indirizzo, SOLO per il trattino accanto al nome e
-     per le linee del disegno. Non si usano per nient'altro. */
-  --meccanica:     #C2410C;  /* arancione bruciato */
-  --grafica:       #B8326F;  /* rosa scuro */
+  /* Un colore per indirizzo, SOLO per il trattino accanto al nome, il
+     nome stesso nella home e le linee del disegno. Non si usano per
+     nient'altro. Sul bianco: arancione 5,0, rosa 6,5, blu 6,4. */
+  --meccanica:     #B45309;  /* arancione: più giallo dal 27 ottobre 2026 sera (prima #C2410C) */
+  --grafica:       #A3288C;  /* rosa che tende al viola: dal 27 ottobre 2026 sera (prima #B8326F) */
   --liceo:         #1F5FA8;  /* blu */
 
   /* I tre percorsi del liceo: tre toni del blu del liceo, solo nelle
@@ -577,7 +578,7 @@ button.pulsante {
 /* Il nome vero e proprio nel colore dell'indirizzo, come il trattino:
    arancione, rosa, blu (scelta di Alessandra, 27 ottobre 2026 sera).
    "opzione" davanti a "Scienze applicate" resta in blu notte. Sul
-   bianco: 5,2, 5,6 e 6,4. */
+   bianco: 5,0, 6,5 e 6,4. */
 .indirizzo-nome-colore { color: var(--tono, var(--blu-notte)); }
 
 .indirizzo-claim {

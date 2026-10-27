@@ -567,10 +567,15 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   anno dei serali, occhiello, "Pagina in preparazione" e nota dei
   turni.
 - **Arancione, rosa e blu indicano solo i tre indirizzi** (Meccanica
-  `#C2410C`, Grafica `#B8326F`, Liceo `#1F5FA8`) e non si usano per
+  `#B45309`, Grafica `#A3288C`, Liceo `#1F5FA8`; sul bianco 5,0, 6,5
+  e 6,4) e non si usano per
   altro: le linee del disegno, il trattino accanto al nome e, nella
   home, il nome dell'indirizzo (dal 27 ottobre 2026 sera; "opzione"
-  davanti a "Scienze applicate" resta in blu notte). Nei
+  davanti a "Scienze applicate" resta in blu notte). Arancione e rosa
+  cambiati il 27 ottobre 2026 sera, perché erano troppo simili: prima
+  `#C2410C` e `#B8326F`; l'arancione ora tende al giallo, il rosa al
+  viola. Valgono anche per il disegno (`immagini/linee-scuola.svg`) e
+  per la cartolina. Nei
   serali il trattino ha il colore dell'indirizzo (Meccanica e
   meccatronica arancione, Grafica e comunicazione rosa).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo

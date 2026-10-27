@@ -38,7 +38,7 @@ window.Cartolina = (function () {
   var SVG = "http://www.w3.org/2000/svg";
 
   /* Il disegno delle tre linee: lo stesso della home */
-  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
+  var FILE_DISEGNO = "immagini/linee-scuola.svg?v=2";
 
   /* La firma di Giulio Natta: un'immagine blu notte su fondo bianco
      pieno, senza trasparenze. Se si cambia il file, si aumenta il
