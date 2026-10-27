@@ -5,8 +5,9 @@
      - il disegno della scuola con le tre linee (Grafica.disegno)
      - il piede con le etichette (Grafica.piede) e il suo timbro
        rotondo (Grafica.timbro)
-     - le date degli open day ancora da venire (Grafica.dateOpenDay) e
-       il pulsante per prenotare (Grafica.pulsantePrenota)
+     - le date degli open day ancora da venire (Grafica.dateOpenDay),
+       i loro foglietti da calendario (Grafica.listaDate) e il pulsante
+       per prenotare (Grafica.pulsantePrenota)
    I colori e le misure stanno in grafica.css.
 
    Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
@@ -25,9 +26,12 @@ window.Grafica = (function () {
      numero ?v= qui sotto. */
   var FILE_DISEGNO = "immagini/linee-scuola.svg?v=1";
 
-  /* Lo spessore delle linee sullo schermo, in pixel. Resta lo stesso
-     su telefono, computer e LIM. */
+  /* Lo spessore delle linee sullo schermo, in pixel: più sottili sul
+     telefono (sotto i 40rem), dove il disegno è piccolo; uguale su
+     tablet, computer e LIM */
+  var SPESSORE_TELEFONO = 1.4;
   var SPESSORE_LINEE = 2.4;
+  var LARGO = window.matchMedia ? window.matchMedia("(min-width: 40rem)") : null;
 
   /* La larghezza massima della scuola al centro del disegno, in rem:
      44 perché al computer pulsanti e percorsi restino nella prima
@@ -74,7 +78,8 @@ window.Grafica = (function () {
      bordi. Sul telefono la scuola è già larga quanto lo schermo e non
      cambia nulla.
      Insieme si ricalcola lo spessore, perché sullo schermo resti sempre
-     di 2,4 pixel. Tutto si rifà ogni volta che cambia la larghezza. */
+     di 1,4 pixel sul telefono e 2,4 dai 40rem in su. Tutto si rifà ogni
+     volta che cambia la larghezza. */
   function adatta(contenitore, svg) {
     var box = svg.viewBox.baseVal;
     var sinistra = box.x, destra = box.x + box.width, alto = box.y, altezza = box.height;
@@ -108,7 +113,8 @@ window.Grafica = (function () {
         }
         l.linea.setAttribute("d", d);
       });
-      svg.style.setProperty("--spessore", (SPESSORE_LINEE / scala) + "px");
+      var spessore = (!LARGO || LARGO.matches) ? SPESSORE_LINEE : SPESSORE_TELEFONO;
+      svg.style.setProperty("--spessore", (spessore / scala) + "px");
     }
     aggiorna();
     if (window.ResizeObserver) {
@@ -124,6 +130,9 @@ window.Grafica = (function () {
      Nome della scuola e indirizzo, poi tre dati con un'etichetta
      davanti: "Centralino: 011 956 32 13", "Segreteria: ...", "Sito
      della scuola: ...". Il link sta solo sul dato. Tutto da comuni.txt.
+     Il numero e l'indirizzo del sito non si spezzano mai: se non
+     stanno accanto all'etichetta, vanno interi alla riga sotto
+     (classe "dato-intero"); l'email va a capo dopo la chiocciola.
      Va nell'elenco con id="piede".
      --------------------------------------------------------------- */
 
@@ -141,7 +150,9 @@ window.Grafica = (function () {
     if (campo("nome")) { voce("", C.scrivi(document.createElement("span"), campo("nome"))); }
     if (campo("indirizzo")) { voce("", C.scrivi(document.createElement("span"), campo("indirizzo"))); }
     if (campo("telefono")) {
-      voce(campo("etichetta-telefono"), P.collegamento(campo("telefono"), P.linkTelefono(campo("telefono"))));
+      var telefono = P.collegamento(campo("telefono"), P.linkTelefono(campo("telefono")));
+      telefono.className = "dato-intero";
+      voce(campo("etichetta-telefono"), telefono);
     }
     if (campo("email")) {
       var email = P.collegamento("", "mailto:" + campo("email"));
@@ -149,7 +160,9 @@ window.Grafica = (function () {
       voce(campo("etichetta-email"), email);
     }
     if (campo("sito")) {
-      voce(campo("etichetta-sito"), P.collegamento(P.sitoDaMostrare(campo("sito")), campo("sito")));
+      var sito = P.collegamento(P.sitoDaMostrare(campo("sito")), campo("sito"));
+      sito.className = "dato-intero";
+      voce(campo("etichetta-sito"), sito);
     }
   }
 
@@ -203,6 +216,76 @@ window.Grafica = (function () {
       future.push({ riga: riga, data: data });
     });
     return future;
+  }
+
+  /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
+     "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
+     "sold out"). Accanto al turno esaurito compare in rosso la scritta
+     del campo "esaurito" di comuni.txt: la differenza non sta solo nel
+     colore (rosso e verde si confondono per chi è daltonico) ma anche
+     nella scritta. Chi usa un lettore di schermo sente "posti liberi"
+     oppure la scritta. Un turno non si spezza mai (grafica.css). */
+  var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
+
+  function turnoConStato(testo, scrittaEsaurito) {
+    var esaurito = TURNO_PIENO.test(testo);
+    var turno = document.createElement("span");
+    turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
+    C.scrivi(turno, testo.replace(TURNO_PIENO, ""));
+    if (esaurito) {
+      turno.appendChild(P.elemento("span", "turno-scritta", " " + scrittaEsaurito));
+    } else {
+      turno.appendChild(P.elemento("span", "solo-lettori", ", posti liberi"));
+    }
+    return turno;
+  }
+
+  /* Le date ancora da venire come foglietti da calendario, dentro
+     l'elenco indicato (un <ul class="date">). Per ogni data: il
+     foglietto (mese e giorno) e, accanto, il giorno della settimana con
+     sotto i due turni. Il foglietto è solo un disegno: chi usa un
+     lettore di schermo sente la data per intero, scritta accanto al
+     giorno della settimana. Restituisce quante date ha messo. Lo stesso
+     componente serve alla home e alle pagine del liceo. */
+  function listaDate(comuni, elenco) {
+    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
+    var future = dateOpenDay(comuni);
+    future.forEach(function (d) {
+      var riga = d.riga, data = d.data;
+      var voce = document.createElement("li");
+      voce.className = "data";
+
+      var foglietto = document.createElement("div");
+      foglietto.className = "foglietto";
+      foglietto.setAttribute("aria-hidden", "true");
+      if (data) {
+        foglietto.appendChild(P.elemento("span", "foglietto-mese", data.sigla));
+        foglietto.appendChild(P.elemento("span", "foglietto-giorno", String(data.giorno)));
+      }
+      voce.appendChild(foglietto);
+
+      var testi = document.createElement("div");
+      testi.className = "data-testi";
+      var settimana = P.elemento("p", "data-settimana", riga[0]);
+      settimana.appendChild(P.elemento("span", "solo-lettori", " " + riga[1]));
+      testi.appendChild(settimana);
+
+      /* I due turni su una riga, separati da " · ". Lo spazio prima del
+         punto medio non va a capo: se la riga non ci sta (un turno
+         esaurito sul telefono), va a capo solo dopo il punto medio. */
+      var turni = document.createElement("p");
+      turni.className = "data-turni";
+      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
+      var separa = P.elemento("span", "turni-separa", " · ");
+      separa.setAttribute("aria-hidden", "true");
+      turni.appendChild(separa);
+      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
+      testi.appendChild(turni);
+
+      voce.appendChild(testi);
+      elenco.appendChild(voce);
+    });
+    return future.length;
   }
 
   /* Il pulsante pieno per prenotare, dentro l'elemento indicato. Se il
@@ -277,6 +360,7 @@ window.Grafica = (function () {
     piede: piede,
     timbro: timbro,
     dateOpenDay: dateOpenDay,
+    listaDate: listaDate,
     pulsantePrenota: pulsantePrenota
   };
 }());

@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="grafica.css?v=4">
+  <link rel="stylesheet" href="grafica.css?v=5">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -55,9 +55,11 @@
     </section>
 
     <!-- I tre percorsi, come gli indirizzi della home: ognuno si clicca
-         per intero. Sopra, il sottotitolo. -->
-    <section class="sezione" aria-label="I tre percorsi">
+         per intero. Sopra, il titolo "I tre percorsi" (solo per i lettori
+         di schermo) e il sottotitolo. -->
+    <section class="sezione" aria-labelledby="titolo-percorsi">
       <div class="interno">
+        <h2 class="solo-lettori" id="titolo-percorsi"></h2>
         <p class="sottotitolo-liceo" id="sottotitolo"></p>
         <ul class="percorsi" id="percorsi"></ul>
       </div>
@@ -80,13 +82,16 @@
       </div>
     </section>
 
-    <!-- Vieni a trovarci: la nota sui turni e il pulsante per prenotare
-         un open day, presi da comuni.txt come nella home. Se non resta
-         nessuna data, solo la frase "nessuna-data", senza pulsante. -->
+    <!-- Vieni a trovarci: i foglietti delle date, la nota sui turni e il
+         pulsante per prenotare un open day, presi da comuni.txt come
+         nella home. Se non resta nessuna data, solo la frase
+         "nessuna-data", senza foglietti né pulsante. -->
     <section class="sezione" aria-labelledby="titolo-visita">
       <div class="interno">
         <h2 class="titolo-sezione" id="titolo-visita"></h2>
-        <p class="testo-sezione" id="nota-visita"></p>
+        <!-- I foglietti delle date, come nella home -->
+        <ul class="date" id="date-visita"></ul>
+        <p class="nota" id="nota-visita"></p>
         <p class="fondo-sezione" id="prenota-visita"></p>
       </div>
     </section>
@@ -126,7 +131,7 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/grafica.js?v=2"></script>
-  <script src="js/liceo.js?v=9"></script>
+  <script src="js/grafica.js?v=3"></script>
+  <script src="js/liceo.js?v=10"></script>
 </body>
 </html>

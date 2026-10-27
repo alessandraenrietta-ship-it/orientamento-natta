@@ -335,6 +335,14 @@ a:hover { text-decoration-thickness: 2px; }
   line-height: 1.2;
 }
 
+/* Il titolo della home, sempre su due righe: js/home.js mette dopo la
+   prima virgola la seconda parte in un blocco a sé ("Un'unica
+   scuola," / "tanti modi di imparare."). Sul telefono 24 pixel, perché
+   la seconda riga stia intera in 375 pixel; dai 40rem torna grande
+   (SCHERMI PIÙ LARGHI). */
+.titolo-home { font-size: 1.5rem; }
+.titolo-seconda-riga { display: block; }
+
 .presentazione { max-width: 40rem; margin: 0 auto 1rem; }
 
 /* Il disegno: largo quanto la finestra. La scuola al centro è larga
@@ -753,9 +761,9 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Il sottotitolo apre la sezione dei percorsi, allineato a sinistra */
 .sottotitolo-liceo {
-  max-width: 40rem;
   margin: 0 0 2.5rem;
   font-size: 1.125rem;
+  text-wrap: balance;        /* al computer sta su una riga sola */
 }
 
 
@@ -1103,4 +1111,34 @@ a:hover { text-decoration-thickness: 2px; }
   display: inline-block;
   min-height: 2.75rem;
   padding: 0.35rem 0;
+}
+
+
+/* =================================================================
+   SECONDA REVISIONE DEL 27 OTTOBRE 2026
+   ================================================================= */
+
+/* Nel piede il numero del centralino e l'indirizzo del sito non si
+   spezzano mai: se non stanno accanto all'etichetta, vanno interi alla
+   riga sotto. L'email invece va a capo dopo la chiocciola. */
+.dato-intero { white-space: nowrap; }
+
+/* I PARAGRAFI LUNGHI SU DUE COLONNE GIUSTIFICATE, SOLO AL COMPUTER
+   L'unica eccezione all'allineamento a sinistra del sito. Riguarda la
+   spiegazione delle pagine dei percorsi e "Dopo il diploma", solo
+   quando sono lunghi almeno 350 caratteri (classe "testo-lungo",
+   messa da js/liceo.js). Dai 66rem il paragrafo occupa tutta la
+   larghezza del contenuto, diviso in due colonne giustificate con la
+   sillabazione automatica (le pagine hanno lang="it"). Nell'apertura
+   le due colonne stanno centrate sotto il titolo. Sotto i 66rem, e per
+   i testi più corti, una colonna sola allineata a sinistra. */
+@media (min-width: 66rem) {
+  .testo-lungo {
+    max-width: none;
+    column-count: 2;
+    column-gap: 2.5rem;
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+  }
 }

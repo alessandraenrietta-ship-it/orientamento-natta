@@ -43,8 +43,10 @@ prenotazione: https://docs.google.com/forms/d/e/1FAIpQLSf2-GVebwM6bBYqMDFJkMnFVo
 come-prenotare: Prenota un open day
 # La scritta accanto ai turni al completo
 esaurito: Esaurito
-# La nota sui turni, sotto le date. Se si toglie la riga, non compare.
-nota-turni: Ogni open day ha due turni di un'ora. Al momento della prenotazione si sceglie il turno.
+# La nota sui turni, sotto le date. Se si toglie la riga (o ci si mette
+# un # davanti), non compare. Tolta su richiesta di Alessandra il 27
+# ottobre 2026: per farla ricomparire si toglie il # (e lo spazio dopo).
+# nota-turni: Ogni open day ha due turni di un'ora. Al momento della prenotazione si sceglie il turno.
 # Le date già passate il sito le nasconde da solo. Quando non ne resta
 # nessuna, la sezione degli open day scende dopo gli indirizzi e mostra
 # solo questa frase, senza il pulsante per prenotare.

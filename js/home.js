@@ -55,8 +55,19 @@
     } else {
       occhiello.hidden = true;
     }
-    /* Il titolo grande è il claim generale della scuola */
-    C.scrivi(document.getElementById("titolo"), home.campo("APERTURA", "claim"));
+    /* Il titolo grande è il claim generale della scuola, sempre su due
+       righe: va a capo dopo la prima virgola ("Un'unica scuola," /
+       "tanti modi di imparare."). Il testo in home.txt resta intero; il
+       lettore di schermo legge la frase di seguito. */
+    var claimGenerale = home.campo("APERTURA", "claim");
+    var titolo = document.getElementById("titolo");
+    var virgola = claimGenerale.indexOf(",");
+    if (virgola === -1) {
+      C.scrivi(titolo, claimGenerale);
+    } else {
+      C.scrivi(titolo, claimGenerale.slice(0, virgola + 1) + " ");
+      titolo.appendChild(elemento("span", "titolo-seconda-riga", claimGenerale.slice(virgola + 1).trim()));
+    }
     var presentazione = document.getElementById("presentazione");
     home.campi("APERTURA", "testo").forEach(function (testo) {
       presentazione.appendChild(C.scrivi(document.createElement("p"), testo));
@@ -198,73 +209,11 @@
      OPEN DAY
      --------------------------------------------------------------- */
 
-  /* Un turno con il suo stato. Nel file, dopo l'orario, si può scrivere
-     "esaurito": "10.00-11.00 esaurito" (funziona anche il vecchio
-     "sold out"). Accanto al turno esaurito compare in rosso la scritta
-     del campo "esaurito" di comuni.txt: la differenza non sta solo nel
-     colore (rosso e verde si confondono per chi è daltonico) ma anche
-     nella scritta. Chi usa un lettore di schermo sente "posti liberi"
-     oppure la scritta. */
-  var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
-
-  /* Un turno: l'orario e, se è esaurito, la scritta. Non si spezza mai
-     (grafica.css). */
-  function turnoConStato(testo, scrittaEsaurito) {
-    var esaurito = TURNO_PIENO.test(testo);
-    var turno = document.createElement("span");
-    turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
-    C.scrivi(turno, testo.replace(TURNO_PIENO, ""));
-    if (esaurito) {
-      turno.appendChild(elemento("span", "turno-scritta", " " + scrittaEsaurito));
-    } else {
-      turno.appendChild(elemento("span", "solo-lettori", ", posti liberi"));
-    }
-    return turno;
-  }
-
   function openDay(comuni) {
+    /* Le date ancora da venire, come foglietti da calendario: le
+       costruisce js/grafica.js, che toglie anche quelle passate */
     var elenco = document.getElementById("elenco-open-day");
-    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
-
-    /* Ogni data ancora da venire (le passate le toglie js/grafica.js):
-       un foglietto da calendario (mese e giorno) e, accanto, il giorno
-       della settimana con sotto i due turni. Il foglietto è solo un
-       disegno: chi usa un lettore di schermo sente la data per intero,
-       scritta accanto al giorno della settimana. */
-    G.dateOpenDay(comuni).forEach(function (d) {
-      var riga = d.riga, data = d.data;
-      var voce = document.createElement("li");
-      voce.className = "data";
-
-      var foglietto = document.createElement("div");
-      foglietto.className = "foglietto";
-      foglietto.setAttribute("aria-hidden", "true");
-      if (data) {
-        foglietto.appendChild(elemento("span", "foglietto-mese", data.sigla));
-        foglietto.appendChild(elemento("span", "foglietto-giorno", String(data.giorno)));
-      }
-      voce.appendChild(foglietto);
-
-      var testi = document.createElement("div");
-      testi.className = "data-testi";
-      var settimana = elemento("p", "data-settimana", riga[0]);
-      settimana.appendChild(elemento("span", "solo-lettori", " " + riga[1]));
-      testi.appendChild(settimana);
-
-      /* I due turni su una riga, separati da " · ". Lo spazio prima del
-         punto medio non va a capo: se la riga non ci sta (un turno
-         esaurito sul telefono), va a capo solo dopo il punto medio. */
-      var turni = document.createElement("p");
-      turni.className = "data-turni";
-      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
-      turni.appendChild(elemento("span", "turni-separa", " · "));
-      turni.lastChild.setAttribute("aria-hidden", "true");
-      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
-      testi.appendChild(turni);
-
-      voce.appendChild(testi);
-      elenco.appendChild(voce);
-    });
+    G.listaDate(comuni, elenco);
 
     var nota = document.getElementById("open-day-nota");
     var prenota = document.getElementById("prenotazione");

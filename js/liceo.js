@@ -133,7 +133,9 @@
       h1.appendChild(elemento("span", "titolo-riga-2", liceo.campo("LICEO", "titolo-riga-2")));
     }
 
-    /* Il sottotitolo apre la sezione dei percorsi */
+    /* La sezione dei percorsi: il titolo (di livello 2, visibile solo
+       ai lettori di schermo) e il sottotitolo */
+    C.scrivi(document.getElementById("titolo-percorsi"), liceo.campo("LICEO", "titolo-percorsi"));
     C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
 
     /* I tre percorsi, nell'ordine del file, come gli indirizzi della
@@ -151,7 +153,8 @@
       var voce = document.createElement("li");
       voce.className = "percorso con-trattino " + p.tono;
 
-      var titolo = document.createElement("h2");
+      /* Il nome è un titolo di livello 3, come gli indirizzi della home */
+      var titolo = document.createElement("h3");
       titolo.className = "percorso-nome";
       var link = elemento("a", "percorso-link", p.nome);
       link.href = p.pagina;
@@ -310,7 +313,9 @@
     tornaIndietro(liceo.campo("LICEO", "torna-liceo"));
     C.scrivi(document.getElementById("etichetta"), titoloCompleto(liceo));
     C.scrivi(document.getElementById("titolo"), p.nome);
-    C.scrivi(document.getElementById("spiegazione"), liceo.campo(sezione, "spiegazione"));
+    var spiegazione = document.getElementById("spiegazione");
+    C.scrivi(spiegazione, liceo.campo(sezione, "spiegazione"));
+    testoLungo(spiegazione);
 
     C.scrivi(document.getElementById("titolo-quadro"), TESTI.quadro);
     quadroOrario(liceo, p.ore, p.nome);
@@ -373,23 +378,40 @@
     }
     C.scrivi(fascia.querySelector("h2"), titolo);
     C.scrivi(paragrafo, testo);
+    testoLungo(paragrafo);
+  }
+
+  /* I paragrafi lunghi (spiegazione e "Dopo il diploma"), dai
+     LUNGHEZZA_COLONNE caratteri in su, ricevono la classe "testo-lungo":
+     al computer grafica.css li mette su due colonne giustificate. Quelli
+     più corti restano una colonna sola allineata a sinistra. */
+  var LUNGHEZZA_COLONNE = 350;
+
+  function testoLungo(paragrafo) {
+    if (paragrafo.textContent.trim().length >= LUNGHEZZA_COLONNE) {
+      paragrafo.classList.add("testo-lungo");
+    }
   }
 
 
   /* ---------------------------------------------------------------
      VIENI A TROVARCI (in fondo a liceo.html e alle pagine dei percorsi)
-     Il titolo da liceo.txt; sotto la nota sui turni e il pulsante per
-     prenotare, da comuni.txt, come nella home. Se non resta nessuna
-     data futura, solo la frase "nessuna-data", senza pulsante. Nelle
-     pagine dei percorsi, sotto, i collegamenti agli altri due percorsi.
+     Il titolo da liceo.txt; sotto i foglietti delle date, la nota sui
+     turni e il pulsante per prenotare, da comuni.txt, con lo stesso
+     componente della home (js/grafica.js). Se non resta nessuna data
+     futura, solo la frase "nessuna-data", senza foglietti né pulsante.
+     Nelle pagine dei percorsi, sotto, i collegamenti agli altri due
+     percorsi.
      --------------------------------------------------------------- */
 
   function visita(liceo, comuni, attuale) {
     C.scrivi(document.getElementById("titolo-visita"), liceo.campo("LICEO", "titolo-visita"));
+    var date = document.getElementById("date-visita");
     var nota = document.getElementById("nota-visita");
     var prenota = document.getElementById("prenota-visita");
 
-    if (!G.dateOpenDay(comuni).length) {
+    if (!G.listaDate(comuni, date)) {
+      date.hidden = true;
       C.scrivi(nota, comuni.campo("OPEN DAY", "nessuna-data"));
       prenota.hidden = true;
     } else {

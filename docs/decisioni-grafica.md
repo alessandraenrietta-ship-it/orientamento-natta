@@ -57,3 +57,14 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - "Le ore a confronto" (id confronto): riga grigia "Ore di lezione alla settimana, anno per anno."; una riga per percorso con le ore totali anno per anno, calcolate dal sito; pulsante "Che cosa cambia ›" (details) con le ore in più rispetto a Scienze applicate. Nelle pagine dei percorsi, sotto il quadro orario, "Confronta con gli altri percorsi ›". Il confronto fra indirizzi si rimanda a quando ci saranno i quadri dei tecnici: ore totali e ore di laboratorio, non materia per materia.
 - Fondo di liceo.html e delle pagine dei percorsi: "Vieni a trovarci." con la nota sui turni e "Prenota un open day ›" (senza date future, solo la frase nessuna-data); nelle pagine dei percorsi anche "Gli altri percorsi".
 - Giustificazione: per ora tutto a sinistra; da rivalutare a sito quasi finito, con tutti i testi lunghi scritti, provando sui telefoni.
+
+## Seconda revisione di home e pagine del liceo (decisa il 27 ottobre 2026, tarda mattina)
+- Titolo della home: a capo sempre dopo la virgola, "Un'unica scuola," / "tanti modi di imparare."; sul telefono 24 px perché la seconda riga stia intera.
+- Linee del disegno: 1,4 px sul telefono (sotto 40rem), 2,4 px dai 40rem in su; home e liceo.html.
+- Piede: numero del centralino e indirizzo del sito non si spezzano mai; l'email della segreteria va a capo dopo la chiocciola.
+- Pulsante delle pagine dei percorsi: "Confronta i percorsi ›".
+- Sottotitolo di liceo.html: su una riga al computer, righe pareggiate sul telefono.
+- "Vieni a trovarci." in liceo.html e nei percorsi: foglietti delle date come nella home, poi la nota sui turni, poi "Prenota un open day ›".
+- Pulsante del dettaglio in "Le ore a confronto": "Le materie in più ›".
+- liceo.html: titolo "I tre percorsi" solo per i lettori di schermo (livello 2), nomi dei percorsi di livello 3.
+- Paragrafi lunghi al computer (spiegazione dei percorsi e "Dopo il diploma", dai 350 caratteri): dai 66rem su due colonne a tutta larghezza, giustificate con sillabazione. Scelta di Alessandra, preferita al testo a tutta pagina e alla colonna unica. Sul telefono e nel resto del sito testo a sinistra. Da verificare con Chrome o Edge su Windows.

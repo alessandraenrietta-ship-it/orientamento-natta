@@ -172,9 +172,12 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   sono nascosti su richiesta di Alessandra (righe commentate in
   `liceo.txt`). Ordine della pagina: apertura, percorsi, "Le ore a
   confronto", "Vieni a trovarci.", piede.
-  - Percorsi: in testa il sottotitolo, allineato a sinistra; poi i tre
-    percorsi come gli indirizzi della home: trattino corto nel tono del
-    percorso, nome in blu notte, spiegazione breve, pulsante secondario
+  - Percorsi: in testa un titolo di livello 2 "I tre percorsi", visibile
+    solo ai lettori di schermo (campo `titolo-percorsi` di `liceo.txt`),
+    e il sottotitolo, allineato a sinistra, su una riga al computer e con
+    le righe pareggiate sul telefono; poi i tre percorsi come gli
+    indirizzi della home: trattino corto nel tono del percorso, nome in
+    blu notte (titolo di livello 3), spiegazione breve, pulsante secondario
     "Scopri il percorso ›". Ogni percorso è un unico collegamento,
     cliccabile per intero (il link sul nome si allarga a tutto il
     percorso); il pulsante è solo grafico, nascosto al lettore di
@@ -186,7 +189,7 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     e nome) e le ore totali alla settimana anno per anno, calcolate dal
     sito: QUADRO BASE più le ore della colonna "ore in più" della
     tabella PERCORSI di `liceo.txt`, mai scritte a mano. Sotto, il
-    pulsante secondario "Che cosa cambia ›", fatto con details/summary
+    pulsante secondario "Le materie in più ›", fatto con details/summary
     (niente JavaScript): chiuso all'apertura; aperto, la freccia ruota di
     90 gradi (senza movimento con `prefers-reduced-motion`) e compaiono
     la riga grigia "Le ore in più alla settimana rispetto a Scienze
@@ -197,10 +200,14 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     Il confronto fra indirizzi (tecnici e liceo) si rimanda a quando ci
     saranno i quadri dei tecnici: ore totali e ore di laboratorio, non
     materia per materia.
-  - "Vieni a trovarci." (anche in fondo alle pagine dei percorsi): la
-    nota sui turni e il pulsante pieno "Prenota un open day ›", da
-    `comuni.txt` come nella home; se non resta nessuna data futura, solo
-    la frase `nessuna-data`, senza pulsante.
+  - "Vieni a trovarci." (anche in fondo alle pagine dei percorsi): i
+    foglietti delle date, con lo stesso componente e gli stessi dati
+    della home (`Grafica.listaDate` in `js/grafica.js`: date passate
+    nascoste, stessa disposizione su telefono e computer), poi la nota
+    sui turni se c'è (oggi tolta: vedi "Open day" al punto 13), poi il
+    pulsante pieno "Prenota un open day ›", tutto da
+    `comuni.txt`; se non resta nessuna data futura, solo la frase
+    `nessuna-data`, senza foglietti né pulsante.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e l'attributo `data-percorso` del `<body>` (le
@@ -214,16 +221,25 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      in verde e il testo sotto; le voci degli elenchi hanno un trattino
      grigio `#5B6B80`. Sul telefono una sotto l'altra separate dal
      filetto, al computer tre colonne;
-  3. "Quadro orario" e sotto il pulsante secondario "Confronta con gli
-     altri percorsi ›", che porta a `liceo.html#confronto`;
+  3. "Quadro orario" e sotto il pulsante secondario "Confronta i
+     percorsi ›" (su una riga anche a 375 pixel), che porta a
+     `liceo.html#confronto`;
   4. "Dopo il diploma", sezione normale con il titolo in verde;
   5. "Vieni a trovarci." come in `liceo.html` e, sotto, la riga grigia
      maiuscola "Gli altri percorsi" con i collegamenti agli altri due,
      ognuno con il trattino nel suo tono e il nome sottolineato in verde.
   Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
   nessuna delle tre parti sparisce la loro sezione. La fascia
-  "Laboratori e progetti" non esiste più. Nessun testo è giustificato
-  e non c'è la sillabazione automatica. I segnaposto `[DA COMPLETARE]`
+  "Laboratori e progetti" non esiste più. I testi sono allineati a
+  sinistra, con un'unica eccezione in tutto il sito: al computer, dai
+  66rem, la spiegazione e "Dopo il diploma", se lunghi almeno 350
+  caratteri, occupano tutta la larghezza del contenuto su due colonne
+  (distanza 2.5rem), giustificate con la sillabazione automatica
+  (`hyphens: auto`, le pagine hanno `lang="it"`); nell'apertura le due
+  colonne stanno centrate sotto il titolo. La classe `testo-lungo` la
+  mette `js/liceo.js`. Sotto i 66rem, e per i testi più corti, una
+  colonna sola larga al massimo 46rem, allineata a sinistra. Scelta di
+  Alessandra; da verificare con Chrome o Edge su Windows. I segnaposto `[DA COMPLETARE]`
   di Scienze applicate e Liceo Matematico restano visibili. Nella
   pagina del Liceo Digitale nessun collegamento al sito del Liceo
   Digitale.
@@ -486,14 +502,18 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   filetto sotto.
 - **Apertura**, centrata: occhiello "ORIENTAMENTO 2026/27" (campo
   `occhiello` di `home.txt` più l'anno degli open day); titolo = il
-  `claim` di `home.txt`; sotto, il disegno delle tre linee; poi i
+  `claim` di `home.txt`, sempre su due righe: il sito va a capo dopo la
+  prima virgola ("Un'unica scuola," / "tanti modi di imparare."), il
+  testo nel file resta intero; sul telefono il titolo è a 24 pixel,
+  perché la seconda riga stia intera a 375 pixel. Sotto, il disegno
+  delle tre linee; poi i
   pulsanti "Dopo la terza media" (pieno) e "Corsi serali per adulti"
   (vuoto): sul telefono uno sotto l'altro, larghi uguali, a tutta
   larghezza; al computer affiancati. Lo spazio fra le due torri del
   disegno resta vuoto (ancora aperto se accoglierà qualcosa).
 - **Il disegno** `immagini/linee-scuola.svg` resta com'è (spessore
   1.6, quello della cartolina). `js/grafica.js` lo legge e lo mette nella
-  pagina; lo spessore sullo schermo è sempre circa 2,4 px (lo ricalcola
+  pagina; lo spessore sullo schermo è 1,4 px sotto i 40rem (telefono) e 2,4 px dai 40rem in su (lo ricalcola
   il JS al cambiare della larghezza). Il disegno è largo quanto la
   finestra; la scuola al centro al massimo 44rem, perché al computer
   pulsanti e percorsi restino nella prima schermata. Quando la finestra è
@@ -519,7 +539,9 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   e solo se non ci sta (un turno esaurito sul telefono). Turni a 14 px
   sul telefono, 16 dai 40rem. Turno esaurito con la scritta rossa
   "Esaurito" accanto (rosso `#B91C1C` solo qui, sempre con la
-  scritta). Poi la nota sui turni e il pulsante pieno "Prenota un open
+  scritta). Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
+  dal 27 ottobre 2026 tolta su richiesta di Alessandra: la riga ha il #
+  davanti) e il pulsante pieno "Prenota un open
   day". Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
   i turni non ci starebbero su una riga).
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
@@ -546,7 +568,10 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   NATTA · ORIENTAMENTO" lungo il cerchio, accanto ai dati della scuola:
   nome e indirizzo senza etichetta, poi "Centralino: 011 956 32 13",
   "Segreteria: tois059003@istruzione.it", "Sito della scuola:
-  www.itisgiulionatta.it", con il link (verde) solo sul dato. Le
+  www.itisgiulionatta.it", con il link (verde) solo sul dato. Il
+  numero e l'indirizzo del sito non si spezzano mai: se non stanno
+  accanto all'etichetta, vanno interi alla riga sotto; l'email va a
+  capo dopo la chiocciola. Le
   etichette stanno in `comuni.txt`. Uguale in tutte le pagine.
   Il timbro è largo 110 px sul telefono e 120 al computer,
   scritta lungo il cerchio a 11 px sul telefono; è decorativo

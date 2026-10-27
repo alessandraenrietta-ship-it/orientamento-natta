@@ -17,6 +17,9 @@ titolo: Liceo scientifico
 titolo-riga-2: opzione Scienze applicate
 sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere.
 pulsante-percorso: Scopri il percorso
+# Il titolo sopra i tre percorsi: non si vede, lo sente solo chi usa un
+# lettore di schermo per muoversi fra i titoli della pagina
+titolo-percorsi: I tre percorsi
 # I titoli dei blocchi delle pagine dei percorsi, uguali per tutte e tre
 titolo-impara: Che cosa si impara
 titolo-studio: Come si studia
@@ -35,11 +38,11 @@ titolo-dopo: Dopo il diploma
 titolo-confronto: Le ore a confronto
 nota-confronto: Ore di lezione alla settimana, anno per anno.
 intestazione-percorso: Percorso
-pulsante-differenze: Che cosa cambia
+pulsante-differenze: Le materie in più
 nota-differenze: Le ore in più alla settimana rispetto a Scienze applicate, che è il quadro di base.
 # Il pulsante sotto il quadro orario delle pagine dei percorsi, che
 # porta a "Le ore a confronto" in liceo.html
-pulsante-confronta: Confronta con gli altri percorsi
+pulsante-confronta: Confronta i percorsi
 # La sezione in fondo a liceo.html e alle pagine dei percorsi: il
 # titolo (sotto compaiono la nota sui turni e il pulsante per
 # prenotare, presi da comuni.txt) e, nelle pagine dei percorsi, la riga

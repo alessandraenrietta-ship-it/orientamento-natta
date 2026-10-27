@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="grafica.css?v=4">
+  <link rel="stylesheet" href="grafica.css?v=5">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <!-- Le tre pagine dei percorsi sono uguali: cambiano solo il titolo qui
@@ -80,14 +80,17 @@
       </div>
     </section>
 
-    <!-- Vieni a trovarci: la nota sui turni e il pulsante per prenotare
-         un open day, presi da comuni.txt come nella home (se non resta
-         nessuna data, solo la frase "nessuna-data", senza pulsante). Sotto,
-         i collegamenti agli altri due percorsi. -->
+    <!-- Vieni a trovarci: i foglietti delle date, la nota sui turni e il
+         pulsante per prenotare un open day, presi da comuni.txt come
+         nella home (se non resta nessuna data, solo la frase
+         "nessuna-data", senza foglietti né pulsante). Sotto, i
+         collegamenti agli altri due percorsi. -->
     <section class="sezione" aria-labelledby="titolo-visita">
       <div class="interno">
         <h2 class="titolo-sezione" id="titolo-visita"></h2>
-        <p class="testo-sezione" id="nota-visita"></p>
+        <!-- I foglietti delle date, come nella home -->
+        <ul class="date" id="date-visita"></ul>
+        <p class="nota" id="nota-visita"></p>
         <p class="fondo-sezione" id="prenota-visita"></p>
         <nav class="altri-percorsi" id="altri-percorsi" aria-labelledby="titolo-altri">
           <p class="altri-titolo" id="titolo-altri"></p>
@@ -130,7 +133,7 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
-  <script src="js/grafica.js?v=2"></script>
-  <script src="js/liceo.js?v=9"></script>
+  <script src="js/grafica.js?v=3"></script>
+  <script src="js/liceo.js?v=10"></script>
 </body>
 </html>

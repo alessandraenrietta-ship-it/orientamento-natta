@@ -119,7 +119,9 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   `ORE AGGIUNTIVE MATEMATICO`); per Scienze applicate resta vuota. Il
   sito la usa per il quadro orario delle pagine dei percorsi e per
   calcolare "Le ore a confronto".
-- Nella sezione `LICEO` ci sono anche i testi delle sezioni nuove:
+- Nella sezione `LICEO` ci sono anche il titolo sopra i tre percorsi,
+  che sente solo chi usa un lettore di schermo (`titolo-percorsi`), e i
+  testi delle sezioni nuove:
   "Le ore a confronto" (`titolo-confronto`, `nota-confronto`,
   `intestazione-percorso`, `pulsante-differenze`, `nota-differenze`),
   il pulsante sotto il quadro orario (`pulsante-confronta`) e "Vieni a
