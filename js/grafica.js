@@ -8,6 +8,8 @@
      - le date degli open day ancora da venire (Grafica.dateOpenDay),
        i loro foglietti da calendario (Grafica.listaDate) e il pulsante
        per prenotare (Grafica.pulsantePrenota)
+     - le parole con il trattino che non si spezzano nei testi
+       giustificati (Grafica.paroleIntere)
    I colori e le misure stanno in grafica.css.
 
    Ha bisogno di js/contenuti.js e js/comuni.js, che vanno caricati
@@ -288,6 +290,45 @@ window.Grafica = (function () {
     return future.length;
   }
 
+  /* ---------------------------------------------------------------
+     LE PAROLE CON IL TRATTINO
+     Nei testi giustificati le parole con un trattino, come
+     "post-diploma", non devono andare a capo né dopo il trattino né con
+     un secondo trattino della sillabazione. Il CSS da solo non lo sa
+     fare: qui ogni parola così si chiude in un pezzo che non si spezza
+     (classe "parola-intera", vedi grafica.css). I file di testo non
+     cambiano.
+     --------------------------------------------------------------- */
+
+  var CON_TRATTINO = /[A-Za-zÀ-ÿ]+(?:-[A-Za-zÀ-ÿ]+)+/g;
+
+  function paroleIntere(elemento) {
+    var cammino = document.createTreeWalker(elemento, NodeFilter.SHOW_TEXT);
+    var nodi = [];
+    while (cammino.nextNode()) { nodi.push(cammino.currentNode); }
+    nodi.forEach(function (nodo) {
+      var testo = nodo.nodeValue;
+      if (!CON_TRATTINO.test(testo)) { return; }
+      CON_TRATTINO.lastIndex = 0;
+      var pezzi = document.createDocumentFragment();
+      var inizio = 0, trovato;
+      while ((trovato = CON_TRATTINO.exec(testo)) !== null) {
+        if (trovato.index > inizio) {
+          pezzi.appendChild(document.createTextNode(testo.slice(inizio, trovato.index)));
+        }
+        var intera = document.createElement("span");
+        intera.className = "parola-intera";
+        intera.textContent = trovato[0];
+        pezzi.appendChild(intera);
+        inizio = trovato.index + trovato[0].length;
+      }
+      if (inizio < testo.length) { pezzi.appendChild(document.createTextNode(testo.slice(inizio))); }
+      nodo.parentNode.replaceChild(pezzi, nodo);
+    });
+    return elemento;
+  }
+
+
   /* Il pulsante pieno per prenotare, dentro l'elemento indicato. Se il
      link manca, resta solo il testo. */
   function pulsantePrenota(comuni, dove) {
@@ -361,6 +402,7 @@ window.Grafica = (function () {
     timbro: timbro,
     dateOpenDay: dateOpenDay,
     listaDate: listaDate,
+    paroleIntere: paroleIntere,
     pulsantePrenota: pulsantePrenota
   };
 }());

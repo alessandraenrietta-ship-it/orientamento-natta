@@ -40,7 +40,8 @@ Grafica e comunicazione | grafica
 # QUATTRO CAMPI FISSI, con il nome da non cambiare:
 #   titolo      il titolo della pagina
 #   etichetta   la riga piccola in alto (l'anno)
-#   pulsante    la scritta sul pulsante verso il modulo
+#   pulsante    la scritta sul pulsante verso la pagina della scuola
+#               con la domanda di iscrizione (la freccia la aggiunge il sito)
 #   link        l'indirizzo a cui porta il pulsante. Contiene l'anno:
 #               va aggiornato ogni anno.
 #
@@ -58,6 +59,6 @@ orari: [DA COMPLETARE: giorni e orari delle lezioni]
 durata e frequenza: [DA COMPLETARE: durata del percorso e frequenza richiesta]
 requisiti: [DA COMPLETARE: chi può iscriversi]
 studi già fatti: [DA COMPLETARE: come si riconoscono gli studi e le esperienze di lavoro già fatti]
-iscrizione: Si compila il modulo di preiscrizione pubblicato sul sito della scuola.
-pulsante: Modulo di preiscrizione
+iscrizione: Si scarica la domanda di iscrizione dal sito della scuola, si compila e si invia per email alla segreteria (tois059003@istruzione.it) oppure si consegna allo sportello della Segreteria Didattica, negli orari di apertura al pubblico.
+pulsante: Come iscriversi
 link: https://www.itisgiulionatta.it/pagine/corso-serale-per-adulti-as-2026-2027---online-il-modulo-per-le-preiscrizioni

@@ -149,7 +149,7 @@
 
       var testi = document.createElement("div");
       testi.className = "indirizzo-testi";
-      if (dati.frase) { testi.appendChild(elemento("p", "indirizzo-frase", dati.frase)); }
+      if (dati.frase) { testi.appendChild(G.paroleIntere(elemento("p", "indirizzo-frase", dati.frase))); }
       if (dati.breve) { testi.appendChild(elemento("p", "", dati.breve)); }
       voce.appendChild(testi);
 

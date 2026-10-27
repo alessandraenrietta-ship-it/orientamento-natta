@@ -161,7 +161,7 @@
       titolo.appendChild(link);
       voce.appendChild(titolo);
 
-      voce.appendChild(elemento("p", "percorso-testo", p.testo));
+      voce.appendChild(G.paroleIntere(elemento("p", "percorso-testo", p.testo)));
 
       var fondo = document.createElement("p");
       fondo.className = "percorso-fondo";
@@ -360,7 +360,7 @@
       } else {
         testi.forEach(function (t) { blocco.appendChild(elemento("p", "", t)); });
       }
-      contenitore.appendChild(blocco);
+      contenitore.appendChild(G.paroleIntere(blocco));
     });
 
     if (!quante) { contenitore.closest("section").hidden = true; }
@@ -384,13 +384,35 @@
   /* I paragrafi lunghi (spiegazione e "Dopo il diploma"), dai
      LUNGHEZZA_COLONNE caratteri in su, ricevono la classe "testo-lungo":
      al computer grafica.css li mette su due colonne giustificate. Quelli
-     più corti restano una colonna sola allineata a sinistra. */
+     più corti restano una colonna sola allineata a sinistra.
+     Le due colonne non le fa il browser: il sito divide il paragrafo
+     alla fine della frase più vicina alla metà dei caratteri (un punto
+     seguito da una maiuscola) e mette le due parti in due pezzi
+     ("colonna"). Così nessuna frase passa da una colonna all'altra, e le
+     colonne possono finire ad altezze diverse. Il paragrafo resta uno
+     solo: sul telefono si vede come prima e il lettore di schermo lo
+     legge di seguito. */
   var LUNGHEZZA_COLONNE = 350;
+  var FINE_FRASE = /[.!?](?=\s+[A-ZÀ-Ý])/g;
 
   function testoLungo(paragrafo) {
-    if (paragrafo.textContent.trim().length >= LUNGHEZZA_COLONNE) {
+    var testo = paragrafo.textContent.trim();
+    if (testo.length >= LUNGHEZZA_COLONNE && !paragrafo.querySelector(".da-completare")) {
+      var meta = testo.length / 2, taglio = -1, trovato;
+      FINE_FRASE.lastIndex = 0;
+      while ((trovato = FINE_FRASE.exec(testo)) !== null) {
+        var qui = trovato.index + 1;
+        if (taglio === -1 || Math.abs(qui - meta) < Math.abs(taglio - meta)) { taglio = qui; }
+      }
       paragrafo.classList.add("testo-lungo");
+      if (taglio > 0) {
+        paragrafo.textContent = "";
+        paragrafo.appendChild(elemento("span", "colonna", testo.slice(0, taglio)));
+        paragrafo.appendChild(document.createTextNode(" "));
+        paragrafo.appendChild(elemento("span", "colonna", testo.slice(taglio).trim()));
+      }
     }
+    G.paroleIntere(paragrafo);
   }
 
 

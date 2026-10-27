@@ -79,7 +79,8 @@ note. Non serve toccare nessun altro file.
 - `== PAGINA ==` contiene le informazioni per la futura pagina dei
   serali. Oggi nella home si usano solo `pulsante` e `link`: finché la
   pagina dei serali è "in preparazione", in fondo alla sezione dei
-  serali compare il pulsante verso il modulo di preiscrizione.
+  serali compare il pulsante "Come iscriversi", verso la pagina della
+  scuola con la domanda di iscrizione.
 
 Nella sezione `PAGINA` c'è **un'eccezione** alla prima regola. Quattro
 campi hanno un posto fisso e il loro nome non va cambiato: `titolo`,

@@ -220,7 +220,10 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      si rivolge" (elenco): non sono schede, ma tre parti con il titolo
      in verde e il testo sotto; le voci degli elenchi hanno un trattino
      grigio `#5B6B80`. Sul telefono una sotto l'altra separate dal
-     filetto, al computer tre colonne;
+     filetto, con il titolo sopra; al computer (dai 56rem) tre righe una
+     sotto l'altra, separate dal filetto, con il titolo a sinistra (un
+     terzo della larghezza) e il testo giustificato a destra (due terzi,
+     al massimo 46rem);
   3. "Quadro orario" e sotto il pulsante secondario "Confronta i
      percorsi ›" (su una riga anche a 375 pixel), che porta a
      `liceo.html#confronto`;
@@ -230,19 +233,41 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      ognuno con il trattino nel suo tono e il nome sottolineato in verde.
   Ogni blocco compare solo se c'è il suo testo in `liceo.txt`; senza
   nessuna delle tre parti sparisce la loro sezione. La fascia
-  "Laboratori e progetti" non esiste più. I testi sono allineati a
-  sinistra, con un'unica eccezione in tutto il sito: al computer, dai
-  66rem, la spiegazione e "Dopo il diploma", se lunghi almeno 350
-  caratteri, occupano tutta la larghezza del contenuto su due colonne
-  (distanza 2.5rem), giustificate con la sillabazione automatica
-  (`hyphens: auto`, le pagine hanno `lang="it"`); nell'apertura le due
-  colonne stanno centrate sotto il titolo. La classe `testo-lungo` la
-  mette `js/liceo.js`. Sotto i 66rem, e per i testi più corti, una
-  colonna sola larga al massimo 46rem, allineata a sinistra. Scelta di
-  Alessandra; da verificare con Chrome o Edge su Windows. I segnaposto `[DA COMPLETARE]`
+  "Laboratori e progetti" non esiste più. I segnaposto `[DA COMPLETARE]`
   di Scienze applicate e Liceo Matematico restano visibili. Nella
   pagina del Liceo Digitale nessun collegamento al sito del Liceo
   Digitale.
+- **Giustificato: l'unica eccezione all'allineamento a sinistra, solo al
+  computer (dai 56rem in su).** Sotto i 56rem (telefono, tablet stretti)
+  tutto resta a sinistra. Scelta di Alessandra; da verificare con Chrome
+  o Edge su Windows e da riprovare sul telefono, anche su Android.
+  - Paragrafi larghi, sillabazione solo per parole di almeno 10 lettere
+    con almeno 4 lettere prima e dopo il taglio (`hyphenate-limit-chars:
+    10 4 4`):
+    - la spiegazione delle pagine dei percorsi e "Dopo il diploma", se
+      lunghi almeno 350 caratteri (classe `testo-lungo`, messa da
+      `js/liceo.js`): dai 66rem occupano tutta la larghezza del
+      contenuto su due colonne (distanza 2.5rem); il sito divide il
+      paragrafo alla fine della frase più vicina alla metà dei caratteri,
+      così nessuna frase passa da una colonna all'altra e le colonne
+      possono finire ad altezze diverse; nell'apertura le due colonne
+      stanno centrate sotto il titolo. Sotto i 66rem, e per i testi più
+      corti, una colonna sola larga al massimo 46rem, allineata a
+      sinistra. Il testo in `liceo.txt` resta intero;
+    - il testo dei tre blocchi delle pagine dei percorsi, nelle righe
+      con il titolo a sinistra; nelle voci degli elenchi il trattino
+      grigio resta fuori, a sinistra.
+  - Colonne strette, sillabazione più frequente (`hyphenate-limit-chars:
+    6 3 3`) per non lasciare buchi fra le parole: le frasi "In questo
+    indirizzo imparerai…" degli indirizzi nella home e le spiegazioni
+    brevi dei tre percorsi in `liceo.html`.
+  - Le parole con il trattino ("post-diploma") non si spezzano mai, né
+    dopo il trattino né con la sillabazione: `js/grafica.js`
+    (`Grafica.paroleIntere`) le chiude in un pezzo intero, senza
+    cambiare i file di testo.
+  - Restano allineati a sinistra: titoli, occhielli, claim (anche quelli
+    degli indirizzi), contatti, piede, tabelle, date degli open day,
+    pulsanti e ogni riga breve.
 - Grafia: sempre "Liceo scientifico, opzione Scienze applicate", con la
   virgola, nei testi, nei titoli delle schede del browser e nelle
   descrizioni delle pagine.
@@ -554,7 +579,7 @@ liceo), `js/home.js`, `js/liceo.js`, `immagini/linee-scuola.svg`,
   chi lavora o vuole riprendere gli studi.", i due percorsi con il
   trattino; in fondo il pulsante verso la pagina dei serali se è
   "pronta", altrimenti, finché la pagina non c'è, il pulsante
-  secondario "Modulo di preiscrizione ›" (scritta e link dai campi
+  secondario "Come iscriversi ›" (scritta e link dai campi
   `pulsante` e `link` della sezione PAGINA di `serali.txt`), che si apre
   in una nuova scheda con il testo nascosto per il lettore di schermo.
   Tono da adulti.

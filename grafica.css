@@ -995,7 +995,8 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 /* Al computer i tre percorsi su righe comuni (nome, spiegazione,
-   pulsante) e le tre parti del percorso affiancate */
+   pulsante). Le tre parti del percorso stanno in righe (in fondo al
+   file, GIUSTIFICATO AL COMPUTER). */
 @media (min-width: 56rem) {
   .percorsi {
     grid-template-columns: repeat(3, 1fr);
@@ -1008,8 +1009,6 @@ a:hover { text-decoration-thickness: 2px; }
     grid-template-rows: subgrid;
     align-content: start;
   }
-  .blocchi { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
-  .blocco + .blocco { padding-top: 0; border-top: 0; }
 }
 
 
@@ -1123,22 +1122,87 @@ a:hover { text-decoration-thickness: 2px; }
    riga sotto. L'email invece va a capo dopo la chiocciola. */
 .dato-intero { white-space: nowrap; }
 
-/* I PARAGRAFI LUNGHI SU DUE COLONNE GIUSTIFICATE, SOLO AL COMPUTER
-   L'unica eccezione all'allineamento a sinistra del sito. Riguarda la
-   spiegazione delle pagine dei percorsi e "Dopo il diploma", solo
-   quando sono lunghi almeno 350 caratteri (classe "testo-lungo",
-   messa da js/liceo.js). Dai 66rem il paragrafo occupa tutta la
-   larghezza del contenuto, diviso in due colonne giustificate con la
-   sillabazione automatica (le pagine hanno lang="it"). Nell'apertura
-   le due colonne stanno centrate sotto il titolo. Sotto i 66rem, e per
-   i testi più corti, una colonna sola allineata a sinistra. */
-@media (min-width: 66rem) {
-  .testo-lungo {
-    max-width: none;
-    column-count: 2;
+/* -----------------------------------------------------------------
+   GIUSTIFICATO AL COMPUTER
+   L'unica eccezione all'allineamento a sinistra del sito, solo al
+   computer. Sotto i 56rem (telefono, tablet stretti) tutto resta a
+   sinistra. Restano a sinistra anche titoli, occhielli, claim,
+   contatti, piede, tabelle, date, pulsanti e righe brevi.
+     - paragrafi larghi (due colonne, righe dei tre blocchi):
+       sillabazione solo per parole di almeno 10 lettere, con almeno 4
+       lettere prima e dopo il taglio (10 4 4);
+     - colonne strette (frasi degli indirizzi nella home, spiegazioni
+       brevi dei percorsi in liceo.html): sillabazione più frequente
+       (6 3 3), per non lasciare buchi fra le parole.
+   Le parole con il trattino ("post-diploma") non si spezzano mai: le
+   chiude in un pezzo intero js/grafica.js (classe "parola-intera").
+   Le pagine hanno lang="it": il browser sillaba in italiano.
+   ----------------------------------------------------------------- */
+
+.parola-intera {
+  white-space: nowrap;
+  -webkit-hyphens: manual;
+          hyphens: manual;
+}
+
+/* Le due parti di un paragrafo lungo (js/liceo.js lo divide fra due
+   frasi): sul telefono di seguito, come un paragrafo normale */
+.colonna { display: inline; }
+
+@media (min-width: 56rem) {
+
+  /* I tre blocchi delle pagine dei percorsi: tre righe una sotto
+     l'altra, separate dal filetto; in ogni riga il titolo a sinistra
+     (un terzo) e il testo a destra (due terzi, al massimo 46rem),
+     giustificato. Nelle voci degli elenchi il trattino grigio resta
+     fuori, a sinistra. */
+  .blocchi { grid-template-columns: 1fr; gap: 2rem; }
+  .blocco {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     column-gap: 2.5rem;
+    align-items: start;
+  }
+  .blocco + .blocco { padding-top: 2rem; border-top: 1px solid var(--filetto); }
+  .blocco > :not(.blocco-titolo) { grid-column: 2; max-width: 46rem; }
+  .blocco-titolo { grid-column: 1; margin-bottom: 0; }
+  .blocco > p,
+  .blocco-elenco li {
     text-align: justify;
     -webkit-hyphens: auto;
             hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
   }
+
+  /* Le colonne strette */
+  .indirizzo-frase,
+  .percorso-testo {
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+    hyphenate-limit-chars: 6 3 3;
+  }
+}
+
+/* I paragrafi lunghi su due colonne: spiegazione delle pagine dei
+   percorsi e "Dopo il diploma", solo quando sono lunghi almeno 350
+   caratteri (classe "testo-lungo", messa da js/liceo.js). Dai 66rem il
+   paragrafo occupa tutta la larghezza del contenuto, diviso fra due
+   frasi in due colonne giustificate, che possono finire ad altezze
+   diverse. Nell'apertura le due colonne stanno centrate sotto il
+   titolo. Sotto i 66rem, e per i testi più corti, una colonna sola
+   allineata a sinistra. */
+@media (min-width: 66rem) {
+  .testo-lungo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2.5rem;
+    align-items: start;
+    max-width: none;
+    text-align: justify;
+    -webkit-hyphens: auto;
+            hyphens: auto;
+    hyphenate-limit-chars: 10 4 4;
+  }
+  .testo-lungo .colonna { display: block; }
 }

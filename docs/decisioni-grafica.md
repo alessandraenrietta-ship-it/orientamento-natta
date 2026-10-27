@@ -68,3 +68,11 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Pulsante del dettaglio in "Le ore a confronto": "Le materie in più ›".
 - liceo.html: titolo "I tre percorsi" solo per i lettori di schermo (livello 2), nomi dei percorsi di livello 3.
 - Paragrafi lunghi al computer (spiegazione dei percorsi e "Dopo il diploma", dai 350 caratteri): dai 66rem su due colonne a tutta larghezza, giustificate con sillabazione. Scelta di Alessandra, preferita al testo a tutta pagina e alla colonna unica. Sul telefono e nel resto del sito testo a sinistra. Da verificare con Chrome o Edge su Windows.
+
+## Terza revisione (decisa il 27 ottobre 2026, mezzogiorno)
+- Nota sui turni tolta da tutte le pagine (scelta di Alessandra); la riga resta in comuni.txt, commentata. I punti precedenti che la citano restano come storia.
+- Due colonne giustificate: il sito divide il paragrafo fra due frasi, la più vicina alla metà; nessuna frase passa da una colonna all'altra.
+- Sillabazione nei paragrafi larghi: solo parole di almeno 10 lettere, almeno 4 lettere prima e dopo il taglio. Le parole con un trattino (post-diploma) non si spezzano mai.
+- Giustificato esteso, solo al computer (dai 56rem): i tre blocchi delle pagine dei percorsi diventano tre righe con il titolo a sinistra e il testo giustificato a destra (sillabazione 10 4 4); frasi degli indirizzi in home e spiegazioni brevi dei percorsi in liceo.html restano in tre colonne, giustificate con sillabazione più frequente (6 3 3). Restano a sinistra titoli, claim, contatti, tabelle, righe brevi. Telefono: tutto a sinistra per ora, da riprovare anche su Android.
+- Scartato per ora: spazio distribuito fra le lettere (supporto incerto).
+- Serali: pulsante "Come iscriversi ›" (prima "Modulo di preiscrizione", che faceva pensare a un modulo online). La frase "iscrizione" di serali.txt va riscritta con il nome esatto del documento usato dalla scuola.
