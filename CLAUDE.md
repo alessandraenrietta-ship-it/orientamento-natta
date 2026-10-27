@@ -164,11 +164,13 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
 - Pagina del liceo (`liceo.html`), grafica a cartolina (punto 13):
   testata e piede della home, con logo e nome che portano alla home.
   Apertura bianca centrata: il titolo è un solo h1 su due righe,
-  "titolo" in verde e, al 60% della grandezza, "titolo-riga-2"; sotto
+  "titolo" e, al 60% della grandezza, "titolo-riga-2", tutte e due nel
+  blu del liceo `#1F5FA8` (dal 27 ottobre 2026 sera: l'unico titolo di
+  pagina non verde; le pagine dei percorsi restano verdi); sotto
   il claim del liceo (preso da `home.txt`) in verde, niente occhiello;
   poi il disegno della scuola della home con le stesse linee e la
   stessa animazione, ma nei tre toni dei percorsi (esterna azzurro
-  `#2A7AB0`, centrale blu `#1F5FA8`, interna blu scuro `#0F3460`), con
+  `#1B7DB5`, centrale blu `#2563B3`, interna blu violetto `#2348D6`), con
   i tratti esterni fino ai bordi al computer: l'apertura finisce con
   il disegno. Sul telefono circa 20 pixel fra il titolo e il claim. I
   collegamenti "‹ Torna alla home" e, nei percorsi, "‹ Torna al liceo"
@@ -311,12 +313,16 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   - Serali: ardesia `#3A4756`, luna (colore da rivedere)
 - Percorsi del liceo: tre toni del blu del liceo, legati al percorso e
   non alla posizione, usati solo nelle pagine del liceo per le linee
-  del disegno, il trattino accanto al nome e la riga "In più nel ..."
-  del quadro orario (sul bianco: azzurro 4,7, blu 6,4, blu scuro 12,5):
-  - Scienze applicate: azzurro `#2A7AB0`
-  - Liceo Matematico: blu `#1F5FA8`
-  - Liceo Digitale: blu scuro `#0F3460` (molto vicino al blu notte del
-    testo: da tenere d'occhio)
+  del disegno, il trattino accanto al nome, il nome stesso in
+  `liceo.html` e la riga "In più nel ..." del quadro orario (sul
+  bianco: azzurro 4,5, blu 6,0, blu violetto 7,1; mai sotto 4,5, perché
+  la riga "In più nel ..." è a 13 px). Schiariti il 27 ottobre 2026
+  sera: prima erano `#2A7AB0`, `#1F5FA8` e `#0F3460`, e il blu scuro
+  sembrava nero. Il Liceo Digitale ha poi preso un blu vivo che tende
+  al violetto, perché risalti più degli altri due.
+  - Scienze applicate: azzurro `#1B7DB5`
+  - Liceo Matematico: blu `#2563B3`
+  - Liceo Digitale: blu violetto `#2348D6`
   Nessun simbolo per i percorsi.
 - I colori sono stati verificati per contrasto (testo almeno 4,5:1) e per
   deuteranopia e protanopia. **Non si cambiano senza dirlo ad
@@ -562,7 +568,9 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   turni.
 - **Arancione, rosa e blu indicano solo i tre indirizzi** (Meccanica
   `#C2410C`, Grafica `#B8326F`, Liceo `#1F5FA8`) e non si usano per
-  altro: le linee del disegno e il trattino accanto al nome. Nei
+  altro: le linee del disegno, il trattino accanto al nome e, nella
+  home, il nome dell'indirizzo (dal 27 ottobre 2026 sera; "opzione"
+  davanti a "Scienze applicate" resta in blu notte). Nei
   serali il trattino ha il colore dell'indirizzo (Meccanica e
   meccatronica arancione, Grafica e comunicazione rosa).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo

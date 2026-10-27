@@ -185,7 +185,7 @@
       var voce = document.createElement("li");
       voce.className = "indirizzo con-trattino tono-" + dati.colore;
       voce.appendChild(elemento("p", "indirizzo-tipo", dati.tipo));
-      voce.appendChild(elemento("h3", "indirizzo-nome", P.nomeIntero(dati.nome)));
+      voce.appendChild(nomeColorato(dati.nome));
       voce.appendChild(elemento("p", "indirizzo-claim", dati.claim));
 
       var testi = document.createElement("div");
@@ -205,6 +205,20 @@
 
       elenco.appendChild(voce);
     });
+  }
+
+  /* Il nome dell'indirizzo, nel colore dell'indirizzo (grafica.css):
+     "Meccanica, meccatronica ed energia" arancione, "Grafica e
+     comunicazione" rosa, "Scienze applicate" blu. Le parole minuscole
+     all'inizio ("opzione") restano in blu notte: si colora il nome vero
+     e proprio, dalla prima maiuscola in poi. */
+  function nomeColorato(nome) {
+    var h3 = elemento("h3", "indirizzo-nome", "");
+    var inizio = nome.match(/^(?:[a-zà-ù]+ )+/);
+    var prima = inizio ? inizio[0] : "";
+    if (prima) { h3.appendChild(document.createTextNode(prima)); }
+    h3.appendChild(elemento("span", "indirizzo-nome-colore", P.nomeIntero(nome.slice(prima.length))));
+    return h3;
   }
 
   function inPreparazione(home) {
