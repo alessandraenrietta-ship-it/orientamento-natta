@@ -86,7 +86,8 @@ avviso-retro: Ora si vede il retro.
 avviso-fronte: Ora si vede il fronte.
 # Il PDF della cartolina, salvato con la funzione Stampa di Edge da
 # cartolina.html?foglio=docenti (pulsante "PDF per i docenti"): A4
-# verticale, una cartolina per pagina, fronte e retro. Se il file non
+# verticale, due cartoline per foglio: pagina 1 i fronti, pagina 2 i
+# retri. Se il file non
 # c'è, il pulsante per scaricarlo non compare.
 pdf: materiali/cartolina-natta.pdf
 # Le due righe grigie stampate sotto la cartolina nel PDF per i

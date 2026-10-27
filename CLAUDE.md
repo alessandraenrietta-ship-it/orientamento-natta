@@ -518,10 +518,11 @@ computer di Alessandra.
     taglio agli angoli; pagina 1 i fronti, pagina 2 i retri,
     fronte-retro capovolgendo sul lato lungo.
   - Versione per i docenti (`cartolina.html?foglio=docenti`): A4
-    verticale, una sola cartolina al centro con l'abbondanza e i segni
-    di taglio; sotto, fuori dai segni, due righe grigie `#5B6B80` a 8
-    pt (`pdf-riga-1` e `pdf-riga-2` della sezione `ORIENTATORI` di
-    `comuni.txt`). Pagina 1 il fronte, pagina 2 il retro. È il PDF
+    verticale come la versione scuola: due cartoline uguali una sopra
+    l'altra, con i segni di taglio; sotto la seconda, fuori dai segni,
+    due righe grigie `#5B6B80` a 8 pt (`pdf-riga-1` e `pdf-riga-2`
+    della sezione `ORIENTATORI` di `comuni.txt`). Pagina 1 i fronti,
+    pagina 2 i retri. È il PDF
     `materiali/cartolina-natta.pdf`, che si scarica da
     `orientatori.html`; oggi è una versione non definitiva.
 - **Nomi degli indirizzi**: le ultime due parole non si separano mai

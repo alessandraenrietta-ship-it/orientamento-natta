@@ -174,21 +174,15 @@ h1, p, ul { margin: 0; }
 
 /* ---------------------------------------------------------------
    LA VERSIONE PER I DOCENTI (il PDF di orientatori.html)
-   Una sola cartolina al centro dell'A4 verticale, con l'abbondanza e
-   i segni di taglio; sotto, fuori dai segni, due righe grigie a 8 pt.
+   Come la versione A4: due cartoline una sopra l'altra (.coppia), con
+   i segni di taglio; sotto la seconda, fuori dai segni, due righe
+   grigie a 8 pt.
    --------------------------------------------------------------- */
-
-.sola {
-  position: absolute;
-  top: 95.5mm;     /* (297 - 106) / 2 */
-  left: 27mm;      /* (210 - 156) / 2 */
-  width: 156mm;
-  height: 106mm;
-}
 
 .note-docenti {
   position: absolute;
-  top: 120mm;      /* sotto i segni di taglio, che finiscono a 114 mm */
+  top: 226mm;      /* sotto i segni di taglio, che finiscono a 220 mm
+                      dall'alto della coppia: sul foglio a 268,5 mm */
   left: 0;
   width: 156mm;
   font-size: 8pt;

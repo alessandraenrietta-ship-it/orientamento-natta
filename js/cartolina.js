@@ -14,11 +14,10 @@
    - a4: due cartoline per foglio A4 verticale, una sopra l'altra, con
      i segni di taglio;
    - docenti: il PDF che si scarica da orientatori.html
-     (materiali/cartolina-natta.pdf). Una cartolina per foglio A4
-     verticale, al centro, con l'abbondanza e i segni di taglio; sotto,
-     fuori dai segni, due righe grigie lette da comuni.txt (sezione
-     ORIENTATORI, pdf-riga-1 e pdf-riga-2). Pagina 1 il fronte, pagina
-     2 il retro.
+     (materiali/cartolina-natta.pdf). Come a4, due cartoline per foglio
+     con i segni di taglio; sotto, fuori dai segni, due righe grigie
+     lette da comuni.txt (sezione ORIENTATORI, pdf-riga-1 e
+     pdf-riga-2). Pagina 1 i fronti, pagina 2 i retri.
    Con l'indirizzo cartolina.html?foglio=a4 o ?foglio=docenti si apre
    già la versione scelta.
 
@@ -93,8 +92,8 @@
       fogli.appendChild(gruppo("Foglio 1: i fronti", foglioA4(fronte)));
       fogli.appendChild(gruppo("Foglio 2: i retri", foglioA4(retro)));
     } else if (modo === "docenti") {
-      fogli.appendChild(gruppo("Pagina 1: il fronte", foglioDocenti(fronte)));
-      fogli.appendChild(gruppo("Pagina 2: il retro", foglioDocenti(retro)));
+      fogli.appendChild(gruppo("Pagina 1: i fronti", foglioDocenti(fronte)));
+      fogli.appendChild(gruppo("Pagina 2: i retri", foglioDocenti(retro)));
     } else {
       fogli.appendChild(gruppo("Fronte", foglioTipografia(fronte)));
       fogli.appendChild(gruppo("Retro", foglioTipografia(retro)));
@@ -147,38 +146,17 @@
     return foglio;
   }
 
-  /* Una sola cartolina al centro dell'A4 verticale, con i segni di
-     taglio agli angoli e, sotto, le due righe grigie. Le misure sono in
-     millimetri, a partire dall'angolo in alto a sinistra della
-     cartolina con l'abbondanza (156 x 106 mm). Fronte e retro sono
-     nello stesso punto del foglio, così combaciano quando lo si
-     capovolge sul lato lungo. */
+  /* Il foglio per i docenti: lo stesso della versione a4 (due
+     cartoline uguali una sopra l'altra, con i segni di taglio) e, sotto
+     la seconda, fuori dai segni, le due righe grigie */
   function foglioDocenti(facciata) {
-    var foglio = document.createElement("div");
-    foglio.className = "foglio foglio-a4";
-    var sola = document.createElement("div");
-    sola.className = "sola";
-    sola.appendChild(facciata.cloneNode(true));
-
-    /* I tagli passano a 3 mm dai bordi: in orizzontale a 3 e 103 mm,
-       in verticale a 3 e 153 mm. Segni lunghi 6 mm, a 2 mm dal fondo. */
-    [3, 103].forEach(function (y) {
-      sola.appendChild(segnoTaglio("orizzontale", -8, y - 0.125));
-      sola.appendChild(segnoTaglio("orizzontale", 158, y - 0.125));
-    });
-    [3, 153].forEach(function (x) {
-      sola.appendChild(segnoTaglio("verticale", x - 0.125, -8));
-      sola.appendChild(segnoTaglio("verticale", x - 0.125, 108));
-    });
-
+    var foglio = foglioA4(facciata);
     if (righeDocenti.length) {
       var note = document.createElement("div");
       note.className = "note-docenti";
       righeDocenti.forEach(function (riga) { note.appendChild(elemento("p", "", riga)); });
-      sola.appendChild(note);
+      foglio.querySelector(".coppia").appendChild(note);
     }
-
-    foglio.appendChild(sola);
     return foglio;
   }
 
