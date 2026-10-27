@@ -108,6 +108,19 @@ window.Cartolina = (function () {
      IL RETRO, come una cartolina postale
      --------------------------------------------------------------- */
 
+  /* Il nome dell'indirizzo nel colore dell'indirizzo, come nella home:
+     le parole minuscole all'inizio ("opzione") restano in blu notte, il
+     nome vero e proprio, dalla prima maiuscola in poi, prende il colore
+     (cartolina-facciate.css) */
+  function nomeColorato(nome) {
+    var span = elemento("span", "retro-nome", "");
+    var inizio = nome.match(/^(?:[a-zà-ù]+ )+/);
+    var prima = inizio ? inizio[0] : "";
+    if (prima) { span.appendChild(document.createTextNode(prima)); }
+    span.appendChild(elemento("span", "retro-nome-colore", P.nomeIntero(nome.slice(prima.length))));
+    return span;
+  }
+
   function retro(home, comuni, cartolina) {
     var f = document.createElement("section");
     f.className = "facciata retro";
@@ -131,7 +144,7 @@ window.Cartolina = (function () {
       var li = document.createElement("li");
       li.className = "tono-" + riga[7].toLowerCase();
       li.appendChild(elemento("span", "retro-tipo", riga[1]));
-      li.appendChild(elemento("span", "retro-nome", P.nomeIntero(riga[0])));
+      li.appendChild(nomeColorato(riga[0]));
       elenco.appendChild(li);
     });
     sinistra.appendChild(elenco);

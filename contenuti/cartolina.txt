@@ -25,5 +25,5 @@ saluto: Ti aspettiamo,
 # Lo spazio del destinatario, a destra sotto il francobollo: l'etichetta
 # e le due righe scritte; sotto resta una terza riga vuota per il nome
 destinatario: DESTINATARIO
-riga-1: Al futuro studente
-riga-2: o alla futura studentessa
+riga-1: Al futuro studente,
+riga-2: alla futura studentessa

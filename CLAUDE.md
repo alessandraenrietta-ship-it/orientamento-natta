@@ -486,15 +486,16 @@ computer di Alessandra.
   verticale grigio `#C9C9C4`:
   - a sinistra "Vieni a trovarci." in verde (18 pt, perché stia su una
     riga); i tre indirizzi, ognuno con il trattino corto del suo colore,
-    il tipo in grigio `#5B6B80` (7,5 pt) e sotto il nome in blu notte
-    (8,5 pt), come nella home (il modello aveva prima il nome); poi "Ti
+    il tipo in grigio `#5B6B80` (7,5 pt) e sotto il nome (8,5 pt) nel
+    colore del suo indirizzo, come nella home ("opzione" in blu notte;
+    il modello aveva prima il nome); poi "Ti
     aspettiamo," e la firma di Giulio Natta in blu notte, larga 37 mm;
   - a destra, in alto, le onde di annullo nei tre colori, il timbro
     rotondo blu inchiostro `#1F3A6B` leggermente ruotato (lo stesso del
     piede del sito, con il logo e "IIS GIULIO NATTA · ORIENTAMENTO") e
     il francobollo verde (17,7 × 21 mm, bordo dentellato, cornice
     tratteggiata bianca, logo bianco); sotto "DESTINATARIO" in grigio
-    maiuscolo, "Al futuro studente" e "o alla futura studentessa" su due
+    maiuscolo, "Al futuro studente," e "alla futura studentessa" su due
     righe con il filetto sotto e una terza riga vuota per il nome;
   - in basso, a tutta larghezza, il sottopancia dopo un filetto:
     indirizzo, telefono ed email dell'orientamento, 7 pt, grigio, su una
@@ -523,14 +524,21 @@ computer di Alessandra.
   stampa.
   - Versione tipografia: PDF di due pagine da 156 × 106 mm.
   - Versione scuola (`cartolina.html?foglio=a4`): A4 verticale, due
-    cartoline uguali una sopra l'altra al centro del foglio, segni di
-    taglio agli angoli; pagina 1 i fronti, pagina 2 i retri,
+    cartoline uguali una sopra l'altra al centro del foglio, accostate:
+    il bordo inferiore della prima e quello superiore della seconda
+    coincidono e si rifilano con un solo taglio; l'abbondanza di 3 mm
+    resta solo sui bordi esterni del gruppo (156 × 206 mm, a 45,5 mm
+    dall'alto e 27 mm da sinistra). Segni di taglio agli angoli e uno
+    per lato in mezzo; pagina 1 i fronti, pagina 2 i retri,
     fronte-retro capovolgendo sul lato lungo.
   - Versione per i docenti (`cartolina.html?foglio=docenti`): A4
-    verticale come la versione scuola: due cartoline uguali una sopra
-    l'altra, con i segni di taglio; sotto la seconda, fuori dai segni,
-    due righe grigie `#5B6B80` a 8 pt (`pdf-riga-1` e `pdf-riga-2`
-    della sezione `ORIENTATORI` di `comuni.txt`). Pagina 1 i fronti,
+    verticale come la versione scuola: due cartoline accostate, con i
+    segni di taglio; sotto la seconda, fuori dai segni, due righe grigie
+    `#5B6B80` a 8 pt in un'area larga 194 mm (`pdf-riga-1` e
+    `pdf-riga-2` della sezione `ORIENTATORI` di `comuni.txt`): "Versione
+    non definitiva" e "Stampare a colori, al 100% (dimensione reale),
+    fronte-retro capovolgendo sul lato lungo; poi rifilare sui segni.".
+    Pagina 1 i fronti,
     pagina 2 i retri. È il PDF
     `materiali/cartolina-natta.pdf`, che si scarica da
     `orientatori.html`; oggi è una versione non definitiva.

@@ -176,6 +176,11 @@
   color: var(--blu-notte);
 }
 
+/* Il nome vero e proprio nel colore dell'indirizzo, come nella home:
+   arancione, rosa, blu; "opzione" resta in blu notte (dal 27 ottobre
+   2026, notte) */
+.facciata .retro-nome-colore { color: var(--tono, var(--blu-notte)); }
+
 .facciata .retro-saluto {
   margin-top: 5mm;
   font-size: 8.5pt;
