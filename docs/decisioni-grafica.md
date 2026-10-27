@@ -76,3 +76,16 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Giustificato esteso, solo al computer (dai 56rem): i tre blocchi delle pagine dei percorsi diventano tre righe con il titolo a sinistra e il testo giustificato a destra (sillabazione 10 4 4); frasi degli indirizzi in home e spiegazioni brevi dei percorsi in liceo.html restano in tre colonne, giustificate con sillabazione più frequente (6 3 3). Restano a sinistra titoli, claim, contatti, tabelle, righe brevi. Telefono: tutto a sinistra per ora, da riprovare anche su Android.
 - Scartato per ora: spazio distribuito fra le lettere (supporto incerto).
 - Serali: pulsante "Come iscriversi ›" (prima "Modulo di preiscrizione", che faceva pensare a un modulo online). La frase "iscrizione" di serali.txt va riscritta con il nome esatto del documento usato dalla scuola.
+
+## Prima della pubblicazione (27 ottobre 2026)
+- Tre blocchi delle pagine dei percorsi: anche qui la sillabazione più frequente (6 3 3), perché con 10 4 4 restavano righe con spazi molto larghi.
+- cartolina.html: sostituita con la cartolina "Vieni a trovarci" (15 x 10 cm orizzontale), con i testi letti dai file di contenuto. Sul retro, per ogni indirizzo, prima il tipo in grigio e sotto il nome, come nella home.
+- La firma di Giulio Natta (immagini/firma-natta.png) è pubblicata con la cartolina per decisione di Alessandra. Restano da verificare la licenza del file originale su Wikimedia Commons e il parere della dirigente; il repository pubblico conserva la cronologia, quindi una volta pubblicata la firma resta consultabile anche se poi la si toglie.
+- Timbro: quello disegnato; il timbro ufficiale resta da proporre alla dirigente.
+- QR: per ora verso la home del sito di orientamento; da decidere prima della stampa se portare direttamente agli open day.
+
+## Pubblicazione (27 ottobre 2026)
+- La grafica a cartolina va online unendo il ramo grafica-cartolina a main. Con la pubblicazione Alessandra dà il via libera alla scheda del liceo nella home ("pronta").
+- Vanno online con i segnaposto, per scelta: [DA COMPLETARE] in Scienze applicate e Liceo Matematico, "(da definire)" nelle frasi brevi dei percorsi. Prima di dare il link alle famiglie o di stampare la cartolina, questi testi vanno completati.
+- Restano da fare dopo: testi di Scienze applicate e Liceo Matematico, frasi brevi "(da definire)", spazi larghi nelle colonne strette, blu del Liceo Digitale.
+- L'etichetta grafica-ottobre conserva la versione precedente.

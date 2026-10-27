@@ -1,10 +1,13 @@
-# TESTI DELLA CARTOLINA (cartolina.html)
+# TESTI DELLA CARTOLINA "VIENI A TROVARCI" (cartolina.html)
 # ------------------------------------------------------------------
 # Quasi tutti i testi della cartolina arrivano da altri file, così sito
 # e cartolina restano uguali:
-#   - claim generale, tipo, nome e claim dei tre indirizzi: home.txt
-#   - nome della scuola, città, telefono, email dell'orientamento,
-#     indirizzo e indirizzo del sito: comuni.txt
+#   - tipo e nome dei tre indirizzi, nello stesso ordine della home:
+#     home.txt
+#   - nome della scuola, città, indirizzo, telefono, email
+#     dell'orientamento e indirizzo del sito a cui porta il QR:
+#     comuni.txt
+#   - la parola lungo il timbro ("ORIENTAMENTO"): occhiello di home.txt
 # Qui stanno solo i testi che esistono soltanto sulla cartolina.
 #
 # Sulla cartolina non vanno date né anni scolastici: deve restare
@@ -15,7 +18,12 @@
 # ------------------------------------------------------------------
 
 == RETRO ==
-# Il testo sotto il codice QR. Ogni riga "sotto-qr" va a capo: se ne
-# possono scrivere una o più.
-sotto-qr: Vieni a trovarci!
-sotto-qr: Inquadra il QR code per prenotare la tua visita e scoprire il Natta.
+# L'invito in verde, in alto a sinistra
+invito: Vieni a trovarci.
+# Il saluto sopra la firma di Giulio Natta
+saluto: Ti aspettiamo,
+# Lo spazio del destinatario, a destra sotto il francobollo: l'etichetta
+# e le due righe scritte; sotto resta una terza riga vuota per il nome
+destinatario: DESTINATARIO
+riga-1: Al futuro studente
+riga-2: o alla futura studentessa

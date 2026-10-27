@@ -350,11 +350,16 @@ window.Grafica = (function () {
      NATTA · ORIENTAMENTO" lungo il cerchio e il logo al centro. Le
      parole vengono dai file di testo (nome della scuola in comuni.txt e
      occhiello in home.txt). È solo decorativo: i dati sono scritti
-     accanto. Va nell'elemento con id="timbro".
+     accanto. Va nell'elemento con id="timbro" oppure, se si indica,
+     in un altro elemento (la cartolina lo usa sul retro).
      --------------------------------------------------------------- */
 
-  function timbro(home, comuni) {
-    var contenitore = document.getElementById("timbro");
+  var timbriFatti = 0;
+
+  function timbro(home, comuni, dove) {
+    var contenitore = dove || document.getElementById("timbro");
+    /* Ogni timbro ha il suo cerchio per la scritta, con un nome diverso */
+    var cerchio = "timbro-cerchio" + (timbriFatti++ ? "-" + timbriFatti : "");
     var nome = comuni.campo("SCUOLA", "nome");
     var scritta = (nome + " · " + home.campo("APERTURA", "occhiello") + " · ").toUpperCase();
 
@@ -374,14 +379,14 @@ window.Grafica = (function () {
     /* Il cerchio su cui corre la scritta: parte da sinistra e gira in
        senso orario, così la scritta in alto si legge dritta */
     svg.appendChild(nuovo("path", {
-      id: "timbro-cerchio",
+      id: cerchio,
       d: "M " + (60 - raggio) + " 60 a " + raggio + " " + raggio + " 0 1 1 " + (2 * raggio) + " 0" +
          " a " + raggio + " " + raggio + " 0 1 1 " + (-2 * raggio) + " 0",
       fill: "none"
     }));
     var testo = nuovo("text", { "class": "timbro-scritta" });
     var percorso = nuovo("textPath", {
-      href: "#timbro-cerchio",
+      href: "#" + cerchio,
       textLength: (2 * Math.PI * raggio).toFixed(1),
       lengthAdjust: "spacing"
     });
@@ -394,6 +399,7 @@ window.Grafica = (function () {
     var logo = document.createElement("span");
     logo.className = "timbro-logo";
     contenitore.appendChild(logo);
+    return contenitore;
   }
 
   return {

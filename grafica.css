@@ -1128,12 +1128,13 @@ a:hover { text-decoration-thickness: 2px; }
    computer. Sotto i 56rem (telefono, tablet stretti) tutto resta a
    sinistra. Restano a sinistra anche titoli, occhielli, claim,
    contatti, piede, tabelle, date, pulsanti e righe brevi.
-     - paragrafi larghi (due colonne, righe dei tre blocchi):
-       sillabazione solo per parole di almeno 10 lettere, con almeno 4
-       lettere prima e dopo il taglio (10 4 4);
+     - paragrafi larghi (due colonne): sillabazione solo per parole di
+       almeno 10 lettere, con almeno 4 lettere prima e dopo il taglio
+       (10 4 4);
      - colonne strette (frasi degli indirizzi nella home, spiegazioni
-       brevi dei percorsi in liceo.html): sillabazione più frequente
-       (6 3 3), per non lasciare buchi fra le parole.
+       brevi dei percorsi in liceo.html) e righe dei tre blocchi:
+       sillabazione più frequente (6 3 3), per non lasciare buchi fra
+       le parole.
    Le parole con il trattino ("post-diploma") non si spezzano mai: le
    chiude in un pezzo intero js/grafica.js (classe "parola-intera").
    Le pagine hanno lang="it": il browser sillaba in italiano.
@@ -1171,7 +1172,7 @@ a:hover { text-decoration-thickness: 2px; }
     text-align: justify;
     -webkit-hyphens: auto;
             hyphens: auto;
-    hyphenate-limit-chars: 10 4 4;
+    hyphenate-limit-chars: 6 3 3;   /* con 10 4 4 restavano righe con spazi molto larghi */
   }
 
   /* Le colonne strette */

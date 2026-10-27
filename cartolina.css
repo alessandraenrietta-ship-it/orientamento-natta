@@ -1,41 +1,44 @@
 /* ==================================================================
-   LA CARTOLINA DI PRESENTAZIONE (cartolina.html)
+   LA CARTOLINA "VIENI A TROVARCI" (cartolina.html)
 
-   Formato 10 x 15 cm verticale, fronte e retro. Le misure sono in
-   millimetri e i caratteri in punti, come in tipografia.
+   Formato 15 x 10 cm orizzontale, fronte e retro, fondo bianco. Le
+   misure sono in millimetri e i caratteri in punti, come in
+   tipografia. Il modello è materiali-grezzi/cartolina-modello-NON-
+   PUBBLICARE.pdf (solo sul computer di Alessandra).
 
-   - Ogni facciata è di 106 x 156 mm: la cartolina (100 x 150) più
+   - Ogni facciata è di 156 x 106 mm: la cartolina (150 x 100) più
      3 mm di ABBONDANZA su ogni lato, cioè il fondo che esce oltre il
      taglio. Serve perché la lama non taglia mai esattamente sulla
      linea: senza, resterebbe un filo bianco sul bordo.
    - I testi stanno ad almeno 5 mm dal taglio, cioè a 8 mm dal bordo
      della facciata: la ZONA DI SICUREZZA.
-   - Carattere Arial, nessun testo sotto gli 8 punti.
+   - Un solo carattere, Cutive Mono, come nel sito.
 
-   Questo file non usa stile.css: il sito e la cartolina si cambiano
-   ognuno per conto suo.
+   Questo file non usa grafica.css: il sito e la cartolina si cambiano
+   ognuno per conto suo. I colori sono gli stessi.
    ================================================================== */
 
+@font-face {
+  font-family: "Cutive Mono";
+  src: url("fonts/cutive-mono-regular.ttf?v=1") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  /* Gli stessi colori di stile.css. Se là cambia un colore, si cambia
+  /* Gli stessi colori di grafica.css. Se là cambia un colore, si cambia
      anche qui. */
   --verde:         #026C37;
-  --chiaro:       #F3F7EC;
   --blu-notte:     #00193C;
-  --giallo:        #FFF33F;
+  --grigio:        #5B6B80;
+  --inchiostro:    #1F3A6B;   /* il timbro */
+  --filetto:       #C9C9C4;   /* i filetti del retro */
   --bianco:        #FFFFFF;
-  --bordo-scheda:  #A9C9B4;
   --meccanica:     #C2410C;
   --grafica:       #B8326F;
   --liceo:         #1F5FA8;
 
-  /* I simboli di immagini/simboli.svg prendono i colori da qui */
-  --simbolo-interno:  var(--bianco);
-  --simbolo-contorno: var(--blu-notte);
-  --simbolo-iride:    var(--liceo);
-
-  --carattere:     Arial, Helvetica, sans-serif;
-  --titolo-grande: "Arial Black", Arial, Helvetica, sans-serif;
+  --carattere:     "Cutive Mono", "Courier New", monospace;
 
   /* Le misure della cartolina */
   --abbondanza: 3mm;
@@ -54,11 +57,17 @@ html {
 body {
   margin: 0;
   font-family: var(--carattere);
+  font-synthesis: none;
   color: var(--blu-notte);
-  background: #D9DED6;
+  background: #DCDCD6;
 }
 
-h1, h2, p, ul { margin: 0; }
+h1, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+
+.tono-meccanica { --tono: var(--meccanica); }
+.tono-grafica   { --tono: var(--grafica); }
+.tono-liceo     { --tono: var(--liceo); }
 
 
 /* ---------------------------------------------------------------
@@ -70,19 +79,19 @@ h1, h2, p, ul { margin: 0; }
   margin: 0 auto;
   padding: 1.5rem 1rem 1rem;
   font-size: 16px;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .comandi h1 {
   margin-bottom: 1rem;
-  font-family: var(--titolo-grande);
-  font-size: 1.4rem;
+  font-size: 1.5rem;
+  font-weight: normal;
   color: var(--verde);
-  text-transform: uppercase;
 }
 
+.comandi strong { font-weight: normal; text-decoration: underline; }
 .comandi p, .comandi ul { margin-bottom: 0.8rem; }
-.spiegazioni { padding-left: 1.2rem; }
+.spiegazioni { padding-left: 1.2rem; list-style: disc; }
 .spiegazioni li { margin-bottom: 0.4rem; }
 
 .pulsanti {
@@ -92,29 +101,29 @@ h1, h2, p, ul { margin: 0; }
   margin-bottom: 1rem;
 }
 
+/* I pulsanti come nel sito: rettangolo ad angoli vivi, verde */
 .pulsante {
   min-height: 44px;
-  padding: 0.6rem 1.3rem;
-  font: bold 1rem var(--carattere);
+  padding: 0.5rem 1.1rem;
+  font: 1rem var(--carattere);
   color: var(--bianco);
   background: var(--verde);
-  border: 0;
-  border-radius: 999px;
+  border: 2px solid var(--verde);
+  border-radius: 0;
   cursor: pointer;
 }
 .pulsante:hover { text-decoration: underline; }
 .pulsante:focus-visible { outline: 3px solid var(--blu-notte); outline-offset: 3px; }
 
-.legenda-taglio { color: #C0007A; font-weight: bold; }
-.legenda-sicurezza { color: #0077B6; font-weight: bold; }
+.legenda-taglio { color: #C0007A; }
+.legenda-sicurezza { color: #0077B6; }
 
 .avviso {
   padding: 0.8rem 1rem;
-  background: var(--giallo);
-  border-radius: 8px;
+  border: 2px dashed var(--blu-notte);
 }
 
-/* L'anteprima: i fogli uno accanto all'altro, come pezzi di carta */
+/* L'anteprima: i fogli uno sotto l'altro, come pezzi di carta */
 #fogli {
   display: flex;
   flex-wrap: wrap;
@@ -128,24 +137,24 @@ h1, h2, p, ul { margin: 0; }
   flex: none;
   overflow: hidden;
   background: var(--bianco);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* Sopra ogni foglio, sullo schermo, il suo nome ("Fronte", "Retro") */
 .foglio-nome {
   margin-bottom: 0.4rem;
-  font: bold 14px var(--carattere);
+  font: 14px var(--carattere);
   text-align: center;
 }
 
 .foglio-tipografia {
-  width: 106mm;
-  height: 156mm;
+  width: 156mm;
+  height: 106mm;
 }
 
 .foglio-a4 {
-  width: 297mm;
-  height: 210mm;
+  width: 210mm;
+  height: 297mm;
 }
 
 /* Le linee guida, solo sullo schermo: il taglio (fucsia tratteggiata)
@@ -154,7 +163,7 @@ h1, h2, p, ul { margin: 0; }
 .facciata::after {
   content: "";
   position: absolute;
-  z-index: 2;
+  z-index: 5;
   pointer-events: none;
 }
 .facciata::before {
@@ -168,304 +177,267 @@ h1, h2, p, ul { margin: 0; }
 
 
 /* ---------------------------------------------------------------
-   LA FACCIATA (fronte o retro), 106 x 156 mm
+   LA FACCIATA (fronte o retro), 156 x 106 mm, fondo bianco.
+   Tutti i pezzi hanno una posizione fissa, in millimetri dall'angolo
+   in alto a sinistra della facciata (abbondanza compresa).
    --------------------------------------------------------------- */
 
 .facciata {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  width: 106mm;
-  height: 156mm;
+  width: 156mm;
+  height: 106mm;
   overflow: hidden;
-  padding: var(--sicurezza);
+  background: var(--bianco);
 }
 
 
 /* ---------------------------------------------------------------
-   IL FRONTE: fondo verde, logo e nome, le tre schede
+   IL FRONTE
+   La scuola disegnata dalle tre linee, larga quanto la facciata: le
+   linee entrano ed escono dai bordi, abbondanza compresa. Le linee
+   sono di 0,4 mm (lo spessore lo mette js/cartolina.js). Il QR prende
+   il posto del portone, sotto il tetto curvo fra le due torri, a
+   circa 5 mm dalle linee. Sotto, il nome della scuola.
    --------------------------------------------------------------- */
 
-.fronte {
-  color: var(--bianco);
-  background: var(--verde);
-}
-
-/* La testata: logo e nome della scuola, sul fondo verde */
-.fronte-testata {
-  display: flex;
-  align-items: center;
-  gap: 3.5mm;
-  margin-bottom: 3.5mm;
-}
-
-/* Il logo è un PNG di 231 pixel di larghezza: a 18 mm sono circa 325
-   punti per pollice, il minimo per la stampa. Non va ingrandito.
-   Sta su un riquadro bianco: sul verde il logo, che è verde, si
-   vedrebbe male. */
-.fronte-logo {
-  display: block;
-  flex: none;
-  box-sizing: content-box;
-  width: 18mm;
+.fronte-disegno {
+  position: absolute;
+  top: 26mm;
+  left: 0;
+  width: 156mm;
   height: auto;
-  padding: 1.6mm;
-  background: var(--bianco);
-  border-radius: 2mm;
 }
+
+/* Il QR, largo 25 mm con il suo margine bianco: blu notte su riquadro
+   bianco. Al centro della facciata, in orizzontale. */
+.fronte-qr {
+  position: absolute;
+  top: 46mm;
+  left: 65.5mm;    /* (156 - 25) / 2 */
+  width: 25mm;
+  height: 25mm;
+  background: var(--bianco);
+}
+.fronte-qr svg { display: block; width: 100%; height: 100%; }
 
 .fronte-nome {
-  font-family: var(--titolo-grande);
-  font-weight: 900;
-  font-size: 14pt;
-  line-height: 1.1;
+  position: absolute;
+  top: 91mm;
+  left: var(--sicurezza);
+  right: var(--sicurezza);
+  font-size: 9pt;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-}
-
-.fronte-citta {
-  display: block;
-  margin-top: 1mm;
-  font-family: var(--carattere);
-  font-weight: bold;
-  font-size: 10pt;
-  text-transform: none;
-}
-
-/* Le tre schede, una sotto l'altra, alte uguali */
-.fronte-schede {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 2.5mm;
-}
-
-.tono-meccanica { --tono: var(--meccanica); }
-.tono-grafica   { --tono: var(--grafica); }
-.tono-liceo     { --tono: var(--liceo); }
-
-.scheda {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  overflow: hidden;
-  /* Il fondo della scheda è nel colore dell'indirizzo, non bianco: così
-     agli angoli in alto non resta un filo chiaro fra bordo e colore */
-  background: var(--tono, var(--verde));
-  border: 0.8mm solid var(--tono, var(--verde));
-  border-radius: 3mm;
-}
-
-/* La parte alta, piena nel colore dell'indirizzo: il simbolo a
-   sinistra, accanto tipo di scuola e nome */
-.scheda-testa {
-  display: flex;
-  align-items: center;
-  gap: 3mm;
-  padding: 1.5mm 3mm;
-  color: var(--bianco);
-  background: var(--tono, var(--verde));
-}
-
-.scheda-simbolo {
-  display: block;
-  flex: none;
-  width: 10mm;
-  height: 10mm;
-}
-
-/* Il tipo di scuola: bianco, piccolo, maiuscolo, spaziato */
-.scheda-tipo {
-  margin-bottom: 0.8mm;
-  font-weight: bold;
-  font-size: 8pt;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Il nome: Arial Black, maiuscolo, bianco */
-.scheda-nome {
-  font-family: var(--titolo-grande);
-  font-weight: 900;
-  font-size: 11pt;
-  line-height: 1.12;
-  text-transform: uppercase;
-}
-
-/* La parte bianca: il claim in verde, centrato, e sotto la frase */
-.scheda-corpo {
-  display: flex;
-  flex: 1;
-  align-items: center;
-  padding: 1.6mm 3mm;
-  background: var(--bianco);
-}
-
-/* Il blocco dei testi occupa tutta la larghezza, così il claim si
-   centra nella scheda */
-.scheda-corpo > div { flex: 1; }
-
-.scheda-claim {
-  font-weight: bold;
-  font-size: 9.5pt;
-  line-height: 1.25;
-  color: var(--verde);
   text-align: center;
-}
-
-/* La frase concreta sotto il claim, in blu notte */
-.scheda-frase {
-  margin-top: 2.2mm;
-  font-size: 8.5pt;
-  line-height: 1.25;
   color: var(--blu-notte);
 }
 
 
 /* ---------------------------------------------------------------
-   IL RETRO: fondo chiaro, claim, codice QR, sito, fascia dei contatti
+   IL RETRO, come una cartolina postale, diviso a metà da un filetto
+   verticale grigio. A sinistra l'invito, gli indirizzi e la firma; a
+   destra onde, timbro, francobollo e destinatario; in basso, a tutta
+   larghezza, il sottopancia con i contatti.
    --------------------------------------------------------------- */
 
-.retro {
-  background: var(--chiaro);
+.retro-sinistra {
+  position: absolute;
+  top: 15mm;
+  left: 9mm;
+  width: 66mm;
 }
 
-.retro-alto {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-/* La fascia verde in alto: esce oltre il taglio in alto e ai lati, come
-   quella dei contatti in basso. Così il retro è a fasce come il sito:
-   verde, chiaro, verde. */
-.retro-testa {
-  margin: calc(-1 * var(--sicurezza)) calc(-1 * var(--sicurezza)) 0;
-  padding: var(--sicurezza) var(--sicurezza) 5mm;
-  background: var(--verde);
-}
-
-/* Il claim: giallo, Arial Black maiuscolo, come i titoli delle fasce
-   verdi del sito (giallo su verde 5,7) */
-.retro-claim {
-  font-family: var(--titolo-grande);
-  font-weight: 900;
-  font-size: 13pt;
-  line-height: 1.2;
-  color: var(--giallo);
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/* I tre simboli degli indirizzi in fila, ognuno nel suo quadratino
-   del colore dell'indirizzo, con un bordo sottile blu notte */
-.retro-simboli {
-  display: flex;
-  justify-content: center;
-  gap: 4mm;
-  margin-bottom: 5mm;
-}
-
-.retro-quadratino {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 11mm;
-  height: 11mm;
-  background: var(--tono, var(--verde));
-  border: 0.3mm solid var(--blu-notte);
-  border-radius: 1.5mm;
-}
-
-.retro-simbolo {
-  display: block;
-  width: 8mm;
-  height: 8mm;
-}
-
-/* Il riquadro bianco del QR. Il disegno del QR ha già dentro il suo
-   margine bianco di quattro quadretti: il riquadro aggiunge spazio. */
-.retro-qr {
-  width: 45mm;
-  padding: 2.5mm;
-  margin-bottom: 4mm;
-  background: var(--bianco);
-  border: 0.3mm solid var(--bordo-scheda);
-  border-radius: 3mm;
-}
-
-.retro-sotto-qr {
-  margin-bottom: 2mm;
-  font-size: 10pt;
-  line-height: 1.3;
-}
-
-/* Ogni riga "sotto-qr" su una riga sua; se è lunga va a capo in due
-   righe di lunghezza simile, senza una parola sola in fondo */
-.retro-riga {
-  display: block;
-  text-wrap: balance;
-}
-
-/* L'indirizzo del sito: va a capo solo dopo una barra "/" */
-.retro-sito {
-  font-weight: bold;
-  font-size: 9.5pt;
-  line-height: 1.3;
+.retro-invito {
+  margin-bottom: 6mm;
+  font-size: 18pt;   /* circa 19: a 18 sta su una riga nei 66 mm della colonna */
+  line-height: 1.1;
   color: var(--verde);
 }
-.retro-sito span { white-space: nowrap; }
 
-/* La fascia verde in fondo: esce oltre il taglio a destra, a sinistra
-   e in basso, ma i testi restano nella zona di sicurezza */
-.retro-fascia {
-  margin: 6mm calc(-1 * var(--sicurezza)) calc(-1 * var(--sicurezza));
-  padding: 4.5mm var(--sicurezza) var(--sicurezza);
-  color: var(--bianco);
-  background: var(--verde);
-}
-
-.retro-contatti {
-  padding: 0;
-  list-style: none;
-  font-size: 9pt;
+/* I tre indirizzi: trattino del loro colore, tipo in grigio e sotto
+   il nome, come nella home */
+.retro-indirizzi li {
+  position: relative;
+  margin-bottom: 3mm;
+  padding-left: 6.5mm;
   line-height: 1.3;
 }
 
-.retro-contatti li {
-  display: flex;
-  align-items: center;
-  gap: 2.2mm;
+.retro-indirizzi li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1.5mm;
+  width: 4.5mm;
+  height: 0.5mm;
+  background: var(--tono);
 }
-.retro-contatti li + li { margin-top: 1.6mm; }
 
-.retro-icona {
+.retro-tipo {
   display: block;
-  flex: none;
-  width: 4.2mm;
-  height: 4.2mm;
+  font-size: 7.5pt;
+  color: var(--grigio);
+}
+
+.retro-nome {
+  display: block;
+  font-size: 8.5pt;
+  color: var(--blu-notte);
+}
+
+.retro-saluto {
+  margin-top: 5mm;
+  font-size: 8.5pt;
+}
+
+/* La firma di Giulio Natta, larga 37 mm, in blu notte: l'immagine fa
+   da stampo (mask) e il colore la riempie, qualunque sia il colore del
+   file */
+.retro-firma {
+  display: block;
+  width: 37mm;
+  aspect-ratio: 2000 / 534;
+  margin-top: 1.5mm;
+  background: var(--blu-notte);
+  -webkit-mask: var(--firma) left center / contain no-repeat;
+          mask: var(--firma) left center / contain no-repeat;
+}
+
+.retro-filetto {
+  position: absolute;
+  top: 12mm;
+  left: 78mm;
+  width: 0.25mm;
+  height: 76mm;
+  background: var(--filetto);
+}
+
+/* Le onde di annullo, a sinistra del timbro */
+.retro-onde {
+  position: absolute;
+  top: 15.5mm;
+  left: 85mm;
+  width: 16.5mm;
+  height: 7mm;
+  overflow: visible;
+}
+.onda {
+  fill: none;
+  stroke: var(--tono);
+  stroke-width: 3.5;   /* 0,35 mm */
+  stroke-linecap: round;
+}
+
+/* Il timbro rotondo blu inchiostro, leggermente ruotato: lo disegna
+   js/grafica.js, come nel piede del sito */
+.retro-timbro {
+  position: absolute;
+  top: 9.5mm;
+  left: 105mm;
+  width: 19mm;
+  height: 19mm;
+  color: var(--inchiostro);
+  transform: rotate(-12deg);
+}
+.retro-timbro svg { display: block; width: 100%; height: 100%; }
+.timbro-bordo { fill: none; stroke: currentColor; stroke-width: 1.5; }
+.timbro-scritta { font-family: var(--carattere); font-size: 12px; fill: currentColor; }
+.timbro-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46%;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: currentColor;
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+/* Il francobollo verde, 17,7 x 21 mm, in alto a destra, dentro la zona
+   di sicurezza. Il logo è il file piccolo (231 x 155 pixel), largo
+   11 mm, colorato di bianco: per la stampa servirà l'originale. */
+.retro-francobollo {
+  position: absolute;
+  top: 8.5mm;
+  left: 129.5mm;
+  width: 17.7mm;
+  height: 21mm;
+}
+.retro-francobollo svg { display: block; width: 100%; height: 100%; }
+.francobollo-fondo { fill: var(--verde); }
+.francobollo-dente { fill: var(--bianco); }
+.francobollo-cornice {
+  fill: none;
+  stroke: var(--bianco);
+  stroke-width: 2.5;
+  stroke-dasharray: 5 4;
+}
+.francobollo-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 11mm;
+  aspect-ratio: 231 / 155;
+  transform: translate(-50%, -50%);
+  background: var(--bianco);
+  -webkit-mask: url("immagini/logo-natta.png") center / contain no-repeat;
+          mask: url("immagini/logo-natta.png") center / contain no-repeat;
+}
+
+/* Il destinatario: l'etichetta grigia maiuscola, poi tre righe con il
+   filetto sotto; l'ultima resta vuota per il nome */
+.retro-destinatario {
+  position: absolute;
+  top: 55mm;
+  left: 85.5mm;
+  width: 61.5mm;
+}
+
+.retro-etichetta {
+  margin-bottom: 2mm;
+  font-size: 7pt;
+  letter-spacing: 0.25em;
+  color: var(--grigio);
+}
+
+.retro-riga {
+  height: 6.5mm;
+  padding-top: 1.6mm;
+  font-size: 8.5pt;
+  border-bottom: 0.25mm solid var(--filetto);
+}
+
+/* Il sottopancia: filetto orizzontale e, sotto, i contatti su una riga */
+.retro-sottopancia {
+  position: absolute;
+  top: 92mm;
+  left: 9mm;
+  right: 9mm;
+  padding-top: 1.8mm;
+  font-size: 7pt;
+  white-space: nowrap;
+  text-align: center;
+  color: var(--grigio);
+  border-top: 0.25mm solid var(--filetto);
 }
 
 
 /* ---------------------------------------------------------------
-   IL FOGLIO A4 PER LA STAMPA A SCUOLA
-
-   Due cartoline affiancate, con le abbondanze che si toccano: fra i
-   due tagli restano 6 mm di fondo, da buttare. Il gruppo è al centro
-   del foglio, così fronte e retro combaciano anche quando la
+   LA VERSIONE A4 PER LA SCUOLA
+   Due cartoline una sopra l'altra, con le abbondanze che si toccano:
+   fra i due tagli restano 6 mm di fondo, da buttare. Il gruppo è al
+   centro del foglio, così fronte e retro combaciano anche quando la
    stampante gira il foglio. I segni di taglio stanno fuori dal fondo,
    agli angoli.
    --------------------------------------------------------------- */
 
 .coppia {
   position: absolute;
-  top: 27mm;       /* (210 - 156) / 2 */
-  left: 42.5mm;    /* (297 - 212) / 2 */
-  display: flex;
-  width: 212mm;
-  height: 156mm;
+  top: 42.5mm;     /* (297 - 212) / 2 */
+  left: 27mm;      /* (210 - 156) / 2 */
+  width: 156mm;
+  height: 212mm;
 }
 
 .segno-taglio {

@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- La cartolina di presentazione della scuola, fronte e retro,
-       10 x 15 cm verticale. Non è una pagina del sito da leggere: si
-       apre per salvarla in PDF con la funzione Stampa del browser.
+  <!-- La cartolina "Vieni a trovarci", fronte e retro, 15 x 10 cm
+       orizzontale. Non è una pagina del sito da leggere: si apre per
+       salvarla in PDF con la funzione Stampa del browser.
        Nessuna pagina del sito la collega.
        I testi arrivano dai file della cartella contenuti/: home.txt,
        comuni.txt e cartolina.txt. -->
   <title>Cartolina | IIS Giulio Natta, Rivoli</title>
-  <meta name="description" content="Cartolina di presentazione dell'IIS Giulio Natta di Rivoli, da stampare.">
+  <meta name="description" content="Cartolina &quot;Vieni a trovarci&quot; dell'IIS Giulio Natta di Rivoli, da stampare.">
 
   <!-- BOZZA: chiede ai motori di ricerca di non mostrare questa pagina
        e di non seguirne i link. -->
@@ -19,19 +19,19 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO. -->
-  <link rel="stylesheet" href="cartolina.css?v=1">
+  <link rel="stylesheet" href="cartolina.css?v=2">
   <link rel="icon" href="immagini/logo-natta.png">
 
   <!-- La misura del foglio di stampa: la scrive js/cartolina.js, perché
        cambia fra la versione per la tipografia e quella per la scuola. -->
-  <style id="misura-foglio">@page { size: 106mm 156mm; margin: 0; }</style>
+  <style id="misura-foglio">@page { size: 156mm 106mm; margin: 0; }</style>
 </head>
 <body class="modo-tipografia">
 
   <!-- I comandi e le istruzioni: si vedono solo sullo schermo, non
        finiscono mai sulla carta. -->
   <div class="comandi">
-    <h1>Cartolina di presentazione</h1>
+    <h1>Cartolina "Vieni a trovarci"</h1>
     <div class="pulsanti">
       <button type="button" class="pulsante" data-modo="tipografia">Stampa per la tipografia</button>
       <button type="button" class="pulsante" data-modo="a4">Stampa a scuola (A4)</button>
@@ -44,13 +44,13 @@
       sfondo</strong> attiva.</p>
     <ul class="spiegazioni">
       <li><strong>Tipografia</strong>: un PDF di due pagine, fronte e retro,
-        ognuna di 106 × 156 mm: la cartolina è 100 × 150 mm, più 3 mm di
-        fondo che esce oltre il taglio su ogni lato.</li>
-      <li><strong>A scuola</strong>: due cartoline per foglio A4 orizzontale.
-        Pagina 1 i fronti, pagina 2 i retri: si stampa fronte-retro,
-        <strong>capovolgendo sul lato corto</strong>. Prima di stamparne
-        tante, si fa un foglio di prova e si controlla che il retro non
-        esca capovolto. Si taglia sui segni agli angoli.</li>
+        ognuna di 156 × 106 mm: la cartolina è 150 × 100 mm, più 3 mm che
+        escono oltre il taglio su ogni lato.</li>
+      <li><strong>A scuola</strong>: due cartoline per foglio A4 verticale, una
+        sopra l'altra. Pagina 1 i fronti, pagina 2 i retri: si stampa
+        fronte-retro, <strong>capovolgendo sul lato lungo</strong>. Prima di
+        stamparne tante, si fa un foglio di prova e si controlla che il retro
+        non esca capovolto. Si taglia sui segni agli angoli.</li>
       <li>Sullo schermo la <span class="legenda-taglio">linea fucsia
         tratteggiata</span> è il taglio, la <span class="legenda-sicurezza">linea
         azzurra punteggiata</span> è il limite dei testi (5 mm dal taglio).
@@ -66,7 +66,8 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=2"></script>
+  <script src="js/grafica.js?v=5"></script>
   <script src="js/qr.js?v=1"></script>
-  <script src="js/cartolina.js?v=1"></script>
+  <script src="js/cartolina.js?v=2"></script>
 </body>
 </html>

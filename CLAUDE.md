@@ -254,13 +254,13 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
       stanno centrate sotto il titolo. Sotto i 66rem, e per i testi più
       corti, una colonna sola larga al massimo 46rem, allineata a
       sinistra. Il testo in `liceo.txt` resta intero;
-    - il testo dei tre blocchi delle pagine dei percorsi, nelle righe
-      con il titolo a sinistra; nelle voci degli elenchi il trattino
-      grigio resta fuori, a sinistra.
   - Colonne strette, sillabazione più frequente (`hyphenate-limit-chars:
     6 3 3`) per non lasciare buchi fra le parole: le frasi "In questo
     indirizzo imparerai…" degli indirizzi nella home e le spiegazioni
-    brevi dei tre percorsi in `liceo.html`.
+    brevi dei tre percorsi in `liceo.html`; e il testo dei tre blocchi
+    delle pagine dei percorsi, nelle righe con il titolo a sinistra (con
+    10 4 4 restavano righe con spazi molto larghi); nelle voci degli
+    elenchi il trattino grigio resta fuori, a sinistra.
   - Le parole con il trattino ("post-diploma") non si spezzano mai, né
     dopo il trattino né con la sillabazione: `js/grafica.js`
     (`Grafica.paroleIntere`) le chiude in un pezzo intero, senza
@@ -382,8 +382,9 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      aggiuntive di Matematico e Digitale.
      Il sito del Liceo Digitale non compare né nella home né nelle
      pagine del liceo; il suo indirizzo resta in `comuni.txt`.
-     La scheda del liceo nella home resta "in preparazione" finché
-     Alessandra non dà il via libera.
+     La scheda del liceo nella home è "pronta" dal 27 ottobre 2026 (via
+     libera di Alessandra con la pubblicazione della grafica a
+     cartolina).
   4. **Corsi serali per adulti 2026/27**: Meccanica e meccatronica;
      Grafica e comunicazione.
 - Materie plastiche: **non si presenta** (decisione in corso).
@@ -428,64 +429,81 @@ hanno `NON-PUBBLICARE` nel nome: `.gitignore` li tiene fuori dal sito.
 - Mettere alla prova le sue idee, segnalare incertezze e dati da
   verificare, niente complimenti di maniera.
 
-## 12. La cartolina di presentazione
+## 12. La cartolina "Vieni a trovarci"
 
-Decisa con Alessandra il 16 ottobre 2026. File: `cartolina.html`,
-`cartolina.css`, `js/cartolina.js`, `js/qr.js` (copiato dal Liceo
-Digitale) e `contenuti/cartolina.txt`.
+Decisa con Alessandra il 26 ottobre 2026, fatta il 27 (sostituisce la
+cartolina del 16 ottobre, che resta nell'etichetta Git
+`grafica-ottobre`). File: `cartolina.html`, `cartolina.css`,
+`js/cartolina.js`, `js/qr.js` (copiato dal Liceo Digitale),
+`js/grafica.js` (il timbro), `contenuti/cartolina.txt`,
+`immagini/firma-natta.png`. Il modello, in PDF, è
+`materiali-grezzi/cartolina-modello-NON-PUBBLICARE.pdf`: resta solo sul
+computer di Alessandra.
 
-- Cartolina fronte e retro, 10 × 15 cm verticale, da salvare in PDF con
-  la funzione Stampa di Edge o Chrome. Nessuna pagina del sito la
-  collega; ha il `noindex` come le altre.
+- Cartolina fronte e retro, 15 × 10 cm orizzontale, fondo bianco, da
+  salvare in PDF con la funzione Stampa di Edge o Chrome. Nessuna
+  pagina del sito la collega; ha il `noindex` come le altre.
 - I testi si leggono dai file di contenuto, mai scritti nel codice:
-  claim generale e schede da `home.txt`; nome, `città`, contatti e
-  `sito-orientamento` da `comuni.txt`; la riga sotto il QR da
-  `cartolina.txt`.
-- **Fronte**, fondo verde `#026C37`: in alto il logo su un riquadro
-  bianco con gli angoli tondi (sul verde il logo verde si vedeva male;
-  la fascia verde scuro è stata provata e tolta), accanto nome della
-  scuola e città in bianco; sotto le tre schede degli indirizzi una
-  sotto l'altra, alte uguali. Parte alta, bassa, nel colore
-  dell'indirizzo con il simbolo (10 mm) a sinistra e accanto tipo di
-  scuola (bianco, maiuscolo piccolo) e nome (Arial Black maiuscolo
-  bianco), senza filetto giallo (tolto su richiesta di Alessandra);
-  parte bianca con il claim in verde, centrato, a 9,5 punti perché
-  stia su una riga, e sotto, in blu notte a 8,5 punti, la frase "In questo
-  indirizzo imparerai…" (colonna `frase` di `home.txt`, aggiunta su
-  richiesta di Alessandra); bordo nel colore dell'indirizzo. Niente
-  retino.
-- **Retro**, a fasce come il sito (verde, chiaro, verde). In alto una
-  fascia verde da bordo a bordo con il claim generale in giallo, Arial
-  Black maiuscolo, a capo dopo la prima virgola ("Un'unica scuola," /
-  "tanti modi di imparare."). Poi, su fondo chiaro `#F3F7EC`: i tre
-  simboli degli indirizzi in fila, ognuno in un quadratino del colore
-  dell'indirizzo con bordo sottile blu notte; il QR verso
-  `sito-orientamento` (nero su riquadro bianco largo 45 mm, il codice
-  di circa 3,3 cm, mai sotto 2,5); sotto il QR "Vieni a trovarci!" e,
-  a capo, l'invito a inquadrare il QR (righe `sotto-qr` di
-  `cartolina.txt`); indirizzo scritto
-  per esteso del sito della scuola (campo `sito`, www.itisgiulionatta.it,
-  scelta di Alessandra: il QR porta all'orientamento, la scritta al
-  sito del Natta); fascia verde con telefono, email dell'orientamento e
-  indirizzo.
-- **Non ci vanno**: date
-  degli open day, anno scolastico (la cartolina non deve scadere), i
-  percorsi del liceo (avranno una cartolina a parte), una sezione sui
-  serali.
-- **Stampa**: misure in millimetri, caratteri in punti. Abbondanza di
-  3 mm oltre il taglio (facciata 106 × 156 mm), testi ad almeno 5 mm
-  dal taglio, Arial, nessun testo sotto gli 8 punti.
-  - Versione tipografia: PDF di due pagine da 106 × 156 mm.
-  - Versione scuola (`cartolina.html?foglio=a4`): A4 orizzontale, due
-    cartoline uguali affiancate al centro del foglio, segni di taglio
-    agli angoli; pagina 1 i fronti, pagina 2 i retri, fronte-retro
-    capovolgendo sul lato corto.
-- Il logo è un PNG di 231 pixel: sulla cartolina è largo 18 mm (circa
-  325 punti per pollice) e non va ingrandito.
+  tipo e nome dei tre indirizzi da `home.txt` (nello stesso ordine
+  della home) e l'occhiello per il timbro; nome, `città`, indirizzo,
+  telefono, email dell'orientamento e `sito-orientamento` da
+  `comuni.txt`; invito, saluto e destinatario da `cartolina.txt`.
+- Un solo carattere, Cutive Mono (`fonts/cutive-mono-regular.ttf`).
+  Misure in millimetri e caratteri in punti; i colori sono quelli del
+  sito, scritti anche in `cartolina.css`.
+- **Fronte**: il disegno della scuola con le tre linee nei colori degli
+  indirizzi (`immagini/linee-scuola.svg`), largo quanto la facciata, con
+  le linee di 0,4 mm che entrano ed escono dai bordi, abbondanza
+  compresa. Al posto della vetrata, sotto il tetto curvo fra le due
+  torri, il codice QR largo 25 mm (margine bianco compreso), blu notte
+  `#00193C` su riquadro bianco, a circa 5 mm dalle linee; porta a
+  `sito-orientamento`. Sotto, centrato, "IIS GIULIO NATTA · RIVOLI" in
+  maiuscolo spaziato, 9 pt.
+- **Retro**, come una cartolina postale, diviso a metà da un filetto
+  verticale grigio `#C9C9C4`:
+  - a sinistra "Vieni a trovarci." in verde (18 pt, perché stia su una
+    riga); i tre indirizzi, ognuno con il trattino corto del suo colore,
+    il tipo in grigio `#5B6B80` (7,5 pt) e sotto il nome in blu notte
+    (8,5 pt), come nella home (il modello aveva prima il nome); poi "Ti
+    aspettiamo," e la firma di Giulio Natta in blu notte, larga 37 mm;
+  - a destra, in alto, le onde di annullo nei tre colori, il timbro
+    rotondo blu inchiostro `#1F3A6B` leggermente ruotato (lo stesso del
+    piede del sito, con il logo e "IIS GIULIO NATTA · ORIENTAMENTO") e
+    il francobollo verde (17,7 × 21 mm, bordo dentellato, cornice
+    tratteggiata bianca, logo bianco); sotto "DESTINATARIO" in grigio
+    maiuscolo, "Al futuro studente" e "o alla futura studentessa" su due
+    righe con il filetto sotto e una terza riga vuota per il nome;
+  - in basso, a tutta larghezza, il sottopancia dopo un filetto:
+    indirizzo, telefono ed email dell'orientamento, 7 pt, grigio, su una
+    riga.
+- **Firma di Giulio Natta**: `immagini/firma-natta.png`, sfondo
+  trasparente, colorata di blu notte dal CSS. È pubblicata con la
+  cartolina per decisione di Alessandra; restano da verificare la
+  licenza del file originale su Wikimedia Commons e il parere della
+  dirigente. Il repository pubblico conserva la cronologia: una volta
+  pubblicata resta consultabile anche se poi la si toglie.
+- **Logo**: il PNG piccolo (231 × 155 pixel), colorato con il CSS
+  (bianco nel francobollo, blu inchiostro nel timbro), largo al massimo
+  11 mm. Prima di stampare servirà il file originale.
+- **Non ci vanno**, per scelta di Alessandra: mittente, claim generale,
+  invito scritto a inquadrare il QR, date degli open day, anno
+  scolastico (la cartolina non deve scadere).
+- **Stampa**: abbondanza di 3 mm oltre il taglio (facciata 156 × 106
+  mm), testi ad almeno 5 mm dal taglio. Qui i caratteri scendono sotto
+  gli 8 punti per scelta (7 e 7,5 pt): da verificare su una prova di
+  stampa.
+  - Versione tipografia: PDF di due pagine da 156 × 106 mm.
+  - Versione scuola (`cartolina.html?foglio=a4`): A4 verticale, due
+    cartoline uguali una sopra l'altra al centro del foglio, segni di
+    taglio agli angoli; pagina 1 i fronti, pagina 2 i retri,
+    fronte-retro capovolgendo sul lato lungo.
 - Se cambia l'indirizzo del sito, prima di stampare si controlla che il
-  QR porti a quello nuovo.
+  QR porti a quello nuovo. Per ora il QR porta alla home del sito di
+  orientamento; da decidere prima della stampa se portare direttamente
+  agli open day.
 - Ancora aperti: tipografia o stampa a scuola e numero di copie,
-  dominio del sito, logo in un file per la stampa.
+  timbro ufficiale (da proporre alla dirigente), file originale del
+  logo, leggibilità dei contatti in Cutive Mono su una prova di stampa.
 
 ## 13. La grafica "a cartolina" (home e pagine del liceo)
 
