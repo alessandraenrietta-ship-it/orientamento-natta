@@ -580,8 +580,6 @@ computer di Alessandra.
 - Ancora aperti: tipografia o stampa a scuola e numero di copie,
   timbro ufficiale (da proporre alla dirigente), file originale del
   logo, leggibilità dei contatti in Space Mono su una prova di stampa.
-  Il PDF `materiali/cartolina-natta.pdf` è ancora in Cutive Mono: va
-  salvato di nuovo da `cartolina.html?foglio=docenti`.
 
 ## 13. La grafica "a cartolina" (home, pagine del liceo, docenti orientatori)
 
