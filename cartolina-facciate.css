@@ -16,7 +16,8 @@
      linea: senza, resterebbe un filo bianco sul bordo.
    - I testi stanno ad almeno 5 mm dal taglio, cioè a 8 mm dal bordo
      della facciata: la ZONA DI SICUREZZA.
-   - Un solo carattere, Cutive Mono, come nel sito.
+   - Un solo carattere, Space Mono, contatti compresi (deciso il 2
+     novembre 2026; prima Cutive Mono).
 
    Tutte le regole valgono solo dentro la cartolina (cominciano con
    .facciata): colori e misure della cartolina non toccano il sito.
@@ -25,8 +26,8 @@
    ================================================================== */
 
 @font-face {
-  font-family: "Cutive Mono";
-  src: url("fonts/cutive-mono-regular.ttf?v=1") format("truetype");
+  font-family: "Space Mono";
+  src: url("fonts/space-mono-latin-400-normal.woff2?v=1") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
@@ -48,7 +49,7 @@
   --meccanica:     #B45309;
   --grafica:       #A3288C;
   --liceo:         #1F5FA8;
-  --carattere:     "Cutive Mono", "Courier New", monospace;
+  --carattere:     "Space Mono", "Courier New", monospace;
   --abbondanza: 3mm;
   --sicurezza:  8mm;   /* 3 mm di abbondanza + 5 mm dal taglio */
 
@@ -60,8 +61,7 @@
   font-size: 12pt;
   font-weight: normal;
   font-synthesis: none;
-  /* Niente legature: "fi" resta di due lettere, come vuole il Cutive
-     Mono, che ha tutte le lettere larghe uguali */
+  /* Niente legature: "fi" resta di due lettere */
   font-variant-ligatures: none;
   line-height: normal;
   letter-spacing: normal;
