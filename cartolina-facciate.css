@@ -140,7 +140,7 @@
 
 .facciata .retro-invito {
   margin-bottom: 6mm;
-  font-size: 18pt;   /* circa 19: a 18 sta su una riga nei 66 mm della colonna */
+  font-size: 17pt;   /* in Space Mono a 17 sta su una riga nei 66 mm della colonna (a 18 andava a capo) */
   line-height: 1.1;
   color: var(--verde);
 }

@@ -511,7 +511,7 @@ computer di Alessandra.
   maiuscolo spaziato, 9 pt.
 - **Retro**, come una cartolina postale, diviso a metà da un filetto
   verticale grigio `#C9C9C4`:
-  - a sinistra "Vieni a trovarci." in verde (18 pt, perché stia su una
+  - a sinistra "Vieni a trovarci." in verde (17 pt, perché stia su una
     riga); i tre indirizzi, ognuno con il trattino corto del suo colore,
     il tipo in grigio `#5B6B80` (7,5 pt) e sotto il nome (8,5 pt) nel
     colore del suo indirizzo, come nella home ("opzione" in blu notte;

@@ -138,3 +138,4 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Tolto il contorno di 0,3 px del testo, che serviva solo a ispessire il Cutive Mono (scelta di Alessandra).
 - Questa scelta sostituisce ogni indicazione precedente sul Cutive Mono. Le misure (testo 17 px, claim e nomi 19 px, titolo 24 px sul telefono, foglietti di circa 58 px, ecc.) erano tarate sul Cutive Mono e vanno ricontrollate.
 - Il PDF per i docenti (materiali/cartolina-natta.pdf) è ancora in Cutive Mono: va salvato di nuovo.
+- Prime correzioni dopo il cambio (2 novembre 2026, scelte di Alessandra): sulla cartolina "Vieni a trovarci." passa da 18 a 17 pt, perché in Space Mono a 18 andava a capo; il testo corrente resta a 17 px (a 18 si leggeva meglio, ma al computer le colonne strette giustificate lasciavano buchi fra le parole); nella home sul telefono "Meccanica e meccatronica" dei serali resta su due righe.
