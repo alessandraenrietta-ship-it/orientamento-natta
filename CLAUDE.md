@@ -78,23 +78,49 @@ adulti interessati ai corsi serali.
 - Testo alternativo per le immagini, `alt=""` per quelle solo decorative.
 - **Nessun testo dentro le immagini.**
 - Tutto usabile da tastiera, con l'elemento attivo ben visibile.
-- **Un solo carattere in tutto il sito: Cutive Mono** (licenza SIL OFL,
-  testo in `fonts/OFL.txt`). Il file è `fonts/cutive-mono-regular.ttf`,
-  caricato con `@font-face` in `grafica.css`: nessun collegamento a
-  Google Fonts. Ha un solo spessore, senza grassetto: titoli e nomi si
-  distinguono per grandezza, colore e maiuscolo, e `font-synthesis:
-  none` impedisce il grassetto finto. Niente legature
-  (`font-variant-ligatures: none` in `grafica.css`,
-  `cartolina-facciate.css` e `cartolina.css`): "fi" resta di due
-  lettere, come vuole la griglia del Cutive Mono. Nel sito il testo ha
-  un contorno di 0,3 px nel suo colore (`-webkit-text-stroke` in
-  `grafica.css`), che lo rende un po' più pieno: non sul timbro e non
-  sulla cartolina (dal 27 ottobre 2026 sera). Testi ad almeno 16 px (di base
-  17; claim degli indirizzi 19), interlinea 1,6. Non è più Arial: lo
-  usano la home e le pagine del liceo (punto 13); solo la vecchia
-  cartolina resta in Arial. Eccezioni volute sotto i 16 px: i turni
-  degli open day e la tabella del quadro orario sul telefono (14), le
-  intestazioni della tabella (12-13), la scritta del timbro.
+- **Tre caratteri, un solo peso (normale)**, decisi il 2 novembre 2026
+  al posto del Cutive Mono (decisioni in `docs/decisioni-grafica.md`).
+  Licenza SIL OFL, un testo per carattere in `fonts/`
+  (`space-mono-licenza-ofl.txt`, `ibm-plex-mono-licenza-ofl.txt`,
+  `ibm-plex-sans-licenza-ofl.txt`). I file sono
+  `fonts/space-mono-latin-400-normal.woff2`,
+  `fonts/ibm-plex-mono-latin-400-normal.woff2` e
+  `fonts/ibm-plex-sans-latin-400-normal.woff2`, caricati con
+  `@font-face` in `grafica.css` (e Space Mono anche in
+  `cartolina-facciate.css`): nessun collegamento a Google Fonts.
+  - **Space Mono**: testata, occhielli, titoli, nomi di indirizzi e
+    percorsi, tipo di scuola, claim, pulsanti, azioni dei contatti
+    ("Chiama", "Scrivi all'orientamento", "Come arrivare"),
+    intestazioni delle tabelle, righe "In più nel …", mese dei
+    foglietti, titolo che si gira, tutte le scritte in maiuscolo.
+  - **IBM Plex Mono**: le cifre dentro gli elementi in Space Mono (per
+    esempio "2026/27" nell'occhiello e gli anni 1°-5° nell'intestazione
+    del quadro orario) e il numero del giorno nei foglietti degli open
+    day. Le cifre si separano da sole: in `grafica.css` il carattere
+    "Titoli Natta" prende le lettere da Space Mono e le cifre (0-9) da
+    IBM Plex Mono (`unicode-range`). I file di `contenuti/` non
+    cambiano.
+  - **IBM Plex Sans**: tutto il resto, cioè testi correnti, elenchi,
+    giorno della settimana e turni degli open day, materie e numeri dei
+    quadri orari e di "Le ore a confronto" (totali e "+2" compresi),
+    dati dei contatti, piede, scritte grigie secondarie, "Pagina in
+    preparazione".
+  - **Cartolina** (`cartolina.html` e la cartolina di
+    `orientatori.html`): un solo carattere, Space Mono, contatti
+    compresi. Anche il timbro del piede è in Space Mono.
+  - Dove va ogni carattere sta in fondo a `grafica.css` ("I CARATTERI:
+    DOVE"). Niente grassetto: titoli e nomi si distinguono per
+    grandezza, colore, maiuscolo e carattere, e `font-synthesis: none`
+    impedisce il grassetto finto. Niente legature
+    (`font-variant-ligatures: none` in `grafica.css`,
+    `cartolina-facciate.css` e `cartolina.css`): "fi" resta di due
+    lettere. Il contorno di 0,3 px che ispessiva il Cutive Mono è stato
+    tolto.
+  Testi ad almeno 16 px (di base 17; claim degli indirizzi 19),
+  interlinea 1,6. Le misure erano tarate sul Cutive Mono e vanno
+  ricontrollate. Eccezioni volute sotto i 16 px: i turni degli open day
+  e la tabella del quadro orario sul telefono (14), le intestazioni
+  della tabella (12-13), la scritta del timbro.
 
 ## 6. Grafica
 
@@ -471,7 +497,8 @@ computer di Alessandra.
   della home) e l'occhiello per il timbro; nome, `città`, indirizzo,
   telefono, email dell'orientamento e `sito-orientamento` da
   `comuni.txt`; invito, saluto e destinatario da `cartolina.txt`.
-- Un solo carattere, Cutive Mono (`fonts/cutive-mono-regular.ttf`).
+- Un solo carattere, Space Mono (`fonts/space-mono-latin-400-normal.woff2`),
+  contatti e cifre compresi (dal 2 novembre 2026; prima Cutive Mono).
   Misure in millimetri e caratteri in punti; i colori sono quelli del
   sito, scritti anche in `cartolina.css`.
 - **Fronte**: il disegno della scuola con le tre linee nei colori degli
@@ -484,7 +511,7 @@ computer di Alessandra.
   maiuscolo spaziato, 9 pt.
 - **Retro**, come una cartolina postale, diviso a metà da un filetto
   verticale grigio `#C9C9C4`:
-  - a sinistra "Vieni a trovarci." in verde (18 pt, perché stia su una
+  - a sinistra "Vieni a trovarci." in verde (17 pt, perché stia su una
     riga); i tre indirizzi, ognuno con il trattino corto del suo colore,
     il tipo in grigio `#5B6B80` (7,5 pt) e sotto il nome (8,5 pt) nel
     colore del suo indirizzo, come nella home ("opzione" in blu notte;
@@ -552,7 +579,7 @@ computer di Alessandra.
   agli open day.
 - Ancora aperti: tipografia o stampa a scuola e numero di copie,
   timbro ufficiale (da proporre alla dirigente), file originale del
-  logo, leggibilità dei contatti in Cutive Mono su una prova di stampa.
+  logo, leggibilità dei contatti in Space Mono su una prova di stampa.
 
 ## 13. La grafica "a cartolina" (home, pagine del liceo, docenti orientatori)
 
@@ -745,7 +772,7 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   scritta lungo il cerchio a 11 px sul telefono; è decorativo
   (`aria-hidden`), le parole vengono da `comuni.txt` e `home.txt`.
 - **Pulsanti**: rettangolo ad angoli vivi, freccia "›" disegnata con
-  il CSS (il "›" del Cutive Mono è uguale a ">"; scelta di Alessandra),
+  il CSS (scelta di Alessandra, quando il "›" del Cutive Mono era uguale a ">"),
   nascosta al lettore di schermo; pieni verdi con testo bianco, oppure bianchi con
   bordo e testo verdi; altezza minima 44 px.
 - **Focus da tastiera**: contorno blu notte di 3 px.

@@ -128,3 +128,14 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Il titolo della home resta senza segno e non si gira da tastiera, per scelta di Alessandra.
 - Restano come sono: il piede di orientatori.html con il solo timbro, la riga per i docenti nel piede (su quattro righe sul telefono) e il contorno di 0,3 px del testo.
 - Retro della cartolina: i nomi dei tre indirizzi nel colore del loro indirizzo, come nella home ("opzione" resta in blu notte); il destinatario diventa "Al futuro studente," / "alla futura studentessa" (prima "o alla futura studentessa"). Scelte di Alessandra; i colori dei nomi, piccoli (8,5 pt), vanno guardati sulla prova di stampa.
+
+## Caratteri (decisi il 2 novembre 2026)
+- Tre caratteri, tutti a peso normale, licenza SIL Open Font License, salvati nella cartella fonts/ con i testi delle licenze.
+- Space Mono: testata, occhielli, titoli, nomi di indirizzi e percorsi, tipo di scuola, claim, pulsanti, azioni dei contatti ("Chiama", "Scrivi all'orientamento", "Come arrivare"), intestazioni delle tabelle, righe "In più nel …", mese dei foglietti, titolo che si gira, tutte le scritte in maiuscolo.
+- IBM Plex Mono: le cifre che compaiono dentro elementi in Space Mono (per esempio "2026/27" nell'occhiello e gli anni 1°-5° nell'intestazione del quadro orario) e il numero del giorno nei foglietti degli open day. Le cifre si separano in automatico nel codice: i file della cartella contenuti/ non cambiano, così i colleghi continuano a scrivere normalmente.
+- IBM Plex Sans: tutto il resto, cioè testi correnti, elenchi, giorno della settimana e turni degli open day, materie e numeri dei quadri orari e di "Le ore a confronto" (totali e "+2" compresi), dati dei contatti, piede, scritte grigie secondarie, "Pagina in preparazione".
+- Cartolina (cartolina.html e la cartolina di orientatori.html): un solo carattere, Space Mono, contatti compresi. Anche il timbro del piede in Space Mono.
+- Tolto il contorno di 0,3 px del testo, che serviva solo a ispessire il Cutive Mono (scelta di Alessandra).
+- Questa scelta sostituisce ogni indicazione precedente sul Cutive Mono. Le misure (testo 17 px, claim e nomi 19 px, titolo 24 px sul telefono, foglietti di circa 58 px, ecc.) erano tarate sul Cutive Mono e vanno ricontrollate.
+- Il PDF per i docenti (materiali/cartolina-natta.pdf) è stato salvato di nuovo il 2 novembre 2026, in Space Mono, con "Vieni a trovarci." a 17 pt. Resta "Versione non definitiva".
+- Prime correzioni dopo il cambio (2 novembre 2026, scelte di Alessandra): sulla cartolina "Vieni a trovarci." passa da 18 a 17 pt, perché in Space Mono a 18 andava a capo; il testo corrente resta a 17 px (a 18 si leggeva meglio, ma al computer le colonne strette giustificate lasciavano buchi fra le parole); nella home sul telefono "Meccanica e meccatronica" dei serali resta su due righe.
