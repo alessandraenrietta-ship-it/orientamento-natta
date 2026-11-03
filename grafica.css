@@ -527,11 +527,16 @@ button.pulsante {
   gap: 1.5rem;
 }
 
-/* Il foglietto in alto, alla stessa altezza del giorno della settimana */
+/* Due colonne: a sinistra il foglietto, a destra il giorno della
+   settimana e sotto i due turni. Il foglietto sta a metà altezza dei
+   due turni (scelta di Alessandra, 3 novembre 2026). I testi
+   (.data-testi) non fanno da scatola: giorno e turni stanno
+   direttamente nelle righe della griglia. */
 .data {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 0.4rem 1rem;          /* 0,4rem fra il giorno e i turni */
+  align-items: start;
 }
 
 /* Il foglietto: contorno sottile blu notte, angoli vivi; dentro il
@@ -539,7 +544,9 @@ button.pulsante {
    anellini, niente striscia piena. Solo un disegno: la data per intero
    è scritta per il lettore di schermo accanto al giorno. */
 .foglietto {
-  flex: none;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: center;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -562,13 +569,20 @@ button.pulsante {
   color: var(--verde);
 }
 
-/* I testi occupano tutto lo spazio accanto al foglietto: i turni sono
+/* Giorno della settimana e turni nella colonna a destra: i turni sono
    larghi quanto la colonna */
-.data-testi { flex: 1 1 auto; min-width: 0; }
+.data-testi { display: contents; }
 
 .data-settimana {
+  grid-column: 2;
+  grid-row: 1;
   margin: 0;
   font-size: 1.125rem;
+}
+
+.data-turni {
+  grid-column: 2;
+  grid-row: 2;
 }
 
 /* I due turni uno sotto l'altro, ognuno su una riga sua (14 pixel
@@ -576,7 +590,7 @@ button.pulsante {
 .data-turni {
   display: grid;
   gap: 0.5rem;
-  margin: 0.4rem 0 0;
+  margin: 0;
   font-size: 0.875rem;
 }
 
@@ -590,7 +604,7 @@ button.pulsante {
   gap: 0.6em;
   width: 100%;
   min-height: 2.75rem;      /* 44 pixel */
-  padding: 0.45em 0.9em;
+  padding: 0.45em 1.5em 0.45em 0.9em;   /* a destra più spazio dopo "Prenota ›" (scelta di Alessandra) */
   border: 2px solid var(--verde);
 }
 
