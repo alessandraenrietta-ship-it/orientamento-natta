@@ -72,9 +72,10 @@ nessuna-data: Le date dei prossimi open day saranno pubblicate qui.
 # Quando un turno è al completo, si scrive "esaurito" dopo l'orario,
 # per esempio: 10.00-11.00 esaurito
 # Sulla pagina il turno non si può più cliccare e, al posto di
-# "Prenota ›", compare in rosso la scritta del campo "esaurito". Il
-# sito non legge da solo le prenotazioni del modulo: quando un turno è
-# pieno, lo si scrive qui a mano.
+# "Prenota ›", compare in rosso la scritta del campo "esaurito". Un
+# controllo automatico lo scrive anche da solo, poche ore dopo che il
+# turno è stato tolto dal modulo (vedi CLAUDE.md). Si può sempre
+# scriverlo a mano.
 sabato | 21 novembre | 10.00-11.00 esaurito | 11.00-12.00 esaurito
 venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30 | Venerdì 27 novembre ore 17:30 | Venerdì 27 novembre ore 18:30
 sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00 | Sabato 12 dicembre ore 10 | Sabato 12 dicembre ore 11

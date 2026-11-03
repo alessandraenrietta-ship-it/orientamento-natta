@@ -457,6 +457,18 @@ hanno `NON-PUBBLICARE` nel nome: `.gitignore` li tiene fuori dal sito.
 - I messaggi di commit dicono **che cosa è cambiato**, non come.
 - Se Git chiede di accedere a GitHub si spiega che cosa fare. **Mai
   chiedere password o token in chat.**
+- **Controllo automatico dei turni esauriti** (dal 3 novembre 2026 al
+  15 gennaio 2027). Un compito programmato, "Turni esauriti open day",
+  sette volte al giorno confronta i turni del modulo Google con la
+  tabella OPEN DAY di `contenuti/comuni.txt`: se un turno non c'è più
+  nel modulo, scrive `esaurito` dopo l'orario e pubblica **da solo,
+  direttamente su `main`**, senza chiedere conferma. È un'eccezione
+  alla regola del push decisa da Alessandra, solo per questa modifica:
+  il compito non tocca altri file e non riapre mai un turno. Quindi su
+  `main` possono comparire commit che non passano da `caratteri-h`:
+  prima di lavorare su `caratteri-h`, dopo `git pull`, si riportano le
+  modifiche di `main` con `git merge main`. Vale anche per il punto 13:
+  "esaurito" si scrive a mano oppure lo scrive il compito.
 - Anteprima sul computer con `anteprima.bat`. Aprire `index.html` con un
   doppio clic non basta, perché le pagine leggono i file di testo.
 
