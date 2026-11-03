@@ -61,7 +61,7 @@ nessuna-data: Le date dei prossimi open day saranno pubblicate qui.
 # campo "esaurito"; accanto agli altri turni niente. Il sito non legge
 # da solo le prenotazioni del modulo: quando un turno è pieno, lo si
 # scrive qui a mano.
-sabato | 21 novembre | 10.00-11.00 | 11.00-12.00
+sabato | 21 novembre | 10.00-11.00 esaurito | 11.00-12.00 esaurito
 venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30
 sabato | 12 dicembre | 10.00-11.00 | 11.00-12.00
 mercoledì | 16 dicembre | 17.30-18.30 | 18.30-19.30
