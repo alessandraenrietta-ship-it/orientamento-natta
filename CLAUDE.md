@@ -238,10 +238,10 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     foglietti delle date, con lo stesso componente e gli stessi dati
     della home (`Grafica.listaDate` in `js/grafica.js`: date passate
     nascoste, stessa disposizione su telefono e computer), poi la nota
-    sui turni se c'è (oggi tolta: vedi "Open day" al punto 13), poi il
-    pulsante pieno "Prenota il tuo open day ›", tutto da
-    `comuni.txt`; se non resta nessuna data futura, solo la frase
-    `nessuna-data`, senza foglietti né pulsante.
+    sui turni se c'è (oggi tolta: vedi "Open day" al punto 13), tutto
+    da `comuni.txt`. Ogni turno si prenota da solo; il pulsante "Prenota
+    il tuo open day ›" non c'è più (dal 3 novembre 2026). Se non resta
+    nessuna data futura, solo la frase `nessuna-data`, senza foglietti.
 - Pagine dei percorsi (`liceo-scienze-applicate.html`,
   `liceo-matematico.html`, `liceo-digitale.html`): uguali fra loro,
   cambiano solo titolo e l'attributo `data-percorso` del `<body>` (le
@@ -675,24 +675,39 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   `anno` di `comuni.txt`: settembre-dicembre il primo, gennaio-agosto
   il secondo; una data sparisce dal giorno dopo). Quando non ne resta
   nessuna, la sezione degli open day scende dopo gli indirizzi e mostra
-  solo la frase `nessuna-data`, senza nota e senza pulsante.
+  solo la frase `nessuna-data`, senza nota.
 - **Open day**: per ogni data un foglietto da calendario (contorno di
   1 px blu notte, angoli vivi, largo 58 px; dentro il mese abbreviato
   maiuscolo grigio a 12 px, spaziato, e il numero del giorno a 30 px in
   verde; niente anellini, niente striscia piena; `aria-hidden`, la data
-  per intero è scritta per il lettore di schermo). Accanto il giorno
-  della settimana e sotto i due turni, uno per riga (dal 27 ottobre
-  2026 sera): l'orario e, solo accanto al turno pieno, "Esaurito" in
-  rosso (campo `esaurito` di `comuni.txt`), senza simboli; accanto agli
-  altri niente. Il turno pieno si segna a mano,
-  con `esaurito` dopo l'orario: il sito non legge le prenotazioni del
-  modulo. Orario e scritta non si spezzano: se la scritta non ci sta,
-  va intera sotto. Turni a 14 px sul telefono, 16 dai 40rem; rosso
-  `#B91C1C` solo qui, sempre con la scritta. Poi la nota sui turni (campo `nota-turni` di `comuni.txt`;
-  dal 27 ottobre 2026 tolta su richiesta di Alessandra: la riga ha il #
-  davanti) e il pulsante pieno "Prenota il tuo
-  open day" (dal 27 ottobre 2026 sera; prima "Prenota un open day"). Una colonna sul telefono, due dai 48rem, tre dai 66rem (prima
-  "11.00-12.00 Esaurito" non ci starebbe su una riga).
+  per intero è scritta per il lettore di schermo), in alto, alla stessa
+  altezza del giorno della settimana. Accanto il giorno della
+  settimana e sotto i due turni, uno per riga, **ognuno prenotabile**
+  (versione C, dal 3 novembre 2026):
+  - turno con posti: un pulsante secondario largo quanto la colonna
+    (angoli vivi, bordo verde `#026C37`, alto almeno 44 px), a sinistra
+    l'orario in IBM Plex Sans, a destra "Prenota ›" in Space Mono (campo
+    `prenota-turno`). Tutta la riga è un unico link, che apre nella
+    stessa scheda il modulo con il turno già scelto: link del campo
+    `prenotazione` + `?usp=pp_url&` + `campo-turno` (`entry.179028996`)
+    + il testo dell'opzione del modulo (colonne 5 e 6 della tabella OPEN
+    DAY), trasformato dal sito (spazi come +, "ì" come %C3%AC). Senza
+    il testo dell'opzione il link apre il modulo senza turno scelto. Il
+    lettore di schermo sente "Prenota il turno di venerdì 27 novembre,
+    17.30-18.30" (`aria-label`, inizio dal campo
+    `prenota-turno-lettore`);
+  - turno pieno (`esaurito` dopo l'orario, segnato a mano: il sito non
+    legge le prenotazioni del modulo): la riga non è un link, bordo e
+    orario grigi `#5B6B80`, a destra "Esaurito" in rosso (campo
+    `esaurito`), in Space Mono.
+  Orario e "Prenota ›" stanno sempre su una riga (controllato da 320
+  px). Turni a 14 px sul telefono, 16 dai 40rem; rosso `#B91C1C` solo
+  qui, sempre con la scritta. Poi la nota sui turni (campo
+  `nota-turni` di `comuni.txt`; dal 27 ottobre 2026 tolta su richiesta
+  di Alessandra: la riga ha il # davanti). Il pulsante "Prenota il tuo
+  open day ›" sotto le date è stato tolto il 3 novembre 2026 (era un
+  doppione); il campo `prenotazione` resta, perché serve ai link dei
+  turni. Una colonna sul telefono, due dai 48rem, tre dai 66rem.
 - **Indirizzi**: trattino del colore accanto a tipo di scuola (grigio,
   maiuscolo) e nome; sotto, allineati a loro, claim in verde, frase,
   "Pagina in preparazione" o il pulsante vuoto "Scopri di più" (per il

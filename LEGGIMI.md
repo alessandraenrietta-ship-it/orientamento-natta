@@ -30,22 +30,39 @@ note. Non serve toccare nessun altro file.
     riga si toglie, non resta spazio vuoto;
   - le date già passate il sito le nasconde da solo, il giorno dopo.
     Quando non ne resta nessuna, la sezione degli open day scende dopo
-    gli indirizzi e mostra solo la frase del campo `nessuna-data`, senza
-    pulsante. Per il nuovo anno basta cambiare `anno` e scrivere le
-    date nuove;
-  - `come-prenotare` è la scritta del pulsante, `prenotazione` il link
-    a cui porta;
-  - la tabella ha **quattro colonne**: `giorno | data | primo turno |
-    secondo turno`. La data si scrive come `21 novembre`, senza anno: il sito lo
+    gli indirizzi e mostra solo la frase del campo `nessuna-data`. Per
+    il nuovo anno basta cambiare `anno` e scrivere le date nuove;
+  - **ogni turno è un pulsante** che apre il modulo di prenotazione con
+    quel turno già scelto. `prenotazione` è il link del modulo;
+    `campo-turno` è il codice della domanda dei turni nel modulo
+    (`entry.179028996`), scritto una volta sola: cambia solo se nel
+    modulo si rifà quella domanda. `prenota-turno` è la scritta a destra
+    del turno ("Prenota ›", la freccia la aggiunge il sito) e
+    `prenota-turno-lettore` l'inizio della frase che sente chi usa il
+    lettore di schermo ("Prenota il turno di venerdì 27 novembre,
+    17.30-18.30": giorno, data e orario li aggiunge il sito);
+  - la tabella ha **sei colonne**: `giorno | data | primo turno |
+    secondo turno | primo turno nel modulo | secondo turno nel modulo`.
+    La data si scrive come `21 novembre`, senza anno: il sito lo
     ricava da `anno` (da settembre a dicembre il primo anno, da gennaio
     ad agosto il secondo) e dal mese ricava la sigla del foglietto da
     calendario (NOV). Gli orari si
     scrivono sempre con ore e minuti, inizio-fine, come `10.00-11.00`.
+    Le ultime due colonne sono il testo dell'opzione del turno **come è
+    scritto nel modulo Google**, carattere per carattere, con gli
+    accenti normali: `Venerdì 27 novembre ore 17:30`. Non serve
+    trasformarlo per il link: lo fa il sito. Se il testo non è uguale a
+    quello del modulo, il modulo si apre senza turno già scelto (non
+    succede niente di grave, ma la persona deve sceglierlo a mano). Se
+    le due colonne mancano, il pulsante apre il modulo senza turno già
+    scelto. Esempio:
+    `venerdì | 27 novembre | 17.30-18.30 | 18.30-19.30 | Venerdì 27 novembre ore 17:30 | Venerdì 27 novembre ore 18:30`
   - quando un turno è al completo si scrive `esaurito` dopo l'orario,
-    come `10.00-11.00 esaurito`: sulla pagina compare, accanto al turno,
-    la scritta rossa del campo `esaurito` (oggi "Esaurito"). Accanto
-    agli altri turni non compare niente. Il sito non legge le
-    prenotazioni del modulo: il turno pieno si segna a mano.
+    come `10.00-11.00 esaurito`: sulla pagina il turno diventa grigio,
+    non si può più cliccare e a destra compare, in rosso, la scritta del
+    campo `esaurito` (oggi "Esaurito"). Conviene togliere quel turno
+    anche dal modulo Google. Il sito non legge le prenotazioni del
+    modulo: il turno pieno si segna a mano.
 - `home.txt`: i testi della pagina iniziale. Nella sezione `APERTURA`,
   `occhiello` è la riga piccola sopra il titolo (il sito ci aggiunge
   l'anno degli open day); `titolo-inglese` e `titolo-italiano` sono il

@@ -271,14 +271,12 @@
     G.listaDate(comuni, elenco);
 
     var nota = document.getElementById("open-day-nota");
-    var prenota = document.getElementById("prenotazione");
 
     /* Nessuna data ancora da venire: la sezione scende dopo gli
        indirizzi e mostra solo la frase "nessuna-data" di comuni.txt,
-       senza la nota sui turni e senza il pulsante per prenotare */
+       senza la nota sui turni */
     if (!elenco.firstChild) {
       elenco.hidden = true;
-      prenota.hidden = true;
       C.scrivi(nota, comuni.campo("OPEN DAY", "nessuna-data"));
       nota.className += " nota-nessuna-data";
       var indirizzi = document.getElementById("sezione-indirizzi");
@@ -292,9 +290,8 @@
     } else {
       nota.hidden = true;
     }
-
-    /* In fondo, il pulsante per prenotare */
-    G.pulsantePrenota(comuni, prenota);
+    /* (Il pulsante "Prenota il tuo open day ›" non c'è più dal 3
+       novembre 2026: ogni turno si prenota da solo.) */
   }
 
 
