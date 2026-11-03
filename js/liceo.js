@@ -419,10 +419,10 @@
 
   /* ---------------------------------------------------------------
      VIENI A TROVARCI (in fondo a liceo.html e alle pagine dei percorsi)
-     Il titolo da liceo.txt; sotto i foglietti delle date, la nota sui
-     turni e il pulsante per prenotare, da comuni.txt, con lo stesso
-     componente della home (js/grafica.js). Se non resta nessuna data
-     futura, solo la frase "nessuna-data", senza foglietti né pulsante.
+     Il titolo da liceo.txt; sotto i foglietti delle date, con i turni
+     che si prenotano uno per uno, e la nota sui turni, da comuni.txt,
+     con lo stesso componente della home (js/grafica.js). Se non resta
+     nessuna data futura, solo la frase "nessuna-data", senza foglietti.
      Nelle pagine dei percorsi, sotto, i collegamenti agli altri due
      percorsi.
      --------------------------------------------------------------- */
@@ -431,19 +431,14 @@
     C.scrivi(document.getElementById("titolo-visita"), liceo.campo("LICEO", "titolo-visita"));
     var date = document.getElementById("date-visita");
     var nota = document.getElementById("nota-visita");
-    var prenota = document.getElementById("prenota-visita");
 
     if (!G.listaDate(comuni, date)) {
       date.hidden = true;
       C.scrivi(nota, comuni.campo("OPEN DAY", "nessuna-data"));
-      prenota.hidden = true;
+    } else if (comuni.campo("OPEN DAY", "nota-turni")) {
+      C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
     } else {
-      if (comuni.campo("OPEN DAY", "nota-turni")) {
-        C.scrivi(nota, comuni.campo("OPEN DAY", "nota-turni"));
-      } else {
-        nota.hidden = true;
-      }
-      G.pulsantePrenota(comuni, prenota);
+      nota.hidden = true;
     }
 
     /* Gli altri percorsi: solo nelle pagine dei percorsi */

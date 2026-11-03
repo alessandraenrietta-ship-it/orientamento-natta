@@ -5,9 +5,9 @@
      - il disegno della scuola con le tre linee (Grafica.disegno)
      - il piede con le etichette (Grafica.piede) e il suo timbro
        rotondo (Grafica.timbro)
-     - le date degli open day ancora da venire (Grafica.dateOpenDay),
-       i loro foglietti da calendario (Grafica.listaDate) e il pulsante
-       per prenotare (Grafica.pulsantePrenota)
+     - le date degli open day ancora da venire (Grafica.dateOpenDay) e
+       i loro foglietti da calendario, con i turni che si prenotano uno
+       per uno (Grafica.listaDate)
      - le parole con il trattino che non si spezzano nei testi
        giustificati (Grafica.paroleIntere)
    I colori e le misure stanno in grafica.css.
@@ -189,8 +189,10 @@ window.Grafica = (function () {
     oggi.setHours(0, 0, 0, 0);
     var future = [];
     comuni.righe("OPEN DAY").forEach(function (riga, i) {
-      if (riga.length !== 4) {
-        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono 4 colonne, ne ho trovate " + riga.length);
+      /* 4 colonne, più le due (facoltative) con i testi dei turni nel
+         modulo di prenotazione */
+      if (riga.length < 4 || riga.length > 6) {
+        console.warn("comuni.txt, OPEN DAY, riga " + (i + 1) + ": servono da 4 a 6 colonne, ne ho trovate " + riga.length);
         return;
       }
       var data = dataOpenDay(riga[1], anno);
@@ -204,25 +206,61 @@ window.Grafica = (function () {
     return future;
   }
 
-  /* Un turno su una riga sua: l'orario e, solo se il turno è pieno,
-     accanto la scritta rossa del campo "esaurito" di comuni.txt
-     ("Esaurito"). Accanto ai turni con posti non c'è niente. Nessun
-     simbolo: la differenza non sta solo nel colore ma nella scritta.
+  /* Il link al modulo con il turno già scelto: il link del campo
+     "prenotazione", poi "?usp=pp_url&", il codice della domanda (campo
+     "campo-turno", per esempio entry.179028996) e il testo dell'opzione
+     come è scritto nel modulo. Il testo si trasforma per l'indirizzo
+     (spazi come +, "ì" come %C3%AC); i due punti restano come sono.
+     Senza il testo dell'opzione, il link apre il modulo senza turno già
+     scelto. */
+  function linkTurno(comuni, opzione) {
+    var link = comuni.campo("OPEN DAY", "prenotazione");
+    var campo = comuni.campo("OPEN DAY", "campo-turno");
+    if (!link || C.daCompletare(link)) { return ""; }
+    if (!opzione || !campo) { return link; }
+    var testo = encodeURIComponent(opzione.trim()).replace(/%20/g, "+").replace(/%3A/gi, ":");
+    return link + (link.indexOf("?") < 0 ? "?" : "&") + "usp=pp_url&" + campo + "=" + testo;
+  }
+
+  /* Un turno su una riga sua, a tutta larghezza della colonna.
+     - Con posti: un pulsante secondario che apre il modulo con il turno
+       già scelto; a sinistra l'orario, a destra "Prenota ›" (campo
+       "prenota-turno"). Tutta la riga è un unico collegamento. Il
+       lettore di schermo sente "Prenota il turno di venerdì 27
+       novembre, 17.30-18.30" (campo "prenota-turno-lettore", poi
+       giorno, data e orario).
+     - Pieno: la riga non è un collegamento; bordo e orario grigi e, a
+       destra, la scritta rossa del campo "esaurito" ("Esaurito").
      Nel file, dopo l'orario, si scrive "esaurito" quando il turno è
      pieno: "10.00-11.00 esaurito" (funziona anche il vecchio "sold
      out"). Il sito non legge le prenotazioni del modulo: si segna a
-     mano. Orario e scritta non si spezzano mai. */
+     mano. Orario e scritta non vanno mai a capo. */
   var TURNO_PIENO = /\s*(esaurito|sold\s*out)\s*$/i;
 
-  function turnoConStato(testo, scrittaEsaurito) {
+  function turnoPrenotabile(comuni, riga, colonna) {
+    var testo = riga[colonna];
+    var orario = testo.replace(TURNO_PIENO, "");
     var esaurito = TURNO_PIENO.test(testo);
+    var link = esaurito ? "" : linkTurno(comuni, riga[colonna + 2]);
     var turno = document.createElement("li");
     turno.className = "turno" + (esaurito ? " turno-esaurito" : "");
-    turno.appendChild(P.elemento("span", "turno-orario", testo.replace(TURNO_PIENO, "")));
-    if (esaurito) {
-      turno.appendChild(document.createTextNode(" "));
-      turno.appendChild(P.elemento("span", "turno-stato", scrittaEsaurito));
+    var dentro;
+    if (link) {
+      dentro = P.elemento("a", "pulsante pulsante-vuoto turno-riga", "");
+      dentro.href = link;
+      dentro.setAttribute("aria-label", (comuni.campo("OPEN DAY", "prenota-turno-lettore") || "Prenota il turno di") +
+        " " + riga[0] + " " + riga[1] + ", " + orario);
+      dentro.appendChild(P.elemento("span", "turno-orario", orario));
+      dentro.appendChild(P.elemento("span", "turno-azione", comuni.campo("OPEN DAY", "prenota-turno") || "Prenota"));
+    } else {
+      dentro = P.elemento("div", "turno-riga" + (esaurito ? " turno-riga-piena" : ""), "");
+      dentro.appendChild(P.elemento("span", "turno-orario", orario));
+      if (esaurito) {
+        dentro.appendChild(document.createTextNode(" "));
+        dentro.appendChild(P.elemento("span", "turno-stato", comuni.campo("OPEN DAY", "esaurito") || "Esaurito"));
+      }
     }
+    turno.appendChild(dentro);
     return turno;
   }
 
@@ -234,7 +272,6 @@ window.Grafica = (function () {
      giorno della settimana. Restituisce quante date ha messo. Lo stesso
      componente serve alla home e alle pagine del liceo. */
   function listaDate(comuni, elenco) {
-    var scrittaEsaurito = comuni.campo("OPEN DAY", "esaurito") || "Esaurito";
     var future = dateOpenDay(comuni);
     future.forEach(function (d) {
       var riga = d.riga, data = d.data;
@@ -256,11 +293,12 @@ window.Grafica = (function () {
       settimana.appendChild(P.elemento("span", "solo-lettori", " " + riga[1]));
       testi.appendChild(settimana);
 
-      /* I due turni uno sotto l'altro; accanto a quello pieno "Esaurito" */
+      /* I due turni uno sotto l'altro, ognuno prenotabile; quello
+         pieno con "Esaurito" */
       var turni = document.createElement("ul");
       turni.className = "data-turni";
-      turni.appendChild(turnoConStato(riga[2], scrittaEsaurito));
-      turni.appendChild(turnoConStato(riga[3], scrittaEsaurito));
+      turni.appendChild(turnoPrenotabile(comuni, riga, 2));
+      turni.appendChild(turnoPrenotabile(comuni, riga, 3));
       testi.appendChild(turni);
 
       voce.appendChild(testi);
@@ -308,19 +346,9 @@ window.Grafica = (function () {
   }
 
 
-  /* Il pulsante pieno per prenotare, dentro l'elemento indicato. Se il
-     link manca, resta solo il testo. */
-  function pulsantePrenota(comuni, dove) {
-    var testo = comuni.campo("OPEN DAY", "come-prenotare");
-    var link = comuni.campo("OPEN DAY", "prenotazione");
-    if (link && !C.daCompletare(link)) {
-      var a = P.elemento("a", "pulsante pulsante-pieno", testo);
-      a.href = link;
-      dove.appendChild(a);
-    } else {
-      C.scrivi(dove, testo + " " + (link || ""));
-    }
-  }
+  /* (Il pulsante "Prenota il tuo open day ›" sotto le date non c'è più
+     dal 3 novembre 2026: ogni turno si prenota da solo, vedi
+     turnoPrenotabile.) */
 
 
   /* ---------------------------------------------------------------
@@ -387,7 +415,6 @@ window.Grafica = (function () {
     timbro: timbro,
     dateOpenDay: dateOpenDay,
     listaDate: listaDate,
-    paroleIntere: paroleIntere,
-    pulsantePrenota: pulsantePrenota
+    paroleIntere: paroleIntere
   };
 }());

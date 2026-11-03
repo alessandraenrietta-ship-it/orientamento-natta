@@ -515,9 +515,11 @@ button.pulsante {
 /* -----------------------------------------------------------------
    OPEN DAY
    Una lista: per ogni data un foglietto da calendario e, accanto, il
-   giorno della settimana con sotto i due turni. Poi la nota sui turni
-   e il pulsante per prenotare. Telefono: un foglietto per riga;
-   computer: tre colonne.
+   giorno della settimana con sotto i due turni, ognuno un pulsante che
+   apre il modulo con il turno già scelto (dal 3 novembre 2026; prima
+   c'era un solo pulsante "Prenota il tuo open day" sotto le date). Poi
+   la nota sui turni. Telefono: un foglietto per riga; computer: tre
+   colonne.
    ----------------------------------------------------------------- */
 
 .date {
@@ -525,9 +527,10 @@ button.pulsante {
   gap: 1.5rem;
 }
 
+/* Il foglietto in alto, alla stessa altezza del giorno della settimana */
 .data {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -559,26 +562,61 @@ button.pulsante {
   color: var(--verde);
 }
 
-.data-testi { min-width: 0; }
+/* I testi occupano tutto lo spazio accanto al foglietto: i turni sono
+   larghi quanto la colonna */
+.data-testi { flex: 1 1 auto; min-width: 0; }
 
 .data-settimana {
   margin: 0;
   font-size: 1.125rem;
 }
 
-/* I due turni uno sotto l'altro: l'orario e, solo accanto al turno
-   pieno, "Esaurito" in rosso (6,5 sul bianco). Accanto agli altri
-   niente. Orario e scritta non si spezzano. Sugli schermi stretti 14
-   pixel. */
+/* I due turni uno sotto l'altro, ognuno su una riga sua (14 pixel
+   sugli schermi stretti, 16 dai 40rem) */
 .data-turni {
-  margin: 0;
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0;
   font-size: 0.875rem;
 }
 
-.turno-orario,
-.turno-stato { white-space: nowrap; }
+/* Il turno: un pulsante secondario come gli altri del sito (angoli
+   vivi, bordo verde, alto almeno 44 pixel), largo quanto la colonna; a
+   sinistra l'orario in IBM Plex Sans, a destra "Prenota ›" in Space
+   Mono. Orario e scritta non vanno mai a capo. */
+.turno-riga {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  width: 100%;
+  min-height: 2.75rem;      /* 44 pixel */
+  padding: 0.45em 0.9em;
+  border: 2px solid var(--verde);
+}
 
-.turno-esaurito .turno-stato { color: var(--rosso); }
+.turno-orario {
+  font-family: var(--carattere-testo);
+  white-space: nowrap;
+}
+
+.turno-azione,
+.turno-stato {
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Il turno pieno: non è un collegamento; bordo e orario grigi, a
+   destra "Esaurito" in rosso (6,5 sul bianco), in Space Mono come
+   "Prenota" */
+.turno-riga-piena {
+  border-color: var(--grigio);
+  color: var(--grigio);
+}
+
+.turno-stato {
+  font-family: var(--carattere-titoli);
+  color: var(--rosso);
+}
 
 .nota {
   margin-top: 2rem;
