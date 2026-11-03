@@ -680,8 +680,8 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   1 px blu notte, angoli vivi, largo 58 px; dentro il mese abbreviato
   maiuscolo grigio a 12 px, spaziato, e il numero del giorno a 30 px in
   verde; niente anellini, niente striscia piena; `aria-hidden`, la data
-  per intero è scritta per il lettore di schermo), in alto, alla stessa
-  altezza del giorno della settimana. Accanto il giorno della
+  per intero è scritta per il lettore di schermo), a metà altezza dei
+  due turni (scelta di Alessandra, 3 novembre 2026). Accanto il giorno della
   settimana e sotto i due turni, uno per riga, **ognuno prenotabile**
   (versione C, dal 3 novembre 2026):
   - turno con posti: un pulsante secondario largo quanto la colonna
