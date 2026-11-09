@@ -135,9 +135,15 @@
     }
 
     /* La sezione dei percorsi: il titolo (di livello 2, visibile solo
-       ai lettori di schermo) e il sottotitolo */
+       ai lettori di schermo) e il sottotitolo, che compare solo se in
+       liceo.txt c'è il suo campo */
     C.scrivi(document.getElementById("titolo-percorsi"), liceo.campo("LICEO", "titolo-percorsi"));
-    C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
+    var sottotitolo = document.getElementById("sottotitolo");
+    if (liceo.campo("LICEO", "sottotitolo")) {
+      C.scrivi(sottotitolo, liceo.campo("LICEO", "sottotitolo"));
+    } else {
+      sottotitolo.hidden = true;
+    }
 
     /* I tre percorsi, nell'ordine del file, come gli indirizzi della
        home: il trattino nel tono del percorso accanto al nome, sotto la

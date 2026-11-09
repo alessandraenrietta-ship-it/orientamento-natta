@@ -137,7 +137,8 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
 
 - `== LICEO ==`: titolo (`titolo` e, sulla seconda riga più piccola,
   `titolo-riga-2`; nelle pagine dei percorsi compaiono uniti da una
-  virgola), sottotitolo della pagina del liceo e le
+  virgola), sottotitolo della pagina del liceo (oggi tolto: la riga ha
+  un `#` davanti; senza testo non compare) e le
   scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`).
   `torna-home` e `torna-liceo` sono i collegamenti in alto a sinistra;
   oggi hanno un `#` davanti e non compaiono: per farli comparire si

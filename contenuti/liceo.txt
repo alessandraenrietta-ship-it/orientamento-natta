@@ -15,7 +15,9 @@
 == LICEO ==
 titolo: Liceo scientifico
 titolo-riga-2: opzione Scienze applicate
-sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere.
+# Il sottotitolo sopra i tre percorsi, per ora tolto: per farlo
+# ricomparire si toglie il # (e lo spazio dopo) all'inizio della riga.
+# sottotitolo: Una base scientifica comune, tre percorsi tra cui scegliere.
 pulsante-percorso: Scopri il percorso
 # Il titolo sopra i tre percorsi: non si vede, lo sente solo chi usa un
 # lettore di schermo per muoversi fra i titoli della pagina

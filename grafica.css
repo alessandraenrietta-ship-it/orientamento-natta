@@ -1306,10 +1306,13 @@ button.pulsante {
      - paragrafi larghi (due colonne): sillabazione solo per parole di
        almeno 10 lettere, con almeno 4 lettere prima e dopo il taglio
        (10 4 4);
-     - colonne strette (frasi degli indirizzi nella home, spiegazioni
-       brevi dei percorsi in liceo.html) e righe dei tre blocchi:
-       sillabazione più frequente (6 3 3), per non lasciare buchi fra
-       le parole.
+     - colonne strette (frasi degli indirizzi nella home) e righe dei
+       tre blocchi: sillabazione più frequente (6 3 3), per non
+       lasciare buchi fra le parole.
+   Le spiegazioni brevi dei tre percorsi in liceo.html invece restano
+   allineate a sinistra, senza sillabazione (scelta di Alessandra,
+   9 novembre 2026: nelle colonne strette si spezzavano parole come
+   "pen-siero" e restavano righe con spazi larghi).
    Le parole con il trattino ("post-diploma") non si spezzano mai: le
    chiude in un pezzo intero js/grafica.js (classe "parola-intera").
    Le pagine hanno lang="it": il browser sillaba in italiano.
@@ -1350,9 +1353,9 @@ button.pulsante {
     hyphenate-limit-chars: 6 3 3;   /* con 10 4 4 restavano righe con spazi molto larghi */
   }
 
-  /* Le colonne strette */
-  .indirizzo-frase,
-  .percorso-testo {
+  /* Le colonne strette della home. (Le spiegazioni brevi dei percorsi
+     in liceo.html, .percorso-testo, restano a sinistra.) */
+  .indirizzo-frase {
     text-align: justify;
     -webkit-hyphens: auto;
             hyphens: auto;
