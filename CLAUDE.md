@@ -209,7 +209,10 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   - Percorsi: in testa un titolo di livello 2 "I tre percorsi", visibile
     solo ai lettori di schermo (campo `titolo-percorsi` di `liceo.txt`),
     e il sottotitolo, allineato a sinistra, su una riga al computer e con
-    le righe pareggiate sul telefono; poi i tre percorsi come gli
+    le righe pareggiate sul telefono (dal 9 novembre 2026 tolto su
+    richiesta di Alessandra: la riga `sottotitolo` di `liceo.txt` è
+    commentata e, senza testo, il paragrafo non compare); poi i tre
+    percorsi come gli
     indirizzi della home: trattino corto nel tono del percorso, nome in
     blu notte (titolo di livello 3), spiegazione breve, pulsante secondario
     "Scopri il percorso ›". Ogni percorso è un unico collegamento,
@@ -290,11 +293,14 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
       sinistra. Il testo in `liceo.txt` resta intero;
   - Colonne strette, sillabazione più frequente (`hyphenate-limit-chars:
     6 3 3`) per non lasciare buchi fra le parole: le frasi "In questo
-    indirizzo imparerai…" degli indirizzi nella home e le spiegazioni
-    brevi dei tre percorsi in `liceo.html`; e il testo dei tre blocchi
-    delle pagine dei percorsi, nelle righe con il titolo a sinistra (con
-    10 4 4 restavano righe con spazi molto larghi); nelle voci degli
-    elenchi il trattino grigio resta fuori, a sinistra.
+    indirizzo imparerai…" degli indirizzi nella home; e il testo dei tre
+    blocchi delle pagine dei percorsi, nelle righe con il titolo a
+    sinistra (con 10 4 4 restavano righe con spazi molto larghi); nelle
+    voci degli elenchi il trattino grigio resta fuori, a sinistra.
+  - Le spiegazioni brevi dei tre percorsi in `liceo.html` **non** sono
+    giustificate: allineate a sinistra anche al computer, senza
+    sillabazione (scelta di Alessandra, 9 novembre 2026: si spezzavano
+    parole come "pen-siero" e restavano righe con spazi larghi).
   - Le parole con il trattino ("post-diploma") non si spezzano mai, né
     dopo il trattino né con la sillabazione: `js/grafica.js`
     (`Grafica.paroleIntere`) le chiude in un pezzo intero, senza
@@ -399,6 +405,17 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   (curvatura, biennio, articolazione, PCTO, ITS). Eccezione voluta:
   "biennio" nell'intestazione del quadro orario (e delle tabelle del
   confronto) non si spiega.
+- **Maiuscole delle materie** (regola di Alessandra, 9 novembre 2026):
+  - i nomi delle materie scolastiche hanno l'iniziale maiuscola:
+    Matematica, Fisica, Scienze naturali, Informatica, Italiano,
+    Inglese, Storia, Filosofia, Laboratorio Matematico, Intelligenza
+    artificiale e coding, Laboratorio del pensiero critico, Diritto;
+  - restano minuscole le parole che indicano un ambito del sapere o un
+    fenomeno ("la matematica dialoga con gli altri ambiti del sapere",
+    "le sfide dell'intelligenza artificiale"), le parti di una materia
+    (chimica, biologia, scienze della Terra) e i nomi comuni che
+    riprendono una materia ("il laboratorio");
+  - "Liceo Matematico" e "Liceo Digitale" sempre con la maiuscola.
 - Niente slogan vuoti: ogni claim è seguito da informazioni concrete.
 - Mai il trattino lungo al posto della virgola.
 - Serali: tono e contenuti per adulti.

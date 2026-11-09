@@ -137,7 +137,8 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
 
 - `== LICEO ==`: titolo (`titolo` e, sulla seconda riga più piccola,
   `titolo-riga-2`; nelle pagine dei percorsi compaiono uniti da una
-  virgola), sottotitolo della pagina del liceo e le
+  virgola), sottotitolo della pagina del liceo (oggi tolto: la riga ha
+  un `#` davanti; senza testo non compare) e le
   scritte fisse (`pulsante-percorso`, `torna-home`, `torna-liceo`).
   `torna-home` e `torna-liceo` sono i collegamenti in alto a sinistra;
   oggi hanno un `#` davanti e non compaiono: per farli comparire si
@@ -205,6 +206,23 @@ Il titolo grande della pagina iniziale (campo `titolo` della sezione
 `APERTURA` di `home.txt`) compare **esattamente come è scritto**: le
 parole in maiuscolo vanno scritte in maiuscolo nel file. Gli altri
 titoli delle fasce, invece, la pagina li mette in maiuscolo da sola.
+
+## Le maiuscole delle materie
+
+Nei testi i nomi delle materie scolastiche hanno l'iniziale maiuscola:
+Matematica, Fisica, Scienze naturali, Informatica, Italiano, Inglese,
+Storia, Filosofia, Laboratorio Matematico, Intelligenza artificiale e
+coding, Laboratorio del pensiero critico, Diritto.
+
+Restano invece in minuscolo:
+- le parole che indicano un ambito del sapere o un fenomeno: "la
+  matematica dialoga con gli altri ambiti del sapere", "le sfide
+  dell'intelligenza artificiale";
+- le parti di una materia: chimica, biologia, scienze della Terra;
+- i nomi comuni che riprendono una materia: "il laboratorio".
+
+"Liceo Matematico" e "Liceo Digitale" si scrivono sempre con la
+maiuscola.
 
 ## Dati che mancano
 

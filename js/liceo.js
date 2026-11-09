@@ -135,9 +135,15 @@
     }
 
     /* La sezione dei percorsi: il titolo (di livello 2, visibile solo
-       ai lettori di schermo) e il sottotitolo */
+       ai lettori di schermo) e il sottotitolo, che compare solo se in
+       liceo.txt c'è il suo campo */
     C.scrivi(document.getElementById("titolo-percorsi"), liceo.campo("LICEO", "titolo-percorsi"));
-    C.scrivi(document.getElementById("sottotitolo"), liceo.campo("LICEO", "sottotitolo"));
+    var sottotitolo = document.getElementById("sottotitolo");
+    if (liceo.campo("LICEO", "sottotitolo")) {
+      C.scrivi(sottotitolo, liceo.campo("LICEO", "sottotitolo"));
+    } else {
+      sottotitolo.hidden = true;
+    }
 
     /* I tre percorsi, nell'ordine del file, come gli indirizzi della
        home: il trattino nel tono del percorso accanto al nome, sotto la
@@ -466,8 +472,8 @@
      ore aggiuntive del percorso, in una seconda parte della tabella che
      si apre con la riga-titolo "In più nel ...", con un trattino e la
      scritta nel tono del percorso, senza fondo pieno
-     (nel Matematico c'è così una seconda riga "Matematica" con le sole
-     ore in più). In fondo il totale, calcolato dal sito.
+     (nel Matematico la riga "Laboratorio Matematico" con le sue ore).
+     In fondo il totale, calcolato dal sito.
      Le colonne degli anni sono raggruppate: primo biennio (1° e 2°),
      secondo biennio (3° e 4°), quinto anno.
      --------------------------------------------------------------- */
