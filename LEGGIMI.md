@@ -206,6 +206,23 @@ Il titolo grande della pagina iniziale (campo `titolo` della sezione
 parole in maiuscolo vanno scritte in maiuscolo nel file. Gli altri
 titoli delle fasce, invece, la pagina li mette in maiuscolo da sola.
 
+## Le maiuscole delle materie
+
+Nei testi i nomi delle materie scolastiche hanno l'iniziale maiuscola:
+Matematica, Fisica, Scienze naturali, Informatica, Italiano, Inglese,
+Storia, Filosofia, Laboratorio Matematico, Intelligenza artificiale e
+coding, Laboratorio del pensiero critico, Diritto.
+
+Restano invece in minuscolo:
+- le parole che indicano un ambito del sapere o un fenomeno: "la
+  matematica dialoga con gli altri ambiti del sapere", "le sfide
+  dell'intelligenza artificiale";
+- le parti di una materia: chimica, biologia, scienze della Terra;
+- i nomi comuni che riprendono una materia: "il laboratorio".
+
+"Liceo Matematico" e "Liceo Digitale" si scrivono sempre con la
+maiuscola.
+
 ## Dati che mancano
 
 Si scrive `[DA COMPLETARE: che cosa manca]`. Sul sito compare così com'è,

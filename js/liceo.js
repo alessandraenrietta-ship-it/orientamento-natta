@@ -466,8 +466,8 @@
      ore aggiuntive del percorso, in una seconda parte della tabella che
      si apre con la riga-titolo "In più nel ...", con un trattino e la
      scritta nel tono del percorso, senza fondo pieno
-     (nel Matematico c'è così una seconda riga "Matematica" con le sole
-     ore in più). In fondo il totale, calcolato dal sito.
+     (nel Matematico la riga "Laboratorio Matematico" con le sue ore).
+     In fondo il totale, calcolato dal sito.
      Le colonne degli anni sono raggruppate: primo biennio (1° e 2°),
      secondo biennio (3° e 4°), quinto anno.
      --------------------------------------------------------------- */

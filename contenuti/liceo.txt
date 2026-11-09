@@ -57,9 +57,9 @@ titolo-altri: Gli altri percorsi
 # percorso (qui sotto, per esempio ORE AGGIUNTIVE MATEMATICO); per
 # Scienze applicate, che è il quadro di base, resta vuota. Serve al
 # quadro orario delle pagine dei percorsi e a "Le ore a confronto".
-Scienze applicate | Le materie del liceo scientifico, con più scienze naturali e l'informatica al posto del latino. (da definire) | liceo-scienze-applicate.html |
-Liceo Matematico | Le stesse materie di Scienze applicate, con più ore di matematica in tutti e cinque gli anni. (da definire) | liceo-matematico.html | ORE AGGIUNTIVE MATEMATICO
-Liceo Digitale | Le stesse materie di Scienze applicate, con intelligenza artificiale e coding per cinque anni, diritto e pensiero critico nei primi due. (da definire) | liceo-digitale.html | ORE AGGIUNTIVE DIGITALE
+Scienze applicate | Un percorso che integra Matematica, Fisica, Scienze naturali e Informatica, con particolare attenzione alle loro applicazioni scientifiche e tecnologiche. | liceo-scienze-applicate.html |
+Liceo Matematico | Un percorso che arricchisce la formazione di Scienze applicate con il Laboratorio Matematico, in cui si approfondiscono le relazioni tra la matematica e gli altri ambiti del sapere. | liceo-matematico.html | ORE AGGIUNTIVE MATEMATICO
+Liceo Digitale | Un percorso che amplia la formazione di Scienze applicate con Intelligenza artificiale e coding, Laboratorio del pensiero critico e Diritto, per comprendere le tecnologie digitali e imparare a usarle in modo consapevole. | liceo-digitale.html | ORE AGGIUNTIVE DIGITALE
 
 == QUADRO BASE ==
 # Ore settimanali di Scienze applicate, comuni ai tre percorsi.
@@ -81,10 +81,9 @@ Religione cattolica o attività alternative | 1 | 1 | 1 | 1 | 1
 == ORE AGGIUNTIVE MATEMATICO ==
 # Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
 # Nel quadro orario queste righe compaiono dopo le materie del quadro
-# base, sotto la riga-titolo "In più nel Liceo Matematico", anche se la
-# materia c'è già nel quadro base: così Matematica compare due volte,
-# con le ore di base e, più sotto, con le sole ore in più.
-Matematica | 2 | 2 | 1 | 1 | 1
+# base, sotto la riga-titolo "In più nel Liceo Matematico". La stessa
+# riga compare anche in "Le materie in più" di liceo.html.
+Laboratorio Matematico | 2 | 2 | 1 | 1 | 1
 
 == ORE AGGIUNTIVE DIGITALE ==
 # Ore in più rispetto a Scienze applicate. Stesse colonne del quadro base.
@@ -106,7 +105,7 @@ Intelligenza artificiale e coding | 1 | 1 | 1 | 1 | 1
 # [DA COMPLETARE].
 
 == SCIENZE APPLICATE ==
-spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
+spiegazione: Scienze applicate offre una solida preparazione scientifica, che integra Matematica, Fisica, Scienze naturali e Informatica, con particolare attenzione alle loro applicazioni e ai loro sviluppi scientifici e tecnologici. Le Scienze naturali comprendono chimica, biologia e scienze della Terra. L'Informatica, presente in tutti e cinque gli anni, diventa uno strumento per analizzare situazioni, affrontare problemi e sviluppare soluzioni. Accanto alle discipline scientifiche, lo studio dell'Italiano, dell'Inglese, della Storia, della Filosofia e dell'arte assicura una formazione liceale completa, aperta ai diversi ambiti del sapere.
 # impara: [DA COMPLETARE: una cosa che si impara]
 # impara: [DA COMPLETARE: un'altra cosa che si impara]
 # come-si-studia: [DA COMPLETARE: come si studia]
@@ -115,7 +114,7 @@ spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
 # dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO MATEMATICO ==
-spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
+spiegazione: Il Liceo Matematico è un percorso del Liceo scientifico, opzione Scienze applicate, che dall'anno scolastico 2026/27 entra a far parte di una sperimentazione nazionale autorizzata e accompagnata dal Ministero dell'Istruzione e del Merito. Alle materie di Scienze applicate si aggiunge il Laboratorio Matematico, con due ore settimanali nei primi due anni e un'ora negli ultimi tre. Il laboratorio propone un approccio interdisciplinare, in cui la matematica dialoga con gli altri ambiti del sapere, scientifici e umanistici. Le attività permettono di scoprire nuovi collegamenti, sviluppare il ragionamento e applicare il pensiero matematico a contesti diversi.
 # impara: [DA COMPLETARE: una cosa che si impara]
 # impara: [DA COMPLETARE: un'altra cosa che si impara]
 # come-si-studia: [DA COMPLETARE: come si studia]
@@ -124,7 +123,7 @@ spiegazione: [DA COMPLETARE: breve spiegazione del percorso]
 # dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
 
 == LICEO DIGITALE ==
-spiegazione: Il Liceo Digitale è una curvatura del Liceo scientifico, opzione Scienze applicate, cioè lo stesso percorso con alcune ore in più. Mantiene tutte le discipline di base e le integra con ore dedicate al diritto, al pensiero critico, all'intelligenza artificiale e al coding. Il percorso mette in dialogo discipline scientifiche, tecniche e umanistiche per aiutare studentesse e studenti a comprendere il presente, sviluppare nuove competenze e affrontare con consapevolezza le sfide del futuro.
+spiegazione: Il Liceo Digitale arricchisce le materie del Liceo scientifico, opzione Scienze applicate, con ore dedicate a Intelligenza artificiale e coding, Laboratorio del pensiero critico e Diritto. Qui la tecnologia non è soltanto uno strumento da utilizzare, ma un mondo da esplorare, comprendere e interpretare. Le discipline scientifiche, tecnologiche e umanistiche si incontrano per sviluppare competenze digitali, creatività e capacità di analisi. Studentesse e studenti imparano così a comprendere le trasformazioni del presente, a interrogarsi sulle opportunità e sulle sfide dell'intelligenza artificiale e a diventare protagonisti consapevoli dell'innovazione.
 impara: A osservare e comprendere i fenomeni scientifici attraverso esperimenti in laboratorio.
 impara: A programmare e a conoscere le potenzialità e i limiti dell'intelligenza artificiale.
 impara: A utilizzare gli strumenti digitali in modo critico e responsabile.

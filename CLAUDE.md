@@ -399,6 +399,17 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   (curvatura, biennio, articolazione, PCTO, ITS). Eccezione voluta:
   "biennio" nell'intestazione del quadro orario (e delle tabelle del
   confronto) non si spiega.
+- **Maiuscole delle materie** (regola di Alessandra, 9 novembre 2026):
+  - i nomi delle materie scolastiche hanno l'iniziale maiuscola:
+    Matematica, Fisica, Scienze naturali, Informatica, Italiano,
+    Inglese, Storia, Filosofia, Laboratorio Matematico, Intelligenza
+    artificiale e coding, Laboratorio del pensiero critico, Diritto;
+  - restano minuscole le parole che indicano un ambito del sapere o un
+    fenomeno ("la matematica dialoga con gli altri ambiti del sapere",
+    "le sfide dell'intelligenza artificiale"), le parti di una materia
+    (chimica, biologia, scienze della Terra) e i nomi comuni che
+    riprendono una materia ("il laboratorio");
+  - "Liceo Matematico" e "Liceo Digitale" sempre con la maiuscola.
 - Niente slogan vuoti: ogni claim è seguito da informazioni concrete.
 - Mai il trattino lungo al posto della virgola.
 - Serali: tono e contenuti per adulti.
