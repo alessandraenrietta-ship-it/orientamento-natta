@@ -259,8 +259,10 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      grigio `#5B6B80`. Sul telefono una sotto l'altra separate dal
      filetto, con il titolo sopra; al computer (dai 56rem) tre righe una
      sotto l'altra, separate dal filetto, con il titolo a sinistra (un
-     terzo della larghezza) e il testo giustificato a destra (due terzi,
-     al massimo 46rem);
+     terzo della larghezza) e il testo a destra (due terzi, al massimo
+     46rem): giustificato il paragrafo "Come si studia", allineate a
+     sinistra le voci degli elenchi (scelta di Alessandra, 10 novembre
+     2026);
   3. "Quadro orario" e sotto il pulsante secondario "Confronta i
      percorsi ›" (su una riga anche a 375 pixel), che porta a
      `liceo.html#confronto`;
@@ -293,10 +295,15 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
       sinistra. Il testo in `liceo.txt` resta intero;
   - Colonne strette, sillabazione più frequente (`hyphenate-limit-chars:
     6 3 3`) per non lasciare buchi fra le parole: le frasi "In questo
-    indirizzo imparerai…" degli indirizzi nella home; e il testo dei tre
-    blocchi delle pagine dei percorsi, nelle righe con il titolo a
-    sinistra (con 10 4 4 restavano righe con spazi molto larghi); nelle
-    voci degli elenchi il trattino grigio resta fuori, a sinistra.
+    indirizzo imparerai…" degli indirizzi nella home; e il paragrafo
+    "Come si studia" dei tre blocchi delle pagine dei percorsi, nelle
+    righe con il titolo a sinistra (con 10 4 4 restavano righe con spazi
+    molto larghi).
+  - Le voci degli elenchi dei tre blocchi ("Che cosa si impara", "A chi
+    si rivolge") **non** sono giustificate: allineate a sinistra anche al
+    computer, senza sillabazione (scelta di Alessandra, 10 novembre 2026:
+    restavano righe con spazi larghi e una parola sola a capo); il
+    trattino grigio resta fuori, a sinistra.
   - Le spiegazioni brevi dei tre percorsi in `liceo.html` **non** sono
     giustificate: allineate a sinistra anche al computer, senza
     sillabazione (scelta di Alessandra, 9 novembre 2026: si spezzavano

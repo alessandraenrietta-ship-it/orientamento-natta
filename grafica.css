@@ -1306,9 +1306,10 @@ button.pulsante {
      - paragrafi larghi (due colonne): sillabazione solo per parole di
        almeno 10 lettere, con almeno 4 lettere prima e dopo il taglio
        (10 4 4);
-     - colonne strette (frasi degli indirizzi nella home) e righe dei
-       tre blocchi: sillabazione più frequente (6 3 3), per non
-       lasciare buchi fra le parole.
+     - colonne strette (frasi degli indirizzi nella home) e paragrafo
+       "Come si studia" dei tre blocchi: sillabazione più frequente
+       (6 3 3), per non lasciare buchi fra le parole.
+   Le voci degli elenchi dei tre blocchi restano a sinistra.
    Le spiegazioni brevi dei tre percorsi in liceo.html invece restano
    allineate a sinistra, senza sillabazione (scelta di Alessandra,
    9 novembre 2026: nelle colonne strette si spezzavano parole come
@@ -1332,9 +1333,9 @@ button.pulsante {
 
   /* I tre blocchi delle pagine dei percorsi: tre righe una sotto
      l'altra, separate dal filetto; in ogni riga il titolo a sinistra
-     (un terzo) e il testo a destra (due terzi, al massimo 46rem),
-     giustificato. Nelle voci degli elenchi il trattino grigio resta
-     fuori, a sinistra. */
+     (un terzo) e il testo a destra (due terzi, al massimo 46rem):
+     giustificato il paragrafo, a sinistra le voci degli elenchi. Nelle
+     voci il trattino grigio resta fuori, a sinistra. */
   .blocchi { grid-template-columns: 1fr; gap: 2rem; }
   .blocco {
     display: grid;
@@ -1345,8 +1346,11 @@ button.pulsante {
   .blocco + .blocco { padding-top: 2rem; border-top: 1px solid var(--filetto); }
   .blocco > :not(.blocco-titolo) { grid-column: 2; max-width: 46rem; }
   .blocco-titolo { grid-column: 1; margin-bottom: 0; }
-  .blocco > p,
-  .blocco-elenco li {
+  /* Giustificato solo il paragrafo ("Come si studia"); le voci degli
+     elenchi restano a sinistra (scelta di Alessandra, 10 novembre 2026:
+     nelle voci di una riga e poco più restavano spazi larghi e una
+     parola sola a capo) */
+  .blocco > p {
     text-align: justify;
     -webkit-hyphens: auto;
             hyphens: auto;
