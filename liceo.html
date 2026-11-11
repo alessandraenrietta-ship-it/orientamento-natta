@@ -16,7 +16,7 @@
 
   <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
        DI UNO in tutte le pagine che lo caricano. -->
-  <link rel="stylesheet" href="grafica.css?v=26">
+  <link rel="stylesheet" href="grafica.css?v=27">
   <link rel="icon" href="immagini/logo-natta.png">
 </head>
 <body>
@@ -66,19 +66,20 @@
     </section>
 
     <!-- Le ore a confronto: una riga per percorso con le ore totali alla
-         settimana, anno per anno, calcolate dal sito. Sotto, "Che cosa
-         cambia": si apre e si chiude da solo (details), senza JavaScript.
+         settimana, anno per anno, calcolate dal sito. Subito sotto,
+         sempre visibile, "Le materie in più": le ore in più di ogni
+         percorso rispetto a Scienze applicate.
          Le pagine dei percorsi portano qui (liceo.html#confronto). -->
     <section class="sezione" id="confronto" aria-labelledby="titolo-confronto">
       <div class="interno">
         <h2 class="titolo-sezione" id="titolo-confronto"></h2>
         <p class="nota-tabella" id="nota-confronto"></p>
         <table class="orario orario-confronto" id="tabella-confronto"></table>
-        <details class="differenze" id="differenze">
-          <summary class="pulsante pulsante-vuoto" id="pulsante-differenze"></summary>
+        <div class="differenze" id="differenze">
+          <h3 class="titolo-sezione" id="titolo-differenze"></h3>
           <p class="nota-tabella" id="nota-differenze"></p>
           <table class="orario orario-differenze" id="tabella-differenze"></table>
-        </details>
+        </div>
       </div>
     </section>
 
@@ -131,7 +132,7 @@
 
   <script src="js/contenuti.js?v=2"></script>
   <script src="js/comuni.js?v=3"></script>
-  <script src="js/grafica.js?v=12"></script>
-  <script src="js/liceo.js?v=15"></script>
+  <script src="js/grafica.js?v=13"></script>
+  <script src="js/liceo.js?v=17"></script>
 </body>
 </html>

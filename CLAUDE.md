@@ -225,15 +225,18 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
     stile del quadro orario con una riga per percorso (trattino nel tono
     e nome) e le ore totali alla settimana anno per anno, calcolate dal
     sito: QUADRO BASE più le ore della colonna "ore in più" della
-    tabella PERCORSI di `liceo.txt`, mai scritte a mano. Sotto, il
-    pulsante secondario "Le materie in più ›", fatto con details/summary
-    (niente JavaScript): chiuso all'apertura; aperto, la freccia ruota di
-    90 gradi (senza movimento con `prefers-reduced-motion`) e compaiono
-    la riga grigia "Le ore in più alla settimana rispetto a Scienze
-    applicate, che è il quadro di base." e una tabella con la stessa
-    intestazione: per ogni percorso con ore in più una riga-titolo con
-    trattino e nome maiuscolo nel tono, poi le materie con "+2", "+1" in
-    verde e il trattino grigio dove non ce ne sono. Tutto in 375 pixel.
+    tabella PERCORSI di `liceo.txt`, mai scritte a mano. Subito sotto,
+    sempre visibile (niente pulsante, dall'11 novembre 2026), "Le
+    materie in più": titolo nello stesso stile di "Le ore a confronto"
+    (campo `titolo-differenze`), la riga grigia "Le ore in più alla
+    settimana rispetto a Scienze applicate, che è il quadro di base." e
+    una tabella con la stessa intestazione: per ogni percorso con ore in
+    più una riga-titolo con trattino e nome maiuscolo nel tono, poi le
+    materie con "+2", "+1" in verde e il trattino grigio dove non ce ne
+    sono. Tutto in 375 pixel. Il contenuto della pagina resta nascosto
+    finché i testi non sono letti, quindi il browser da solo non trova
+    l'ancora `#confronto`: ci porta `js/liceo.js` (`vaiAllAncora`), dopo
+    che caratteri e disegno sono caricati.
     Il confronto fra indirizzi (tecnici e liceo) si rimanda a quando ci
     saranno i quadri dei tecnici: ore totali e ore di laboratorio, non
     materia per materia.
@@ -252,7 +255,8 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   quest'ordine, separate dai filetti grigi:
   1. apertura bianca centrata: occhiello grigio maiuscolo "Liceo
      scientifico, opzione Scienze applicate", il nome del percorso in
-     verde, poi la spiegazione in blu notte allineata a sinistra;
+     verde, poi la spiegazione in blu notte (giustificata al computer,
+     a sinistra sul telefono);
   2. "Che cosa si impara" (elenco), "Come si studia" (paragrafo), "A chi
      si rivolge" (elenco): non sono schede, ma tre parti con il titolo
      in verde e il testo sotto; le voci degli elenchi hanno un trattino
@@ -260,9 +264,9 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      filetto, con il titolo sopra; al computer (dai 56rem) tre righe una
      sotto l'altra, separate dal filetto, con il titolo a sinistra (un
      terzo della larghezza) e il testo a destra (due terzi, al massimo
-     46rem): giustificato il paragrafo "Come si studia", allineate a
-     sinistra le voci degli elenchi (scelta di Alessandra, 10 novembre
-     2026);
+     46rem): giustificati il paragrafo "Come si studia" e le voci degli
+     elenchi, con il trattino fuori, a sinistra (scelta di Alessandra,
+     11 novembre 2026);
   3. "Quadro orario" e sotto il pulsante secondario "Confronta i
      percorsi ›" (su una riga anche a 375 pixel), che porta a
      `liceo.html#confronto`;
@@ -291,23 +295,20 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
       così nessuna frase passa da una colonna all'altra e le colonne
       possono finire ad altezze diverse; nell'apertura le due colonne
       stanno centrate sotto il titolo. Sotto i 66rem, e per i testi più
-      corti, una colonna sola larga al massimo 46rem, allineata a
-      sinistra. Il testo in `liceo.txt` resta intero;
+      corti, una colonna sola larga al massimo 46rem (giustificata dai
+      56rem). Il testo in `liceo.txt` resta intero;
+    Sempre con 10 4 4, giustificate: la spiegazione delle pagine dei
+    percorsi e "Dopo il diploma" anche quando sono più corti, e le note
+    grigie.
   - Colonne strette, sillabazione più frequente (`hyphenate-limit-chars:
     6 3 3`) per non lasciare buchi fra le parole: le frasi "In questo
-    indirizzo imparerai…" degli indirizzi nella home; e il paragrafo
-    "Come si studia" dei tre blocchi delle pagine dei percorsi, nelle
-    righe con il titolo a sinistra (con 10 4 4 restavano righe con spazi
-    molto larghi).
-  - Le voci degli elenchi dei tre blocchi ("Che cosa si impara", "A chi
-    si rivolge") **non** sono giustificate: allineate a sinistra anche al
-    computer, senza sillabazione (scelta di Alessandra, 10 novembre 2026:
-    restavano righe con spazi larghi e una parola sola a capo); il
-    trattino grigio resta fuori, a sinistra.
-  - Le spiegazioni brevi dei tre percorsi in `liceo.html` **non** sono
-    giustificate: allineate a sinistra anche al computer, senza
-    sillabazione (scelta di Alessandra, 9 novembre 2026: si spezzavano
-    parole come "pen-siero" e restavano righe con spazi larghi).
+    indirizzo imparerai…" degli indirizzi nella home; le spiegazioni
+    brevi dei tre percorsi in `liceo.html`; il paragrafo "Come si
+    studia" e le voci degli elenchi ("Che cosa si impara", "A chi si
+    rivolge") dei tre blocchi delle pagine dei percorsi. Il trattino
+    grigio delle voci resta fuori dal testo, a sinistra. (Scelta di
+    Alessandra, 11 novembre 2026: tutti i testi di più righe giustificati
+    al computer; prima voci e spiegazioni brevi erano a sinistra.)
   - Le parole con il trattino ("post-diploma") non si spezzano mai, né
     dopo il trattino né con la sillabazione: `js/grafica.js`
     (`Grafica.paroleIntere`) le chiude in un pezzo intero, senza
