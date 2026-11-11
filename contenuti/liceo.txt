@@ -1,7 +1,6 @@
 # TESTI DELLA PAGINA DEL LICEO E DEI TRE PERCORSI
 # Le righe che iniziano con # sono commenti: il sito le ignora.
 # Il formato è spiegato in LEGGIMI.md.
-# I testi con "(da definire)" sono provvisori.
 # Il claim del liceo non sta qui: si prende da home.txt.
 #
 # Nelle sezioni dei tre percorsi (in fondo al file):
@@ -118,13 +117,15 @@ a-chi: A chi desidera acquisire una solida preparazione culturale, scientifica e
 dopo-il-diploma: Il diploma consente l'accesso a qualsiasi corso di laurea. La preparazione acquisita risulta particolarmente adeguata alla prosecuzione degli studi universitari in ambito scientifico, matematico, tecnologico, informatico, medico e sanitario, senza escludere corsi di studio in ambito umanistico, economico e sociale. In alternativa, è possibile proseguire la formazione attraverso un ITS Academy, un corso post-diploma in cui si conseguono competenze tecniche e professionali specialistiche, oppure inserirsi nel mondo del lavoro.
 
 == LICEO MATEMATICO ==
-spiegazione: Il Liceo Matematico è un percorso del Liceo scientifico, opzione Scienze applicate, che dall'anno scolastico 2026/27 entra a far parte di una sperimentazione nazionale autorizzata e accompagnata dal Ministero dell'Istruzione e del Merito. Alle materie di Scienze applicate si aggiunge il Laboratorio Matematico, con due ore settimanali nei primi due anni e un'ora negli ultimi tre. Il laboratorio propone un approccio interdisciplinare, in cui la matematica dialoga con gli altri ambiti del sapere, scientifici e umanistici. Le attività permettono di scoprire nuovi collegamenti, sviluppare il ragionamento e applicare il pensiero matematico a contesti diversi.
-# impara: [DA COMPLETARE: una cosa che si impara]
-# impara: [DA COMPLETARE: un'altra cosa che si impara]
-# come-si-studia: [DA COMPLETARE: come si studia]
-# a-chi: [DA COMPLETARE: a chi si rivolge]
-# a-chi: [DA COMPLETARE: a chi altro si rivolge]
-# dopo-il-diploma: [DA COMPLETARE: università, ITS, lavoro]
+spiegazione: Il Liceo Matematico è un percorso del Liceo scientifico, opzione Scienze applicate, che a partire dall'anno scolastico 2026/27 entra a far parte di una sperimentazione nazionale autorizzata e accompagnata dal Ministero dell'Istruzione e del Merito. Alle materie di Scienze applicate si aggiunge il Laboratorio Matematico, con due ore settimanali nei primi due anni e un'ora negli ultimi tre. Il percorso, che è inserito nella Rete Nazionale dei Licei Matematici (Re.Na.Li.Mat.) e collabora con il Dipartimento di Matematica dell'Università di Torino, ha l'obiettivo di valorizzare il ruolo della matematica nella formazione liceale, evidenziando la dimensione interdisciplinare e favorendo una visione unitaria della conoscenza.
+impara: A osservare, formulare congetture e dimostrarle, sviluppando capacità critiche, argomentative e riflessive.
+impara: A riconoscere la matematica come linguaggio comune ai saperi scientifici e umanistici: nei fenomeni naturali, nell'arte, nella musica, nella filosofia e nella tecnologia.
+impara: Ad affrontare problemi complessi con creatività, individuando strategie e strumenti per risolverli.
+come-si-studia: Alle lezioni si affianca il Laboratorio Matematico, basato sulla didattica laboratoriale: si esplora, si modellizza, si costruisce e si collabora. Le attività sono organizzate in moduli interdisciplinari, che mettono in relazione la matematica con le scienze e con le discipline umanistiche. Il laboratorio è pensato per tutte le studentesse e gli studenti della classe, con particolare attenzione a garantire a ciascuno, compresi gli alunni con bisogni educativi speciali, la piena fruizione dell'esperienza formativa.
+a-chi: A chi si interessa di matematica, scienze e tecnologia, ma non vuole rinunciare a solide basi umanistiche.
+a-chi: A chi è curioso, ama le sfide intellettuali e vuole mettersi alla prova con nuovi modi di imparare.
+a-chi: A chi vuole capire come la matematica descriva il mondo e sia alla base delle tecnologie di oggi.
+dopo-il-diploma: Il percorso si conclude con l'esame di Stato e il diploma ordinari del Liceo scientifico, opzione Scienze applicate: la sperimentazione non modifica l'esame di Stato né il titolo di studio. Il diploma dà accesso a tutti i corsi di laurea; la preparazione è particolarmente adatta agli studi scientifici, matematici, tecnologici e informatici, ma offre basi solide anche per i corsi umanistici e sociali. In alternativa, è possibile proseguire la formazione attraverso un ITS Academy, un corso post-diploma che forma tecnici superiori, oppure entrare nel mondo del lavoro.
 
 == LICEO DIGITALE ==
 spiegazione: Il Liceo Digitale arricchisce le materie del Liceo scientifico, opzione Scienze applicate, con ore dedicate a Intelligenza artificiale e coding, Laboratorio del pensiero critico e Diritto. Qui la tecnologia non è soltanto uno strumento da utilizzare, ma un mondo da esplorare, comprendere e interpretare. Le discipline scientifiche, tecnologiche e umanistiche si incontrano per sviluppare competenze digitali, creatività e capacità di analisi. Studentesse e studenti imparano così a comprendere le trasformazioni del presente, a interrogarsi sulle opportunità e sulle sfide dell'intelligenza artificiale e a diventare protagonisti consapevoli dell'innovazione.
