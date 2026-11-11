@@ -148,3 +148,10 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Turni a 14 px sul telefono e 16 al computer, come prima; orario e "Prenota ›" sempre su una riga (controllato da 320 px). Al computer restano le tre colonne. Il foglietto sta a metà altezza dei due turni (scelta di Alessandra, dopo una prima prova con il foglietto in alto).
 - Tolto il pulsante "Prenota il tuo open day ›" dalla home, da liceo.html e dalle pagine dei percorsi: con gli orari prenotabili era un doppione. Il campo "prenotazione" resta, il campo "come-prenotare" è stato tolto. Senza date future resta la frase "Le date dei prossimi open day saranno pubblicate qui.".
 - Dentro il pulsante del turno più spazio a destra, dopo "Prenota ›" (scelta di Alessandra: prima sembrava schiacciato contro il bordo). Orario e "Prenota ›" restano su una riga anche a 320 px.
+
+## Pagine del liceo (decise l'11 novembre 2026)
+- Al computer (dai 56rem) tutti i testi di più righe sono giustificati: anche le voci degli elenchi (trattino fuori, a sinistra) e le spiegazioni brevi dei percorsi in liceo.html, con sillabazione 6 3 3. Sostituisce le scelte del 9 e del 10 novembre (voci e spiegazioni brevi a sinistra). Sul telefono tutto a sinistra.
+- "Le materie in più" in liceo.html sempre visibile sotto i totali, con un titolo come gli altri: tolto il pulsante (details).
+- "Confronta i percorsi ›" porta davvero all'inizio di "Le ore a confronto": prima la pagina restava in cima, perché il contenuto era ancora nascosto quando il browser cercava l'ancora.
+- Trattino delle voci: nessuna differenza misurata fra le voci; l'impressione di un trattino più scuro veniva da schermate rimpicciolite.
+- Liceo Digitale, terza voce di "A chi si rivolge": "A chi vuole un liceo scientifico completo, con in più ore dedicate al digitale."

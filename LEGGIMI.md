@@ -156,7 +156,8 @@ percorsi (`liceo-scienze-applicate.html`, `liceo-matematico.html`,
   che sente solo chi usa un lettore di schermo (`titolo-percorsi`), e i
   testi delle sezioni nuove:
   "Le ore a confronto" (`titolo-confronto`, `nota-confronto`,
-  `intestazione-percorso`, `pulsante-differenze`, `nota-differenze`),
+  `intestazione-percorso`; per "Le materie in più", sempre visibile
+  sotto, `titolo-differenze` e `nota-differenze`),
   il pulsante sotto il quadro orario (`pulsante-confronta`) e "Vieni a
   trovarci." (`titolo-visita`, `titolo-altri`).
 - `== QUADRO BASE ==`: le ore settimanali di Scienze applicate, comuni

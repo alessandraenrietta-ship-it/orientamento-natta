@@ -33,13 +33,13 @@ titolo-dopo: Dopo il diploma
 # torna-liceo: Torna al liceo
 #
 # La sezione "Le ore a confronto" di liceo.html: titolo, riga grigia
-# sotto il titolo, intestazione della prima colonna della tabella,
-# scritta del pulsante che apre il dettaglio e riga grigia del
-# dettaglio. Le ore le calcola il sito dalle tabelle qui sotto.
+# sotto il titolo, intestazione della prima colonna della tabella;
+# poi titolo e riga grigia della seconda tabella, "Le materie in più",
+# sempre visibile. Le ore le calcola il sito dalle tabelle qui sotto.
 titolo-confronto: Le ore a confronto
 nota-confronto: Ore di lezione alla settimana, anno per anno.
 intestazione-percorso: Percorso
-pulsante-differenze: Le materie in più
+titolo-differenze: Le materie in più
 nota-differenze: Le ore in più alla settimana rispetto a Scienze applicate, che è il quadro di base.
 # Il pulsante sotto il quadro orario delle pagine dei percorsi, che
 # porta a "Le ore a confronto" in liceo.html
@@ -135,5 +135,5 @@ impara: A collegare le scoperte della scienza alla riflessione filosofica e alla
 come-si-studia: Alle lezioni si affiancano attività pratiche e laboratoriali, in cui si osserva, si crea, si costruisce e si collabora, esplorando da vicino anche il funzionamento dell'intelligenza artificiale. Le proposte sono pensate per coinvolgere tutte le studentesse e tutti gli studenti, con particolare attenzione a garantire a ciascuno, compresi quelli con bisogni educativi speciali, la piena partecipazione all'esperienza formativa e la sua fruizione.
 a-chi: A chi si interessa di scienze e tecnologia, ma non vuole rinunciare a solide basi umanistiche.
 a-chi: A chi è curioso, ama sperimentare e vuole mettersi alla prova con nuovi modi di imparare.
-a-chi: A chi vuole capire come funzionano il mondo digitale e l'intelligenza artificiale.
+a-chi: A chi vuole un liceo scientifico completo, con in più ore dedicate al digitale.
 dopo-il-diploma: Il diploma consente di accedere a qualsiasi corso di laurea. Il percorso offre una preparazione particolarmente adatta agli studi scientifici, tecnologici e informatici, senza escludere la scelta di corsi universitari in ambito umanistico e sociale. In alternativa, è possibile proseguire la formazione attraverso un ITS Academy, un corso post-diploma che forma tecnici superiori, oppure entrare nel mondo del lavoro.

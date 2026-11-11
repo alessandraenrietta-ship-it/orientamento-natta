@@ -48,10 +48,13 @@ window.Grafica = (function () {
      spessore delle linee e farle disegnare una dopo l'altra (vedi
      grafica.css). Se il file non si legge, lo spazio resta vuoto e la
      pagina funziona lo stesso.
+     Restituisce una promessa che si compie quando il disegno è al suo
+     posto (o quando si è rinunciato): js/liceo.js la usa per sapere
+     quando la pagina ha la sua altezza definitiva.
      --------------------------------------------------------------- */
 
   function disegno(contenitore) {
-    fetch(FILE_DISEGNO)
+    return fetch(FILE_DISEGNO)
       .then(function (risposta) {
         if (!risposta.ok) { throw new Error(risposta.status); }
         return risposta.text();

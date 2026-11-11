@@ -65,13 +65,34 @@
         paginaLiceo(liceo, home);
       }
       visita(liceo, comuni, percorso);
+      var prima = window.pageYOffset;
       document.getElementById("contenuto").hidden = false;
-      if (!percorso) { G.disegno(document.getElementById("disegno")); }
+      var attese = [document.fonts ? document.fonts.ready : null];
+      if (!percorso) { attese.push(G.disegno(document.getElementById("disegno"))); }
+      Promise.all(attese).then(function () { vaiAllAncora(prima); });
     })
     .catch(function (errore) {
       console.error(errore);
       document.getElementById("avviso").hidden = false;
     });
+
+
+  /* L'ANCORA NELL'INDIRIZZO (per esempio liceo.html#confronto, il
+     pulsante "Confronta i percorsi" delle pagine dei percorsi).
+     Quando la pagina si apre, il contenuto è ancora nascosto: il
+     browser non trova la sezione e resta in cima. Quindi ci si va qui,
+     dopo aver mostrato il contenuto e dopo che caratteri e disegno sono
+     caricati, perché cambiano l'altezza della pagina.
+     Se intanto chi legge ha già fatto scorrere la pagina, non si
+     tocca nulla. */
+  function vaiAllAncora(prima) {
+    var nome = window.location.hash.slice(1);
+    if (!nome) { return; }
+    try { nome = decodeURIComponent(nome); } catch (e) { return; }
+    var dove = document.getElementById(nome);
+    if (!dove || window.pageYOffset !== prima) { return; }
+    window.requestAnimationFrame(function () { dove.scrollIntoView(); });
+  }
 
 
   /* I tre percorsi della tabella PERCORSI di liceo.txt, controllati.
@@ -207,9 +228,9 @@
      LE ORE A CONFRONTO (liceo.html, id="confronto")
      Una tabella nello stile del quadro orario, con una riga per
      percorso e le ore totali alla settimana anno per anno, calcolate
-     dal sito: QUADRO BASE più le ore in più del percorso. Sotto, il
-     pulsante "Che cosa cambia ›" (details/summary: si apre e si chiude
-     senza JavaScript) con le ore in più rispetto a Scienze applicate.
+     dal sito: QUADRO BASE più le ore in più del percorso. Subito sotto,
+     sempre visibile, "Le materie in più": le ore in più rispetto a
+     Scienze applicate.
      --------------------------------------------------------------- */
 
   function confronto(liceo) {
@@ -241,8 +262,8 @@
     });
     tabella.appendChild(corpo);
 
-    /* "Che cosa cambia": le ore in più di ogni percorso che ne ha */
-    C.scrivi(document.getElementById("pulsante-differenze"), liceo.campo("LICEO", "pulsante-differenze"));
+    /* "Le materie in più": le ore in più di ogni percorso che ne ha */
+    C.scrivi(document.getElementById("titolo-differenze"), liceo.campo("LICEO", "titolo-differenze"));
     C.scrivi(document.getElementById("nota-differenze"), liceo.campo("LICEO", "nota-differenze"));
     var dettaglio = document.getElementById("tabella-differenze");
     dettaglio.appendChild(elemento("caption", "solo-lettori", TESTI.didascaliaDifferenze));
