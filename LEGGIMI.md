@@ -107,9 +107,11 @@ note. Non serve toccare nessun altro file.
 
 - `== HOME ==` è la sezione dei serali nella pagina iniziale: i campi
   `titolo`, `tipo`, `claim`, `in breve`, `pagina`, `stato` e una
-  tabella con i percorsi, `nome | colore` (meccanica o grafica: il
-  colore del trattino accanto al nome). I nomi dei campi non vanno
-  cambiati.
+  tabella con i percorsi, `nome | colore | pagina` (colore: meccanica
+  o grafica, il colore del trattino accanto al nome; pagina: la pagina
+  dell'indirizzo del diurno a cui porta il nome, per esempio
+  `meccanica.html`; se è vuota, il nome non è un collegamento). I nomi
+  dei campi non vanno cambiati.
 - `== PAGINA ==` contiene le informazioni per la futura pagina dei
   serali. Oggi nella home si usano solo `pulsante` e `link`: finché la
   pagina dei serali è "in preparazione", in fondo alla sezione dei

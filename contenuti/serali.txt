@@ -23,15 +23,17 @@ in breve: Per chi lavora o vuole riprendere gli studi.
 pagina: serali.html
 stato: in preparazione
 #
-# I percorsi serali, uno per riga, due colonne:
+# I percorsi serali, uno per riga, tre colonne:
 #
-#   nome | colore
+#   nome | colore | pagina
 #
 #   colore   meccanica oppure grafica: il trattino accanto al nome ha il
 #            colore dell'indirizzo (arancione per meccanica, rosa per
 #            grafica). Non va cambiato.
-Meccanica e meccatronica | meccanica
-Grafica e comunicazione | grafica
+#   pagina   la pagina dell'indirizzo del diurno a cui porta il nome.
+#            Si può lasciare vuota: allora il nome non è un collegamento.
+Meccanica e meccatronica | meccanica | meccanica.html
+Grafica e comunicazione | grafica | grafica.html
 
 == PAGINA ==
 # Le informazioni per la futura pagina dei serali (serali.html). Oggi
@@ -52,10 +54,12 @@ Grafica e comunicazione | grafica
 titolo: Corsi serali per adulti
 etichetta: Anno scolastico 2026/27
 a chi si rivolge: A chi lavora o vuole riprendere gli studi.
-# verificare con chi coordina i serali prima di pubblicare, anche il
-# nome del diploma dopo il decreto-legge 170/2026 (gli istituti tecnici
-# diventano licei tecnologici)
-titolo di studio: Diploma di istruzione tecnica, lo stesso del corso diurno.
+# verificare con chi coordina i serali prima di pubblicare. Dal 13
+# novembre 2026 la dicitura è "liceo tecnologico" (decreto-legge
+# 170/2026, che rinomina gli istituti tecnici in licei tecnologici; prima
+# era "Diploma di istruzione tecnica"): da controllare il nome esatto del
+# diploma sulla guida Unica.
+titolo di studio: Diploma di liceo tecnologico, lo stesso del corso diurno.
 indirizzi: Meccanica e meccatronica; Grafica e comunicazione.
 orari: [DA COMPLETARE: giorni e orari delle lezioni]
 durata e frequenza: [DA COMPLETARE: durata del percorso e frequenza richiesta]

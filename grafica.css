@@ -725,6 +725,9 @@ button.pulsante {
    trattino e come i nomi degli indirizzi del diurno: arancione e rosa
    (scelta di Alessandra, 27 ottobre 2026 sera) */
 .serali-percorsi li { color: var(--tono, var(--blu-notte)); }
+/* I nomi dei percorsi serali sono collegamenti alle pagine degli
+   indirizzi del diurno: restano nel colore dell'indirizzo, sottolineati */
+.serali-percorsi a { color: inherit; }
 
 
 /* -----------------------------------------------------------------
