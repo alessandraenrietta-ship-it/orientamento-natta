@@ -307,6 +307,19 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   (minuscole a inizio voce, punti e virgola, "elettro-meccanici",
   "manutenere", "ed utilizzo"): non si correggono. In home le due schede sono "pronta", con il pulsante
   "Scopri di più ›".
+- Pagine dei due corsi serali (`serale-meccanica.html`,
+  `serale-grafica.html`, dal 13 novembre 2026): stessa struttura e
+  stessi testi delle pagine del diurno (file
+  `contenuti/serale-meccanica.txt`, `contenuti/serale-grafica.txt`),
+  senza la frase sulla durata del percorso ("Il percorso dura cinque
+  anni…"). Le riempie `js/indirizzo.js` (attributo `data-serale` nel
+  `<body>`): occhiello grigio "Corso serale per adulti" (campo
+  `occhiello` del file), nome del corso dalla tabella HOME di
+  `serali.txt` (anche il serale ha Energia: "Meccanica, meccatronica ed
+  energia"); in fondo, al posto di "Vieni a trovarci.", il pulsante
+  "Come iscriversi ›" verso la pagina della scuola (campi `pulsante` e
+  `link` della sezione PAGINA di `serali.txt`, nuova scheda). In home i
+  nomi dei corsi serali portano a queste pagine.
 - **Giustificato: l'unica eccezione all'allineamento a sinistra, solo al
   computer (dai 56rem in su).** Sotto i 56rem (telefono, tablet stretti)
   tutto resta a sinistra. Scelta di Alessandra; da verificare con Chrome
@@ -480,7 +493,7 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      La scheda del liceo nella home è "pronta" dal 27 ottobre 2026 (via
      libera di Alessandra con la pubblicazione della grafica a
      cartolina).
-  4. **Corsi serali per adulti 2026/27**: Meccanica e meccatronica;
+  4. **Corsi serali per adulti 2026/27**: Meccanica, meccatronica ed energia;
      Grafica e comunicazione.
 - Materie plastiche: **non si presenta** (decisione in corso).
 - Quadri orari dei tecnici: solo **nuovo ordinamento (DM 29/2026)**, li
@@ -685,10 +698,10 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   viola. Valgono anche per il disegno (`immagini/linee-scuola.svg`) e
   per la cartolina. Nei
   serali il trattino e il nome del corso hanno il colore dell'indirizzo
-  (Meccanica e meccatronica arancione, Grafica e comunicazione rosa;
-  il nome dal 27 ottobre 2026 sera). Dal 13 novembre 2026 il nome è un
-  collegamento, sottolineato nello stesso colore, alla pagina
-  dell'indirizzo del diurno (`meccanica.html`, `grafica.html`; terza
+  (Meccanica, meccatronica ed energia arancione, Grafica e comunicazione
+  rosa; il nome dal 27 ottobre 2026 sera). Dal 13 novembre 2026 il nome
+  è un collegamento, sottolineato nello stesso colore, alla pagina del
+  corso serale (`serale-meccanica.html`, `serale-grafica.html`; terza
   colonna della tabella in `serali.txt`).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo
   nel colore di un indirizzo (le date degli open day non lo hanno).

@@ -1,0 +1,48 @@
+# TESTI DELLA PAGINA DEL CORSO SERALE DI GRAFICA E COMUNICAZIONE (serale-grafica.html)
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+#
+# Stessi testi della pagina del diurno (contenuti/grafica.txt), senza la
+# frase sulla durata del percorso. Il nome del corso non sta qui: si
+# prende dalla tabella HOME di serali.txt (prima colonna, riga con questa
+# pagina), così si cambia in un posto solo. In fondo alla pagina, al
+# posto delle date degli open day, il pulsante "Come iscriversi" con la
+# scritta e il link di serali.txt (sezione PAGINA).
+#
+# "Adatto a chi", "Imparerai a" e "Potrai lavorare" vengono alla lettera
+# dalla guida Unica del Ministero. Tutti i testi sono copiati così come
+# sono: minuscole a inizio voce, punti e virgola. Non si correggono.
+#
+# Campi:
+#   occhiello          la riga grigia sopra il nome
+#   apertura           il paragrafo sotto il nome, su una colonna
+#   adatto             "Adatto a chi": una riga per voce
+#   imparerai          "Imparerai a": una riga per voce
+#   lavorare           "Potrai lavorare", dentro "Dopo il diploma": un paragrafo
+#   studi              "Potrai continuare gli studi": una riga per voce
+# Le voci degli elenchi si scrivono una per riga, ripetendo ogni volta il
+# nome del campo. Una parte senza testo non compare.
+# I titoli delle sezioni sono in fondo, nella sezione TITOLI.
+
+== PAGINA ==
+occhiello: Corso serale per adulti
+apertura: Grafica e comunicazione introduce nel mondo della comunicazione, personale e di massa, e insegna a capire come essa si sviluppa attraverso la grafica, i linguaggi multimediali e le nuove tecnologie.
+adatto: ha interesse per la comunicazione attraverso forme di espressione visive e grafiche, e linguaggi multimediali;
+adatto: vuole realizzare prodotti di comunicazione che valorizzano creatività e originalità, e che siano fruibili attraverso differenti canali;
+adatto: vuole lavorare nell'industria grafica, nell'editoria e nel settore audiovisivo.
+imparerai: muoverti nel campo della comunicazione interpersonale e di massa;
+imparerai: progettare e realizzare prodotti di carta e cartone;
+imparerai: utilizzare i linguaggi dei colori per la comunicazione visiva;
+imparerai: gestire i processi per la realizzazione di comunicazione grafica convenzionale e multimediale;
+imparerai: utilizzare software per la modellizzazione 3D e la progettazione CAD.
+lavorare: Tra le figure professionali più richieste del settore cui accedere anche con livelli di istruzione post-diploma: grafici, pubblicitari, grafici di redazione, disegnatori industriali, copywriter, art director.
+studi: ITS Academy - Istituti Tecnologici Superiori
+studi: Università
+
+== TITOLI ==
+# I titoli delle sezioni, uguali nelle pagine dei due corsi serali
+titolo-adatto: Adatto a chi
+titolo-imparerai: Imparerai a
+titolo-dopo: Dopo il diploma
+titolo-lavorare: Potrai lavorare
+titolo-studi: Potrai continuare gli studi
