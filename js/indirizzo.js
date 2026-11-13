@@ -54,7 +54,7 @@
 
   /* L'apertura: la riga grigia ("Liceo tecnologico", colonna "tipo") e
      il nome (colonna "nome") dalla riga di home.txt che porta a questa
-     pagina; sotto, la frase di questo indirizzo. */
+     pagina; sotto, il paragrafo di apertura di questo indirizzo. */
   function apertura(testi, home) {
     var riga = home.righe("INDIRIZZI").filter(function (r) {
       return (r[5] || "").toLowerCase() === pagina.toLowerCase();
@@ -67,11 +67,15 @@
     if (riga[1]) { C.scrivi(etichetta, riga[1]); } else { etichetta.hidden = true; }
     C.scrivi(document.getElementById("titolo"), riga[0]);
 
-    var frase = document.getElementById("spiegazione");
-    if (testi.campo("PAGINA", "frase")) {
-      G.paroleIntere(C.scrivi(frase, testi.campo("PAGINA", "frase")));
+    /* Il paragrafo di apertura, su una colonna sola (scelta di
+       Alessandra, 13 novembre 2026: niente due colonne): giustificato al
+       computer, a sinistra sul telefono, come la spiegazione dei
+       percorsi del liceo (grafica.css, .spiegazione). */
+    var paragrafo = document.getElementById("spiegazione");
+    if (testi.campo("PAGINA", "apertura")) {
+      G.paroleIntere(C.scrivi(paragrafo, testi.campo("PAGINA", "apertura")));
     } else {
-      frase.hidden = true;
+      paragrafo.hidden = true;
     }
   }
 
