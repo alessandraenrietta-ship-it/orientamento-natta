@@ -319,7 +319,10 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   energia"); in fondo, al posto di "Vieni a trovarci.", il pulsante
   "Come iscriversi ›" verso la pagina della scuola (campi `pulsante` e
   `link` della sezione PAGINA di `serali.txt`, nuova scheda). In home i
-  nomi dei corsi serali portano a queste pagine.
+  nomi dei corsi serali portano a queste pagine. Con gli adulti niente
+  "tu": i titoli sono "Si imparerà a", "Si potrà lavorare", "Si potrà
+  continuare a studiare", e in Grafica la prima voce è "muoversi" (nel
+  diurno "muoverti", come nella guida Unica).
 - **Giustificato: l'unica eccezione all'allineamento a sinistra, solo al
   computer (dai 56rem in su).** Sotto i 56rem (telefono, tablet stretti)
   tutto resta a sinistra. Scelta di Alessandra; da verificare con Chrome

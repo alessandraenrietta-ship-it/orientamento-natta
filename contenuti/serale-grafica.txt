@@ -12,14 +12,16 @@
 # "Adatto a chi", "Imparerai a" e "Potrai lavorare" vengono alla lettera
 # dalla guida Unica del Ministero. Tutti i testi sono copiati così come
 # sono: minuscole a inizio voce, punti e virgola. Non si correggono.
+# Unica eccezione, solo qui nel serale: "muoversi" al posto di "muoverti"
+# (con gli adulti non si usa il "tu").
 #
 # Campi:
 #   occhiello          la riga grigia sopra il nome
 #   apertura           il paragrafo sotto il nome, su una colonna
 #   adatto             "Adatto a chi": una riga per voce
-#   imparerai          "Imparerai a": una riga per voce
-#   lavorare           "Potrai lavorare", dentro "Dopo il diploma": un paragrafo
-#   studi              "Potrai continuare gli studi": una riga per voce
+#   imparerai          "Si imparerà a": una riga per voce
+#   lavorare           "Si potrà lavorare", dentro "Dopo il diploma": un paragrafo
+#   studi              "Si potrà continuare a studiare": una riga per voce
 # Le voci degli elenchi si scrivono una per riga, ripetendo ogni volta il
 # nome del campo. Una parte senza testo non compare.
 # I titoli delle sezioni sono in fondo, nella sezione TITOLI.
@@ -30,7 +32,7 @@ apertura: Grafica e comunicazione introduce nel mondo della comunicazione, perso
 adatto: ha interesse per la comunicazione attraverso forme di espressione visive e grafiche, e linguaggi multimediali;
 adatto: vuole realizzare prodotti di comunicazione che valorizzano creatività e originalità, e che siano fruibili attraverso differenti canali;
 adatto: vuole lavorare nell'industria grafica, nell'editoria e nel settore audiovisivo.
-imparerai: muoverti nel campo della comunicazione interpersonale e di massa;
+imparerai: muoversi nel campo della comunicazione interpersonale e di massa;
 imparerai: progettare e realizzare prodotti di carta e cartone;
 imparerai: utilizzare i linguaggi dei colori per la comunicazione visiva;
 imparerai: gestire i processi per la realizzazione di comunicazione grafica convenzionale e multimediale;
@@ -40,9 +42,12 @@ studi: ITS Academy - Istituti Tecnologici Superiori
 studi: Università
 
 == TITOLI ==
-# I titoli delle sezioni, uguali nelle pagine dei due corsi serali
+# I titoli delle sezioni, uguali nelle pagine dei due corsi serali. Con gli
+# adulti non si usa il "tu": "Si imparerà a", "Si potrà lavorare", "Si potrà
+# continuare a studiare" (nel diurno "Imparerai a", "Potrai lavorare",
+# "Potrai continuare gli studi").
 titolo-adatto: Adatto a chi
-titolo-imparerai: Imparerai a
+titolo-imparerai: Si imparerà a
 titolo-dopo: Dopo il diploma
-titolo-lavorare: Potrai lavorare
-titolo-studi: Potrai continuare gli studi
+titolo-lavorare: Si potrà lavorare
+titolo-studi: Si potrà continuare a studiare
