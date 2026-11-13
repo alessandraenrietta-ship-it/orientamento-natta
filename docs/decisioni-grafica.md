@@ -162,3 +162,4 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - Testi della guida Unica copiati esattamente, senza correzioni e senza collegamenti.
 - In home, per i due indirizzi, "Pagina in preparazione" lascia il posto al pulsante "Scopri di più ›".
 - Corsi serali in home: i nomi dei due percorsi (Meccanica e meccatronica, Grafica e comunicazione) portano alle pagine degli indirizzi del diurno (meccanica.html, grafica.html); restano nel colore dell'indirizzo, sottolineati come collegamenti. Scelta di Alessandra.
+- Pagine di Meccanica e Grafica: al posto della frase "Per…" un paragrafo di apertura di due frasi (che cosa offre l'indirizzo; durata, esame di Stato e diploma), su una colonna sola: giustificato al computer, a sinistra sul telefono. Le due colonne (una frase per colonna, come la spiegazione dei percorsi del liceo) sono state provate e scartate da Alessandra.

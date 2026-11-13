@@ -289,7 +289,11 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   giustificato al computer):
   1. apertura bianca centrata: occhiello grigio "Liceo tecnologico" e
      nome in verde, presi dalla tabella INDIRIZZI di `home.txt` (colonne
-     tipo e nome, riga con questa pagina), poi la frase "Per…";
+     tipo e nome, riga con questa pagina), poi il paragrafo di apertura
+     (campo `apertura`) su una colonna, come la spiegazione dei
+     percorsi: giustificato al computer, a sinistra sul telefono (le due
+     colonne sono state provate e scartate da Alessandra il 13 novembre
+     2026);
   2. "Adatto a chi" (elenco), "Imparerai a" (elenco), "Dopo il diploma"
      come blocchi delle pagine dei percorsi (`.blocco`), con titolo
      verde e filetto; "Dopo il diploma" ha due sottotitoli nella riga
@@ -297,10 +301,11 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
      paragrafo) e "Potrai continuare gli studi" (elenco);
   3. "Vieni a trovarci." con i foglietti delle date, come in `liceo.html`.
   Niente quadro orario, niente "Confronta i percorsi", niente
-  collegamenti nei testi. I testi sono quelli della guida Unica del
-  Ministero, copiati esattamente (minuscole a inizio voce, punti e
-  virgola, "elettro-meccanici", "manutenere", "ed utilizzo"): non si
-  correggono. In home le due schede sono "pronta", con il pulsante
+  collegamenti nei testi. "Adatto a chi", "Imparerai a" e "Potrai
+  lavorare" sono presi alla lettera dalla guida Unica del Ministero;
+  tutti i testi sono copiati esattamente come li ha dati Alessandra
+  (minuscole a inizio voce, punti e virgola, "elettro-meccanici",
+  "manutenere", "ed utilizzo"): non si correggono. In home le due schede sono "pronta", con il pulsante
   "Scopri di più ›".
 - **Giustificato: l'unica eccezione all'allineamento a sinistra, solo al
   computer (dai 56rem in su).** Sotto i 56rem (telefono, tablet stretti)

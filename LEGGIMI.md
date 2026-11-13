@@ -209,9 +209,10 @@ materia in più si aggiunge una riga.
 ## I file dei due indirizzi del liceo tecnologico
 
 `meccanica.txt` (pagina `meccanica.html`) e `grafica.txt` (pagina
-`grafica.html`) sono fatti allo stesso modo. I testi vengono dalla guida
-Unica del Ministero e sono copiati così come sono, anche con le
-minuscole a inizio voce e i punti e virgola.
+`grafica.html`) sono fatti allo stesso modo. "Adatto a chi", "Imparerai a"
+e "Potrai lavorare" vengono alla lettera dalla guida Unica del Ministero;
+tutti i testi sono copiati così come sono, anche con le minuscole a
+inizio voce e i punti e virgola: non si correggono.
 
 Il **nome dell'indirizzo** e la **riga grigia sopra il nome** ("Liceo
 tecnologico") non stanno in questi file: la pagina li prende dalla
@@ -220,7 +221,7 @@ che ha questa pagina nella colonna `pagina`). Così si cambiano in un
 posto solo, e valgono anche per la home e la cartolina.
 
 - `== PAGINA ==`, i testi della pagina:
-  - `frase`: la frase sotto il nome, che comincia con "Per…";
+  - `apertura`: il paragrafo sotto il nome, su una colonna;
   - `adatto`: "Adatto a chi", un elenco: **una riga per voce**,
     ripetendo ogni volta `adatto:`;
   - `imparerai`: "Imparerai a", un elenco, una riga per voce;

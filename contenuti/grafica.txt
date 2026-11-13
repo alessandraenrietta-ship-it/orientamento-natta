@@ -6,11 +6,12 @@
 # tecnologico") non stanno qui: si prendono dalla tabella INDIRIZZI di
 # home.txt (colonne "nome" e "tipo"), così si cambiano in un posto solo.
 #
-# I testi vengono dalla guida Unica del Ministero e sono copiati così
-# come sono: minuscole a inizio voce, punti e virgola.
+# "Adatto a chi", "Imparerai a" e "Potrai lavorare" vengono alla lettera
+# dalla guida Unica del Ministero. Tutti i testi sono copiati così come
+# sono: minuscole a inizio voce, punti e virgola. Non si correggono.
 #
 # Campi:
-#   frase              la frase sotto il nome, nell'apertura
+#   apertura           il paragrafo sotto il nome, su una colonna
 #   adatto             "Adatto a chi": una riga per voce
 #   imparerai          "Imparerai a": una riga per voce
 #   lavorare           "Potrai lavorare", dentro "Dopo il diploma": un paragrafo
@@ -20,7 +21,7 @@
 # I titoli delle sezioni sono in fondo, nella sezione TITOLI.
 
 == PAGINA ==
-frase: Per entrare nel mondo della comunicazione, personale e di massa, e capire come essa si sviluppa attraverso la grafica, i linguaggi multimediali e le nuove tecnologie.
+apertura: Grafica e comunicazione introduce nel mondo della comunicazione, personale e di massa, e insegna a capire come essa si sviluppa attraverso la grafica, i linguaggi multimediali e le nuove tecnologie. Il percorso dura cinque anni, suddivisi in due bienni e un quinto anno, e si conclude con l'esame di Stato e il diploma di istruzione secondaria di secondo grado.
 adatto: ha interesse per la comunicazione attraverso forme di espressione visive e grafiche, e linguaggi multimediali;
 adatto: vuole realizzare prodotti di comunicazione che valorizzano creatività e originalità, e che siano fruibili attraverso differenti canali;
 adatto: vuole lavorare nell'industria grafica, nell'editoria e nel settore audiovisivo.
