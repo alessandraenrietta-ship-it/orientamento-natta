@@ -30,10 +30,14 @@ stato: in preparazione
 #   colore   meccanica oppure grafica: il trattino accanto al nome ha il
 #            colore dell'indirizzo (arancione per meccanica, rosa per
 #            grafica). Non va cambiato.
-#   pagina   la pagina dell'indirizzo del diurno a cui porta il nome.
-#            Si può lasciare vuota: allora il nome non è un collegamento.
-Meccanica e meccatronica | meccanica | meccanica.html
-Grafica e comunicazione | grafica | grafica.html
+#   pagina   la pagina del corso serale a cui porta il nome (serale-
+#            meccanica.html, serale-grafica.html: stessa struttura delle
+#            pagine del diurno, testi in contenuti/serale-meccanica.txt e
+#            serale-grafica.txt). Il nome è anche il titolo della
+#            pagina. Si può lasciare vuota: allora il nome
+#            non è un collegamento.
+Meccanica, meccatronica ed energia | meccanica | serale-meccanica.html
+Grafica e comunicazione | grafica | serale-grafica.html
 
 == PAGINA ==
 # Le informazioni per la futura pagina dei serali (serali.html). Oggi
@@ -60,7 +64,7 @@ a chi si rivolge: A chi lavora o vuole riprendere gli studi.
 # era "Diploma di istruzione tecnica"): da controllare il nome esatto del
 # diploma sulla guida Unica.
 titolo di studio: Diploma di liceo tecnologico, lo stesso del corso diurno.
-indirizzi: Meccanica e meccatronica; Grafica e comunicazione.
+indirizzi: Meccanica, meccatronica ed energia; Grafica e comunicazione.
 orari: [DA COMPLETARE: giorni e orari delle lezioni]
 durata e frequenza: [DA COMPLETARE: durata del percorso e frequenza richiesta]
 requisiti: [DA COMPLETARE: chi può iscriversi]

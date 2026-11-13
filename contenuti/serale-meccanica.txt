@@ -1,0 +1,50 @@
+# TESTI DELLA PAGINA DEL CORSO SERALE DI MECCANICA, MECCATRONICA ED ENERGIA (serale-meccanica.html)
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+#
+# Stessi testi della pagina del diurno (contenuti/meccanica.txt), senza la
+# frase sulla durata del percorso. Il nome del corso non sta qui: si
+# prende dalla tabella HOME di serali.txt (prima colonna, riga con questa
+# pagina), così si cambia in un posto solo. In fondo alla pagina, al
+# posto delle date degli open day, il pulsante "Come iscriversi" con la
+# scritta e il link di serali.txt (sezione PAGINA).
+#
+# "Adatto a chi", "Imparerai a" e "Potrai lavorare" vengono alla lettera
+# dalla guida Unica del Ministero. Tutti i testi sono copiati così come
+# sono: minuscole a inizio voce, punti e virgola, "elettro-meccanici",
+# "manutenere", "ed utilizzo". Non si correggono.
+#
+# Campi:
+#   occhiello          la riga grigia sopra il nome
+#   apertura           il paragrafo sotto il nome, su una colonna
+#   adatto             "Adatto a chi": una riga per voce
+#   imparerai          "Imparerai a": una riga per voce
+#   lavorare           "Potrai lavorare", dentro "Dopo il diploma": un paragrafo
+#   studi              "Potrai continuare gli studi": una riga per voce
+# Le voci degli elenchi si scrivono una per riga, ripetendo ogni volta il
+# nome del campo. Una parte senza testo non compare.
+# I titoli delle sezioni sono in fondo, nella sezione TITOLI.
+
+== PAGINA ==
+occhiello: Corso serale per adulti
+apertura: Meccanica, meccatronica ed energia prepara a progettare e costruire sistemi meccanici ed elettromeccanici nel rispetto delle normative di settore.
+adatto: ha interesse per i processi produttivi e ha passione per la fabbricazione e il monitoraggio di componenti meccanici;
+adatto: vuole inserirsi e capire come innovare il settore della progettazione e della costruzione di sistemi meccanici ed elettro-meccanici;
+adatto: ha interesse per la pianificazione e la gestione di un ciclo produttivo;
+adatto: vuole approfondire le problematiche collegate alla conversione ed utilizzo dell'energia;
+adatto: in futuro vorrebbe installare e gestire impianti industriali, controllare processi tecnologici di produzione.
+imparerai: progettare, costruire, manutenere e collaudare sistemi meccanici ed elettro-meccanici complessi;
+imparerai: contribuire all'innovazione e all'adeguamento tecnologico e organizzativo delle imprese;
+imparerai: intervenire nei processi di conversione, gestione e utilizzo dell'energia e nel loro controllo;
+imparerai: agire autonomamente, nel rispetto delle normative in vigore, per garantire la sicurezza sul lavoro e la tutela ambientale.
+lavorare: Tra le figure professionali più richieste del settore cui accedere anche con livelli di istruzione post-diploma: impiantisti meccanici, installatori di impianti termici, manutentori meccanici, tecnici e manutentori autronici dell'auto, tecnici dell'uso razionale dell'energia, progettisti di sistemi di energia rinnovabile.
+studi: ITS Academy - Istituti Tecnologici Superiori
+studi: Università
+
+== TITOLI ==
+# I titoli delle sezioni, uguali nelle pagine dei due corsi serali
+titolo-adatto: Adatto a chi
+titolo-imparerai: Imparerai a
+titolo-dopo: Dopo il diploma
+titolo-lavorare: Potrai lavorare
+titolo-studi: Potrai continuare gli studi

@@ -87,6 +87,9 @@ note. Non serve toccare nessun altro file.
 - `meccanica.txt` e `grafica.txt`: i testi delle pagine dei due
   indirizzi del liceo tecnologico (`meccanica.html`, `grafica.html`).
   Vedi più sotto.
+- `serale-meccanica.txt` e `serale-grafica.txt`: i testi delle pagine
+  dei due corsi serali (`serale-meccanica.html`, `serale-grafica.html`).
+  Vedi più sotto.
 
 ## Le quattro regole
 
@@ -109,9 +112,10 @@ note. Non serve toccare nessun altro file.
   `titolo`, `tipo`, `claim`, `in breve`, `pagina`, `stato` e una
   tabella con i percorsi, `nome | colore | pagina` (colore: meccanica
   o grafica, il colore del trattino accanto al nome; pagina: la pagina
-  dell'indirizzo del diurno a cui porta il nome, per esempio
-  `meccanica.html`; se è vuota, il nome non è un collegamento). I nomi
-  dei campi non vanno cambiati.
+  del corso serale a cui porta il nome, `serale-meccanica.html` o
+  `serale-grafica.html`; se è vuota, il nome non è un collegamento). Il
+  nome è anche il titolo della pagina del corso. I nomi dei campi non
+  vanno cambiati.
 - `== PAGINA ==` contiene le informazioni per la futura pagina dei
   serali. Oggi nella home si usano solo `pulsante` e `link`: finché la
   pagina dei serali è "in preparazione", in fondo alla sezione dei
@@ -238,6 +242,26 @@ posto solo, e valgono anche per la home e la cartolina.
 In fondo alla pagina i foglietti delle date degli open day vengono da
 `comuni.txt`, come nella home. **Una parte senza testo non compare**:
 per nasconderla basta mettere un `#` davanti alle sue righe.
+
+## I file dei due corsi serali
+
+`serale-meccanica.txt` (pagina `serale-meccanica.html`) e
+`serale-grafica.txt` (pagina `serale-grafica.html`) sono fatti come i
+file dei due indirizzi del diurno, con gli stessi testi, senza la frase
+sulla durata del percorso. Le differenze:
+
+- il **nome del corso** viene dalla tabella della sezione `HOME` di
+  `serali.txt` (prima colonna, nella riga che ha questa pagina nella
+  terza colonna);
+- la **riga grigia sopra il nome** sta qui, nel campo `occhiello`
+  ("Corso serale per adulti");
+- in fondo alla pagina non ci sono le date degli open day ma il
+  pulsante "Come iscriversi", con la scritta e il link dei campi
+  `pulsante` e `link` della sezione `PAGINA` di `serali.txt`, lo stesso
+  della home. Per questo nella sezione `TITOLI` non c'è `titolo-visita`.
+
+Se si cambia un testo nella pagina del diurno, va cambiato anche qui,
+se deve restare uguale.
 
 ## Le maiuscole del titolo
 
