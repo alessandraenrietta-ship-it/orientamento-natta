@@ -1,0 +1,45 @@
+# TESTI DELLA PAGINA DI GRAFICA E COMUNICAZIONE (grafica.html)
+# Le righe che iniziano con # sono commenti: il sito le ignora.
+# Il formato è spiegato in LEGGIMI.md.
+#
+# Il nome dell'indirizzo e la riga grigia sopra il nome ("Liceo
+# tecnologico") non stanno qui: si prendono dalla tabella INDIRIZZI di
+# home.txt (colonne "nome" e "tipo"), così si cambiano in un posto solo.
+#
+# I testi vengono dalla guida Unica del Ministero e sono copiati così
+# come sono: minuscole a inizio voce, punti e virgola.
+#
+# Campi:
+#   frase              la frase sotto il nome, nell'apertura
+#   adatto             "Adatto a chi": una riga per voce
+#   imparerai          "Imparerai a": una riga per voce
+#   lavorare           "Potrai lavorare", dentro "Dopo il diploma": un paragrafo
+#   studi              "Potrai continuare gli studi": una riga per voce
+# Le voci degli elenchi si scrivono una per riga, ripetendo ogni volta il
+# nome del campo. Una parte senza testo non compare.
+# I titoli delle sezioni sono in fondo, nella sezione TITOLI.
+
+== PAGINA ==
+frase: Per entrare nel mondo della comunicazione, personale e di massa, e capire come essa si sviluppa attraverso la grafica, i linguaggi multimediali e le nuove tecnologie.
+adatto: ha interesse per la comunicazione attraverso forme di espressione visive e grafiche, e linguaggi multimediali;
+adatto: vuole realizzare prodotti di comunicazione che valorizzano creatività e originalità, e che siano fruibili attraverso differenti canali;
+adatto: vuole lavorare nell'industria grafica, nell'editoria e nel settore audiovisivo.
+imparerai: muoverti nel campo della comunicazione interpersonale e di massa;
+imparerai: progettare e realizzare prodotti di carta e cartone;
+imparerai: utilizzare i linguaggi dei colori per la comunicazione visiva;
+imparerai: gestire i processi per la realizzazione di comunicazione grafica convenzionale e multimediale;
+imparerai: utilizzare software per la modellizzazione 3D e la progettazione CAD.
+lavorare: Tra le figure professionali più richieste del settore cui accedere anche con livelli di istruzione post-diploma: grafici, pubblicitari, grafici di redazione, disegnatori industriali, copywriter, art director.
+studi: ITS Academy - Istituti Tecnologici Superiori
+studi: Università
+
+== TITOLI ==
+# I titoli delle sezioni, uguali nelle pagine dei due indirizzi
+titolo-adatto: Adatto a chi
+titolo-imparerai: Imparerai a
+titolo-dopo: Dopo il diploma
+titolo-lavorare: Potrai lavorare
+titolo-studi: Potrai continuare gli studi
+# La sezione in fondo: sotto il titolo compaiono i foglietti delle date
+# degli open day, presi da comuni.txt come nella home
+titolo-visita: Vieni a trovarci.

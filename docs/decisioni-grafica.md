@@ -155,3 +155,9 @@ Questo file prevale su claude/decisioni.md per tutto ciò che riguarda la grafic
 - "Confronta i percorsi ›" porta davvero all'inizio di "Le ore a confronto": prima la pagina restava in cima, perché il contenuto era ancora nascosto quando il browser cercava l'ancora.
 - Trattino delle voci: nessuna differenza misurata fra le voci; l'impressione di un trattino più scuro veniva da schermate rimpicciolite.
 - Liceo Digitale, terza voce di "A chi si rivolge": "A chi vuole un liceo scientifico completo, con in più ore dedicate al digitale."
+
+## Indirizzi del liceo tecnologico (decisi il 13 novembre 2026)
+- "Istituto tecnico tecnologico" diventa "Liceo tecnologico" ovunque compaia nel sito (decreto-legge 170/2026; riferimento per le diciture: la guida Unica del Ministero): home, retro della cartolina, anteprima in orientatori.html, descrizione della home per i motori di ricerca, PDF per i docenti (rigenerato). I nomi degli indirizzi non cambiano. Non cambiati: i testi del liceo, la storia in questo file, il campo "titolo di studio" dei serali (non compare ancora; da verificare con chi coordina i serali).
+- Nuove pagine meccanica.html e grafica.html, sul modello delle pagine dei percorsi del liceo: apertura con occhiello grigio "Liceo tecnologico", nome in verde e frase "Per…"; poi "Adatto a chi", "Imparerai a", "Dopo il diploma" come blocchi con titolo verde e filetto (al computer titolo a sinistra, testo giustificato a destra); "Dopo il diploma" con i sottotitoli "Potrai lavorare" e "Potrai continuare gli studi" nella riga grigia maiuscola; in fondo "Vieni a trovarci." con i foglietti delle date. Niente quadro orario e niente "Confronta i percorsi".
+- Testi della guida Unica copiati esattamente, senza correzioni e senza collegamenti.
+- In home, per i due indirizzi, "Pagina in preparazione" lascia il posto al pulsante "Scopri di più ›".

@@ -1053,6 +1053,24 @@ button.pulsante {
   background: var(--grigio);
 }
 
+/* Pagine dei due indirizzi del liceo tecnologico (meccanica.html,
+   grafica.html): dentro "Dopo il diploma" due sottotitoli, "Potrai
+   lavorare" e "Potrai continuare gli studi", nella riga grigia
+   maiuscola già usata per "Gli altri percorsi". Sotto un paragrafo o un
+   elenco, come negli altri blocchi. */
+.blocco-sottotitolo {
+  margin: 0 0 0.6rem;
+  font-family: var(--carattere-titoli);
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--grigio);
+}
+/* Spazio prima del secondo sottotitolo; il primo resta in alto,
+   allineato al titolo "Dopo il diploma" quando sta alla sua destra */
+.blocco > p + .blocco-sottotitolo,
+.blocco > ul + .blocco-sottotitolo { margin-top: 1.6rem; }
+
 .testo-sezione { max-width: 46rem; }
 
 

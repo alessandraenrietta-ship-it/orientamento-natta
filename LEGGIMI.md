@@ -84,6 +84,9 @@ note. Non serve toccare nessun altro file.
 - `serali.txt`: i testi dei corsi serali per adulti.
 - `liceo.txt`: i testi della pagina del liceo (`liceo.html`) e delle
   pagine dei tre percorsi. Vedi più sotto.
+- `meccanica.txt` e `grafica.txt`: i testi delle pagine dei due
+  indirizzi del liceo tecnologico (`meccanica.html`, `grafica.html`).
+  Vedi più sotto.
 
 ## Le quattro regole
 
@@ -200,6 +203,38 @@ applicate e più sotto, dopo la riga-titolo, con le sole ore in più.
 **I totali li calcola il sito**: non si scrivono da nessuna parte. Per
 cambiare un orario basta correggere un numero; per aggiungere una
 materia in più si aggiunge una riga.
+
+## I file dei due indirizzi del liceo tecnologico
+
+`meccanica.txt` (pagina `meccanica.html`) e `grafica.txt` (pagina
+`grafica.html`) sono fatti allo stesso modo. I testi vengono dalla guida
+Unica del Ministero e sono copiati così come sono, anche con le
+minuscole a inizio voce e i punti e virgola.
+
+Il **nome dell'indirizzo** e la **riga grigia sopra il nome** ("Liceo
+tecnologico") non stanno in questi file: la pagina li prende dalla
+tabella `INDIRIZZI` di `home.txt` (colonne `nome` e `tipo`, nella riga
+che ha questa pagina nella colonna `pagina`). Così si cambiano in un
+posto solo, e valgono anche per la home e la cartolina.
+
+- `== PAGINA ==`, i testi della pagina:
+  - `frase`: la frase sotto il nome, che comincia con "Per…";
+  - `adatto`: "Adatto a chi", un elenco: **una riga per voce**,
+    ripetendo ogni volta `adatto:`;
+  - `imparerai`: "Imparerai a", un elenco, una riga per voce;
+  - `lavorare`: dentro "Dopo il diploma", il paragrafo sotto "Potrai
+    lavorare";
+  - `studi`: dentro "Dopo il diploma", l'elenco sotto "Potrai
+    continuare gli studi", una riga per voce.
+- `== TITOLI ==`, i titoli delle sezioni (`titolo-adatto`,
+  `titolo-imparerai`, `titolo-dopo`), i due sottotitoli di "Dopo il
+  diploma" (`titolo-lavorare`, `titolo-studi`) e il titolo della
+  sezione in fondo, `titolo-visita` ("Vieni a trovarci."). Sono uguali
+  nei due file: se se ne cambia uno, va cambiato anche nell'altro.
+
+In fondo alla pagina i foglietti delle date degli open day vengono da
+`comuni.txt`, come nella home. **Una parte senza testo non compare**:
+per nasconderla basta mettere un `#` davanti alle sue righe.
 
 ## Le maiuscole del titolo
 

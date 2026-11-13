@@ -52,7 +52,9 @@ Grafica e comunicazione | grafica
 titolo: Corsi serali per adulti
 etichetta: Anno scolastico 2026/27
 a chi si rivolge: A chi lavora o vuole riprendere gli studi.
-# verificare con chi coordina i serali prima di pubblicare
+# verificare con chi coordina i serali prima di pubblicare, anche il
+# nome del diploma dopo il decreto-legge 170/2026 (gli istituti tecnici
+# diventano licei tecnologici)
 titolo di studio: Diploma di istruzione tecnica, lo stesso del corso diurno.
 indirizzi: Meccanica e meccatronica; Grafica e comunicazione.
 orari: [DA COMPLETARE: giorni e orari delle lezioni]
