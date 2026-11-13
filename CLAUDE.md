@@ -681,7 +681,10 @@ home, il liceo e `orientatori.html`), `js/home.js`, `js/liceo.js`,
   per la cartolina. Nei
   serali il trattino e il nome del corso hanno il colore dell'indirizzo
   (Meccanica e meccatronica arancione, Grafica e comunicazione rosa;
-  il nome dal 27 ottobre 2026 sera).
+  il nome dal 27 ottobre 2026 sera). Dal 13 novembre 2026 il nome è un
+  collegamento, sottolineato nello stesso colore, alla pagina
+  dell'indirizzo del diurno (`meccanica.html`, `grafica.html`; terza
+  colonna della tabella in `serali.txt`).
 - **Trattino**: corto (1,5rem × 3 px), accanto alla prima riga, solo
   nel colore di un indirizzo (le date degli open day non lo hanno).
 - **Righe pareggiate**: titoli e testi brevi centrati (titolo della

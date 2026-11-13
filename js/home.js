@@ -320,16 +320,29 @@
 
     var elenco = document.createElement("ul");
     elenco.className = "serali-percorsi";
+    /* Ogni percorso: nome | colore | pagina (facoltativa). Con la
+       pagina, il nome diventa un collegamento alla pagina
+       dell'indirizzo del diurno (scelta di Alessandra, 13 novembre
+       2026), nel colore del suo indirizzo. */
     file.righe("HOME").forEach(function (riga, i) {
-      if (riga.length !== 2) {
-        console.warn("serali.txt, HOME, riga " + (i + 1) + ": servono 2 colonne, ne ho trovate " + riga.length);
+      if (riga.length !== 2 && riga.length !== 3) {
+        console.warn("serali.txt, HOME, riga " + (i + 1) + ": servono 2 o 3 colonne, ne ho trovate " + riga.length);
         return;
       }
       var colore = riga[1].toLowerCase();
       if (COLORI.indexOf(colore) === -1) {
         console.warn("serali.txt: colore sconosciuto \"" + colore + "\" per " + riga[0]);
       }
-      elenco.appendChild(elemento("li", "con-trattino tono-" + colore, riga[0]));
+      if (riga[2]) {
+        var li = document.createElement("li");
+        li.className = "con-trattino tono-" + colore;
+        var a = elemento("a", "", riga[0]);
+        a.href = riga[2];
+        li.appendChild(a);
+        elenco.appendChild(li);
+      } else {
+        elenco.appendChild(elemento("li", "con-trattino tono-" + colore, riga[0]));
+      }
     });
     if (elenco.firstChild) { contenitore.appendChild(elenco); }
 
