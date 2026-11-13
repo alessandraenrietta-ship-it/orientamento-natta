@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- TESTO MODIFICABILE: titolo della scheda del browser e descrizione
+       che compare su Google e nelle anteprime quando si condivide il
+       link. -->
+  <title>Meccanica, meccatronica ed energia | IIS Giulio Natta, Rivoli</title>
+  <meta name="description" content="Meccanica, meccatronica ed energia all'IIS Giulio Natta di Rivoli, liceo tecnologico: a chi è adatto, che cosa si impara e che cosa fare dopo il diploma.">
+
+  <!-- BOZZA: chiede ai motori di ricerca di non mostrare questa pagina.
+       Va TOLTA quando il sito è approvato. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- QUANDO SI MODIFICA UN FILE .css O .js, SI AUMENTA IL NUMERO ?v=
+       DI UNO in tutte le pagine che lo caricano. -->
+  <link rel="stylesheet" href="grafica.css?v=28">
+  <link rel="icon" href="immagini/logo-natta.png">
+</head>
+<!-- Le pagine dei due indirizzi del liceo tecnologico sono uguali:
+     cambiano solo il titolo qui sopra e l'attributo qui sotto, che dice
+     quale file di contenuti/ leggere (qui contenuti/meccanica.txt). Il
+     nome dell'indirizzo e la riga grigia sopra il nome vengono dalla
+     tabella INDIRIZZI di contenuti/home.txt. -->
+<body data-indirizzo="meccanica">
+
+  <a class="salta" href="#contenuto">Salta al contenuto</a>
+
+  <!-- La testata: logo e nome della scuola, come nelle pagine del liceo -->
+  <header class="testata">
+    <div class="interno testata-interno">
+      <!-- Logo e nome sono un collegamento alla home. Il lettore di
+           schermo sente anche "pagina iniziale" (TESTO MODIFICABILE). -->
+      <p class="marchio">
+        <a class="marchio-link" href="index.html">
+          <img class="logo-scuola" src="immagini/logo-natta.png" alt="" width="231" height="155">
+          <span class="marchio-nome" id="nome-scuola"></span><span class="solo-lettori">, pagina iniziale</span>
+        </a>
+      </p>
+    </div>
+  </header>
+
+  <main id="contenuto" tabindex="-1" hidden>
+
+    <!-- Apertura, centrata: occhiello grigio ("Liceo tecnologico"), nome
+         dell'indirizzo in verde, poi la frase che comincia con "Per…" -->
+    <section class="sezione apertura apertura-percorso" aria-labelledby="titolo">
+      <div class="interno">
+        <p class="occhiello" id="etichetta"></p>
+        <h1 class="titolo-sito" id="titolo"></h1>
+        <p class="spiegazione" id="spiegazione"></p>
+      </div>
+    </section>
+
+    <!-- Adatto a chi, Imparerai a, Dopo il diploma: tre parti con il
+         titolo in verde, come i blocchi delle pagine dei percorsi del
+         liceo. "Dopo il diploma" ha due sottotitoli: "Potrai lavorare" e
+         "Potrai continuare gli studi". Una parte senza testo non
+         compare. -->
+    <section class="sezione" aria-label="L'indirizzo">
+      <div class="interno">
+        <div class="blocchi" id="blocchi"></div>
+      </div>
+    </section>
+
+    <!-- Vieni a trovarci: i foglietti delle date e i turni da prenotare
+         uno per uno, presi da comuni.txt come nella home (date passate
+         nascoste; se non resta nessuna data, solo la frase
+         "nessuna-data", senza foglietti). -->
+    <section class="sezione" aria-labelledby="titolo-visita">
+      <div class="interno">
+        <h2 class="titolo-sezione" id="titolo-visita"></h2>
+        <ul class="date" id="date-visita"></ul>
+        <p class="nota" id="nota-visita"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- TESTO MODIFICABILE: compare solo se i file di testo non si
+       possono leggere. -->
+  <section class="sezione" id="avviso" hidden>
+    <div class="interno">
+      <h1 class="titolo-sezione">Meccanica, meccatronica ed energia</h1>
+      <p>Non riesco a caricare i testi di questa pagina.</p>
+      <p>Se hai aperto il file dal computer con un doppio clic, usa invece
+         anteprima.bat. Altrimenti ricarica la pagina, oppure
+         visita il <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+    </div>
+  </section>
+
+  <noscript>
+    <section class="sezione">
+      <div class="interno">
+        <p>Per vedere questa pagina serve JavaScript attivo nel browser.
+           In alternativa visita il
+           <a href="https://www.itisgiulionatta.it">sito della scuola</a>.</p>
+      </div>
+    </section>
+  </noscript>
+
+  <!-- Il piede, come nella home: il timbro rotondo e la riga per i
+       docenti orientatori. Il timbro è solo decorativo. -->
+  <footer class="piede">
+    <div class="interno piede-interno">
+      <div class="timbro" id="timbro" aria-hidden="true"></div>
+      <ul class="piede-voci" id="piede"></ul>
+    </div>
+  </footer>
+
+  <script src="js/contenuti.js?v=2"></script>
+  <script src="js/comuni.js?v=3"></script>
+  <script src="js/grafica.js?v=13"></script>
+  <script src="js/indirizzo.js?v=1"></script>
+</body>
+</html>

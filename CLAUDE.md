@@ -280,6 +280,28 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
   di Scienze applicate e Liceo Matematico restano visibili. Nella
   pagina del Liceo Digitale nessun collegamento al sito del Liceo
   Digitale.
+- Pagine dei due indirizzi del liceo tecnologico (`meccanica.html`,
+  `grafica.html`, dal 13 novembre 2026): uguali fra loro, cambiano solo
+  titolo, descrizione e l'attributo `data-indirizzo` del `<body>`, che
+  dice quale file leggere (`contenuti/meccanica.txt`,
+  `contenuti/grafica.txt`); le riempie `js/indirizzo.js`. Ricalcano le
+  pagine dei percorsi del liceo (stessa testata, stesso piede, stesso
+  giustificato al computer):
+  1. apertura bianca centrata: occhiello grigio "Liceo tecnologico" e
+     nome in verde, presi dalla tabella INDIRIZZI di `home.txt` (colonne
+     tipo e nome, riga con questa pagina), poi la frase "Per…";
+  2. "Adatto a chi" (elenco), "Imparerai a" (elenco), "Dopo il diploma"
+     come blocchi delle pagine dei percorsi (`.blocco`), con titolo
+     verde e filetto; "Dopo il diploma" ha due sottotitoli nella riga
+     grigia maiuscola (`.blocco-sottotitolo`): "Potrai lavorare" (un
+     paragrafo) e "Potrai continuare gli studi" (elenco);
+  3. "Vieni a trovarci." con i foglietti delle date, come in `liceo.html`.
+  Niente quadro orario, niente "Confronta i percorsi", niente
+  collegamenti nei testi. I testi sono quelli della guida Unica del
+  Ministero, copiati esattamente (minuscole a inizio voce, punti e
+  virgola, "elettro-meccanici", "manutenere", "ed utilizzo"): non si
+  correggono. In home le due schede sono "pronta", con il pulsante
+  "Scopri di più ›".
 - **Giustificato: l'unica eccezione all'allineamento a sinistra, solo al
   computer (dai 56rem in su).** Sotto i 56rem (telefono, tablet stretti)
   tutto resta a sinistra. Scelta di Alessandra; da verificare con Chrome
@@ -432,10 +454,15 @@ di questo punto, le regole su colori, contrasti, grafia e contenuti.
 
 ## 8. Decisioni sui contenuti
 
+- Tipo di scuola dei due indirizzi tecnici: **"Liceo tecnologico"**, non
+  più "Istituto tecnico" (decreto-legge 170/2026, che rinomina gli
+  istituti tecnici in licei tecnologici; riferimento per le diciture: la
+  guida Unica del Ministero). Cambiato il 13 novembre 2026 ovunque
+  compaia nel sito; i nomi degli indirizzi non cambiano.
 - Indirizzi:
-  1. Istituto tecnico tecnologico **Meccanica, meccatronica ed energia**.
+  1. Liceo tecnologico **Meccanica, meccatronica ed energia**.
      Articolazioni dalla terza: Meccanica e meccatronica, Energia.
-  2. Istituto tecnico tecnologico **Grafica e comunicazione**.
+  2. Liceo tecnologico **Grafica e comunicazione**.
   3. **Liceo scientifico opzione Scienze applicate**, con tre percorsi
      sulla stessa base scientifica: Scienze applicate; Liceo Matematico,
      con più ore di matematica; Liceo Digitale, curvatura con ore in più
@@ -624,8 +651,9 @@ Decisa con Alessandra il 26 ottobre 2026, corretta la sera stessa.
 Le decisioni complete, anche sulla nuova cartolina "Vieni a
 trovarci", stanno in `docs/decisioni-grafica.md`: si leggono prima
 di lavorare sulla grafica. La grafica nuova la hanno la home e le
-quattro pagine del liceo (le regole del liceo sono al punto 6);
-mancano ancora le pagine degli indirizzi tecnici e dei serali. Lo stato del sito prima del cambio è
+quattro pagine del liceo (le regole del liceo sono al punto 6) e, dal 13
+novembre 2026, le pagine dei due indirizzi del liceo tecnologico
+(meccanica.html, grafica.html); manca ancora la pagina dei serali. Lo stato del sito prima del cambio è
 segnato dall'etichetta Git `grafica-ottobre`; il lavoro sta sul ramo
 `grafica-cartolina` finché Alessandra non dice di unirlo a `main`.
 File: `grafica.css` (tutte le pagine del sito tranne la cartolina),
